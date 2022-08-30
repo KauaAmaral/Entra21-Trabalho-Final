@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Repository.Entities;
+using Entra21.CSharp.Area21.RepositoryEntities;
 
-namespace Repository.Mappings
+namespace Entra21.CSharp.Area21.RepositoryMappings
 {
-    public class MappingPayments : IEntityTypeConfiguration<Payments>
+    public class MappingPayments : IEntityTypeConfiguration<Payment>
     {
-        public void Configure(EntityTypeBuilder<Payments> builder)
+        public void Configure(EntityTypeBuilder<Payment> builder)
         {
             builder.ToTable("pagamentos");
 
