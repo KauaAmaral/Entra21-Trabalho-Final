@@ -1,11 +1,5 @@
 ﻿using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.RepositoryDataBase;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entra21.CSharp.Area21.Repository.Repositories.Users
 {
