@@ -1,6 +1,6 @@
-﻿namespace Repository.Entities
+﻿namespace Entra21.CSharp.Area21.Repository.Entities
 {
-    internal class Notification : EntitieBase
+    internal class Notification : EntityBase
     {
         public bool RegisteredVehicle { get; set; }
         public string Address { get; set; }
