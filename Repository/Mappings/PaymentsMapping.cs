@@ -4,7 +4,7 @@ using Entra21.CSharp.Area21.Repository.Entities;
 
 namespace Entra21.CSharp.Area21.Repository.Mappings
 {
-    public class MappingPayments : IEntityTypeConfiguration<Payment>
+    public class PaymentsMapping : IEntityTypeConfiguration<Payment>
     {
         public void Configure(EntityTypeBuilder<Payment> builder)
         {
