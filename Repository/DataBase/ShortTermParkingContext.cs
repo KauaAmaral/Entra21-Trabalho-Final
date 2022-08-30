@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Entra21.CSharp.Area21.RepositoryEntities;
-using Entra21.CSharp.Area21.RepositoryMappings;
+using Entra21.CSharp.Area21.Repository.Entities;
+using Entra21.CSharp.Area21.Repository.Mappings;
 
 namespace Entra21.CSharp.Area21.RepositoryDataBase
 {

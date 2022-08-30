@@ -1,7 +1,7 @@
 ﻿using Entra21.CSharp.Area21.RepositoryDataBase;
-using Entra21.CSharp.Area21.RepositoryEntities;
+using Entra21.CSharp.Area21.Repository.Entities;
 
-namespace Entra21.CSharp.Area21.RepositoryRepositories
+namespace Entra21.CSharp.Area21.Repository.Repositories
 {
     public class PaymentsRepository : IPaymentsRepository
     {

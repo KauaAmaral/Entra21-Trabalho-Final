@@ -1,12 +1,12 @@
-﻿using Entra21.CSharp.Area21.RepositoryEnums;
+﻿using Entra21.CSharp.Area21.Repository.Enums;
 
-namespace Entra21.CSharp.Area21.RepositoryEntities
+namespace Entra21.CSharp.Area21.Repository.Entities
 {
-    public class Auto : EntitieBase
+    public class Vehicle : EntityBase
     {
         public User User { get; set; }
         public string LicensePlate { get; set; }
         public string Model { get; set; }
-        public ModelAuto ModelAuto { get; set; }
+        public VehicleType Type { get; set; }
     }
 }

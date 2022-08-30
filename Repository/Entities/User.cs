@@ -1,6 +1,6 @@
-﻿namespace Entra21.CSharp.Area21.RepositoryEntities
+﻿namespace Entra21.CSharp.Area21.Repository.Entities
 {
-    public class User : EntitieBase
+    public class User : EntityBase
     {
         public string Name { get; set; }
         public string Email { get; set; }

@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Entra21.CSharp.Area21.RepositoryEntities;
+using Entra21.CSharp.Area21.Repository.Entities;
 
-namespace Entra21.CSharp.Area21.RepositoryMappings
+namespace Entra21.CSharp.Area21.Repository.Mappings
 {
     internal class UserMapping : IEntityTypeConfiguration<User>
     {
