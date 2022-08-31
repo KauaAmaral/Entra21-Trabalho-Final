@@ -41,6 +41,18 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .IsRequired()
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(20);
+
+            builder.Property(x => x.CreatedAt)
+                .IsRequired()
+                .HasColumnType("DATETIME2");
+
+            builder.Property(x => x.UpdatedAt)
+                .IsRequired()
+                .HasColumnType("DATETIME2");
+
+            builder.Property(x => x.Status)
+                .IsRequired()
+                .HasColumnType("BIT");
         }
     }
 }
