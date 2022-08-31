@@ -4,7 +4,7 @@ using Entra21.CSharp.Area21.Repository.Entities;
 
 namespace Entra21.CSharp.Area21.Repository.Mappings
 {
-    public class MappingPayments : IEntityTypeConfiguration<Payment>
+    public class PaymentsMapping : IEntityTypeConfiguration<Payment>
     {
         public void Configure(EntityTypeBuilder<Payment> builder)
         {
@@ -12,7 +12,17 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
 
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.Auto)
+            builder.Property(x => x.CreatedAt)
+                .HasColumnType("DATETIME2")
+                .IsRequired()
+                .HasColumnName("create_at");
+
+            builder.Property(x => x.UpdatedAt)
+                .HasColumnType("DATETIME2")
+                .IsRequired()
+                .HasColumnName("update_at");
+
+            builder.Property(x => x.vehicle)
                 .HasColumnType("INT")
                 .IsRequired()
                 .HasColumnName("vehicle_id");
