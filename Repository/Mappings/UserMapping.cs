@@ -26,11 +26,6 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .IsRequired()
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(50);
-
-            builder.Property(x => x.Password)
-                .IsRequired()
-                .HasColumnType("VARCHAR")
-                .HasMaxLength(50);
             
             builder.Property(x => x.Cpf)
                 .IsRequired()
