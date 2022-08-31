@@ -15,12 +15,12 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
             builder.Property(x => x.Auto)
                 .HasColumnType("INT")
                 .IsRequired()
-                .HasColumnName("automovel_id");
+                .HasColumnName("vehicle_id");
 
             builder.Property(x => x.User)
                 .HasColumnType("INT")
                 .IsRequired()
-                .HasColumnName("usuario_id");
+                .HasColumnName("usur_id");
         }
     }
 }

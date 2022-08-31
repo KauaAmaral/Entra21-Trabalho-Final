@@ -11,6 +11,36 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
             builder.ToTable("users");
 
             builder.HasKey(x => x.Id);
+
+            builder.Property(x => x.Name)
+                .IsRequired()
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(100);
+            
+            builder.Property(x => x.Email)
+                .IsRequired()
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(50);
+                
+            builder.Property(x => x.Password)
+                .IsRequired()
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(50);
+
+            builder.Property(x => x.Password)
+                .IsRequired()
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(50);
+            
+            builder.Property(x => x.Cpf)
+                .IsRequired()
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(50);
+
+            builder.Property(x => x.Phone)
+                .IsRequired()
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(20);
         }
     }
 }
