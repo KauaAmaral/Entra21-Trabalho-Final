@@ -8,8 +8,6 @@ namespace Repository.Entities
         public User User { get; set; }  
         public int UserId { get; set; }
 
-        public bool Status { get; set; }
-
         //public IList<Notification> Notifications { get; set; }
     }
 }

@@ -12,6 +12,12 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
 
             builder.HasKey(x => x.Id);
 
+            builder.Property(x => x.Status)
+                .HasColumnType("BIT")
+                .IsRequired()
+                .HasDefaultValue(true)
+                .HasColumnName("status");
+
             builder.Property(x => x.CreatedAt)
                 .HasColumnType("DATETIME2")
                 .IsRequired()
@@ -27,12 +33,6 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .HasMaxLength(10)
                 .IsRequired()
                 .HasColumnName("identification_number");
-
-            builder.Property(x => x.Status)
-                .HasColumnType("BIT")
-                .IsRequired()
-                .HasDefaultValue(true)
-                .HasColumnName("status");
             
             builder.Property(x => x.UserId)
                 .HasColumnType("INT")
