@@ -17,6 +17,7 @@ namespace Entra21.CSharp.Area21.Repository.DependeciesInjection
             services.AddScoped<IPaymentsRepository, PaymentsRepository>();
             //services.AddScoped<IGuardRepository, GuardRepository>();
             //services.AddScoped<INotificationRepository, NotificationRepository>();
+            //TODO: Descomentar RepositoryExtensions
 
             return services;
         }
