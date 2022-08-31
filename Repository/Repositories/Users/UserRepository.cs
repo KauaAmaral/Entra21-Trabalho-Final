@@ -12,7 +12,7 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Users
             _context = context;
         }
 
-        public bool Apagar(int id)
+        public bool Delete(int id)
         {
             var user = _context.Users.FirstOrDefault(x => x.Id == id);
 
@@ -25,7 +25,7 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Users
             return true;
         }
 
-        public User Cadastrar(User user)
+        public User Insert(User user)
         {
             _context.Users.Add(user);
             _context.SaveChanges();
@@ -33,16 +33,16 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Users
             return user;
         }
 
-        public void Editar(User user)
+        public void Update(User user)
         {
             _context.Users.Update(user);
             _context.SaveChanges();
         }
 
-        public User? ObterPorId(int id) =>
+        public User? GetById(int id) =>
             _context.Users.FirstOrDefault(x => x.Id == id);
 
-        public IList<User> ObterTodos() =>
+        public IList<User> GetAll() =>
             _context.Users.ToList();
     }
 }
