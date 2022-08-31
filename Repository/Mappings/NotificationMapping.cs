@@ -12,6 +12,11 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
 
             builder.HasKey(x => x.Id);
 
+            builder.Property(x => x.Status)
+                .HasColumnType("BIT")
+                .HasDefaultValue(true)
+                .HasColumnName("status");
+
             builder.Property(x => x.CreatedAt)
                 .HasColumnType("DATETIME2")
                 .IsRequired()
