@@ -1,5 +1,4 @@
 ﻿using Repository.Entities;
-using System.Security.Permissions;
 
 namespace Entra21.CSharp.Area21.Repository.Entities
 {
