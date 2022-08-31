@@ -17,6 +17,7 @@ namespace Entra21.CSharp.Area21.Service.DependenciesInjection
             return services;
         }
 
+        //TODO: Descomentar classe ServiceExtensions
         public static IServiceCollection AddEntitiesMapping(this IServiceCollection services)
         {
             //services.AddScoped<IUserMapping, UserMapping>();
