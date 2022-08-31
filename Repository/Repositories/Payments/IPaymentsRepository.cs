@@ -4,6 +4,6 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Payments
 {
     public interface IPaymentsRepository
     {
-        Payment Cadastrar(Payment payments);
+        Payment Register(Payment payments);
     }
 }

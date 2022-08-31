@@ -12,7 +12,7 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
 
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.Auto)
+            builder.Property(x => x.vehicle)
                 .HasColumnType("INT")
                 .IsRequired()
                 .HasColumnName("vehicle_id");
