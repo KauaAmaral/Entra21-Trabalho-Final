@@ -2,7 +2,10 @@
 {
     public class Payment : EntityBase
     {
-        public Vehicle Auto { get; set; }
+        public int VehicleId { get; set; }
+        public Vehicle vehicle { get; set; }
+
+        public int UserId { get; set; }
         public User User { get; set; }
     }
 }

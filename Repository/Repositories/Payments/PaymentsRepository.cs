@@ -1,7 +1,7 @@
 ﻿using Entra21.CSharp.Area21.RepositoryDataBase;
 using Entra21.CSharp.Area21.Repository.Entities;
 
-namespace Entra21.CSharp.Area21.Repository.Repositories
+namespace Entra21.CSharp.Area21.Repository.Repositories.Payments
 {
     public class PaymentsRepository : IPaymentsRepository
     {
@@ -12,7 +12,7 @@ namespace Entra21.CSharp.Area21.Repository.Repositories
             _context = context;
         }
 
-        public Payment Cadastrar(Payment payments)
+        public Payment Register(Payment payments)
         {
             _context.Payments.Add(payments);
             _context.SaveChanges();
