@@ -32,11 +32,9 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .IsRequired()
                 .HasColumnName("guard_id");
 
-            // TODO: Wellinton Criar no sua entidade Uma lista de Notifications
-
-            //builder.HasOne(x => x.Guard)
-            //    .WithMany(x => x.Notifications)
-            //    .HasForeignKey(x => x.GuardId);
+            builder.HasOne(x => x.Guard)
+                .WithMany(x => x.Notifications)
+                .HasForeignKey(x => x.GuardId);
 
             builder.Property(x => x.VehicleId)
                 .HasColumnType("INT")
