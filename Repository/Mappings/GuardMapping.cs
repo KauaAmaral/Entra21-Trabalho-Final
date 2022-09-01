@@ -18,6 +18,7 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .HasDefaultValue(true)
                 .HasColumnName("status");
 
+
             builder.Property(x => x.CreatedAt)
                 .HasColumnType("DATETIME2")
                 .IsRequired()
