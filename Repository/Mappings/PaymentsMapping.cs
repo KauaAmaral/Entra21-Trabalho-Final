@@ -22,15 +22,27 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .IsRequired()
                 .HasColumnName("update_at");
 
-            builder.Property(x => x.vehicle)
+            builder.Property(x => x.Status)
+                .IsRequired()
+                .HasColumnType("BIT");
+
+            builder.Property(x => x.Vehicle)
                 .HasColumnType("INT")
                 .IsRequired()
                 .HasColumnName("vehicle_id");
+
+            builder.HasOne(x => x.Vehicle)
+                .WithMany(x => x.Payments)
+                .HasForeignKey(x => x.VehicleId);
 
             builder.Property(x => x.User)
                 .HasColumnType("INT")
                 .IsRequired()
                 .HasColumnName("usur_id");
+
+            builder.HasOne(x => x.User)
+                .WithMany(x => x.Payments)
+                .HasForeignKey(x => x.UserId);
         }
     }
 }
