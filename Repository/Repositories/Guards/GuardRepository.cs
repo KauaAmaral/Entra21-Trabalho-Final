@@ -12,6 +12,7 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Guards
         public IList<Guard> GetAll()
         {
             throw new NotImplementedException();
+
         }
 
         public Guard? GetById(int id)
