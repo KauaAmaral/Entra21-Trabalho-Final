@@ -27,13 +27,13 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Notifications
             _context.SaveChanges();
         }
 
-        public Notification? ObterPorId(int id) =>
+        public Notification? GetById(int id) =>
             _context.Notifications
             .Include(x => x.Guard)
             .Include(x => x.Vehicle)
             .FirstOrDefault(x => x.Id == id);
 
-        public IList<Notification> ObterTodos() =>
+        public IList<Notification> GetAll() =>
             _context.Notifications
             .Include(x => x.Guard)
             .Include(x => x.Vehicle)
