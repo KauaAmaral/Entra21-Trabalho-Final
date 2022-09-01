@@ -3,28 +3,28 @@
 namespace Entra21.CSharp.Area21.Repository.Repositories.Guards
 {
     public class GuardRepository : IGuardRepository
-    {        
-        public bool Apagar(int id)
+    {
+        public bool Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Guard Cadastrar(Guard guard)
+        public IList<Guard> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public void Editar(Guard guard)
+        public Guard? GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Guard? ObterPorId(int id)
+        public Guard Insert(Guard guard)
         {
             throw new NotImplementedException();
         }
 
-        public IList<Guard> ObterTodos()
+        public void Update(Guard guard)
         {
             throw new NotImplementedException();
         }
