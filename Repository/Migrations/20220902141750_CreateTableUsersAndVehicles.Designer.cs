@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entra21.CSharp.Area21.Repository.Migrations
 {
     [DbContext(typeof(ShortTermParkingContext))]
-    [Migration("20220901002611_Area21Migration")]
-    partial class Area21Migration
+    [Migration("20220902141750_CreateTableUsersAndVehicles")]
+    partial class CreateTableUsersAndVehicles
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -44,7 +44,7 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int>("VehicleId")
+                    b.Property<int?>("VehicleId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -53,7 +53,7 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
 
                     b.HasIndex("VehicleId");
 
-                    b.ToTable("Payments");
+                    b.ToTable("Payment");
                 });
 
             modelBuilder.Entity("Entra21.CSharp.Area21.Repository.Entities.User", b =>
@@ -113,11 +113,14 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("DATETAME2")
+                        .HasColumnName("created_at");
 
                     b.Property<string>("LicensePlate")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(8)
+                        .HasColumnType("VARCHAR(8)")
+                        .HasColumnName("license_plate");
 
                     b.Property<string>("Model")
                         .IsRequired()
@@ -126,20 +129,23 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
+                    b.Property<byte>("Type")
+                        .HasColumnType("TINYINT")
+                        .HasColumnName("vehicle_type");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("DATETAME2")
+                        .HasColumnName("update_at");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("int");
+                        .HasColumnType("INT")
+                        .HasColumnName("user_id");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Vehicles");
+                    b.ToTable("Vehicles", (string)null);
                 });
 
             modelBuilder.Entity("Entra21.CSharp.Area21.Repository.Entities.Payment", b =>
@@ -150,26 +156,29 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entra21.CSharp.Area21.Repository.Entities.Vehicle", "vehicle")
+                    b.HasOne("Entra21.CSharp.Area21.Repository.Entities.Vehicle", "Vehicle")
                         .WithMany("Payments")
-                        .HasForeignKey("VehicleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("VehicleId");
 
                     b.Navigation("User");
 
-                    b.Navigation("vehicle");
+                    b.Navigation("Vehicle");
                 });
 
             modelBuilder.Entity("Entra21.CSharp.Area21.Repository.Entities.Vehicle", b =>
                 {
                     b.HasOne("Entra21.CSharp.Area21.Repository.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Vehicles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Entra21.CSharp.Area21.Repository.Entities.User", b =>
+                {
+                    b.Navigation("Vehicles");
                 });
 
             modelBuilder.Entity("Entra21.CSharp.Area21.Repository.Entities.Vehicle", b =>

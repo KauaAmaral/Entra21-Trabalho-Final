@@ -1,4 +1,4 @@
-using Entra21.CSharp.Area21.Repository.DependenciesInjection;
+using Entra21.CSharp.Area21.Repository.DependeciesInjection;
 using Entra21.CSharp.Area21.RepositoryDataBase;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 builder.Services
-    .InsertEntityFramework(builder.Configuration);
+    .AddEntityFramework(builder.Configuration);
 
 var app = builder.Build();
 

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Entra21.CSharp.Area21.Repository.Migrations
 {
-    public partial class Area21Migration : Migration
+    public partial class CreateTableUsersAndVehicles : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -35,74 +35,73 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    LicensePlate = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    license_plate = table.Column<string>(type: "VARCHAR(8)", maxLength: 8, nullable: false),
                     Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    vehicle_type = table.Column<byte>(type: "TINYINT", nullable: false),
+                    user_id = table.Column<int>(type: "INT", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    created_at = table.Column<DateTime>(type: "DATETIME2", nullable: false),
+                    update_at = table.Column<DateTime>(type: "DATETIME2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Vehicles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Vehicles_users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Vehicles_users_user_id",
+                        column: x => x.user_id,
                         principalTable: "users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Payments",
+                name: "Payment",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    VehicleId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
+                    VehicleId = table.Column<int>(type: "int", nullable: true),
                     Status = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Payments", x => x.Id);
+                    table.PrimaryKey("PK_Payment", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Payments_users_UserId",
+                        name: "FK_Payment_users_UserId",
                         column: x => x.UserId,
                         principalTable: "users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Payments_Vehicles_VehicleId",
+                        name: "FK_Payment_Vehicles_VehicleId",
                         column: x => x.VehicleId,
                         principalTable: "Vehicles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Payments_UserId",
-                table: "Payments",
+                name: "IX_Payment_UserId",
+                table: "Payment",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Payments_VehicleId",
-                table: "Payments",
+                name: "IX_Payment_VehicleId",
+                table: "Payment",
                 column: "VehicleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vehicles_UserId",
+                name: "IX_Vehicles_user_id",
                 table: "Vehicles",
-                column: "UserId");
+                column: "user_id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Payments");
+                name: "Payment");
 
             migrationBuilder.DropTable(
                 name: "Vehicles");
