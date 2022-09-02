@@ -40,14 +40,14 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .WithMany(x => x.Vehicles)
                 .HasForeignKey(x => x.UserId);
 
-            builder.HasData(
-                new Vehicle
-                {
-                    Id = 1,
-                    LicensePlate = "fhf-1234",
-                    Type = 0,
-                    UserId = 1
-                });
+            //builder.HasData(
+            //    new Vehicle
+            //    {
+            //        Id = 1,
+            //        LicensePlate = "fhf-1234",
+            //        Type = 0,
+            //        UserId = 1
+            //    });
         }
     }
 }

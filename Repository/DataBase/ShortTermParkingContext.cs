@@ -17,6 +17,8 @@ namespace Entra21.CSharp.Area21.RepositoryDataBase
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UserMapping());
+            modelBuilder.ApplyConfiguration(new VehicleMapping());
+            modelBuilder.ApplyConfiguration(new PaymentsMapping());
         }
     }
 }
