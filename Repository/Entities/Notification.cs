@@ -1,4 +1,6 @@
-﻿namespace Entra21.CSharp.Area21.Repository.Entities
+﻿using Repository.Entities;
+
+namespace Entra21.CSharp.Area21.Repository.Entities
 {
     public class Notification : EntityBase
     {

@@ -1,5 +1,4 @@
-
-using Entra21.CSharp.Area21.Repository.DependeciesInjection;
+using Entra21.CSharp.Area21.Repository.DependenciesInjection;
 using Entra21.CSharp.Area21.RepositoryDataBase;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;

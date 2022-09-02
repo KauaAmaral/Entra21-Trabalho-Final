@@ -27,7 +27,22 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .IsRequired()
                 .HasColumnName("update_at");
 
+            builder.Property(x => x.GuardId)
+                .HasColumnType("INT")
+                .HasColumnName("guard_id");
 
+            builder.HasOne(x => x.Guard)
+                .WithMany(x => x.Notifications)
+                .HasForeignKey(x => x.GuardId);
+
+            builder.Property(x => x.VehicleId)
+                 .HasColumnType("INT")
+                 .HasColumnName("vehicle_id");
+
+            builder.HasOne(x => x.Vehicle)
+                .WithMany(x => x.Notifications)
+                .HasForeignKey(x => x.VehicleId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.Property(x => x.RegisteredVehicle)
                 .HasColumnType("BIT")
@@ -39,24 +54,6 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .HasMaxLength(100)
                 .IsRequired()
                 .HasColumnName("address");
-
-            builder.Property(x => x.VehicleId)
-                .HasColumnType("INT")
-                .IsRequired()
-                .HasColumnName("vehicle_id");
-
-            builder.Property(x => x.GuardId)
-                .HasColumnType("INT")
-                .IsRequired()
-                .HasColumnName("guard_id");
-
-            builder.HasOne(x => x.Vehicle)
-                .WithMany(x => x.Notifications)
-                .HasForeignKey(x => x.VehicleId);
-
-            builder.HasOne(x => x.Guard)
-                .WithMany(x => x.Notifications)
-                .HasForeignKey(x => x.GuardId);
         }
     }
 }

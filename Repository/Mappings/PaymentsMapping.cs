@@ -8,7 +8,7 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
     {
         public void Configure(EntityTypeBuilder<Payment> builder)
         {
-            builder.ToTable("pagamentos");
+            builder.ToTable("Pagamentos");
 
             builder.HasKey(x => x.Id);
 
@@ -26,24 +26,23 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .IsRequired()
                 .HasColumnType("BIT");
 
+            builder.Property(x => x.VehicleId)
+                .HasColumnType("INT")
+                .HasColumnName("vehicle_id");
+
+            builder.HasOne(x => x.Vehicle)
+                .WithMany(x => x.Payments)
+                .HasForeignKey(x => x.VehicleId)
+                .OnDelete(DeleteBehavior.NoAction);
+
             builder.Property(x => x.UserId)
                 .HasColumnType("INT")
                 .IsRequired()
                 .HasColumnName("user_id");
 
-            builder.Property(x => x.VehicleId)
-                .HasColumnType("INT")
-                .IsRequired()
-                .HasColumnName("vehicle_id");
-           
             builder.HasOne(x => x.User)
                 .WithMany(x => x.Payments)
                 .HasForeignKey(x => x.UserId);
-
-
-            builder.HasOne(x => x.Vehicle)
-                .WithMany(x => x.Payments)
-                .HasForeignKey(x => x.VehicleId);
         }
     }
 }

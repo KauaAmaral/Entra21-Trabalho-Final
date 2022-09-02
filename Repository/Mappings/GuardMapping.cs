@@ -25,7 +25,6 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
 
             builder.Property(x => x.UpdatedAt)
                 .HasColumnType("DATETIME2")
-                .IsRequired()
                 .HasColumnName("update_at");
 
             builder.Property(x => x.IdentificationNumber)
