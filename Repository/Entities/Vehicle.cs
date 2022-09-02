@@ -13,6 +13,6 @@ namespace Entra21.CSharp.Area21.Repository.Entities
 
         public IList<Payment> Payments { get; set; }
 
-        //public IList<Notification> Notifications { get; set; }
+        public IList<Notification> Notifications { get; set; }
     }
 }
