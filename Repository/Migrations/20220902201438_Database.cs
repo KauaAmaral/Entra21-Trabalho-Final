@@ -108,7 +108,7 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pagamentos",
+                name: "payments",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -121,15 +121,15 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pagamentos", x => x.Id);
+                    table.PrimaryKey("PK_payments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Pagamentos_users_user_id",
+                        name: "FK_payments_users_user_id",
                         column: x => x.user_id,
                         principalTable: "users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Pagamentos_vehicles_vehicle_id",
+                        name: "FK_payments_vehicles_vehicle_id",
                         column: x => x.vehicle_id,
                         principalTable: "vehicles",
                         principalColumn: "Id");
@@ -151,13 +151,13 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                 column: "vehicle_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pagamentos_user_id",
-                table: "Pagamentos",
+                name: "IX_payments_user_id",
+                table: "payments",
                 column: "user_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pagamentos_vehicle_id",
-                table: "Pagamentos",
+                name: "IX_payments_vehicle_id",
+                table: "payments",
                 column: "vehicle_id");
 
             migrationBuilder.CreateIndex(
@@ -172,7 +172,7 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                 name: "notification");
 
             migrationBuilder.DropTable(
-                name: "Pagamentos");
+                name: "payments");
 
             migrationBuilder.DropTable(
                 name: "guards");

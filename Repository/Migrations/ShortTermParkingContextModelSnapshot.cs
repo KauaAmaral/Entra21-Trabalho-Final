@@ -22,6 +22,45 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("Entra21.CSharp.Area21.Repository.Entities.Guard", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("DATETIME2")
+                        .HasColumnName("create_at");
+
+                    b.Property<string>("IdentificationNumber")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("VARCHAR(10)")
+                        .HasColumnName("identification_number");
+
+                    b.Property<bool>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasDefaultValue(true)
+                        .HasColumnName("status");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("DATETIME2")
+                        .HasColumnName("update_at");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INT")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("guards", (string)null);
+                });
+
             modelBuilder.Entity("Entra21.CSharp.Area21.Repository.Entities.Notification", b =>
                 {
                     b.Property<int>("Id")
@@ -61,8 +100,7 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                         .HasColumnType("DATETIME2")
                         .HasColumnName("update_at");
 
-                    b.Property<int?>("VehicleId")
-                        .IsRequired()
+                    b.Property<int>("VehicleId")
                         .HasColumnType("INT")
                         .HasColumnName("vehicle_id");
 
@@ -110,7 +148,7 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
 
                     b.HasIndex("VehicleId");
 
-                    b.ToTable("Pagamentos", (string)null);
+                    b.ToTable("payments", (string)null);
                 });
 
             modelBuilder.Entity("Entra21.CSharp.Area21.Repository.Entities.User", b =>
@@ -205,48 +243,20 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                     b.ToTable("vehicles", (string)null);
                 });
 
-            modelBuilder.Entity("Repository.Entities.Guard", b =>
+            modelBuilder.Entity("Entra21.CSharp.Area21.Repository.Entities.Guard", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.HasOne("Entra21.CSharp.Area21.Repository.Entities.User", "User")
+                        .WithMany("Guards")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("DATETIME2")
-                        .HasColumnName("create_at");
-
-                    b.Property<string>("IdentificationNumber")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("VARCHAR(10)")
-                        .HasColumnName("identification_number");
-
-                    b.Property<bool>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("BIT")
-                        .HasDefaultValue(true)
-                        .HasColumnName("status");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("DATETIME2")
-                        .HasColumnName("update_at");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("INT")
-                        .HasColumnName("user_id");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("guards", (string)null);
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Entra21.CSharp.Area21.Repository.Entities.Notification", b =>
                 {
-                    b.HasOne("Repository.Entities.Guard", "Guard")
+                    b.HasOne("Entra21.CSharp.Area21.Repository.Entities.Guard", "Guard")
                         .WithMany("Notifications")
                         .HasForeignKey("GuardId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -293,15 +303,9 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Repository.Entities.Guard", b =>
+            modelBuilder.Entity("Entra21.CSharp.Area21.Repository.Entities.Guard", b =>
                 {
-                    b.HasOne("Entra21.CSharp.Area21.Repository.Entities.User", "User")
-                        .WithMany("Guards")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
+                    b.Navigation("Notifications");
                 });
 
             modelBuilder.Entity("Entra21.CSharp.Area21.Repository.Entities.User", b =>
@@ -318,11 +322,6 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                     b.Navigation("Notifications");
 
                     b.Navigation("Payments");
-                });
-
-            modelBuilder.Entity("Repository.Entities.Guard", b =>
-                {
-                    b.Navigation("Notifications");
                 });
 #pragma warning restore 612, 618
         }
