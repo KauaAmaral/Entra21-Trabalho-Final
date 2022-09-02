@@ -10,8 +10,8 @@ namespace Entra21.CSharp.Area21.Repository.Entities
         public string Cpf { get; set; }
         public string Phone { get; set; }
 
-        public IList<Payment> Payments;
-        public IList<Vehicle> Vehicles;
-        public IList<Guard> Guards;
+        public IList<Payment> Payments { get; set; }
+        public IList<Vehicle> Vehicles { get; set; }
+        public IList<Guard> Guards { get; set; }
     }
 }

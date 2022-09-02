@@ -32,7 +32,8 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
 
             builder.HasOne(x => x.Vehicle)
                 .WithMany(x => x.Payments)
-                .HasForeignKey(x => x.VehicleId);
+                .HasForeignKey(x => x.VehicleId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.Property(x => x.UserId)
                 .HasColumnType("INT")

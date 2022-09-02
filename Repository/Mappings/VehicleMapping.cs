@@ -8,7 +8,7 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
     {
         public void Configure(EntityTypeBuilder<Vehicle> builder)
         {
-            builder.ToTable("Vehicles");
+            builder.ToTable("vehicles");
 
             builder.HasKey(x => x.Id);
 
@@ -33,8 +33,9 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .HasColumnType("TINYINT");
 
             builder.Property(x => x.UserId)
-                .HasColumnName("user_id")
-                .HasColumnType("INT");
+                .HasColumnType("INT")
+                .IsRequired()
+                .HasColumnName("user_id");
 
             builder.HasOne(x => x.User)
                 .WithMany(x => x.Vehicles)

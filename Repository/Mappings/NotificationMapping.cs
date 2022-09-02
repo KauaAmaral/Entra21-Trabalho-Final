@@ -41,7 +41,8 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
 
             builder.HasOne(x => x.Vehicle)
                 .WithMany(x => x.Notifications)
-                .HasForeignKey(x => x.VehicleId);
+                .HasForeignKey(x => x.VehicleId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.Property(x => x.RegisteredVehicle)
                 .HasColumnType("BIT")

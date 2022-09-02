@@ -30,24 +30,6 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Vehicles",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    license_plate = table.Column<string>(type: "VARCHAR(8)", maxLength: 8, nullable: false),
-                    Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    vehicle_type = table.Column<byte>(type: "TINYINT", nullable: false),
-                    Status = table.Column<bool>(type: "bit", nullable: false),
-                    created_at = table.Column<DateTime>(type: "DATETIME2", nullable: false),
-                    update_at = table.Column<DateTime>(type: "DATETIME2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Vehicles", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "guards",
                 columns: table => new
                 {
@@ -71,30 +53,26 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pagamentos",
+                name: "vehicles",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    license_plate = table.Column<string>(type: "VARCHAR(8)", maxLength: 8, nullable: false),
+                    Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    vehicle_type = table.Column<byte>(type: "TINYINT", nullable: false),
                     user_id = table.Column<int>(type: "INT", nullable: false),
-                    vehicle_id = table.Column<int>(type: "INT", nullable: false),
-                    Status = table.Column<bool>(type: "BIT", nullable: false),
-                    create_at = table.Column<DateTime>(type: "DATETIME2", nullable: false),
-                    update_at = table.Column<DateTime>(type: "DATETIME2", nullable: false)
+                    Status = table.Column<bool>(type: "bit", nullable: false),
+                    created_at = table.Column<DateTime>(type: "DATETIME2", nullable: false),
+                    update_at = table.Column<DateTime>(type: "DATETIME2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pagamentos", x => x.Id);
+                    table.PrimaryKey("PK_vehicles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Pagamentos_users_user_id",
+                        name: "FK_vehicles_users_user_id",
                         column: x => x.user_id,
                         principalTable: "users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Pagamentos_Vehicles_vehicle_id",
-                        column: x => x.vehicle_id,
-                        principalTable: "Vehicles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -123,11 +101,38 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_notification_Vehicles_vehicle_id",
+                        name: "FK_notification_vehicles_vehicle_id",
                         column: x => x.vehicle_id,
-                        principalTable: "Vehicles",
+                        principalTable: "vehicles",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pagamentos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    user_id = table.Column<int>(type: "INT", nullable: false),
+                    vehicle_id = table.Column<int>(type: "INT", nullable: false),
+                    Status = table.Column<bool>(type: "BIT", nullable: false),
+                    create_at = table.Column<DateTime>(type: "DATETIME2", nullable: false),
+                    update_at = table.Column<DateTime>(type: "DATETIME2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pagamentos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Pagamentos_users_user_id",
+                        column: x => x.user_id,
+                        principalTable: "users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Pagamentos_vehicles_vehicle_id",
+                        column: x => x.vehicle_id,
+                        principalTable: "vehicles",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -154,6 +159,11 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                 name: "IX_Pagamentos_vehicle_id",
                 table: "Pagamentos",
                 column: "vehicle_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_vehicles_user_id",
+                table: "vehicles",
+                column: "user_id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -168,7 +178,7 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                 name: "guards");
 
             migrationBuilder.DropTable(
-                name: "Vehicles");
+                name: "vehicles");
 
             migrationBuilder.DropTable(
                 name: "users");

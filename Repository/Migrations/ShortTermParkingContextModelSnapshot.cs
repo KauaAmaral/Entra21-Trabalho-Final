@@ -194,9 +194,15 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                         .HasColumnType("DATETIME2")
                         .HasColumnName("update_at");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("INT")
+                        .HasColumnName("user_id");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Vehicles", (string)null);
+                    b.HasIndex("UserId");
+
+                    b.ToTable("vehicles", (string)null);
                 });
 
             modelBuilder.Entity("Repository.Entities.Guard", b =>
@@ -249,7 +255,7 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                     b.HasOne("Entra21.CSharp.Area21.Repository.Entities.Vehicle", "Vehicle")
                         .WithMany("Notifications")
                         .HasForeignKey("VehicleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Guard");
@@ -268,12 +274,23 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                     b.HasOne("Entra21.CSharp.Area21.Repository.Entities.Vehicle", "Vehicle")
                         .WithMany("Payments")
                         .HasForeignKey("VehicleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("User");
 
                     b.Navigation("Vehicle");
+                });
+
+            modelBuilder.Entity("Entra21.CSharp.Area21.Repository.Entities.Vehicle", b =>
+                {
+                    b.HasOne("Entra21.CSharp.Area21.Repository.Entities.User", "User")
+                        .WithMany("Vehicles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Repository.Entities.Guard", b =>
@@ -292,6 +309,8 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                     b.Navigation("Guards");
 
                     b.Navigation("Payments");
+
+                    b.Navigation("Vehicles");
                 });
 
             modelBuilder.Entity("Entra21.CSharp.Area21.Repository.Entities.Vehicle", b =>
