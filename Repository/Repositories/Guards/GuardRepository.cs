@@ -1,3 +1,5 @@
+
+﻿using Entra21.CSharp.Area21.Repository.Entities;
 ﻿using Entra21.CSharp.Area21.RepositoryDataBase;
 using Repository.Entities;
 using System.Data.Entity;

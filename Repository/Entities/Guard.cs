@@ -1,11 +1,8 @@
-﻿using Entra21.CSharp.Area21.Repository.Entities;
-
-namespace Repository.Entities
+﻿namespace Entra21.CSharp.Area21.Repository.Entities
 {
     public class Guard : EntityBase
     {
         public string IdentificationNumber { get; set; }
-
         public User User { get; set; }  
         public int UserId { get; set; }
 
