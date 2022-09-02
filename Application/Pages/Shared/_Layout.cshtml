@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html class="no-js css-menubar" lang="en">
 <head>
     <meta charset="utf-8">
@@ -63,6 +62,37 @@
 
         <div class="navbar-container container-fluid">
             <!-- Navbar Collapse -->
+                 <div>
+                    <ul class="site-menu" data-plugin="menu">
+                        <li class="site-menu-category">General</li>
+                        <li class="dropdown site-menu-item has-sub">
+                            <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
+                                <i class="site-menu-icon wb-layout" aria-hidden="true"></i>
+                                <span class="site-menu-title">Início</span>
+                                <span class="site-menu"></span>
+                            </a>
+                          
+                        </li>
+                        <li class="dropdown site-menu-item has-sub">
+                            <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
+                                <i class="site-menu-icon wb-file" aria-hidden="true"></i>
+                                <span class="site-menu-title">Veículos</span>
+                                <span class="site-menu"></span>
+                            </a>
+                        </li>
+                        <li class="site-menu-category">Elements</li>
+                        <li class="dropdown site-menu-item has-section has-sub">
+                        </li>
+                        <li class="dropdown site-menu-item has-section has-sub">
+                            <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
+                                <i class="site-menu-icon wb-plugin" aria-hidden="true"></i>
+                                <span class="site-menu-title">Sobre</span>
+                                <span class="site-menu-"></span>
+                            </a>
+
+                        <li class="site-menu-category">Apps</li>
+                    </ul>
+                </div>
             <div class="collapse navbar-collapse navbar-collapse-toolbar" id="site-navbar-collapse">
                 <!-- Navbar Toolbar -->
                 <ul class="nav navbar-toolbar">
@@ -74,13 +104,8 @@
                             </i>
                         </a>
                     </li>
-                    <li class="nav-item hidden-float">
-                        <a class="nav-link icon wb-search" data-toggle="collapse" href="#" data-target="#site-navbar-search"
-                           role="button">
-                            <span class="sr-only">Toggle Search</span>
-                        </a>
-                    </li>
                 </ul>
+             
                 <!-- End Navbar Toolbar -->
                 <!-- Navbar Toolbar Right -->
                 <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
@@ -182,17 +207,6 @@
                                                 </div>
                                             </div>
                                         </a>
-                                        <a class="list-group-item dropdown-item" href="javascript:void(0)" role="menuitem">
-                                            <div class="media">
-                                                <div class="pr-10">
-                                                    <i class="icon wb-chat bg-orange-600 white icon-circle" aria-hidden="true"></i>
-                                                </div>
-                                                <div class="media-body">
-                                                    <h6 class="media-heading">Message received</h6>
-                                                    <time class="media-meta" datetime="2018-06-10T12:34:48+08:00">3 days ago</time>
-                                                </div>
-                                            </div>
-                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -207,11 +221,6 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" title="Messages"
-                           aria-expanded="false" data-animation="scale-up" role="button">
-                            <i class="icon wb-envelope" aria-hidden="true"></i>
-                            <span class="badge badge-pill badge-info up">3</span>
-                        </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
                             <div class="dropdown-menu-header" role="presentation">
                                 <h5>MESSAGES</h5>
@@ -302,12 +311,6 @@
                             </div>
                         </div>
                     </li>
-                    <li class="nav-item" id="toggleChat">
-                        <a class="nav-link" data-toggle="site-sidebar" href="javascript:void(0)" title="Chat"
-                           data-url="site-sidebar.tpl">
-                            <i class="icon wb-chat" aria-hidden="true"></i>
-                        </a>
-                    </li>
                 </ul>
                 <!-- End Navbar Toolbar Right -->
             </div>
@@ -328,7 +331,7 @@
             <!-- End Site Navbar Seach -->
         </div>
     </nav>
-    <div class="site-menubar site-menubar-light">
+    <!-- <div class="site-menubar site-menubar-light">
         <div class="site-menubar-body">
             <div>
                 <div>
@@ -351,11 +354,6 @@
                         </li>
                         <li class="site-menu-category">Elements</li>
                         <li class="dropdown site-menu-item has-section has-sub">
-                            <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
-                                <i class="site-menu-icon wb-bookmark" aria-hidden="true"></i>
-                                <span class="site-menu-title">Perfil</span>
-                                <span class="site-menu"></span>
-                            </a>
                         </li>
                         <li class="dropdown site-menu-item has-section has-sub">
                             <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
@@ -369,9 +367,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <!-- Page -->
+    <!-- Page --> 
     <div class="page">
         <div class="page-content container-fluid">
             @RenderBody()
