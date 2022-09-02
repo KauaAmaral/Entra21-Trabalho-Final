@@ -21,11 +21,11 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
             builder.Property(x => x.CreatedAt)
                 .HasColumnName("created_at")
                 .IsRequired()
-                .HasColumnType("DATETAME2");
+                .HasColumnType("DATETIME2");
 
             builder.Property(x => x.UpdatedAt)
                 .HasColumnName("update_at")
-                .HasColumnType("DATETAME2");
+                .HasColumnType("DATETIME2");
 
             builder.Property(x => x.Type)
                 .HasColumnName("vehicle_type")

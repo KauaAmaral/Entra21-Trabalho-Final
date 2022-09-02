@@ -45,6 +45,19 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Vehicles
 
         public IList<Vehicle> ObterTodos() =>
             _context.Vehicles.ToList();
-        
+
+    //     public Pet? ObterPodId(int id) => 
+    //    _contexto.Pets
+    //        // INNER JOIN com a tabela de Responsaveis
+    //        .Include(x => x.Responsavel) 
+    //        .Include(x => x.Raca)
+    //        .FirstOrDefault(x => x.Id == id);
+
+    //public IList<Pet> ObterTodos() => 
+    //    _contexto.Pets
+    //    // INNER JOIN com a tabela de Responsaveis
+    //        .Include(x => x.Responsavel) 
+    //        .Include(x => x.Raca)
+    //        .ToList();
     }
 }

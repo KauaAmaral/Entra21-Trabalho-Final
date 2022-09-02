@@ -1,6 +1,4 @@
-﻿using Entra21.CSharp.Area21.Repository.Entities;
-
-namespace Repository.Entities
+﻿namespace Entra21.CSharp.Area21.Repository.Entities
 {
     public class Guard : EntityBase
     {
@@ -8,8 +6,6 @@ namespace Repository.Entities
         public User User { get; set; }  
         public int UserId { get; set; }
 
-
-        //public IList<Notification> Notifications { get; set; }
-        //TODO: Descomitar lista da notificação na estrutura do guarda
+        public IList<Notification> Notifications { get; set; }
     }
 }
