@@ -11,9 +11,9 @@ namespace Entra21.CSharp.Area21.Service.Services.Payments
         private readonly IPaymentEntityMapping _paymentEntityMapping;
         public Payment Register(PaymentRegisterViewModel registerViewModel, string pathFiles)
         {
-            var path = SaveFile(registerViewModel, pathFiles);
+            //var path = SaveFile(registerViewModel, pathFiles);
 
-            var payment = _paymentEntityMapping.RegisterWith(registerViewModel, path);
+            var payment = _paymentEntityMapping.RegisterWith(registerViewModel);
 
             _paymentRepository.Register(payment);
 
