@@ -2,7 +2,7 @@
 
 namespace Entra21.CSharp.Area21.Repository.Repositories.Users
 {
-    internal interface IUserRepository
+    public interface IUserRepository
     {
         User Insert(User user);
         void Update(User user);

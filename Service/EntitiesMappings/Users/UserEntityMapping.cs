@@ -16,7 +16,7 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Users
                 CreatedAt = DateTime.Now
             };
 
-        public void UpdateWith(User user, UserUpdateViewModel viewModel)
+        public User UpdateWith(User user, UserUpdateViewModel viewModel)
         {
             user.Name = viewModel.Name;
             user.Email = viewModel.Email;
@@ -24,6 +24,8 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Users
             user.Cpf = viewModel.Cpf;
             user.Phone = viewModel.Phone;
             user.UpdatedAt = DateTime.Now;
+
+            return user;
         }
     }
 }
