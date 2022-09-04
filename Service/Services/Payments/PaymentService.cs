@@ -1,9 +1,9 @@
 ﻿using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.Repository.Repositories.Payments;
-using Entra21.CSharp.Area21.Service.EntitiesMappings;
+using Entra21.CSharp.Area21.Service.EntitiesMappings.Payments;
 using Entra21.CSharp.Area21.Service.ViewModels.Payments;
 
-namespace Entra21.CSharp.Area21.Service.Services
+namespace Entra21.CSharp.Area21.Service.Services.Payments
 {
     public class PaymentService : IPaymentService
     {
@@ -22,7 +22,7 @@ namespace Entra21.CSharp.Area21.Service.Services
 
         private string SaveFile(PaymentViewModel registerViewModel, string pathFiles, string? oldFile = "")
         {
-            if(registerViewModel.File == null)
+            if (registerViewModel.File == null)
                 return string.Empty;
 
             if (!string.IsNullOrEmpty(pathFiles))
