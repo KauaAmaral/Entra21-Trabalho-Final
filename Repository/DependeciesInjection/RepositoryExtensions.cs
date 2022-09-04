@@ -1,4 +1,6 @@
-﻿using Entra21.CSharp.Area21.Repository.Repositories.Payments;
+﻿using Entra21.CSharp.Area21.Repository.Repositories.Guards;
+using Entra21.CSharp.Area21.Repository.Repositories.Notifications;
+using Entra21.CSharp.Area21.Repository.Repositories.Payments;
 using Entra21.CSharp.Area21.Repository.Repositories.Users;
 using Entra21.CSharp.Area21.Repository.Repositories.Vehicles;
 using Entra21.CSharp.Area21.RepositoryDataBase;
@@ -14,19 +16,27 @@ namespace Entra21.CSharp.Area21.Repository.DependeciesInjection
         {
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IVehicleRepository, VehicleRepository>();
+            services.AddScoped<IGuardRepository, GuardRepository>();
             services.AddScoped<IPaymentsRepository, PaymentsRepository>();
-            //services.AddScoped<IGuardRepository, GuardRepository>();
-            //services.AddScoped<INotificationRepository, NotificationRepository>();
-            //TODO: Descomentar RepositoryExtensions
+            services.AddScoped<INotificationRepository, NotificationRepository>();
 
             return services;
         }
 
         public static IServiceCollection AddEntityFramework(this IServiceCollection services, ConfigurationManager configurationManager)
         {
-            services.AddDbContext<ShortTermParkingContext>(options => options.UseSqlServer(configurationManager.GetConnectionString("SqlServer")));
+            services.AddDbContext<ShortTermParkingContext>(options =>
+            options.UseSqlServer(configurationManager.GetConnectionString("SqlServer")));
 
             return services;
         }
+
+        //public static IServiceCollection InsertEntityFramework(this IServiceCollection services, ConfigurationManager configurationManager)
+        //{
+        //    services.AddDbContext<ShortTermParkingContext>(options =>
+        //    options.UseSqlServer(configurationManager.GetConnectionString("SqlServer")));
+
+        //    return services;
+        //}
     }
 }
