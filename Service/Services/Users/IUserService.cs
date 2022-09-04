@@ -6,9 +6,9 @@ namespace Entra21.CSharp.Area21.Service.Services.Users
     internal interface IUserService
     {
         bool Delete(int id);
-        User Insert(UserViewModel viewModel);
+        User Insert(UserRegisterViewModel viewModel);
         bool Update(UserUpdateViewModel viewModel);
-        UserUpdateViewModel? GetById(int id);
+        User? GetById(int id);
         IList<User> GetAll();
     }
 }

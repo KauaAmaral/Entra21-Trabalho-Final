@@ -1,33 +1,51 @@
 ﻿using Entra21.CSharp.Area21.Repository.Entities;
+using Entra21.CSharp.Area21.Repository.Repositories.Users;
+using Entra21.CSharp.Area21.Service.EntitiesMappings.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Users;
 
 namespace Entra21.CSharp.Area21.Service.Services.Users
 {
     internal class UserService : IUserService
     {
-        public bool Delete(int id)
+        private readonly IUserRepository _userRepository;
+        private readonly IUserEntityMapping _userEntityMapping;
+
+        public UserService(IUserRepository userRepository, IUserEntityMapping userEntityMapping)
         {
-            throw new NotImplementedException();
+            _userRepository = userRepository;
+            _userEntityMapping = userEntityMapping;
         }
 
-        public IList<User> GetAll()
-        {
-            throw new NotImplementedException();
-        }
+        public bool Delete(int id) => 
+            _userRepository.Delete(id);
 
-        public UserUpdateViewModel? GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public IList<User> GetAll() =>
+            _userRepository.GetAll();
 
-        public User Insert(UserViewModel viewModel)
+        public User? GetById(int id) => 
+            _userRepository.GetById(id);
+
+        public User Insert(UserRegisterViewModel viewModel)
         {
-            throw new NotImplementedException();
+            var user = _userEntityMapping.RegisterWith(viewModel);
+
+            _userRepository.Insert(user);
+
+            return user;
         }
 
         public bool Update(UserUpdateViewModel viewModel)
         {
-            throw new NotImplementedException();
+            var user = _userRepository.GetById(viewModel.Id);
+
+            if (user == null)
+                return false;
+
+            user = _userEntityMapping.UpdateWith(user, viewModel);
+
+            _userRepository.Update(user);
+
+            return true;
         }
     }
 }
