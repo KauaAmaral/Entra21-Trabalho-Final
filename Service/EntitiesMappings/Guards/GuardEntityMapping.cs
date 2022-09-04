@@ -5,7 +5,7 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Guards
 {
     public class GuardEntityMapping : IGuardEntityMapping
     {
-        public Guard RegisterWith(GuardRegisterViewModel viewModel, string path) =>
+        public Guard RegisterWith(GuardRegisterViewModel viewModel) =>
             new Guard
             {
                 IdentificationNumber = viewModel.IdentificationNumber,
@@ -13,7 +13,7 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Guards
                 CreatedAt = DateTime.Now
             };
 
-        public void UpdateWith(Guard guard, GuardUpdateViewModel viewModel, string path)
+        public void UpdateWith(Guard guard, GuardUpdateViewModel viewModel)
         {
             guard.IdentificationNumber = viewModel.IdentificationNumber;
             guard.UserId = viewModel.UserId.GetValueOrDefault();
