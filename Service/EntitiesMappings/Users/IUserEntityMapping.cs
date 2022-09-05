@@ -6,6 +6,6 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Users
     public interface IUserEntityMapping
     {
         User RegisterWith(UserRegisterViewModel viewModel);
-        void UpdateWith(User user, UserUpdateViewModel viewModel);
+        User UpdateWith(User user, UserUpdateViewModel viewModel);
     }
 }
