@@ -1,4 +1,4 @@
-﻿@model UserRegisterViewModel
+﻿@model UserLoginViewModel
 
 
 <div class="page vertical-align text-center" data-animsition-in="fade-in" data-animsition-out="fade-out">
@@ -8,15 +8,16 @@
 				<div class="brand">
 					<h2 class="brand-text font-size-18">Área 21</h2>
 				</div>
-				<form asp-action="login" method="POST">
+				<form asp-action="Login" asp-controller="login" method="POST">
 					<div class="form-group form-material floating" data-plugin="formMaterial">
-						<input type="email" class="form-control" name="email" />
+						<input asp-for="Email" type="email" class="form-control" name="email" />
 						<label class="floating-label">Email</label>
 						<span asp-validations-for="Email" class="text-danger"></span>
 					</div>
 					<div class="form-group form-material floating" data-plugin="formMaterial">
-						<input type="password" class="form-control" name="password" />
+						<input asp-for="Password" type="password" class="form-control" name="password" />
 						<label class="floating-label">Password</label>
+						<span asp-validations-for="Email" class="text-danger"></span>
 					</div>
 					<button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Sign in</button>
 				</form>

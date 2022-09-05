@@ -12,7 +12,9 @@ builder.Services.AddRazorPages();
 
 builder.Services
     .AddEntityFramework(builder.Configuration)
-    .AddServices();
+    .AddServices()
+    .AddRepository()
+    .AddEntitiesMapping();
 
 var app = builder.Build();
 
