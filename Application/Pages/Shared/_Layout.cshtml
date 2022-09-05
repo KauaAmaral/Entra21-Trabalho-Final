@@ -62,37 +62,37 @@
 
         <div class="navbar-container container-fluid">
             <!-- Navbar Collapse -->
-                 <div>
-                    <ul class="site-menu" data-plugin="menu">
-                        <li class="site-menu-category">General</li>
-                        <li class="dropdown site-menu-item has-sub">
-                            <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
-                                <i class="site-menu-icon wb-layout" aria-hidden="true"></i>
-                                <span class="site-menu-title">Início</span>
-                                <span class="site-menu"></span>
-                            </a>
-                          
-                        </li>
-                        <li class="dropdown site-menu-item has-sub">
-                            <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
-                                <i class="site-menu-icon wb-file" aria-hidden="true"></i>
-                                <span class="site-menu-title">Veículos</span>
-                                <span class="site-menu"></span>
-                            </a>
-                        </li>
-                        <li class="site-menu-category">Elements</li>
-                        <li class="dropdown site-menu-item has-section has-sub">
-                        </li>
-                        <li class="dropdown site-menu-item has-section has-sub">
-                            <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
-                                <i class="site-menu-icon wb-plugin" aria-hidden="true"></i>
-                                <span class="site-menu-title">Sobre</span>
-                                <span class="site-menu-"></span>
-                            </a>
+            <div>
+                <ul class="site-menu" data-plugin="menu">
+                    <li class="site-menu-category">General</li>
+                    <li class="dropdown site-menu-item has-sub">
+                        <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
+                            <i class="site-menu-icon wb-layout" aria-hidden="true"></i>
+                            <span class="site-menu-title">Início</span>
+                            <span class="site-menu"></span>
+                        </a>
 
-                        <li class="site-menu-category">Apps</li>
-                    </ul>
-                </div>
+                    </li>
+                    <li class="dropdown site-menu-item has-sub">
+                        <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
+                            <i class="site-menu-icon wb-file" aria-hidden="true"></i>
+                            <span class="site-menu-title">Veículos</span>
+                            <span class="site-menu"></span>
+                        </a>
+                    </li>
+                    <li class="site-menu-category">Elements</li>
+                    <li class="dropdown site-menu-item has-section has-sub">
+                    </li>
+                    <li class="dropdown site-menu-item has-section has-sub">
+                        <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
+                            <i class="site-menu-icon wb-plugin" aria-hidden="true"></i>
+                            <span class="site-menu-title">Sobre</span>
+                            <span class="site-menu-"></span>
+                        </a>
+
+                    <li class="site-menu-category">Apps</li>
+                </ul>
+            </div>
             <div class="collapse navbar-collapse navbar-collapse-toolbar" id="site-navbar-collapse">
                 <!-- Navbar Toolbar -->
                 <ul class="nav navbar-toolbar">
@@ -105,7 +105,7 @@
                         </a>
                     </li>
                 </ul>
-             
+
                 <!-- End Navbar Toolbar -->
                 <!-- Navbar Toolbar Right -->
                 <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
@@ -278,15 +278,16 @@
             <!-- End Site Navbar Seach -->
         </div>
     </nav>
-    <!-- Page --> 
+    <!-- Page -->
     <div class="page">
-        <div class="page-content container-fluid">
+@*        <div class="page-content container-fluid">*@
             @RenderBody()
             <div class="row" data-plugin="matchHeight" data-by-row="true">
                 <!-- First Row -->
-        <!-- End Second Row -->
-    </div>
-    </div>
+                <!-- End Second Row -->
+            </div>
+@*        </div>*@
+        <img src="~/Theme/global/portraits/Area21_Inicio_Log.jpg" />
     </div>
     <!-- End Page -->
     <!-- Add Item Dialog -->
@@ -390,14 +391,6 @@
         </div>
     </div>
     <!-- End Edit Dialog -->
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="site-footer-legal">© 2018 <a href="http://themeforest.net/item/remark-responsive-bootstrap-admin-template/11989202">Remark</a></div>
-        <div class="site-footer-right">
-            Crafted with <i class="red-600 wb wb-heart"></i> by <a href="https://themeforest.net/user/creation-studio">Creation Studio</a>
-        </div>
-    </footer>
-    <!-- Core  -->
     <script src="~/Theme/global/vendor/babel-external-helpers/babel-external-helpers.js"></script>
     <script src="~/Theme/global/vendor/jquery/jquery.js"></script>
     <script src="~/Theme/global/vendor/popper-js/umd/popper.min.js"></script>
