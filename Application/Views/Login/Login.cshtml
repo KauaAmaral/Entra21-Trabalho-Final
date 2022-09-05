@@ -1,8 +1,8 @@
 ﻿@model UserLoginViewModel
 
 
-<div class="page vertical-align text-center" data-animsition-in="fade-in" data-animsition-out="fade-out">
-	<div class="page-content vertical-align-middle animation-slide-top animation-duration-1">
+<div class="page vertical-align text-center">
+	<div class="page-content vertical-align-middle">
 		<div class="panel">
 			<div class="panel-body">
 				<div class="brand">
@@ -12,13 +12,17 @@
 					<div class="form-group form-material floating" data-plugin="formMaterial">
 						<input asp-for="Email" type="email" class="form-control" name="email" />
 						<label class="floating-label">Email</label>
-						<span asp-validations-for="Email" class="text-danger"></span>
+						<span asp-validation-for="Email" class="text-danger"></span>
 					</div>
 					<div class="form-group form-material floating" data-plugin="formMaterial">
 						<input asp-for="Password" type="password" class="form-control" name="password" />
 						<label class="floating-label">Password</label>
-						<span asp-validations-for="Email" class="text-danger"></span>
+						<span asp-validation-for="Password" class="text-danger"></span>
 					</div>
+						@if(TempData["Message"] != null)
+						{
+							<p class="text-danger">@TempData["Message"]</p>
+						}
 					<button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Sign in</button>
 				</form>
 				<p>Still no account? Please go to <a href="register-v3.html">Sign up</a></p>

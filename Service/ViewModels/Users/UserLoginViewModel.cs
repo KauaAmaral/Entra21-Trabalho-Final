@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Entra21.CSharp.Area21.Service.ViewModels.Users
 {
@@ -11,5 +12,8 @@ namespace Entra21.CSharp.Area21.Service.ViewModels.Users
         [Display(Name = "Senha")]
         [Required(ErrorMessage = "{0} deve ser preenchida")]
         public string Password { get; set; }
+
+        public bool VerifyLogin(string password) => 
+            Password == password;
     }
 }
