@@ -44,5 +44,8 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Users
 
         public IList<User> GetAll() =>
             _context.Users.ToList();
+
+        public User? GetByEmail(string email) => 
+            _context.Users.FirstOrDefault(x => x.Email == email);
     }
 }

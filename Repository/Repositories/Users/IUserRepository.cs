@@ -9,5 +9,6 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Users
         bool Delete(int id);
         User? GetById(int id);
         IList<User> GetAll();
+        User? GetByEmail(string email);
     }
 }
