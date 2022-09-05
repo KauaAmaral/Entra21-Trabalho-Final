@@ -1,0 +1,26 @@
+﻿@model UserRegisterViewModel
+
+
+<div class="page vertical-align text-center" data-animsition-in="fade-in" data-animsition-out="fade-out">
+	<div class="page-content vertical-align-middle animation-slide-top animation-duration-1">
+		<div class="panel">
+			<div class="panel-body">
+				<div class="brand">
+					<h2 class="brand-text font-size-18">Área 21</h2>
+				</div>
+				<form asp-action="login" method="POST">
+					<div class="form-group form-material floating" data-plugin="formMaterial">
+						<input type="email" class="form-control" name="email" />
+						<label class="floating-label">Email</label>
+						<span asp-validations-for="Email" class="text-danger"></span>
+					</div>
+					<div class="form-group form-material floating" data-plugin="formMaterial">
+						<input type="password" class="form-control" name="password" />
+						<label class="floating-label">Password</label>
+					</div>
+					<button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Sign in</button>
+				</form>
+				<p>Still no account? Please go to <a href="register-v3.html">Sign up</a></p>
+			</div>
+		</div>
+	</div>
