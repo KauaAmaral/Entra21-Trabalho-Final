@@ -1,5 +1,6 @@
 ﻿using Entra21.CSharp.Area21.Service.EntitiesMappings.Payments;
 using Entra21.CSharp.Area21.Service.Services;
+using Entra21.CSharp.Area21.Service.Services.Payments;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Entra21.CSharp.Area21.Service.DependenciesInjection
