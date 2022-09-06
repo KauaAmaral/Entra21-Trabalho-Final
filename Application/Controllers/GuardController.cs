@@ -12,5 +12,12 @@ namespace Entra21.CSharp.Area21.Application.Controllers
         {
             _guardService = guardService;
         }
+
+        public IActionResult Index()
+        {
+            var guard = _guardService.GetAll();
+
+            return View("Index", guard);
+        }
     }
 }
