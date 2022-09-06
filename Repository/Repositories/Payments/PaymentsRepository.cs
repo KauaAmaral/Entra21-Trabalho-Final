@@ -14,10 +14,12 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Payments
 
         public Payment Register(Payment payments)
         {
-            //_context.Payments.Add(payments);
+            _context.Payments.Add(payments);
             _context.SaveChanges();
 
             return payments;
         }
     }
 }
+
+

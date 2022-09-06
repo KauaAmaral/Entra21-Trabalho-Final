@@ -1,8 +1,11 @@
-﻿using Entra21.CSharp.Area21.Service.Authentication;
+using Entra21.CSharp.Area21.Service.Authentication;
 using Entra21.CSharp.Area21.Service.EntitiesMappings;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Users;
 using Entra21.CSharp.Area21.Service.Services;
 using Entra21.CSharp.Area21.Service.Services.Users;
+using Entra21.CSharp.Area21.Service.EntitiesMappings.Payments;
+using Entra21.CSharp.Area21.Service.Services;
+using Entra21.CSharp.Area21.Service.Services.Payments;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 

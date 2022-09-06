@@ -11,6 +11,7 @@ namespace Entra21.CSharp.Area21.RepositoryDataBase
         public DbSet<Guard> Guards { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+        public DbSet<Notification> Notifications { get; set; }      
 
         public ShortTermParkingContext(DbContextOptions<ShortTermParkingContext> options) : base(options)
         {
