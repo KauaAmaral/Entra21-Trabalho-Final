@@ -1,2 +1,20 @@
-﻿<p class="h3">Lista de Guardas</p>
+﻿@model List<Guard>
+
+<p class="h3">Lista de Guardas</p>
+
+<div class="row mb-3">
+    <div class="text-end">
+        <a asp-action="cadastrar" class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i> Cadastrar
+        </a>
+    </div>
+</div>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th></th>
+        </tr>
+    </thead>
+</table>
 
