@@ -191,12 +191,24 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                         .HasColumnType("BIT");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .IsRequired()
                         .HasColumnType("DATETIME2");
 
                     b.HasKey("Id");
 
                     b.ToTable("users", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Cpf = "11111111111",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(1989),
+                            Email = "admin@admin.com",
+                            Name = "Admin",
+                            Password = "1234",
+                            Phone = "1111111111",
+                            Status = true
+                        });
                 });
 
             modelBuilder.Entity("Entra21.CSharp.Area21.Repository.Entities.Vehicle", b =>

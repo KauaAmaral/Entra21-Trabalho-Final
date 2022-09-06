@@ -42,12 +42,24 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .HasColumnType("DATETIME2");
 
             builder.Property(x => x.UpdatedAt)
-                .IsRequired()
                 .HasColumnType("DATETIME2");
 
             builder.Property(x => x.Status)
                 .IsRequired()
                 .HasColumnType("BIT");
+
+            builder.HasData(
+                new User
+                {
+                    Id = 1,
+                    Name = "Admin",
+                    Email = "admin@admin.com",
+                    Password = "1234",
+                    Cpf = "11111111111",
+                    Phone = "1111111111",
+                    CreatedAt = new DateTime(2005-08-08),
+                    Status = true
+                });
         }
     }
 }
