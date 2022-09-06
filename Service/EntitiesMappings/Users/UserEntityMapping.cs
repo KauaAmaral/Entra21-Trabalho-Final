@@ -1,4 +1,5 @@
-﻿using Entra21.CSharp.Area21.Repository.Entities;
+﻿using Entra21.CSharp.Area21.Repository.Authentication;
+using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.Service.ViewModels.Users;
 
 namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Users
@@ -10,7 +11,7 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Users
             {
                 Name = viewModel.Name,
                 Email = viewModel.Email,
-                Password = viewModel.Password,
+                Password = viewModel.Password.GetHash(),
                 Cpf = viewModel.Cpf,
                 Phone = viewModel.Phone,
                 CreatedAt = DateTime.Now
@@ -20,7 +21,7 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Users
         {
             user.Name = viewModel.Name;
             user.Email = viewModel.Email;
-            user.Password = viewModel.Password;
+            user.Password = viewModel.Password.GetHash();
             user.Cpf = viewModel.Cpf;
             user.Phone = viewModel.Phone;
             user.UpdatedAt = DateTime.Now;

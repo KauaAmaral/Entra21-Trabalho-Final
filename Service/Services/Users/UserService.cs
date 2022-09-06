@@ -22,9 +22,9 @@ namespace Entra21.CSharp.Area21.Service.Services.Users
         public IList<User> GetAll() =>
             _userRepository.GetAll();
 
-        public User? GetByEmail(string email)
+        public User? GetByEmailAndPassword(string email, string password)
         {
-            var user = _userRepository.GetByEmail(email);
+            var user = _userRepository.GetByEmailAndPassword(email, password);
 
             return user;
         }

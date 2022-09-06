@@ -10,6 +10,6 @@ namespace Entra21.CSharp.Area21.Service.Services.Users
         bool Update(UserUpdateViewModel viewModel);
         User? GetById(int id);
         IList<User> GetAll();
-        User? GetByEmail(string email);
+        User? GetByEmailAndPassword(string email, string password);
     }
 }

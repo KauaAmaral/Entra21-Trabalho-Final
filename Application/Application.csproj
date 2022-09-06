@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\Login\**" />
+    <Content Remove="Controllers\Login\**" />
+    <EmbeddedResource Remove="Controllers\Login\**" />
+    <None Remove="Controllers\Login\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Font.Awesome" Version="5.15.4" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
@@ -22,10 +29,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Repository\Repository.csproj" />
     <ProjectReference Include="..\Service\Service.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\Login\" />
   </ItemGroup>
 
 </Project>
