@@ -1,20 +1,25 @@
-﻿@model List<Guard>
+﻿<p class="h3">Lista de Guardas</p>
 
-<p class="h3">Lista de Guardas</p>
-
-<div class="row mb-3">
-    <div class="text-end">
-        <a asp-action="cadastrar" class="btn btn-primary">
+<div class="row">
+    <div class="col-12">
+        <button type="button" class="btn btn-primary nb-2 float-end" data-bs-toggle="model" data-bs-target="#cadastrarGuarda">
             <i class="fa-solid fa-plus"></i> Cadastrar
-        </a>
+        </button>
     </div>
 </div>
 
-<table class="table table-striped table-bordered">
+<table class="table table-striped table-bordered" id="guarda-table">
     <thead>
         <tr>
-            <th></th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Número de identificação</th>
         </tr>
     </thead>
 </table>
 
+<partial name="Cadastrar"/>
+
+@*@section Scripts{
+    <script src=""
+}*@

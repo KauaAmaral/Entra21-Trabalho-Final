@@ -14,6 +14,7 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             _guardService = guardService;
         }
 
+        // TODO: Adicionar scripts no index
         [HttpGet]
         public IActionResult Index()
         {
