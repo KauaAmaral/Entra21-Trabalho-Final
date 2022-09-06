@@ -21,8 +21,8 @@ namespace Entra21.CSharp.Area21.Application.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            //if (_session.FindUserSession() != null)
-            //    return RedirectToAction("Index");
+            if (_session.FindUserSession() != null)
+                return RedirectToAction("Index", "Home");
 
             return View("Login");
         }
@@ -49,6 +49,14 @@ namespace Entra21.CSharp.Area21.Application.Controllers
                 TempData["Message"] = "Não existe um usuário com esse e-mail";
 
             return View();
+        }
+
+        [HttpGet("Logout")]
+        public IActionResult Logout()
+        {
+            _session.RemoveUserSession();
+
+            return RedirectToAction(nameof(Login));
         }
     }
 }

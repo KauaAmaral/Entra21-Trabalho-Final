@@ -14,13 +14,7 @@ builder.Services
     .AddEntityFramework(builder.Configuration)
     .AddServices()
     .AddRepository()
-    .AddEntitiesMapping()
-    .AddSession(o =>
-    {
-        o.Cookie.HttpOnly = true;
-        o.Cookie.IsEssential = true;
-            
-    });
+    .AddEntitiesMapping();
 
 var app = builder.Build();
 
@@ -63,7 +57,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Login}/{action=Index}/{id?}");
+        pattern: "{controller=Home}/{action=Index}/{id?}");
 });
 
 app.Run();
