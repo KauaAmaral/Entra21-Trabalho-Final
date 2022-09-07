@@ -21,6 +21,23 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             return View();
         }
 
+        [HttpGet("obterTodos")]
+        public IActionResult GetAll()
+        {
+            var guards = _guardService.GetAll();
+
+            return Ok(guards);
+        }
+
+        [HttpGet("obterPorId")]
+        public IActionResult GetById([FromQuery] int id)
+        {
+            var guards = _guardService.GetById(id);
+
+            return Ok(guards);
+        }
+
+        // TODO: Criar View
         [HttpPost("cadastrar")]
         public IActionResult Register([FromForm] GuardRegisterViewModel guardRegisterViewModel)
         {
@@ -30,6 +47,28 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             var guard = _guardService.Register(guardRegisterViewModel);
 
             return Ok(guard);
+        }
+
+        [HttpPost("editar")]
+        public IActionResult Update([FromQuery] GuardUpdateViewModel guardUpdateViewModel)
+        {
+            if (!ModelState.IsValid)
+                return UnprocessableEntity(ModelState);
+
+            var updated = _guardService.Update(guardUpdateViewModel);
+
+            return Ok(new { status = updated });
+        }
+
+        [HttpPost("delete")]
+        public IActionResult Delete([FromQuery] int id)
+        {
+            var deleted = _guardService.Delete(id);
+
+            if (!deleted)
+                return NotFound();
+
+            return Ok();
         }
     }
 }
