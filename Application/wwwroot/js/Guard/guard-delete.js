@@ -1,4 +1,4 @@
-﻿$('table').on('click', '.guard-apagar', (event) => {
+﻿$('table').on('click', '.guard-delete', (event) => {
     let element = event.target.tagName === 'I'
         ? event.target.parentElement
         : event.target;
@@ -25,7 +25,7 @@ let guardDelete = (buttonDelete) => {
 
     toastr.clear();
 
-    fetch(`/guard/delete?id=${id}`)
+    fetch(`/guarda/apagar?id=${id}`)
         .then((response) => {
             let statusResponse = response.status;
 
