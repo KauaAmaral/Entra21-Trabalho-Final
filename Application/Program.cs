@@ -1,5 +1,6 @@
 using Entra21.CSharp.Area21.Repository.DependeciesInjection;
 using Entra21.CSharp.Area21.RepositoryDataBase;
+using Entra21.CSharp.Area21.Service.DependenciesInjection;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
@@ -10,7 +11,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 builder.Services
-    .AddEntityFramework(builder.Configuration);
+    .AddEntityFramework(builder.Configuration)
+    .AddServices()
+    .AddRepository()
+    .AddEntitiesMapping();
 
 var app = builder.Build();
 
@@ -46,5 +50,12 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+});
 
 app.Run();

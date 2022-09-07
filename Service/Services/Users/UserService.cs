@@ -5,7 +5,7 @@ using Entra21.CSharp.Area21.Service.ViewModels.Users;
 
 namespace Entra21.CSharp.Area21.Service.Services.Users
 {
-    internal class UserService : IUserService
+    public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
         private readonly IUserEntityMapping _userEntityMapping;
@@ -21,6 +21,13 @@ namespace Entra21.CSharp.Area21.Service.Services.Users
 
         public IList<User> GetAll() =>
             _userRepository.GetAll();
+
+        public User? GetByEmail(string email)
+        {
+            var user = _userRepository.GetByEmail(email);
+
+            return user;
+        }
 
         public User? GetById(int id) => 
             _userRepository.GetById(id);

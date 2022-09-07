@@ -13,7 +13,7 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Notifications
             _context = context;
         }
 
-        public Notification NewNotification(Notification notification)
+        public Notification RegisterNotification(Notification notification)
         {
             _context.Notifications.Add(notification);
             _context.SaveChanges();
