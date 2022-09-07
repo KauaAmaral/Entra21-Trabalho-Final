@@ -1,7 +1,5 @@
 using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.RepositoryDataBase;
-using Entra21.CSharp.Area21.Repository.Entities;
-using Entra21.CSharp.Area21.RepositoryDataBase;
 using System.Data.Entity;
 
 namespace Entra21.CSharp.Area21.Repository.Repositories.Guards
