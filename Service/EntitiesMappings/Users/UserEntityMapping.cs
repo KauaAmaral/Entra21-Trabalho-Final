@@ -21,7 +21,6 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Users
         {
             user.Name = viewModel.Name;
             user.Email = viewModel.Email;
-            user.Password = viewModel.Password.GetHash();
             user.Cpf = viewModel.Cpf;
             user.Phone = viewModel.Phone;
             user.UpdatedAt = DateTime.Now;
