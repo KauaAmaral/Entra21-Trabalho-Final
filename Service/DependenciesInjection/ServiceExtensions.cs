@@ -6,6 +6,7 @@ using Entra21.CSharp.Area21.Service.EntitiesMappings.Payments;
 using Entra21.CSharp.Area21.Service.Services;
 using Entra21.CSharp.Area21.Service.Services.Payments;
 using Microsoft.Extensions.DependencyInjection;
+using Entra21.CSharp.Area21.Service.Services.Guards;
 
 namespace Entra21.CSharp.Area21.Service.DependenciesInjection
 {
@@ -16,7 +17,7 @@ namespace Entra21.CSharp.Area21.Service.DependenciesInjection
             services.AddScoped<IUserService, UserService>();
             //services.AddScoped<IVehicleService, VehicleService>();
             services.AddScoped<IPaymentService, PaymentService>();
-            //services.AddScoped<IGuardService, GuardService>();
+            services.AddScoped<IGuardService, GuardService>();
             //services.AddScoped<INotificationService, NotificationService>();
 
             return services;
