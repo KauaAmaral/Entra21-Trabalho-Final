@@ -17,7 +17,7 @@ namespace Entra21.CSharp.Area21.Application.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            return View("Index");
         }
 
         [HttpGet("obterTodos")]
@@ -58,7 +58,7 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             return Ok(new { status = updated });
         }
 
-        [HttpPost("delete")]
+        [HttpGet("delete")]
         public IActionResult Delete([FromQuery] int id)
         {
             var deleted = _guardService.Delete(id);
