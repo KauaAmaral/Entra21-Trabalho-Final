@@ -1,9 +1,10 @@
 ﻿using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.RepositoryDataBase;
+using System.Data.Entity;
 
 namespace Entra21.CSharp.Area21.Repository.Repositories.Vehicles
 {
-    internal class VehicleRepository : IVehicleRepository
+    public class VehicleRepository : IVehicleRepository
     {
         private readonly ShortTermParkingContext _context;
 
@@ -12,7 +13,7 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Vehicles
             _context = context;
         }
 
-        public bool Apagar(int id)
+        public bool Delete(int id)
         {
             var vehicle = _context.Vehicles.FirstOrDefault(x => x.Id == id);
 
@@ -25,7 +26,7 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Vehicles
             return true;
         }
 
-        public Vehicle Cadastrar(Vehicle vehicle)
+        public Vehicle Insert(Vehicle vehicle)
         {
             _context.Vehicles.Add(vehicle);
             _context.SaveChanges();
@@ -33,31 +34,22 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Vehicles
             return vehicle;
         }
 
-        public void Editar(Vehicle vehicle)
+        public void Update(Vehicle vehicle)
         {
             _context.Vehicles.Update(vehicle);
             _context.SaveChanges();
         }
 
-        public Vehicle? ObterPorId(int id) =>
-            _context.Vehicles.FirstOrDefault(x => x.Id == id);
+        // INNER JOIN com a tabela de Usuario
+        public Vehicle? GetById(int id) =>
+            _context.Vehicles
+            .Include(x => x.User)
+            .FirstOrDefault(x => x.Id == id);
 
 
-        public IList<Vehicle> ObterTodos() =>
-            _context.Vehicles.ToList();
-
-    //     public Pet? ObterPodId(int id) => 
-    //    _contexto.Pets
-    //        // INNER JOIN com a tabela de Responsaveis
-    //        .Include(x => x.Responsavel) 
-    //        .Include(x => x.Raca)
-    //        .FirstOrDefault(x => x.Id == id);
-
-    //public IList<Pet> ObterTodos() => 
-    //    _contexto.Pets
-    //    // INNER JOIN com a tabela de Responsaveis
-    //        .Include(x => x.Responsavel) 
-    //        .Include(x => x.Raca)
-    //        .ToList();
+        public IList<Vehicle> GetAll() =>
+            _context.Vehicles
+            .Include(_x => _x.User)
+            .ToList();
     }
 }
