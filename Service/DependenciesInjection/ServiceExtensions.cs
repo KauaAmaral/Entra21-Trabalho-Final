@@ -1,3 +1,4 @@
+using Entra21.CSharp.Area21.Service.EntitiesMappings.Guards;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Payments;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Users;
 using Entra21.CSharp.Area21.Service.Services.Guards;
@@ -26,7 +27,7 @@ namespace Entra21.CSharp.Area21.Service.DependenciesInjection
             services.AddScoped<IUserEntityMapping, UserEntityMapping>();
             //services.AddScoped<IVehicleMapping, VehicleMapping>();
             services.AddScoped<IPaymentEntityMapping, PaymentEntityMapping>();
-            //services.AddScoped<IGuardMapping, GuardMapping>();
+            services.AddScoped<IGuardEntityMapping, GuardEntityMapping>();
             //services.AddScoped<INotificationMapping, NotificationMapping>();
 
             return services;
