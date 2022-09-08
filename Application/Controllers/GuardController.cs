@@ -17,7 +17,7 @@ namespace Entra21.CSharp.Area21.Application.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View("Index");
+            return View();
         }
 
         [HttpGet("obterTodos")]
@@ -34,6 +34,14 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             var guards = _guardService.GetById(id);
 
             return Ok(guards);
+        }
+
+        [HttpGet("cadastrar")]
+        public IActionResult Register()
+        {
+            var guardRegisterViewModel = new GuardRegisterViewModel();
+
+            return View(guardRegisterViewModel);
         }
 
         [HttpPost("cadastrar")]
