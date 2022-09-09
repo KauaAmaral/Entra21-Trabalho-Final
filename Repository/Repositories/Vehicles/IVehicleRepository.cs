@@ -2,12 +2,12 @@
 
 namespace Entra21.CSharp.Area21.Repository.Repositories.Vehicles
 {
-    internal interface IVehicleRepository
+    public interface IVehicleRepository
     {
-        Vehicle Cadastrar(Vehicle vehicles);
-        void Editar(Vehicle vehicle);
-        bool Apagar(int id);
-        Vehicle? ObterPorId(int id);
-        IList<Vehicle> ObterTodos();
+        Vehicle Insert(Vehicle vehicles);
+        void Update(Vehicle vehicle);
+        bool Delete(int id);
+        Vehicle? GetById(int id);
+        IList<Vehicle> GetAll();
     }
 }
