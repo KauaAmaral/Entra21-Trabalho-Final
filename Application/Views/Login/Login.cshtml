@@ -1,7 +1,10 @@
 ﻿@model UserLoginViewModel
+@{
+	Layout = "~/Pages/Shared/_LayoutUnlogged.cshtml";
+	ViewData["Title"] = "Login";
+}
 
-
-<div class="page vertical-align text-center">
+<div class="page background-image vertical-align text-center">
 	<div class="page-content vertical-align-middle">
 		<div class="panel">
 			<div class="panel-body">
@@ -16,7 +19,7 @@
 					</div>
 					<div class="form-group form-material floating" data-plugin="formMaterial">
 						<input asp-for="Password" type="password" class="form-control" name="password" />
-						<label class="floating-label">Password</label>
+						<label class="floating-label">Senha</label>
 						<span asp-validation-for="Password" class="text-danger"></span>
 					</div>
 						@if(TempData["Message"] != null)
@@ -25,7 +28,8 @@
 						}
 					<button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Sign in</button>
 				</form>
-				<p>Still no account? Please go to <a href="register-v3.html">Sign up</a></p>
+				<Por>Sem conta? Por favor cadastre-se<p>
 			</div>
 		</div>
 	</div>
+</div>

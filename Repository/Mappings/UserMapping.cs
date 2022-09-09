@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Entra21.CSharp.Area21.Repository.Entities;
+using Entra21.CSharp.Area21.Repository.Authentication;
 
 namespace Entra21.CSharp.Area21.Repository.Mappings
 {
@@ -25,7 +26,7 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
             builder.Property(x => x.Password)
                 .IsRequired()
                 .HasColumnType("VARCHAR")
-                .HasMaxLength(50);
+                .HasMaxLength(64);
             
             builder.Property(x => x.Cpf)
                 .IsRequired()
@@ -42,12 +43,24 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .HasColumnType("DATETIME2");
 
             builder.Property(x => x.UpdatedAt)
-                .IsRequired()
                 .HasColumnType("DATETIME2");
 
             builder.Property(x => x.Status)
                 .IsRequired()
                 .HasColumnType("BIT");
+
+            builder.HasData(
+                new User
+                {
+                    Id = 1,
+                    Name = "Admin",
+                    Email = "admin@admin.com",
+                    Password = "1234".GetHash(),
+                    Cpf = "11111111111",
+                    Phone = "1111111111",
+                    CreatedAt = new DateTime(2005-08-08),
+                    Status = true
+                });
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Entra21.CSharp.Area21.Repository.Entities;
+﻿using Entra21.CSharp.Area21.Repository.Authentication;
+using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.RepositoryDataBase;
 
 namespace Entra21.CSharp.Area21.Repository.Repositories.Users
@@ -45,7 +46,7 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Users
         public IList<User> GetAll() =>
             _context.Users.ToList();
 
-        public User? GetByEmail(string email) => 
-            _context.Users.FirstOrDefault(x => x.Email == email);
+        public User? GetByEmailAndPassword(string email, string password) => 
+            _context.Users.FirstOrDefault(x => x.Email == email && x.Password == password.GetHash());
     }
 }
