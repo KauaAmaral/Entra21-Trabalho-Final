@@ -22,7 +22,7 @@ namespace Entra21.CSharp.Area21.Application.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View("Update");
         }
 
         [HttpGet("update")]
@@ -55,7 +55,10 @@ namespace Entra21.CSharp.Area21.Application.Controllers
         [HttpGet("changePassword")]
         public IActionResult ChangePassword()
         {
-            var viewModel = new UserChangePasswordViewModel();
+            var viewModel = new UserChangePasswordViewModel
+            {
+                Id = _session.FindUserSession().Id
+            };
             
             return View(viewModel);
         }
@@ -71,9 +74,11 @@ namespace Entra21.CSharp.Area21.Application.Controllers
 
             if (userChangePasswordViewModel.CurrentPassword.GetHash() != user.Password)
             {
-                TempData["mensagem"] = "Senha atual é diferente da digitada, tente novamente!";
+                TempData["message"] = "Senha atual é diferente da digitada, tente novamente!";
                 return View(nameof(ChangePassword));
             }
+
+            _userService.UpdatePassword(userChangePasswordViewModel);
 
             return View(nameof(ChangePassword));
         }
