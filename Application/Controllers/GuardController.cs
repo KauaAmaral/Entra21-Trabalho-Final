@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Entra21.CSharp.Area21.Application.Controllers
 {
-    [Route("guarda")]
+    [Route("guard")]
     public class GuardController : Controller
     {
         private readonly IGuardService _guardService;
@@ -20,7 +20,7 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             return View();
         }
 
-        [HttpGet("obterTodos")]
+        [HttpGet("getAll")]
         public IActionResult GetAll()
         {
             var guards = _guardService.GetAll();
@@ -28,53 +28,61 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             return Ok(guards);
         }
 
-        [HttpGet("obterPorId")]
+        [HttpGet("getById")]
         public IActionResult GetById([FromQuery] int id)
         {
             var guards = _guardService.GetById(id);
 
+            if (guards == null)
+                return NotFound();
+
             return Ok(guards);
         }
 
-        [HttpGet("cadastrar")]
+        [HttpGet("register")]
         public IActionResult Register()
         {
-            var guardRegisterViewModel = new GuardRegisterViewModel();
+            var viewModel = new GuardRegisterViewModel();
 
-            return View(guardRegisterViewModel);
+            return View(viewModel);
         }
 
-        [HttpPost("cadastrar")]
-        public IActionResult Register([FromForm] GuardRegisterViewModel guardRegisterViewModel)
+        [HttpPost("register")]
+        public IActionResult Register([FromForm] GuardRegisterViewModel viewModel)
         {
             if (!ModelState.IsValid)
-                return UnprocessableEntity(ModelState);
+                return View(viewModel);
 
-            var guard = _guardService.Register(guardRegisterViewModel);
+            var guard = _guardService.Register(viewModel);
 
-            return Ok(guard);
+            return RedirectToAction(nameof(Update), new { id = guard.Id });
         }
 
-        [HttpPost("editar")]
-        public IActionResult Update([FromQuery] GuardUpdateViewModel guardUpdateViewModel)
+        [HttpGet("update")]
+        public IActionResult Update([FromQuery] int id)
+        {
+            var viewModel = _guardService.GetById(id);
+
+            return View(viewModel);
+        }
+
+        [HttpPost("update")]
+        public IActionResult Update([FromQuery] GuardUpdateViewModel viewModel)
         {
             if (!ModelState.IsValid)
-                return UnprocessableEntity(ModelState);
+                return View(viewModel);
 
-            var updated = _guardService.Update(guardUpdateViewModel);
+            var updated = _guardService.Update(viewModel);
 
-            return Ok(new { status = updated });
+            return RedirectToAction(nameof(Update), new { id = viewModel.Id });
         }
 
         [HttpGet("delete")]
         public IActionResult Delete([FromQuery] int id)
         {
-            var deleted = _guardService.Delete(id);
+            _guardService.Delete(id);
 
-            if (!deleted)
-                return NotFound();
-
-            return Ok();
+            return RedirectToAction(nameof(Index));
         }
     }
 }
