@@ -26,6 +26,14 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Users
             user.UpdatedAt = DateTime.Now;
 
             return user;
+        }      
+        
+        public User UpdatePasswordWith(User user, UserChangePasswordViewModel viewModel)
+        {
+            user.Password = viewModel.NewPassword.GetHash();
+            user.UpdatedAt = DateTime.Now;
+
+            return user;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Entra21.CSharp.Area21.Application.Filters;
+using Entra21.CSharp.Area21.Repository.Authentication;
 using Entra21.CSharp.Area21.Service.Authentication;
 using Entra21.CSharp.Area21.Service.Services.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Users;
@@ -49,6 +50,32 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             var update = _userService.Update(userUpdateViewModel);
 
             return View(nameof(Update));
+        }
+
+        [HttpGet("changePassword")]
+        public IActionResult ChangePassword()
+        {
+            var viewModel = new UserChangePasswordViewModel();
+            
+            return View(viewModel);
+        }
+
+
+        [HttpPost("changePassword")]
+        public IActionResult ChangePassword([FromForm] UserChangePasswordViewModel userChangePasswordViewModel)
+        {
+            if (!ModelState.IsValid)
+                return View(userChangePasswordViewModel);
+
+            var user = _session.FindUserSession();
+
+            if (userChangePasswordViewModel.CurrentPassword.GetHash() != user.Password)
+            {
+                TempData["mensagem"] = "Senha atual é diferente da digitada, tente novamente!";
+                return View(nameof(ChangePassword));
+            }
+
+            return View(nameof(ChangePassword));
         }
     }
 }

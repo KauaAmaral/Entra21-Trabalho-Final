@@ -20,7 +20,7 @@ namespace Entra21.CSharp.Area21.Service.Authentication
             _httpContextAccessor.HttpContext.Session.SetString("userSession", userString);
         }
 
-        public User FindUserSession()
+        public User FindUserSession() // TODO: id usuário
         {
             var session = _httpContextAccessor.HttpContext.Session.GetString("userSession");
 
