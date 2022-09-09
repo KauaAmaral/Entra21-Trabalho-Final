@@ -1,19 +1,15 @@
-﻿@*<div class="modal fade" id="cadastroGuardaModal" tabindex="-1" aria-labelledby="cadastroGuardaModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="cadastroGuardaModalLabel">Cadastro de Guarda</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">*@
-<form>
-    <input id="cadastroGuardaModalId" class="form-control" type="hidden" />
+﻿@using Entra21.CSharp.Area21.Service.ViewModels.Guards
+@model GuardRegisterViewModel
 
-    <div class="row">
-        <div class="col-6">
-            <label for="cadastroGuardaModalNome" class="form-label">Nome <span class="text-danger">*</span></label>
-            <input id="cadastroGuardaModalNome" class="form-control" />
-        </div>
+<h3 class="h3">Cadastro do Guarda</h3>
+
+<form asp-action="Register" method="POST">
+    @*<input id="cadastroGuardaModalId" class="form-control" type="hidden" />*@
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label" span-required=""></label>
+        <input asp-for="fullName" class="form-control" />
+        <span asp-validation-for="fullName" class="text-danger"></span>
     </div>
 
     <div class="row">
