@@ -27,6 +27,11 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .HasColumnName("update_at")
                 .HasColumnType("DATETIME2");
 
+            builder.Property(x => x.Model)
+                .IsRequired()
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(50);
+
             builder.Property(x => x.Type)
                 .HasColumnName("vehicle_type")
                 .IsRequired()
