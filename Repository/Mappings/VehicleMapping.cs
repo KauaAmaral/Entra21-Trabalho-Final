@@ -18,14 +18,6 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(8);
 
-            builder.Property(x => x.CreatedAt)
-                .HasColumnName("created_at")
-                .IsRequired()
-                .HasColumnType("DATETIME2");
-
-            builder.Property(x => x.UpdatedAt)
-                .HasColumnName("update_at")
-                .HasColumnType("DATETIME2");
 
             builder.Property(x => x.Model)
                 .IsRequired()
@@ -42,6 +34,20 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .IsRequired()
                 .HasColumnName("user_id");
 
+            builder.Property(x => x.CreatedAt)
+                .HasColumnName("created_at")
+                .IsRequired()
+                .HasColumnType("DATETIME2")
+                .HasDefaultValue(DateTime.Now);
+
+            builder.Property(x => x.UpdatedAt)
+                .HasColumnName("update_at")
+                .HasColumnType("DATETIME2");
+
+            builder.Property(x => x.Status)
+              .IsRequired()
+              .HasColumnType("BIT");
+            
             builder.HasOne(x => x.User)
                 .WithMany(x => x.Vehicles)
                 .HasForeignKey(x => x.UserId);

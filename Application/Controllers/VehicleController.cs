@@ -5,18 +5,22 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Entra21.CSharp.Area21.Application.Controllers
 {
+
+    [Route("vehicle")]
     public class VehicleController : Controller // TODO ControleVehicle Revisar
     {
         private readonly IVehicleService _vehicleService;
 
-        public VehicleController(IVehicleService vehicleService,
-            IWebHostEnvironment webHostEnvironment)
+        public VehicleController(IVehicleService vehicleService)
         {
             _vehicleService = vehicleService;
         }
 
         [HttpGet]
-        public IActionResult Index() => View();
+        public IActionResult Index()
+        {
+            return View("Index");
+        }
 
         [HttpGet("Register")]
         public IActionResult Register()
@@ -54,7 +58,6 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet]
 
         [HttpGet("getAll")]
         public IActionResult GetAll()
@@ -68,13 +71,13 @@ namespace Entra21.CSharp.Area21.Application.Controllers
         public IActionResult GetById([FromQuery] int id)
         {
             var vehicle = _vehicleService.GetById(id);
-
             return Ok(vehicle);
         }
 
         private List<string> GetVehicleType()
         {
-            return Enum.GetNames<VehicleType>()
+            return Enum
+                .GetNames<VehicleType>()
                 .OrderBy(x => x)
                 .ToList();
         }

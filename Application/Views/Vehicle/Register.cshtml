@@ -8,32 +8,32 @@
 }
 
 <form asp-action="cadastrar" method="POST">
-    <div>
-        <label asp-for="LicensePlate" class="form-label" span-required=""></label>
-        <input asp-for="LicensePlate" class="form-control"/>
-        <span asp-validation-for="LicensePlate" class="text-danger"></span>
-    </div>
+	<div>
+		<label asp-for="LicensePlate" class="form-label" span-required=""></label>
+		<input asp-for="LicensePlate" class="form-control"/>
+		<span asp-validation-for="LicensePlate" class="text-danger"></span>
+	</div>
 
-       <div>
-        <label asp-for="Model" class="form-label" span-required=""></label>
-        <input asp-for="Model" class="form-control"/>
-        <span asp-validation-for="Model" class="text-danger"></span>
-    </div>
+	   <div>
+		<label asp-for="Model" class="form-label" span-required=""></label>
+		<input asp-for="Model" class="form-control"/>
+		<span asp-validation-for="Model" class="text-danger"></span>
+	</div>
 
-    <div class="mb-3">
-        <label asp-for="Type" class="form-label" span-required=""></label>
-        <select asp-for="Type" asp-items="selectVehicleType"
+	<div class="mb-3">
+		<label asp-for="Type" class="form-label" span-required=""></label>
+		<select asp-for="Type" asp-items="selectVehicleType"
                 class="form-select">
-        </select>
-        <span asp-validation-for="Type" class="text-danger"></span>
-    </div>
+		</select>
+		<span asp-validation-for="Type" class="text-danger"></span>
+	</div>
 
-    <div class="text-end">
-        <a asp-action="Index" class="btn btn-outline-danger">
-            <i class="fa-solid fa-xmark"></i> Cancelar
-        </a>
-        <button type="submit" class="btn btn-success">
-            <i class="fa-solid fa-floppy-disk"></i> Salvar
-        </button>
-    </div>
+	<div class="text-end">
+		<a asp-action="Index" class="btn btn-outline-danger">
+			<i class="fa-solid fa-xmark"></i> Cancelar
+		</a>
+		<button type="submit" class="btn btn-success">
+			<i class="fa-solid fa-floppy-disk"></i> Salvar
+		</button>
+	</div>
 </form>

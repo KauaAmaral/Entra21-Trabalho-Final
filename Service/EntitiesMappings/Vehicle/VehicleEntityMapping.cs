@@ -13,8 +13,7 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Vehicles
                 Model = viewModel.Model,
                 Type  = (VehicleType)viewModel.Type,
                 UserId = viewModel.UserId.GetValueOrDefault(),
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now
+                CreatedAt = DateTime.Now
             };
 
         public void UpdateWith(Vehicle vehicle, VehicleUpdateViewModel viewModel)
