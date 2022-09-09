@@ -1,14 +1,38 @@
 ﻿@using Entra21.CSharp.Area21.Service.ViewModels.Guards
 @model GuardRegisterViewModel
 
-<h3 class="h3">Cadastro do Guarda</h3>
+<div class="page vertical-align text-center" data-animsition-in="fade-in" data-animsition-out="fade-out">
+    
+    <div class="page-content vertical-align-middle animation-slide-top animation-duration-1">
+    
+        <div class="brand">
+            <h1 class="brand-text">Area21</h1>
+        </div>
 
-<form asp-action="Register" method="POST">
-    @*<input id="cadastroGuardaModalId" class="form-control" type="hidden" />*@
+        <p>Cadastro do Guarda</p>
 
-    <div class="mb-3">
-        <@*label asp-for="Name" class="form-label" span-required=""></label>
-        <input asp-for="fullName" class="form-control" />
-        <span asp-validation-for="fullName" class="text-danger"></span>*@
-    </div> 
-</form>
+        <form asp-action="Register" method="POST" role="form">
+
+            <div class="form-group">
+                <label asp-for="Cpf" class="sr-only" span-required="">CPF</label>
+                <input asp-for="Cpf" class="form-control" />
+                <span asp-validation-for="Cpf" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group">
+                <label asp-for="UserId" class="sr-only" span-required="">Usuário</label>
+                <input asp-for="UserId" class="form-control" />
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="IdentificationNumber" class="sr-only" span-required="">Número de Identificação</label>
+                <input asp-for="IdentificationNumber" class="form-control" />
+                <span asp-validation-for="IdentificationNumber" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+      
+        </form>
+    </div>
+</div>
