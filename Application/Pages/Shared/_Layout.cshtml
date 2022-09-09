@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html class="no-js css-menubar" lang="en">
 <head>
     <meta charset="utf-8">
@@ -66,7 +66,7 @@
                 <ul class="site-menu" data-plugin="menu">
                     <li class="site-menu-category">General</li>
                     <li class="dropdown site-menu-item has-sub">
-                        <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
+                        <a data-toggle="dropdown" href="/index" data-dropdown-toggle="false">
                             <i class="site-menu-icon wb-layout" aria-hidden="true"></i>
                             <span class="site-menu-title">Início</span>
                             <span class="site-menu"></span>
@@ -74,7 +74,7 @@
 
                     </li>
                     <li class="dropdown site-menu-item has-sub">
-                        <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
+                        <a data-toggle="dropdown" href="/veiculos" data-dropdown-toggle="false">
                             <i class="site-menu-icon wb-file" aria-hidden="true"></i>
                             <span class="site-menu-title">Veículos</span>
                             <span class="site-menu"></span>
@@ -84,7 +84,7 @@
                     <li class="dropdown site-menu-item has-section has-sub">
                     </li>
                     <li class="dropdown site-menu-item has-section has-sub">
-                        <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
+                        <a data-toggle="dropdown" href="/sobre" data-dropdown-toggle="false">
                             <i class="site-menu-icon wb-plugin" aria-hidden="true"></i>
                             <span class="site-menu-title">Sobre</span>
                             <span class="site-menu-"></span>
@@ -120,6 +120,7 @@
                             </a>
                             <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
                                 <span class="flag-icon flag-icon-us"></span> Inglês
+                                <html lang="fr"></html>
                             </a>
                             <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
                                 <span class="flag-icon flag-icon-es"></span> Espanhol
@@ -140,7 +141,10 @@
                         <div class="dropdown-menu" role="menu">
                             <a asp-controller="user" asp-action="update" class="dropdown-item" role="menuitem"><i class="icon wb-user" aria-hidden="true"></i> Perfil</a>
                             <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon wb-payment" aria-hidden="true"></i> Pagamentos</a>
-                            <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon wb-settings" aria-hidden="true"></i> Configurações</a>
+                            <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon wb-user" aria-hidden="true"></i> Perfil</a>
+                            <a asp-action="Payments" asp-controller="Payments" class="dropdown-item">
+                                <i class="fa-solid fa-plus"></i> Pagamentos
+                            </a>                            <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon wb-settings" aria-hidden="true"></i> Configurações</a>
                             <div class="dropdown-divider" role="presentation"></div>
                             <a class="dropdown-item" asp-controller="Login" asp-action="Logout" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Sair</a>
                         </div>
@@ -282,12 +286,16 @@
     <div class="page" >
         <div class="page-content container-fluid">
 @*        <img src="~/Theme/global/portraits/Area21_Inicio_Log.jpg"/>*@     
+
+    <div class="page">
+        @*        <div class="page-content container-fluid">*@
         @RenderBody()
         <div class="row" data-plugin="matchHeight" data-by-row="true">
             <!-- First Row -->
             <!-- End Second Row -->
         </div>
         </div>
+        @*<img src="~/Theme/global/portraits/Area21_Inicio_Log.jpg" />*@
     </div>
     <!-- End Page -->
     <!-- Add Item Dialog -->
