@@ -22,7 +22,7 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                     Phone = table.Column<string>(type: "VARCHAR(20)", maxLength: 20, nullable: false),
                     Status = table.Column<bool>(type: "BIT", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "DATETIME2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "DATETIME2", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "DATETIME2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -134,6 +134,11 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                         principalTable: "vehicles",
                         principalColumn: "Id");
                 });
+
+            migrationBuilder.InsertData(
+                table: "users",
+                columns: new[] { "Id", "Cpf", "CreatedAt", "Email", "Name", "Password", "Phone", "Status", "UpdatedAt" },
+                values: new object[] { 1, "11111111111", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(1989), "admin@admin.com", "Admin", "1234", "1111111111", true, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_guards_user_id",

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entra21.CSharp.Area21.Repository.Migrations
 {
     [DbContext(typeof(ShortTermParkingContext))]
-    [Migration("20220902201438_Database")]
-    partial class Database
+    [Migration("20220906235245_Hash")]
+    partial class Hash
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -181,8 +181,8 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("VARCHAR(50)");
+                        .HasMaxLength(64)
+                        .HasColumnType("VARCHAR(64)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
@@ -193,12 +193,24 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                         .HasColumnType("BIT");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .IsRequired()
                         .HasColumnType("DATETIME2");
 
                     b.HasKey("Id");
 
                     b.ToTable("users", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Cpf = "11111111111",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(1989),
+                            Email = "admin@admin.com",
+                            Name = "Admin",
+                            Password = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+                            Phone = "1111111111",
+                            Status = true
+                        });
                 });
 
             modelBuilder.Entity("Entra21.CSharp.Area21.Repository.Entities.Vehicle", b =>
