@@ -1,10 +1,11 @@
-﻿using Entra21.CSharp.Area21.Service.Services.Vehicles;
+﻿using Entra21.CSharp.Area21.Repository.Enums;
+using Entra21.CSharp.Area21.Service.Services.Vehicles;
 using Entra21.CSharp.Area21.Service.ViewModels.Vehicles;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Entra21.CSharp.Area21.Application.Controllers
 {
-    public class VehicleController : Controller
+    public class VehicleController : Controller // TODO ControleVehicle Revisar
     {
         private readonly IVehicleService _vehicleService;
 
@@ -16,6 +17,44 @@ namespace Entra21.CSharp.Area21.Application.Controllers
 
         [HttpGet]
         public IActionResult Index() => View();
+
+        [HttpGet("Register")]
+        public IActionResult Register()
+        {
+            var vehicleType = GetVehicleType();
+
+            ViewBag.VehicleType = GetVehicleType();
+
+            var vehicleRegisterViewModel = new VehicleRegisterViewModel();
+
+            return View(vehicleRegisterViewModel);
+        }
+
+        [HttpPost("Register")]
+        public IActionResult Register([FromForm] VehicleRegisterViewModel vehicleRegisterViewModel)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.VehicleType = GetVehicleType();
+
+                return View(vehicleRegisterViewModel);
+            }
+
+            _vehicleService.Register(vehicleRegisterViewModel);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet("delete")]
+        public IActionResult Delete([FromQuery] int id)
+        {
+            _vehicleService.Delete(id);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
 
         [HttpGet("getAll")]
         public IActionResult GetAll()
@@ -29,18 +68,15 @@ namespace Entra21.CSharp.Area21.Application.Controllers
         public IActionResult GetById([FromQuery] int id)
         {
             var vehicle = _vehicleService.GetById(id);
-            
+
             return Ok(vehicle);
         }
 
-        [HttpPost("Register")]
-        public IActionResult Register([FromForm] VehicleRegisterViewModel vehicleRegisterViewModel)
+        private List<string> GetVehicleType()
         {
-            if (!ModelState.IsValid)
-                return UnprocessableEntity(ModelState);
-
-            var vehicle = _vehicleService.Register(vehicleRegisterViewModel);
-            return Ok(vehicle);
+            return Enum.GetNames<VehicleType>()
+                .OrderBy(x => x)
+                .ToList();
         }
     }
 }
