@@ -17,10 +17,8 @@ namespace Entra21.CSharp.Area21.Application.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
-        {
-            return View("Index");
-        }
+        public IActionResult Index() =>
+           View("Index");
 
         [HttpGet("Register")]
         public IActionResult Register()

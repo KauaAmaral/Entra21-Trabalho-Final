@@ -1,7 +1,7 @@
 ﻿@model VehicleRegisterViewModel
 
 @{
-	var vehicleType = ViewBag.Vehicle as List<string>;
+	var vehicleType = ViewBag.VehicleType as List<string>;
 	vehicleType.Add(string.Empty);
 
 	var selectVehicleType = new SelectList(vehicleType, string.Empty);

@@ -47,19 +47,22 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
             builder.Property(x => x.Status)
               .IsRequired()
               .HasColumnType("BIT");
-            
+
             builder.HasOne(x => x.User)
                 .WithMany(x => x.Vehicles)
                 .HasForeignKey(x => x.UserId);
 
-            //builder.HasData(
-            //    new Vehicle
-            //    {
-            //        Id = 1,
-            //        LicensePlate = "fhf-1234",
-            //        Type = 0,
-            //        UserId = 1
-            //    });
+            builder.HasData(
+               new Vehicle
+               {
+                   Id = 1,
+                   LicensePlate = "fhf-1234",
+                   Model = "123121234",
+                   Type = 0,
+                   Status = true,
+                   CreatedAt = DateTime.Now,
+                   UserId = 1
+               }) ;
         }
     }
 }
