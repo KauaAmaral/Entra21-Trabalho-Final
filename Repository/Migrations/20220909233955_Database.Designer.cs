@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entra21.CSharp.Area21.Repository.Migrations
 {
     [DbContext(typeof(ShortTermParkingContext))]
-    [Migration("20220906235245_Hash")]
-    partial class Hash
+    [Migration("20220909233955_Database")]
+    partial class Database
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -174,6 +174,11 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("VARCHAR(50)");
 
+                    b.Property<bool>("IsEmailConfirmed")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasDefaultValue(false);
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -206,6 +211,7 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                             Cpf = "11111111111",
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(1989),
                             Email = "admin@admin.com",
+                            IsEmailConfirmed = false,
                             Name = "Admin",
                             Password = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
                             Phone = "1111111111",
@@ -233,7 +239,8 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
 
                     b.Property<string>("Model")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("VARCHAR(50)");
 
                     b.Property<bool>("Status")
                         .HasColumnType("bit");

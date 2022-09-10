@@ -34,7 +34,6 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .HasMaxLength(50);
 
             builder.Property(x => x.Phone)
-                .IsRequired()
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(20);
 
@@ -48,6 +47,10 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
             builder.Property(x => x.Status)
                 .IsRequired()
                 .HasColumnType("BIT");
+
+            builder.Property(x => x.IsEmailConfirmed)
+                .HasColumnType("BIT")
+                .HasDefaultValue(false);
 
             builder.HasData(
                 new User

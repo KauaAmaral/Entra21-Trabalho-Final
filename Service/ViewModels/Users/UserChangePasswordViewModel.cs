@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
 namespace Entra21.CSharp.Area21.Service.ViewModels.Users
@@ -19,7 +20,5 @@ namespace Entra21.CSharp.Area21.Service.ViewModels.Users
         [Required(ErrorMessage = "{0} deve ser preenchida")]
         [Compare("NewPassword", ErrorMessage = "Senha não confere com nova senha")]
         public string ConfirmNewPassword { get; set; }
-
-
     }
 }

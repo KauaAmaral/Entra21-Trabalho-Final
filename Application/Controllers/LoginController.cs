@@ -2,6 +2,8 @@
 using Entra21.CSharp.Area21.Service.Services.Users;
 using Microsoft.AspNetCore.Mvc;
 using Entra21.CSharp.Area21.Service.Authentication;
+using Microsoft.AspNetCore.Identity;
+using Entra21.CSharp.Area21.Repository.Entities;
 
 namespace Entra21.CSharp.Area21.Application.Controllers
 {
@@ -37,8 +39,8 @@ namespace Entra21.CSharp.Area21.Application.Controllers
 
             if (user != null)
             {
-               _session.CreateUserSession(user);
-               return RedirectToAction("Index");
+                _session.CreateUserSession(user);
+                return RedirectToAction("Index");
             }
             else
                 TempData["Message"] = "Não existe um usuário com esse e-mail e/ou senha";
@@ -52,6 +54,38 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             _session.RemoveUserSession();
 
             return RedirectToAction(nameof(Login));
+        }
+
+        [HttpGet("Register")]
+        public IActionResult Register()
+        {
+            var viewModel = new UserRegisterViewModel();
+
+            return View(viewModel);
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromForm] UserRegisterViewModel userRegisterViewModel)
+        {
+            if (!ModelState.IsValid)
+                return View(userRegisterViewModel);
+
+            var user = _userService.Insert(userRegisterViewModel);
+            
+            var token = Guid.NewGuid();
+
+            var confirmationLink = Url.Action("ConfirmEmail", "Login",
+                new { userId = user.Id, token = token }, Request.Scheme);
+
+            TempData["teste"] = confirmationLink;
+
+
+            return View(nameof(VerifyEmail));
+        }
+
+        public IActionResult VerifyEmail()
+        {
+            return View(nameof(VerifyEmail));
         }
     }
 }
