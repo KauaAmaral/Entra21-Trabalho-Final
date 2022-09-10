@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Entra21.CSharp.Area21.Application.Controllers
 {
-
     [Route("vehicle")]
     public class VehicleController : Controller // TODO ControleVehicle Revisar
     {
