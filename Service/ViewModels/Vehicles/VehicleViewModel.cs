@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Entra21.CSharp.Area21.Repository.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace Entra21.CSharp.Area21.Service.ViewModels.Vehicles
 {
@@ -15,12 +16,10 @@ namespace Entra21.CSharp.Area21.Service.ViewModels.Vehicles
         [MaxLength(50, ErrorMessage = "{0} deve conter no máximo {1} caracteres")]
         public string Model { get; set; }
 
-        [Display(Name = "Usuário")]
-        [Required(ErrorMessage = "{0} deve ser preenchido")]
-        public int? UserId { get; set; }
-
         [Display(Name = "Tipo do veículo: ")]
-        public byte Type { get; set; }
+        public VehicleType Type { get; set; }
+
+        public int UserId { get; set; }
 
     }
 }

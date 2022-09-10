@@ -1,4 +1,5 @@
 ﻿using Entra21.CSharp.Area21.Repository.Enums;
+using Entra21.CSharp.Area21.Service.Authentication;
 using Entra21.CSharp.Area21.Service.Services.Vehicles;
 using Entra21.CSharp.Area21.Service.ViewModels.Vehicles;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,14 @@ namespace Entra21.CSharp.Area21.Application.Controllers
     public class VehicleController : Controller // TODO ControleVehicle Revisar
     {
         private readonly IVehicleService _vehicleService;
+        private readonly ISessionAuthentication _session;
 
-        public VehicleController(IVehicleService vehicleService)
+        public VehicleController(
+            IVehicleService vehicleService,
+            ISessionAuthentication sessionAuthentication)
         {
             _vehicleService = vehicleService;
+            _session = sessionAuthentication;
         }
 
         [HttpGet]
@@ -32,9 +37,15 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             return View(vehicleRegisterViewModel);
         }
 
-        [HttpPost("Register")]
+        [HttpPost("Register")] // TODO: Problema para salvar
         public IActionResult Register([FromForm] VehicleRegisterViewModel vehicleRegisterViewModel)
         {
+
+            var usuar = _session.FindUserSession();
+            if (usuar != null)
+                vehicleRegisterViewModel.UserId = usuar.Id;
+            else
+                return RedirectToAction("Index", "Home");
 
             if (!ModelState.IsValid)
             {
