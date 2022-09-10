@@ -9,7 +9,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Payments
     {
         private readonly IPaymentsRepository _paymentRepository;
         private readonly IPaymentEntityMapping _paymentEntityMapping;
-        public Payment Register(PaymentRegisterViewModel registerViewModel, string pathFiles)
+        public Payment Register(PaymentRegisterViewModel registerViewModel)
         {
             var payment = _paymentEntityMapping.RegisterWith(registerViewModel);
 
