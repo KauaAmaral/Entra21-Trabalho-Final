@@ -5,6 +5,7 @@
         <tr>
             <th>Modelo</th>
             <th>Placa</th>
+            <th>Ação</th>
         </tr>
     </thead>
     <tbody>
@@ -13,6 +14,11 @@
             <tr>
                 <td>@vehicles.Model</td>
                 <td>@vehicles.LicensePlate</td>
+                <td>
+                <a class="btn btn-animate mb-2 btn-animate-side btn-primary" asp-action="pagar">
+                    <i class="icon wb-shopping-cart" aria-hidden="true"></i>Pagar
+                </a>
+                </td>
             </tr>
         }
     </tbody>
