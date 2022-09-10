@@ -32,6 +32,8 @@
     <link rel="stylesheet" href="~/Theme/global/vendor/asscrollable/asScrollable.css">
     <link rel="stylesheet" href="~/Theme/assets/examples/css/dashboard/team.css">
 
+    <link rel="stylesheet" href="~/css/Background.css">
+
 
     <!-- Fonts -->
     <link rel="stylesheet" href="~/Theme/global/fonts/web-icons/web-icons.min.css">
@@ -51,7 +53,7 @@
         Breakpoints();
     </script>
 </head>
-<body class="animsition site-navbar-small dashboard">
+<body class="animsition site-navbar-small dashboard" class="back-image">
     <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -74,7 +76,7 @@
 
                     </li>
                     <li class="dropdown site-menu-item has-sub">
-                        <a data-toggle="dropdown" href="/vehicle" data-dropdown-toggle="false">
+                        <a data-toggle="dropdown" asp-action="GetAll" asp-controller="vehicle" data-dropdown-toggle="false">
                             <i class="site-menu-icon wb-file" aria-hidden="true"></i>
                             <span class="site-menu-title">Veículos</span>
                             <span class="site-menu"></span>
@@ -280,7 +282,7 @@
         </div>
     </nav>
     <!-- Page -->
-    <div class="page" >
+    <div class="page">
         <div class="page-content container-fluid">
     <div class="page">
         @*        <div class="page-content container-fluid">*@

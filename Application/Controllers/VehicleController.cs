@@ -40,10 +40,10 @@ namespace Entra21.CSharp.Area21.Application.Controllers
         [HttpPost("Register")] // TODO: Problema para salvar
         public IActionResult Register([FromForm] VehicleRegisterViewModel vehicleRegisterViewModel)
         {
+            var user = _session.FindUserSession();
 
-            var usuar = _session.FindUserSession();
-            if (usuar != null)
-                vehicleRegisterViewModel.UserId = usuar.Id;
+            if (user != null)
+                vehicleRegisterViewModel.UserId = user.Id;
             else
                 return RedirectToAction("Index", "Home");
 
@@ -67,13 +67,12 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             return RedirectToAction("Index");
         }
 
-
         [HttpGet("getAll")]
         public IActionResult GetAll()
         {
             var vehicles = _vehicleService.GetAll();
 
-            return Ok(vehicles);
+            return View("Index",vehicles);
         }
 
         [HttpGet("getById")]
