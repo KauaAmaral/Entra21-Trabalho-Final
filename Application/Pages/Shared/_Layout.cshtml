@@ -140,12 +140,9 @@
                         </a>
                         <div class="dropdown-menu" role="menu">
                             <a asp-controller="user" asp-action="update" class="dropdown-item" role="menuitem"><i class="icon wb-user" aria-hidden="true"></i> Perfil</a>
-                            <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon wb-payment" aria-hidden="true"></i> Pagamentos</a>
-                            <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon wb-user" aria-hidden="true"></i> Perfil</a>
                             <a asp-action="Payments" asp-controller="Payments" class="dropdown-item">
-                                <i class="fa-solid fa-plus"></i> Pagamentos
-                            </a>                            <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon wb-settings" aria-hidden="true"></i> Configurações</a>
-                            <div class="dropdown-divider" role="presentation"></div>
+                                <i class="icon wb-payment"></i> Pagamentos
+                            </a>                           
                             <a class="dropdown-item" asp-controller="Login" asp-action="Logout" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Sair</a>
                         </div>
                     </li>
@@ -174,7 +171,7 @@
                     <li class="nav-item dropdown">
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
                             <div class="dropdown-menu-header" role="presentation">
-                                <h5>MESSAGES</h5>
+                                <h5>MENSSAGES</h5>
                                 <span class="badge badge-round badge-info">New 3</span>
                             </div>
 
@@ -285,8 +282,6 @@
     <!-- Page -->
     <div class="page" >
         <div class="page-content container-fluid">
-@*        <img src="~/Theme/global/portraits/Area21_Inicio_Log.jpg"/>*@     
-
     <div class="page">
         @*        <div class="page-content container-fluid">*@
         @RenderBody()
@@ -295,7 +290,6 @@
             <!-- End Second Row -->
         </div>
         </div>
-        @*<img src="~/Theme/global/portraits/Area21_Inicio_Log.jpg" />*@
     </div>
     <!-- End Page -->
     <!-- Add Item Dialog -->

@@ -31,7 +31,7 @@ using (var scopo = app.Services.CreateScope())
     var contexto = scopo.ServiceProvider
         .GetService<ShortTermParkingContext>();
     contexto.Database.Migrate();
-}
+} 
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
