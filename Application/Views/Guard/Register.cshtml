@@ -1,38 +1,55 @@
 ﻿@using Entra21.CSharp.Area21.Service.ViewModels.Guards
 @model GuardRegisterViewModel
 
+@*@{
+    var users = ViewBag.User as List<string>;
+    users.Add(string.Empty);
+
+    var selectUsers = new SelectList(users, string.Empty);
+}*@
+
 <div class="page vertical-align text-center" data-animsition-in="fade-in" data-animsition-out="fade-out">
-    
+
     <div class="page-content vertical-align-middle animation-slide-top animation-duration-1">
-    
+
         <div class="brand">
             <h1 class="brand-text">Area21</h1>
         </div>
 
         <p>Cadastro do Guarda</p>
 
-        <form asp-action="Register" method="POST" role="form">
+        <form asp-action="register" method="POST" role="form">
 
             <div class="form-group">
-                <label asp-for="Cpf" class="sr-only" span-required="">CPF</label>
-                <input asp-for="Cpf" class="form-control" />
+                <label asp-for="Cpf" class="sr-only" for="inputCpf">CPF</label>
+                <input asp-for="Cpf" class="form-control"
+                       id="inputCpf" name="cpf" placeholder="CPF" />
                 <span asp-validation-for="Cpf" class="text-danger"></span>
             </div>
-           
+
+            @*Modo para digitar apenas para exemplo, depois usar o preenchimento automatico*@
             <div class="form-group">
-                <label asp-for="UserId" class="sr-only" span-required="">Usuário</label>
-                <input asp-for="UserId" class="form-control" />
+                <label asp-for="UserId" class="sr-only" for="inputUser">User</label>
+                <input asp-for="UserId" class="form-control" id="inputUser" name="user" placeholder="Usuário" />
                 <span asp-validation-for="UserId" class="text-danger"></span>
             </div>
 
+            @*<div class="form-group">
+                <label asp-for="UserId" class="sr-only" for="inputUser">User</label>
+                <select asp-for="UserId" asp-items="selectUsers"
+                       class="form-control" id="inputUser" name="user" placeholder="Usuário" />
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>*@
+
             <div class="form-group">
-                <label asp-for="IdentificationNumber" class="sr-only" span-required="">Número de Identificação</label>
-                <input asp-for="IdentificationNumber" class="form-control" />
+                <label asp-for="IdentificationNumber" class="sr-only" for="inputIdentificationNumber">Número de Identificação</label>
+                <input asp-for="IdentificationNumber" class="form-control"
+                       id="inputIdentificationNumber" name="identificationNumber" placeholder="Número de Identificação" />
                 <span asp-validation-for="IdentificationNumber" class="text-danger"></span>
             </div>
 
             <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
-      
+
         </form>
     </div>
 </div>
