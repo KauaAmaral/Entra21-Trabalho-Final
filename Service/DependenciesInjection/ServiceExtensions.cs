@@ -1,7 +1,11 @@
 using Entra21.CSharp.Area21.Service.Authentication;
+using Entra21.CSharp.Area21.Service.EntitiesMappings.Guards;
+using Entra21.CSharp.Area21.Service.EntitiesMappings.Notifications;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Payments;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Users;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Vehicles;
+using Entra21.CSharp.Area21.Service.Services.Guards;
+using Entra21.CSharp.Area21.Service.Services.Notifications;
 using Entra21.CSharp.Area21.Service.Services.Payments;
 using Entra21.CSharp.Area21.Service.Services.Users;
 using Entra21.CSharp.Area21.Service.Services.Vehicles;
@@ -17,8 +21,8 @@ namespace Entra21.CSharp.Area21.Service.DependenciesInjection
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IVehicleService, VehicleService>();
             services.AddScoped<IPaymentService, PaymentService>();
-            //services.AddScoped<IGuardService, GuardService>();
-            //services.AddScoped<INotificationService, NotificationService>();
+            services.AddScoped<IGuardService, GuardService>();
+            services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<ISessionAuthentication, SessionAuthentication>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSession(o =>
@@ -38,8 +42,8 @@ namespace Entra21.CSharp.Area21.Service.DependenciesInjection
             services.AddScoped<IUserEntityMapping, UserEntityMapping>();
             services.AddScoped<IVehicleEntityMapping, VehicleEntityMapping>();
             services.AddScoped<IPaymentEntityMapping, PaymentEntityMapping>();
-            //services.AddScoped<IGuardMapping, GuardMapping>();
-            //services.AddScoped<INotificationMapping, NotificationMapping>();
+            services.AddScoped<IGuardEntityMapping, GuardEntityMapping>();
+            services.AddScoped<INotificationEntityMapping, NotificationEntityMapping>();
 
             return services;
         }
