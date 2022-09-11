@@ -18,7 +18,6 @@ namespace Entra21.CSharp.Area21.Service.Services.Vehicles
             _vehicleEntityMapping = vehicleEntityMapping;
         }
 
-
         public Vehicle Register(VehicleRegisterViewModel viewModel)
         {
             var vehicle = _vehicleEntityMapping.RegisterWith(viewModel);
