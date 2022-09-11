@@ -48,8 +48,8 @@ namespace Entra21.CSharp.Area21.Service.Services.Vehicles
         public Vehicle? GetById(int id) =>
             _vehicleRepository.GetById(id);
 
-        public IList<Vehicle> GetAll() =>
-            _vehicleRepository.GetAll();
+        public IList<Vehicle> GetAll(int id) =>
+            _vehicleRepository.GetAll(id);
        
     }
 }

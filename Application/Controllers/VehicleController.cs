@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Entra21.CSharp.Area21.Application.Controllers
 {
-
     [Route("vehicle")]
     public class VehicleController : Controller // TODO ControleVehicle Revisar
     {
@@ -20,10 +19,6 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             _vehicleService = vehicleService;
             _session = sessionAuthentication;
         }
-
-        [HttpGet]
-        public IActionResult Index() =>
-           View("Index");
 
         [HttpGet("Register")]
         public IActionResult Register()
@@ -67,12 +62,17 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet("getAll")]
+        [HttpGet("")]
         public IActionResult GetAll()
         {
-            var vehicles = _vehicleService.GetAll();
+            var user = _session.FindUserSession();
 
-            return View("Index",vehicles);
+            if (user == null)
+                return RedirectToAction("Index", "Home");
+
+            var vehicles = _vehicleService.GetAll(user.Id);
+
+            return View("Index", vehicles);
         }
 
         [HttpGet("getById")]
