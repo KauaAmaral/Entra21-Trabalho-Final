@@ -20,7 +20,7 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             _session = sessionAuthentication;
         }
 
-        [HttpGet("Register")]
+        [HttpGet("register")]
         public IActionResult Register()
         {
             var vehicleType = GetVehicleType();
@@ -32,7 +32,7 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             return View(vehicleRegisterViewModel);
         }
 
-        [HttpPost("Register")] // TODO: Problema para salvar
+        [HttpPost("register")] // TODO: Problema para salvar
         public IActionResult Register([FromForm] VehicleRegisterViewModel vehicleRegisterViewModel)
         {
             var user = _session.FindUserSession();
@@ -53,6 +53,42 @@ namespace Entra21.CSharp.Area21.Application.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet("update")]
+        public IActionResult Update([FromQuery] int id)
+        {
+            var vehicle = _vehicleService.GetById(id);
+            var vehicleType = GetVehicleType();
+            var user = _session.FindUserSession();
+                
+            var vehicleUpdateViewMode = new VehicleUpdateViewModel
+            {
+                 Id = vehicle.Id,
+                 LicensePlate = vehicle.LicensePlate,
+                 Model = vehicle.Model,
+                 //UserId = user.Id
+            };
+
+            ViewBag.VehicleType = vehicleType;
+
+            return View(vehicleUpdateViewMode);
+        }
+
+        [HttpPost("update")]
+        public IActionResult Update([FromForm]VehicleUpdateViewModel vehicleUpdateViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.VehicleType = GetVehicleType();
+                
+                return View(vehicleUpdateViewModel);
+            }
+
+            _vehicleService.Update(vehicleUpdateViewModel);
+
+            return RedirectToAction("Index");
+        }
+
 
         [HttpGet("delete")]
         public IActionResult Delete([FromQuery] int id)
