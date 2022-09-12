@@ -82,5 +82,16 @@ namespace Entra21.CSharp.Area21.Application.Controllers
 
             return View(nameof(ChangePassword));
         }
+
+        [HttpGet("disable")]
+        public IActionResult Disable()
+        {
+            var user = _session.FindUserSession();
+
+            _userService.Disable(user);
+            _session.RemoveUserSession();
+
+            return RedirectToAction("Index", "Login");
+        }
     }
 }

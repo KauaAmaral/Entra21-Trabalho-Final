@@ -60,7 +60,7 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             return RedirectToAction(nameof(Login));
         }
 
-        [HttpGet("Register")]
+        [HttpGet("register")]
         public IActionResult Register()
         {
             var viewModel = new UserRegisterViewModel();
@@ -69,10 +69,17 @@ namespace Entra21.CSharp.Area21.Application.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromForm] UserRegisterViewModel userRegisterViewModel)
+        public IActionResult Register([FromForm] UserRegisterViewModel userRegisterViewModel)
         {
             if (!ModelState.IsValid)
                 return View(userRegisterViewModel);
+
+            if (_userService.VerifyEmails(userRegisterViewModel.Email) == false)
+            {
+                TempData["Message"] = "Já existe uma conta com esse email, tente novamente";
+
+                return RedirectToAction(nameof(Login));
+            }
 
             var token = Guid.NewGuid();
 

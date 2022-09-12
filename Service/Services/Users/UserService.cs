@@ -19,6 +19,14 @@ namespace Entra21.CSharp.Area21.Service.Services.Users
         public bool Delete(int id) => 
             _userRepository.Delete(id);
 
+        public bool VerifyEmails(string email)
+        {
+            if (_userRepository.GetActiveUsers().Where(x => x.Email == email).ToList().Count > 0)
+                return false;
+
+            return true;    
+        }
+
         public IList<User> GetAll() =>
             _userRepository.GetAll();
 
@@ -64,6 +72,19 @@ namespace Entra21.CSharp.Area21.Service.Services.Users
 
             user = _userEntityMapping.UpdatePasswordWith(user, viewModel);
 
+            _userRepository.Update(user);
+
+            return true;
+        }
+
+        public bool Disable(User userChange)
+        {
+            var user = _userRepository.GetById(userChange.Id);
+
+            if (user == null)
+                return false;
+
+            user.Status = false;
             _userRepository.Update(user);
 
             return true;
