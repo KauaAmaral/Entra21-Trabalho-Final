@@ -14,5 +14,11 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+  margin: 0px !important;
+  padding: 0px !important;
 }
+
+.background-image {
+    background-image: url("../Theme/global/portraits/Area21_Inicio_Log.jpg") !important;
+}
+
