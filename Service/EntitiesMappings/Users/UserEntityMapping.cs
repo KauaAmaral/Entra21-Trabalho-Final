@@ -10,10 +10,11 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Users
             new User
             {
                 Name = viewModel.Name,
+                Token = viewModel.Token,
+                TokenExpiredDate = DateTime.Now.AddHours(2),
                 Email = viewModel.Email,
                 Password = viewModel.Password.GetHash(),
                 Cpf = viewModel.Cpf,
-                Phone = viewModel.Phone,
                 CreatedAt = DateTime.Now
             };
 

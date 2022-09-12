@@ -52,7 +52,7 @@ namespace Entra21.CSharp.Area21.Service.ViewModels.Users
         private bool IsValidPhone() =>
             !Regex.IsMatch(Phone, @"^\([1-9]{2}\) [0-9]{5}\-[0-9]{4}$");   
         private bool IsValidCpf() =>
-            !Regex.IsMatch(Phone, @"([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})");
+            !Regex.IsMatch(Cpf, @"([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})");
         
     }
 }

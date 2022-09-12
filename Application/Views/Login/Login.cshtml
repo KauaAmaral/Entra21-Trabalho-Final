@@ -22,13 +22,13 @@
 						<label class="floating-label">Senha</label>
 						<span asp-validation-for="Password" class="text-danger"></span>
 					</div>
-					@if (TempData["Message"] != null)
-					{
-						<p class="text-danger">@TempData["Message"]</p>
-					}
-					<button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Sign in</button>
+						@if(TempData["Message"] != null)
+						{
+							<p class="text-danger">@TempData["Message"]</p>
+						}
+					<button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Entrar</button>
 				</form>
-				<Por>Sem conta? Por favor cadastre-se<p>
+				<Por>Sem conta? <a asp-controller="Login" asp-action="Register">Cadastre-se</a><p>
 			</div>
 		</div>
 	</div>
