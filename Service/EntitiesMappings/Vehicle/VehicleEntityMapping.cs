@@ -12,16 +12,19 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Vehicles
                 LicensePlate = viewModel.LicensePlate,
                 Model = viewModel.Model,
                 Type  = (VehicleType)viewModel.Type,
-                UserId = viewModel.UserId.GetValueOrDefault(),
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now
+                UserId = viewModel.UserId,
+                CreatedAt = DateTime.Now
             };
 
-        public void UpdateWith(Vehicle vehicle, VehicleUpdateViewModel viewModel)
+        public Vehicle UpdateWith(Vehicle vehicle, VehicleUpdateViewModel viewModel)
         {
             vehicle.LicensePlate = viewModel.LicensePlate;
-            vehicle.UserId = viewModel.UserId.GetValueOrDefault();
+            vehicle.Model = viewModel.Model;
+            vehicle.Type = (VehicleType)viewModel.Type;
+            //vehicle.UserId = viewModel.UserId;
             vehicle.UpdatedAt = DateTime.Now;
+
+            return vehicle;
         }
     }
 }

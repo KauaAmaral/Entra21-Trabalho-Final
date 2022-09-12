@@ -7,7 +7,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>Dashboard Team | Remark Admin Template</title>
+    <title>Area 21</title>
 
     <link rel="apple-touch-icon" href="~/Theme/assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="~/Theme/assets/images/favicon.ico">
@@ -32,6 +32,8 @@
     <link rel="stylesheet" href="~/Theme/global/vendor/asscrollable/asScrollable.css">
     <link rel="stylesheet" href="~/Theme/assets/examples/css/dashboard/team.css">
 
+    <link rel="stylesheet" href="~/css/Background.css">
+
 
     <!-- Fonts -->
     <link rel="stylesheet" href="~/Theme/global/fonts/web-icons/web-icons.min.css">
@@ -51,7 +53,7 @@
         Breakpoints();
     </script>
 </head>
-<body class="animsition site-navbar-small dashboard">
+<body class="animsition site-navbar-small dashboard" class="back-image">
     <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -74,7 +76,7 @@
 
                     </li>
                     <li class="dropdown site-menu-item has-sub">
-                        <a data-toggle="dropdown" href="/veiculos" data-dropdown-toggle="false">
+                        <a data-toggle="dropdown" asp-action="GetAll" asp-controller="vehicle" data-dropdown-toggle="false">
                             <i class="site-menu-icon wb-file" aria-hidden="true"></i>
                             <span class="site-menu-title">Veículos</span>
                             <span class="site-menu"></span>
@@ -140,12 +142,9 @@
                         </a>
                         <div class="dropdown-menu" role="menu">
                             <a asp-controller="user" asp-action="update" class="dropdown-item" role="menuitem"><i class="icon wb-user" aria-hidden="true"></i> Perfil</a>
-                            <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon wb-payment" aria-hidden="true"></i> Pagamentos</a>
-                            <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon wb-user" aria-hidden="true"></i> Perfil</a>
                             <a asp-action="Payments" asp-controller="Payments" class="dropdown-item">
-                                <i class="fa-solid fa-plus"></i> Pagamentos
-                            </a>                            <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon wb-settings" aria-hidden="true"></i> Configurações</a>
-                            <div class="dropdown-divider" role="presentation"></div>
+                                <i class="icon wb-payment"></i> Pagamentos
+                            </a>                           
                             <a class="dropdown-item" asp-controller="Login" asp-action="Logout" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Sair</a>
                         </div>
                     </li>
@@ -174,7 +173,7 @@
                     <li class="nav-item dropdown">
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
                             <div class="dropdown-menu-header" role="presentation">
-                                <h5>MESSAGES</h5>
+                                <h5>MENSSAGES</h5>
                                 <span class="badge badge-round badge-info">New 3</span>
                             </div>
 
@@ -283,10 +282,8 @@
         </div>
     </nav>
     <!-- Page -->
-    <div class="page" >
+    <div class="page">
         <div class="page-content container-fluid">
-@*        <img src="~/Theme/global/portraits/Area21_Inicio_Log.jpg"/>*@     
-
     <div class="page">
         @*        <div class="page-content container-fluid">*@
         @RenderBody()
@@ -295,7 +292,6 @@
             <!-- End Second Row -->
         </div>
         </div>
-        @*<img src="~/Theme/global/portraits/Area21_Inicio_Log.jpg" />*@
     </div>
     <!-- End Page -->
     <!-- Add Item Dialog -->

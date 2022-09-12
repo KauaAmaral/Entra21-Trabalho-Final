@@ -8,6 +8,6 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Vehicles
         void Update(Vehicle vehicle);
         bool Delete(int id);
         Vehicle? GetById(int id);
-        IList<Vehicle> GetAll();
+        IList<Vehicle> GetAll(int id);
     }
 }
