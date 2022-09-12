@@ -13,6 +13,15 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
 
             builder.HasKey(x => x.Id);
 
+            builder.Property(x => x.Token)
+                .IsRequired()
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(100);
+
+            builder.Property(x => x.TokenExpiredDate)
+                .IsRequired()
+                .HasColumnType("DATETIME2");
+
             builder.Property(x => x.Name)
                 .IsRequired()
                 .HasColumnType("VARCHAR")
@@ -56,13 +65,16 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 new User
                 {
                     Id = 1,
+                    Token = new Guid("924e32c0-6523-4efc-ac8f-04ff1ef63220"),
+                    TokenExpiredDate = new DateTime(2005-08-08),
                     Name = "Admin",
                     Email = "admin@admin.com",
                     Password = "1234".GetHash(),
                     Cpf = "11111111111",
                     Phone = "1111111111",
                     CreatedAt = new DateTime(2005-08-08),
-                    Status = true
+                    Status = true,
+                    IsEmailConfirmed = true
                 });
         }
     }

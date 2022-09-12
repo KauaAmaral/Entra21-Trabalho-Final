@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Entra21.CSharp.Area21.Service.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Entra21.CSharp.Area21.Repository.Entities;
+using Entra21.CSharp.Area21.Service.Email;
 
 namespace Entra21.CSharp.Area21.Application.Controllers
 {
@@ -12,12 +13,15 @@ namespace Entra21.CSharp.Area21.Application.Controllers
     {
         private readonly IUserService _userService;
         private readonly ISessionAuthentication _session;
+        private readonly IEmailService _email;
 
         public LoginController(IUserService userService,
-                               ISessionAuthentication session)
+                               ISessionAuthentication session,
+                               IEmailService email)
         {
             _userService = userService;
             _session = session;
+            _email = email;
         }
 
         [HttpGet]
@@ -70,22 +74,48 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             if (!ModelState.IsValid)
                 return View(userRegisterViewModel);
 
-            var user = _userService.Insert(userRegisterViewModel);
-            
             var token = Guid.NewGuid();
 
+            userRegisterViewModel.Token = token;
+
+            var user = _userService.Insert(userRegisterViewModel);
+
             var confirmationLink = Url.Action("ConfirmEmail", "Login",
-                new { userId = user.Id, token = token }, Request.Scheme);
+                new { id = user.Id, token = token }, Request.Scheme);
 
-            TempData["teste"] = confirmationLink;
+            var email = _email.SendEMail(user.Email, "Confirmação de email",
+                @$"<p>Olá, {user.Name}, como você está?
+                <br>
+                Confirme seu cadastro <a href='{confirmationLink}'>aqui</a>
+                <br>
+                Caso você não seja redirecionado, acesse pelo link abaixo:
+                <br>
+                {confirmationLink}<p>");
 
-
-            return View(nameof(VerifyEmail));
+            return View(nameof(ConfirmEmail));
         }
 
-        public IActionResult VerifyEmail()
+        [HttpGet("ConfirmEmail")]
+        public IActionResult ConfirmEmail([FromQuery] int id, Guid token)
         {
-            return View(nameof(VerifyEmail));
+            var user = _userService.GetById(id);
+
+            if (user == null || user.Token != token)
+                TempData["message"] = "Não existe nenhum usuário referido!";
+
+            else if (user.IsEmailConfirmed == true)
+                TempData["message"] = "O usuário já possui o link confirmado!";
+
+            else if (user.TokenExpiredDate.TimeOfDay < DateTime.Now.TimeOfDay)
+                TempData["message"] = "O link foi espirado! Tente criar outra conta";
+
+            else
+            {
+                TempData["message"] = "O usuário foi confirmado!";
+                _userService.UpdateVerifyEmail(user.Id);
+            }
+                
+            return View(nameof(ConfirmEmail));
         }
     }
 }

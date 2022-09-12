@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.RegularExpressions;
 
 namespace Entra21.CSharp.Area21.Service.ViewModels.Users
 {
@@ -31,5 +30,7 @@ namespace Entra21.CSharp.Area21.Service.ViewModels.Users
         [Required(ErrorMessage = "{0} deve ser preenchida")]
         [Compare("Password", ErrorMessage = "Senhas não conferem")]
         public string ConfirmPassword { get; set; }
+        public Guid Token { get; set; }
+        public DateTime TokenExpiredDate { get; set; }
     }
 }

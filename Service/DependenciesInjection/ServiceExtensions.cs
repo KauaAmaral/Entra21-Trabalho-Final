@@ -1,4 +1,5 @@
 using Entra21.CSharp.Area21.Service.Authentication;
+using Entra21.CSharp.Area21.Service.Email;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Guards;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Notifications;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Payments;
@@ -24,6 +25,7 @@ namespace Entra21.CSharp.Area21.Service.DependenciesInjection
             services.AddScoped<IGuardService, GuardService>();
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<ISessionAuthentication, SessionAuthentication>();
+            services.AddScoped<IEmailService, EmailService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSession(o =>
             {

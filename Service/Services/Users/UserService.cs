@@ -68,5 +68,17 @@ namespace Entra21.CSharp.Area21.Service.Services.Users
 
             return true;
         }
+
+        public User UpdateVerifyEmail(int id)
+        {
+            var user = _userRepository.GetById(id);
+
+            user.IsEmailConfirmed = true;
+            user.Status = true;
+
+            _userRepository.Update(user);
+
+            return user;
+        }
     }
 }

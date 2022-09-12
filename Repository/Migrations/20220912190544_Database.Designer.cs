@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entra21.CSharp.Area21.Repository.Migrations
 {
     [DbContext(typeof(ShortTermParkingContext))]
-    [Migration("20220909233955_Database")]
+    [Migration("20220912190544_Database")]
     partial class Database
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -190,12 +190,19 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                         .HasColumnType("VARCHAR(64)");
 
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("VARCHAR(20)");
 
                     b.Property<bool>("Status")
                         .HasColumnType("BIT");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("VARCHAR(100)");
+
+                    b.Property<DateTime>("TokenExpiredDate")
+                        .HasColumnType("DATETIME2");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("DATETIME2");
@@ -211,11 +218,13 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                             Cpf = "11111111111",
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(1989),
                             Email = "admin@admin.com",
-                            IsEmailConfirmed = false,
+                            IsEmailConfirmed = true,
                             Name = "Admin",
                             Password = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
                             Phone = "1111111111",
-                            Status = true
+                            Status = true,
+                            Token = "924e32c0-6523-4efc-ac8f-04ff1ef63220",
+                            TokenExpiredDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(1989)
                         });
                 });
 
@@ -228,7 +237,9 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME2")
+                        .HasDefaultValue(new DateTime(2022, 9, 12, 16, 5, 43, 650, DateTimeKind.Local).AddTicks(9487))
                         .HasColumnName("created_at");
 
                     b.Property<string>("LicensePlate")
@@ -243,7 +254,7 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                         .HasColumnType("VARCHAR(50)");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("bit");
+                        .HasColumnType("BIT");
 
                     b.Property<byte>("Type")
                         .HasColumnType("TINYINT")
@@ -262,6 +273,18 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("vehicles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2022, 9, 12, 16, 5, 43, 651, DateTimeKind.Local).AddTicks(2348),
+                            LicensePlate = "fhf-1234",
+                            Model = "123121234",
+                            Status = true,
+                            Type = (byte)0,
+                            UserId = 1
+                        });
                 });
 
             modelBuilder.Entity("Entra21.CSharp.Area21.Repository.Entities.Guard", b =>

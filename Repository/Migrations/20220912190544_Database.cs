@@ -15,6 +15,8 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Token = table.Column<string>(type: "VARCHAR(100)", maxLength: 100, nullable: false),
+                    TokenExpiredDate = table.Column<DateTime>(type: "DATETIME2", nullable: false),
                     Name = table.Column<string>(type: "VARCHAR(100)", maxLength: 100, nullable: false),
                     Email = table.Column<string>(type: "VARCHAR(50)", maxLength: 50, nullable: false),
                     Password = table.Column<string>(type: "VARCHAR(64)", maxLength: 64, nullable: false),
@@ -63,8 +65,8 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                     Model = table.Column<string>(type: "VARCHAR(50)", maxLength: 50, nullable: false),
                     vehicle_type = table.Column<byte>(type: "TINYINT", nullable: false),
                     user_id = table.Column<int>(type: "INT", nullable: false),
-                    Status = table.Column<bool>(type: "bit", nullable: false),
-                    created_at = table.Column<DateTime>(type: "DATETIME2", nullable: false),
+                    Status = table.Column<bool>(type: "BIT", nullable: false),
+                    created_at = table.Column<DateTime>(type: "DATETIME2", nullable: false, defaultValue: new DateTime(2022, 9, 12, 16, 5, 43, 650, DateTimeKind.Local).AddTicks(9487)),
                     update_at = table.Column<DateTime>(type: "DATETIME2", nullable: true)
                 },
                 constraints: table =>
@@ -138,8 +140,13 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
 
             migrationBuilder.InsertData(
                 table: "users",
-                columns: new[] { "Id", "Cpf", "CreatedAt", "Email", "Name", "Password", "Phone", "Status", "UpdatedAt" },
-                values: new object[] { 1, "11111111111", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(1989), "admin@admin.com", "Admin", "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", "1111111111", true, null });
+                columns: new[] { "Id", "Cpf", "CreatedAt", "Email", "IsEmailConfirmed", "Name", "Password", "Phone", "Status", "Token", "TokenExpiredDate", "UpdatedAt" },
+                values: new object[] { 1, "11111111111", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(1989), "admin@admin.com", true, "Admin", "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", "1111111111", true, "924e32c0-6523-4efc-ac8f-04ff1ef63220", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(1989), null });
+
+            migrationBuilder.InsertData(
+                table: "vehicles",
+                columns: new[] { "Id", "created_at", "license_plate", "Model", "Status", "vehicle_type", "update_at", "user_id" },
+                values: new object[] { 1, new DateTime(2022, 9, 12, 16, 5, 43, 651, DateTimeKind.Local).AddTicks(2348), "fhf-1234", "123121234", true, (byte)0, null, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_guards_user_id",
