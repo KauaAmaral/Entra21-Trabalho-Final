@@ -3,7 +3,7 @@ using Entra21.CSharp.Area21.RepositoryDataBase;
 
 namespace Entra21.CSharp.Area21.Repository.Repositories.Generic
 {
-    public abstract class GenericRepository<TEntity> : IDisposable, IGenericRepository<TEntity> where TEntity : EntityBase
+    public abstract class GenericRepository<T> : IDisposable, IGenericRepository<T> where T : EntityBase
     {
         private readonly ShortTermParkingContext _context;
 
@@ -12,9 +12,9 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Generic
             _context = context;
         }
 
-        public virtual TEntity Create(TEntity entity)
+        public virtual T Create(T entity) 
         {
-            _context.Set<TEntity>().Add(entity);
+            _context.Set<T>().Add(entity);
             _context.SaveChanges();
 
             return entity;
@@ -22,20 +22,20 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Generic
 
         public bool Delete(int id)
         {
-            var entity = _context.Set<TEntity>().FirstOrDefault(x => x.Id == id);
+            var entity = _context.Set<T>().FirstOrDefault(x => x.Id == id);
 
             if (entity == null)
                 return false;
 
-            _context.Set<TEntity>().Remove(entity);
+            _context.Set<T>().Remove(entity);
             _context.SaveChanges();
 
             return true;
         }
 
-        public void Update(TEntity entity)
+        public void Update(T entity)
         {
-            _context.Set<TEntity>().Update(entity);
+            _context.Set<T>().Update(entity);
             _context.SaveChanges();
         }
 
