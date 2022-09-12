@@ -1,25 +1,33 @@
 ﻿@model List<Vehicle>
+@{
+    Layout = "~/Pages/Shared/_LayoutUnlogged.cshtml";
+    ViewData["Title"] = "Pagamentos";
+}
 
-    <table class="table table-striped table-bordered table-hover" id="vehicles-id" style="width:70%" align="center">
-        <thead>
-            <tr>
-                <th style="width:15%">Modelo</th>
-                <th style="width:7%">Placa</th>
-                <th style="width:3%">Ação</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var vehicles in Model)
-            {
+<div class="page background-image vertical-align">
+    <div class="table vertical-align-middle">
+        <table class="table-center" id="vehicles-id" style="width:70%" align="center">
+            <thead>
                 <tr>
-                    <td>@vehicles.Model</td>
-                    <td>@vehicles.LicensePlate</td>
-                    <td>
-                        <a class="btn btn-animate mb-2 btn-animate-side btn-primary" asp-action="pagar">
-                            <i class="icon wb-shopping-cart" aria-hidden="true"></i>Pagar
-                        </a>
-                    </td>
+                    <th style="width:15%"><font size="5"><b><font color="white">Modelo</font></b></font></th>
+                    <th style="width:7%"><font size="5"><b><font color="white">Placa</font></b></font></th>
+                    <th style="width:3%"><font size="5"><b><font color="white">Ação</font></b></font></th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var vehicles in Model)
+                {
+                    <tr>
+                        <td><b><font color="white">@vehicles.Model</font></b></td>
+                        <td><b><font color="white">@vehicles.LicensePlate</font></b></td>
+                        <td>
+                            <a class="btn btn-animate mb-2 btn-animate-side btn-primary" asp-action="pagar">
+                                <i class="icon wb-shopping-cart" aria-hidden="true"></i>Pagar
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
