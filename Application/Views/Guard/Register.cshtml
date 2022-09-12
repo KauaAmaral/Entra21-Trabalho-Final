@@ -10,10 +10,6 @@
 
 <div class="page vertical-align text-center" data-animsition-in="fade-in" data-animsition-out="fade-out">
 
-    <div class="page-content vertical-align-middle animation-slide-top animation-duration-1">
-
-        <div class="brand">
-            <h1 class="brand-text">Area21</h1>
         </div>
 
         <p>Cadastro do Guarda</p>
@@ -34,12 +30,7 @@
                 <span asp-validation-for="UserId" class="text-danger"></span>
             </div>
 
-            @*<div class="form-group">
-                <label asp-for="UserId" class="sr-only" for="inputUser">User</label>
-                <select asp-for="UserId" asp-items="selectUsers"
-                       class="form-control" id="inputUser" name="user" placeholder="Usuário" />
-                <span asp-validation-for="UserId" class="text-danger"></span>
-            </div>*@
+                <Por>Já é guarda? Faça login<p>
 
             <div class="form-group">
                 <label asp-for="IdentificationNumber" class="sr-only" for="inputIdentificationNumber">Número de Identificação</label>
@@ -47,9 +38,5 @@
                        id="inputIdentificationNumber" name="identificationNumber" placeholder="Número de Identificação" />
                 <span asp-validation-for="IdentificationNumber" class="text-danger"></span>
             </div>
-
-            <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
-
-        </form>
     </div>
 </div>
