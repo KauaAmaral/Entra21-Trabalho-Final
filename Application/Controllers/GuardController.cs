@@ -39,7 +39,6 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             return Ok(guards);
         }
 
-        // TODO: Ajustar para retornar o usuario
         [HttpGet("register")]
         public IActionResult Register()
         {
