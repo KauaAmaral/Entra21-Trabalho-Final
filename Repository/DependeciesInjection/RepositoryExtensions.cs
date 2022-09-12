@@ -1,9 +1,11 @@
-﻿using Entra21.CSharp.Area21.Repository.Repositories.Guards;
+﻿using Entra21.CSharp.Area21.Repository.Entities;
+using Entra21.CSharp.Area21.Repository.Repositories.Guards;
 using Entra21.CSharp.Area21.Repository.Repositories.Notifications;
 using Entra21.CSharp.Area21.Repository.Repositories.Payments;
 using Entra21.CSharp.Area21.Repository.Repositories.Users;
 using Entra21.CSharp.Area21.Repository.Repositories.Vehicles;
 using Entra21.CSharp.Area21.RepositoryDataBase;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
