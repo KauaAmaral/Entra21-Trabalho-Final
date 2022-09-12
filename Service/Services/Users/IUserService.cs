@@ -12,5 +12,8 @@ namespace Entra21.CSharp.Area21.Service.Services.Users
         IList<User> GetAll();
         User? GetByEmailAndPassword(string email, string password);
         bool UpdatePassword(UserChangePasswordViewModel viewModel);
+        User UpdateVerifyEmail(int id);
+        bool Disable(User userChange);
+        bool VerifyEmails(string email);
     }
 }

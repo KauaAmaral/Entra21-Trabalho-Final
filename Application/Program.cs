@@ -3,7 +3,9 @@ using Entra21.CSharp.Area21.RepositoryDataBase;
 using Entra21.CSharp.Area21.Service.DependenciesInjection;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using System.Globalization;
+using Entra21.CSharp.Area21.Repository.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +17,7 @@ builder.Services
     .AddServices()
     .AddRepository()
     .AddEntitiesMapping();
-
+  
 var app = builder.Build();
 
 var supportedCultures = new[] { new CultureInfo("pt-BR") };
