@@ -18,8 +18,9 @@ namespace Entra21.CSharp.Area21.Service.Services.Guards
             _guardEntityMapping = guardEntityMapping;
         }
 
-        public bool Delete(int id) =>
-            _guardRepository.Delete(id);
+        // TODO: Verificar se vai ser necessario 
+        //public bool Delete(int id) =>
+        //    _guardRepository.Delete(id);
 
         public IList<Guard> GetAll() =>
             _guardRepository.GetAll();

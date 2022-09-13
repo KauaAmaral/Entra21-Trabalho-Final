@@ -1,5 +1,8 @@
-﻿using Entra21.CSharp.Area21.Service.Services.Guards;
+﻿using Entra21.CSharp.Area21.Service.Authentication;
+using Entra21.CSharp.Area21.Service.Services.Guards;
 using Entra21.CSharp.Area21.Service.ViewModels.Guards;
+using Entra21.CSharp.Area21.Service.ViewModels.Users;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Entra21.CSharp.Area21.Application.Controllers
@@ -8,6 +11,8 @@ namespace Entra21.CSharp.Area21.Application.Controllers
     public class GuardController : Controller
     {
         private readonly IGuardService _guardService;
+        private readonly ISessionAuthentication _session;
+
 
         public GuardController(IGuardService guardService)
         {
@@ -58,7 +63,16 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             return RedirectToAction(nameof(Update), new { id = guard.Id });
         }
 
-        [HttpGet("update")]
+        [HttpGet("logout")]
+        public IActionResult Logout()
+        {
+            _session.RemoveUserSession();
+
+            return RedirectToAction(nameof(Register));
+        }
+
+        // TODO: Adicionar nos users botão para desativar conta guarda
+        [HttpGet("closeGuardAccount")]
         public IActionResult Update([FromQuery] int id)
         {
             var viewModel = _guardService.GetById(id);
@@ -66,7 +80,7 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             return View(viewModel);
         }
 
-        [HttpPost("update")]
+        [HttpPost("closeGuardAccount")]
         public IActionResult Update([FromQuery] GuardUpdateViewModel viewModel)
         {
             if (!ModelState.IsValid)
@@ -75,14 +89,6 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             var updated = _guardService.Update(viewModel);
 
             return RedirectToAction(nameof(Update), new { id = viewModel.Id });
-        }
-
-        [HttpGet("delete")]
-        public IActionResult Delete([FromQuery] int id)
-        {
-            _guardService.Delete(id);
-
-            return RedirectToAction(nameof(Index));
         }
     }
 }
