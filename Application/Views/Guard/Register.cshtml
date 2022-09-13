@@ -1,0 +1,37 @@
+﻿@using Entra21.CSharp.Area21.Service.ViewModels.Guards
+@model GuardRegisterViewModel
+
+@{
+    Layout = "~/Pages/Shared/_LayoutUnlogged.cshtml";
+    ViewData["Title"] = "Register";
+}
+
+<div class="page background-image vertical-align text-center">
+    <div class="page-content vertical-align-middle">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="brand">
+
+                    <h2 class="brand-text font-size-18">Cadastro do Guarda</h2>
+
+                </div>
+
+                <form asp-action="register" asp-controller="register" method="POST">
+
+                    <div class="form-group form-material floating" data-plugin="formMaterial">
+                        <label asp-for="Cpf" class="sr-only" for="inputCpf">CPF</label>
+                        <input asp-for="Cpf" class="form-control"
+                               id="inputCpf" name="cpf" placeholder="CPF" />
+                        <span asp-validation-for="Cpf" class="text-danger"></span>
+                    </div>
+
+                    @if (TempData["Message"] != null)
+                    {
+                        <p class="text-danger">@TempData["Message"]</p>
+                    }
+                    <button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Cadastrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
