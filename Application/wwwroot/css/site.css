@@ -21,3 +21,12 @@ body {
 .background-image {
     background-image: url("../Theme/global/portraits/Area21_Inicio_Log.jpg");
 }
+
+.background-image-about 
+{
+    background-image: url("../Theme/global/portraits/Sobre21.jpg");
+}
+
+.background-image-payments {
+    background-image: url("../Theme/global/portraits/Pagamentos.jpg");
+}
