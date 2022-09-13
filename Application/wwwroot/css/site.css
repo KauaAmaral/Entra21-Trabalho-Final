@@ -26,3 +26,7 @@ body {
 {
     background-image: url("../Theme/global/portraits/Sobre21.jpg");
 }
+
+.background-image-payments {
+    background-image: url("../Theme/global/portraits/Pagamentos.jpg");
+}
