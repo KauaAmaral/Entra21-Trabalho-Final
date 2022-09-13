@@ -46,10 +46,10 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Vehicles
             .Include(x => x.User)
             .FirstOrDefault(x => x.Id == id);
 
-
-        public IList<Vehicle> GetAll() =>
+        public IList<Vehicle> GetAll(int id) =>
             _context.Vehicles
-            .Include(_x => _x.User)
+            .Include(x => x.User)
+            .Where(x => x.User.Id == id)
             .ToList();
     }
 }
