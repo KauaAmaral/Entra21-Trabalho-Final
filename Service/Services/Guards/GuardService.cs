@@ -18,10 +18,6 @@ namespace Entra21.CSharp.Area21.Service.Services.Guards
             _guardEntityMapping = guardEntityMapping;
         }
 
-        // TODO: Verificar se vai ser necessario 
-        //public bool Delete(int id) =>
-        //    _guardRepository.Delete(id);
-
         public IList<Guard> GetAll() =>
             _guardRepository.GetAll();
        
@@ -37,18 +33,20 @@ namespace Entra21.CSharp.Area21.Service.Services.Guards
             return guard;
         }
 
-        public bool Update(GuardUpdateViewModel viewModel)
+        public bool Delete(int id) =>
+           _guardRepository.Delete(id);
+
+        public bool Disable(User userChange)
         {
-            var guard = _guardRepository.GetById(viewModel.Id);
+            var guard = _guardRepository.GetById(userChange.Id);
 
             if (guard == null)
-                return false;            
+                return false;
 
-            _guardEntityMapping.UpdateWith(guard, viewModel);
-
+            guard.Status = false;
             _guardRepository.Update(guard);
 
             return true;
-        }        
+        }
     }
 }

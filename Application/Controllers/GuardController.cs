@@ -1,8 +1,6 @@
 ﻿using Entra21.CSharp.Area21.Service.Authentication;
 using Entra21.CSharp.Area21.Service.Services.Guards;
 using Entra21.CSharp.Area21.Service.ViewModels.Guards;
-using Entra21.CSharp.Area21.Service.ViewModels.Users;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Entra21.CSharp.Area21.Application.Controllers
@@ -13,34 +11,20 @@ namespace Entra21.CSharp.Area21.Application.Controllers
         private readonly IGuardService _guardService;
         private readonly ISessionAuthentication _session;
 
-        public GuardController(IGuardService guardService)
+        public GuardController(IGuardService guardService,
+                               ISessionAuthentication session)
         {
             _guardService = guardService;
+            _session = session;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
-        }
+            if (_session.FindUserSession() != null)
+                return RedirectToAction("Index", "Home");
 
-        [HttpGet("getAll")]
-        public IActionResult GetAll()
-        {
-            var guards = _guardService.GetAll();
-
-            return Ok(guards);
-        }
-
-        [HttpGet("getById")]
-        public IActionResult GetById([FromQuery] int id)
-        {
-            var guards = _guardService.GetById(id);
-
-            if (guards == null)
-                return NotFound();
-
-            return Ok(guards);
+            return View("Login");
         }
 
         [HttpGet("register")]
@@ -59,7 +43,7 @@ namespace Entra21.CSharp.Area21.Application.Controllers
 
             var guard = _guardService.Register(viewModel);
 
-            return RedirectToAction(nameof(Update), new { id = guard.Id });
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet("logout")]
@@ -70,24 +54,15 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             return RedirectToAction(nameof(Register));
         }
 
-        // TODO: Adicionar nos users botão para desativar conta guarda
-        [HttpGet("closeGuardAccount")]
-        public IActionResult Update([FromQuery] int id)
+        [HttpGet("disable")]
+        public IActionResult Disable()
         {
-            var viewModel = _guardService.GetById(id);
+            var guard = _session.FindUserSession();
 
-            return View(viewModel);
-        }
+            _guardService.Disable(guard);
+            _session.RemoveUserSession();
 
-        [HttpPost("closeGuardAccount")]
-        public IActionResult Update([FromQuery] GuardUpdateViewModel viewModel)
-        {
-            if (!ModelState.IsValid)
-                return View(viewModel);
-
-            var updated = _guardService.Update(viewModel);
-
-            return RedirectToAction(nameof(Update), new { id = viewModel.Id });
+            return RedirectToAction("Index", "Login");
         }
     }
 }
