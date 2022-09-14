@@ -1,10 +1,8 @@
-﻿using Entra21.CSharp.Area21.Service.ViewModels.Users;
-using Entra21.CSharp.Area21.Service.Services.Users;
-using Microsoft.AspNetCore.Mvc;
-using Entra21.CSharp.Area21.Service.Authentication;
-using Microsoft.AspNetCore.Identity;
-using Entra21.CSharp.Area21.Repository.Entities;
+﻿using Entra21.CSharp.Area21.Service.Authentication;
 using Entra21.CSharp.Area21.Service.Email;
+using Entra21.CSharp.Area21.Service.Services.Users;
+using Entra21.CSharp.Area21.Service.ViewModels.Users;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Entra21.CSharp.Area21.Application.Controllers
 {
