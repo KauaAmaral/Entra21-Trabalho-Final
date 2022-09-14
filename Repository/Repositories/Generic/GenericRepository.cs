@@ -12,7 +12,7 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Generic
             _context = context;
         }
 
-        public virtual T Create(T entity) 
+        public virtual T Insert(T entity) 
         {
             _context.Set<T>().Add(entity);
             _context.SaveChanges();
