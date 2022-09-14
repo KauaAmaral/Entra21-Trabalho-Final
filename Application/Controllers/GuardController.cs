@@ -11,7 +11,6 @@ namespace Entra21.CSharp.Area21.Application.Controllers
         private readonly IGuardService _guardService;
         private readonly ISessionAuthentication _session;
 
-
         public GuardController(IGuardService guardService)
         {
             _guardService = guardService;
