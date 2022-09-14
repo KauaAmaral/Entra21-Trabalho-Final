@@ -5,5 +5,7 @@
         T Insert(T entity);
         bool Delete(int id);
         void Update(T entity);
+        T? GetById(int id);
+        IList<T> GetAll();
     }
 }
