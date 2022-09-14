@@ -11,10 +11,5 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Guards
                 UserId = viewModel.UserId.GetValueOrDefault(),
                 CreatedAt = DateTime.Now
             };
-
-        public void UpdateWith(Guard guard, GuardUpdateViewModel viewModel)
-        {
-            guard.UpdatedAt = DateTime.Now;
-        }
     }
 }
