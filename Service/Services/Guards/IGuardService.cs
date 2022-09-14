@@ -5,10 +5,10 @@ namespace Entra21.CSharp.Area21.Service.Services.Guards
 {
     public interface IGuardService
     {
-        //bool Delete(int id);
+        bool Delete(int id);
         Guard Register(GuardRegisterViewModel viewModel);
-        bool Update(GuardUpdateViewModel viewModel);
         Guard? GetById(int id);
         IList<Guard> GetAll();
+        bool Disable(User userChange);
     }
 }
