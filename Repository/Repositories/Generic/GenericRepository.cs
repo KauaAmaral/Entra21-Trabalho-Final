@@ -12,7 +12,7 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Generic
             _context = context;
         }
 
-        public virtual T Insert(T entity) 
+        public virtual T Insert(T entity)
         {
             _context.Set<T>().Add(entity);
             _context.SaveChanges();
@@ -39,11 +39,11 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Generic
             _context.SaveChanges();
         }
 
-        public T? GetById(int id) => 
+        public T? GetById(int id) =>
             _context.Set<T>().FirstOrDefault(x => x.Id == id);
-        
+
         public IList<T> GetAll() =>
-            _context.Set<T>().ToList();        
+            _context.Set<T>().ToList();
 
         public void Dispose()
         {
