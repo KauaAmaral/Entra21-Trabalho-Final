@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Entra21.CSharp.Area21.Application.Controllers
 {
-    [Route("login")]
+    [Route("/")]
     public class LoginController : Controller
     {
         private readonly IUserService _userService;
