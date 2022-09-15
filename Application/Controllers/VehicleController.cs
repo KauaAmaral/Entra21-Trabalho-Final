@@ -99,14 +99,14 @@ namespace Entra21.CSharp.Area21.Application.Controllers
         }
 
         [HttpGet("")]
-        public IActionResult GetAll()
+        public IActionResult GetAllById()
         {
             var user = _session.FindUserSession();
 
             if (user == null)
                 return RedirectToAction("Index", "Home");
 
-            var vehicles = _vehicleService.GetAll(user.Id);
+            var vehicles = _vehicleService.GetAllById(user.Id);
 
             return View("Index", vehicles);
         }
