@@ -8,7 +8,7 @@ using Entra21.CSharp.Area21.Service.Email;
 
 namespace Entra21.CSharp.Area21.Application.Controllers
 {
-    [Route("login")]
+    [Route("/")]
     public class LoginController : Controller
     {
         private readonly IUserService _userService;

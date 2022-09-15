@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html class="no-js css-menubar" lang="en">
 <head>
     <meta charset="utf-8">
@@ -13,11 +13,9 @@
     <link rel="shortcut icon" href="~/Theme/assets/images/favicon.ico">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="~/Theme/global/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/Theme/global/css/bootstrap-extend.min.css">
     <link rel="stylesheet" href="~/Theme/assets/css/site.min.css">
-    <link rel="stylesheet" href="~/css/site.css">
 
     <!-- Plugins -->
     <link rel="stylesheet" href="~/Theme/global/vendor/animsition/animsition.css">
@@ -60,23 +58,57 @@
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <nav class="navbar-container container-fluid background-image"
+    <nav class="site-navbar navbar navbar-default navbar-fixed-top navbar-mega"
          role="navigation">
 
-        <div class="navbar-header   ">
-            <button type="button" class="navbar-toggler hamburger hamburger-close navbar-toggler-left hided"
-                    data-toggle="menubar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="hamburger-bar"></span>
-            </button>
-            <a class="navbar-brand navbar-brand-center" href="index.html">
-                <img class="navbar-brand-logo navbar-brand-logo" src="~/Theme/global/portraits/Logo Maior.png">
-            </a>
-        </div>
 
         <div class="navbar-container container-fluid">
             <!-- Navbar Collapse -->
+            <div>
+                <ul class="site-menu" data-plugin="menu">
+                    <li class="site-menu-category">General</li>
+                    <li class="dropdown site-menu-item has-sub">
+                        <a data-toggle="dropdown" href="/index" data-dropdown-toggle="false">
+                            <i class="site-menu-icon wb-layout" aria-hidden="true"></i>
+                            <span class="site-menu-title">Início</span>
+                            <span class="site-menu"></span>
+                        </a>
+
+                    </li>
+                    <li class="dropdown site-menu-item has-sub">
+                        <a data-toggle="dropdown" asp-action="GetAll" asp-controller="vehicle" data-dropdown-toggle="false">
+                            <i class="site-menu-icon wb-file" aria-hidden="true"></i>
+                            <span class="site-menu-title">Veículos</span>
+                            <span class="site-menu"></span>
+                        </a>
+                    </li>
+                    <li class="site-menu-category">Elements</li>
+                    <li class="dropdown site-menu-item has-section has-sub">
+                    </li>
+                    <li class="dropdown site-menu-item has-section has-sub">
+                        <a data-toggle="dropdown" href="/sobre" data-dropdown-toggle="false">
+                            <i class="site-menu-icon wb-plugin" aria-hidden="true"></i>
+                            <span class="site-menu-title">Sobre</span>
+                            <span class="site-menu-"></span>
+                        </a>
+
+                    <li class="site-menu-category">Apps</li>
+                </ul>
+            </div>
             <div class="collapse navbar-collapse navbar-collapse-toolbar" id="site-navbar-collapse">
+                <!-- Navbar Toolbar -->
+                <ul class="nav navbar-toolbar">
+                    <li class="nav-item hidden-float" id="toggleMenubar">
+                        <a class="nav-link" data-toggle="menubar" href="#" role="button">
+                            <i class="icon hamburger hamburger-arrow-left">
+                                <span class="sr-only">Toggle menubar</span>
+                                <span class="hamburger-bar"></span>
+                            </i>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- End Navbar Toolbar -->
                 <!-- Navbar Toolbar Right -->
                 <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
                     <li class="nav-item dropdown">
@@ -120,7 +152,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" title="Notifications"
                        aria-expanded="false" data-animation="scale-up" role="button">
-                        <i class="fa-solid fa-bell color-icons" aria-hidden="true"></i>
+                        <i class="icon wb-bell" aria-hidden="true"></i>
                         <span class="badge badge-pill badge-danger up">0</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
@@ -135,20 +167,14 @@
                             </a>
                             <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
                                 Todas Notificações
-                            </a>F
+                            </a>
                         </div>
                     </div>
                 </li>
-
                 <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" title="Messages"
-                       aria-expanded="false" data-animation="scale-up" role="button">
-                        <i class="icon wb-envelope" aria-hidden="true"></i>
-                        <span class="badge badge-pill badge-info up">3</span>
-                    </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
                         <div class="dropdown-menu-header" role="presentation">
-                            <h5>MESSAGES</h5>
+                            <h5>MENSSAGES</h5>
                             <span class="badge badge-round badge-info">New 3</span>
                         </div>
 
@@ -159,7 +185,7 @@
                                         <div class="media">
                                             <div class="pr-10">
                                                 <span class="avatar avatar-sm avatar-online">
-                                                    <img src="../global/portraits/2.jpg" alt="..." />
+                                                    <img src="~/Theme/global/portraits/2.jpg" alt="..." />
                                                     <i></i>
                                                 </span>
                                             </div>
@@ -176,7 +202,7 @@
                                         <div class="media">
                                             <div class="pr-10">
                                                 <span class="avatar avatar-sm avatar-off">
-                                                    <img src="../global/portraits/3.jpg" alt="..." />
+                                                    <img src="~/Theme/global/portraits/3.jpg" alt="..." />
                                                     <i></i>
                                                 </span>
                                             </div>
@@ -193,7 +219,7 @@
                                         <div class="media">
                                             <div class="pr-10">
                                                 <span class="avatar avatar-sm avatar-busy">
-                                                    <img src="../global/portraits/4.jpg" alt="..." />
+                                                    <img src="~/Theme/global/portraits/4.jpg" alt="..." />
                                                     <i></i>
                                                 </span>
                                             </div>
@@ -210,7 +236,7 @@
                                         <div class="media">
                                             <div class="pr-10">
                                                 <span class="avatar avatar-sm avatar-away">
-                                                    <img src="../global/portraits/5.jpg" alt="..." />
+                                                    <img src="~/Theme/global/portraits/5.jpg" alt="..." />
                                                     <i></i>
                                                 </span>
                                             </div>
@@ -236,89 +262,33 @@
                         </div>
                     </div>
                 </li>
-                <li class="nav-item" id="toggleChat">
-                    <a class="nav-link" data-toggle="site-sidebar" href="javascript:void(0)" title="Chat"
-                       data-url="site-sidebar.tpl">
-                        <i class="icon wb-chat" aria-hidden="true"></i>
-                    </a>
-                </li>
             </ul>
             <!-- End Navbar Toolbar Right -->
         </div>
         <!-- End Navbar Collapse -->
+        <!-- Site Navbar Seach -->
+        <div class="collapse navbar-search-overlap" id="site-navbar-search">
+            <form role="search">
+                <div class="form-group">
+                    <div class="input-search">
+                        <i class="input-search-icon wb-search" aria-hidden="true"></i>
+                        <input type="text" class="form-control" name="site-search" placeholder="Search...">
+                        <button type="button" class="input-search-close icon wb-close" data-target="#site-navbar-search"
+                                data-toggle="collapse" aria-label="Close"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- End Site Navbar Seach -->
     </div>
 </nav>
-<div class="site-menubar site-menubar-light">
-    <div class="site-menubar-body">
-        <div>
-            <div>
-                <ul class="site-menu" data-plugin="menu">
-                    <li class="dropdown site-menu-item has-sub">
-                        <a data-toggle="dropdown" data-dropdown-toggle="false">
-                            <i class="fa-solid fa-car"></i>
-                            <span class="site-menu-title">Veículos</span>
-                        </a>
-                    </li>
-                    <li class="dropdown site-menu-item has-sub">
-                        <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
-                            <i class="fa-solid fa-person-military-pointing"></i>
-                            <span class="site-menu-title">Guardas</span>
-                        </a>
-                    </li>
-                    <li class="dropdown site-menu-item has-sub">
-                        <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
-                            <i class="fa-solid fa-users"></i>
-                            <span class="site-menu-title">Usuários</span>
-                        </a>
-                    </li>
-                    <li class="dropdown site-menu-item has-sub">
-                        <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
-                            <i class="fa-regular fa-credit-card"></i>                     
-                            <span class="site-menu-title">Pagamentos</span>
-                            <span class="site-menu-arrow"></span>
-                        </a>
-                    </li>
-                    <div class="dropdown-menu">
-                        <div class="site-menu-scroll-wrap is-list">
-                            <div>
-                                <div>
-                                    <ul class="site-menu-sub site-menu-normal-list">
-                                        <li class="site-menu-item">
-                                            <a href="layouts/grids.html">
-                                                <span class="site-menu-title">Pagar</span>
-                                            </a>
-                                        </li>
-                                        <li class="site-menu-item">
-                                            <a href="layouts/grids.html">
-                                                <span class="site-menu-title">Pagamentos efetuados</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <li class="dropdown site-menu-item has-sub">
-                        <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
-                            <i class="site-menu-icon wb-layout" aria-hidden="true"></i>
-                            <span class="site-menu-title">Notificações</span>
-                            <span class="site-menu-arrow"></span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- Page -->
 <div class="page">
     <div class="page-content container-fluid">
-              <div class="row" data-plugin="matchHeight" data-by-row="true">
-                @RenderBody()
-               </div>
+        @RenderBody()
     </div>
 </div>
-       <!-- End Page -->
+    @*   <!-- End Page -->
     <!-- Add Item Dialog -->
     <div id="addtodoItemForm" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="addtodoItemForm"
          aria-hidden="true">
@@ -418,7 +388,7 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div>*@
 <!-- End Edit Dialog -->
 <script src="~/Theme/global/vendor/babel-external-helpers/babel-external-helpers.js"></script>
 <script src="~/Theme/global/vendor/jquery/jquery.js"></script>
@@ -473,4 +443,3 @@
 
 </body>
 </html>
-
