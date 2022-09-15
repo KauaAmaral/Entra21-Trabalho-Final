@@ -8,12 +8,7 @@ html {
   }
 }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
+.body-login {
   margin: 0px !important;
   padding: 0px !important;
 }
