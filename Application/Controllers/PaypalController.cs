@@ -1,5 +1,4 @@
-﻿using Entra21.CSharp.Area21.Application.Models;
-using Entra21.CSharp.Area21.Application.Models.PaypalOrder;
+﻿using Entra21.CSharp.Area21.Application.Models.PaypalOrder;
 using Entra21.CSharp.Area21.Application.Models.PaypalTransaction;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -7,7 +6,6 @@ using System.Net.Http.Headers;
 using System.Text;
 namespace Entra21.CSharp.Area21.Application.Controllers
 {
-    [Route("paypal")]
     public class PaypalController : Controller
     {
         public IActionResult Index()
