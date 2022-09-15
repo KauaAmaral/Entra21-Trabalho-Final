@@ -1,6 +1,6 @@
 # Área21
 
-![Área21](https://user-images.githubusercontent.com/105084941/172011940-4cdc7594-5d71-4823-95c6-1d3cec75fe7e.png)
+![Área21](https://raw.githubusercontent.com/KauaAmaral/Entra21-Trabalho-Final/develop/Application/wwwroot/Theme/global/portraits/Sobre21.jpg)
 
 <p align="center">Repositório criado para hospedar o trabalho final de C# Noturno do Entra21.</p>
 
