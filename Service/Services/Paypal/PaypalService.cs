@@ -66,9 +66,9 @@ namespace Entra21.CSharp.Area21.Service.Services.Paypal
                     {
                         brand_name = "Mi Tienda",
                         landing_page = "NO_PREFERENCE",
-                        user_action = "PAY_NOW", //Accion para que paypal muestre el monto de pago
-                        return_url = _UrlReturn,// cuando se aprovo la solicitud del cobro
-                        cancel_url = _UrlCancel// cuando cancela la operacion
+                        user_action = "PAY_NOW",
+                        return_url = _UrlReturn,
+                        cancel_url = _UrlCancel
                     }
                 };
 

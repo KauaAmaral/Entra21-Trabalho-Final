@@ -1,5 +1,4 @@
-﻿using Entra21.CSharp.Area21.Application.Models;
-using Entra21.CSharp.Area21.Application.Models.PaypalOrder;
+﻿using Entra21.CSharp.Area21.Application.Models.PaypalOrder;
 using Entra21.CSharp.Area21.Application.Models.PaypalTransaction;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -7,7 +6,6 @@ using System.Net.Http.Headers;
 using System.Text;
 namespace Entra21.CSharp.Area21.Application.Controllers
 {
-    [Route("paypal")]
     public class PaypalController : Controller
     {
         public IActionResult Index()
@@ -64,13 +62,14 @@ namespace Entra21.CSharp.Area21.Application.Controllers
 
             return View();
         }
+       
 
-        [HttpPost("/paypal/")]
+        [HttpPost]
         //public JsonResult Paypal(string precio) ---> EDITAR POR LA LINEA DE ABAJO
-        public async Task<JsonResult> Paypal(string precio, string producto)
+        public async Task<JsonResult> Paypal()
         {
-            precio = "50,00";
-            producto = "Passe para carro";
+            var precio = "50,00";
+            var producto = "Passe para carro";
 
             bool status = false;
             string respuesta = string.Empty;
