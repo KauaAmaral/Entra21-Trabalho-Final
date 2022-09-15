@@ -22,7 +22,7 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Generic
 
         public bool Delete(int id)
         {
-            var entity = _context.Set<TEntity>().FirstOrDefault(x => x.Id == id);
+            var entity = GetById(id);
 
             if (entity == null)
                 return false;
