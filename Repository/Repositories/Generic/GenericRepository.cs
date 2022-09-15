@@ -39,10 +39,10 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Generic
             _context.SaveChanges();
         }
 
-        public TEntity? GetById(int id) =>
+        public virtual TEntity? GetById(int id) =>
             _context.Set<TEntity>().FirstOrDefault(x => x.Id == id);
 
-        public IList<TEntity> GetAll() =>
+        public virtual IList<TEntity> GetAll() =>
             _context.Set<TEntity>().ToList();
 
         public void Dispose()

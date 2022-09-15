@@ -1,14 +1,9 @@
 ﻿using Entra21.CSharp.Area21.Repository.Entities;
+using Entra21.CSharp.Area21.Repository.Repositories.Generic;
 
 namespace Entra21.CSharp.Area21.Repository.Repositories.Guards
 {
-    public interface IGuardRepository
+    public interface IGuardRepository : IGenericRepository<Guard>
     {
-        Guard Insert(Guard guard);
-        void Update(Guard guard);
-        bool Delete(int id);
-        Guard? GetById(int id);
-        IList<Guard> GetAll();
-
     }
 }
