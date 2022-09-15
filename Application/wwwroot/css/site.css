@@ -35,3 +35,11 @@ html {
 .color-icons{
     color: white;
 }
+
+.a {
+    color: rgb(2,0,36) !important;
+}
+
+.font-size-footer{
+    font-size: 12px;
+}

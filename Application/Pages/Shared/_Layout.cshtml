@@ -138,109 +138,6 @@
                         </div>
                     </div>
                 </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" title="Messages"
-                       aria-expanded="false" data-animation="scale-up" role="button">
-                        <i class="icon wb-envelope" aria-hidden="true"></i>
-                        <span class="badge badge-pill badge-info up">3</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
-                        <div class="dropdown-menu-header" role="presentation">
-                            <h5>MESSAGES</h5>
-                            <span class="badge badge-round badge-info">New 3</span>
-                        </div>
-
-                        <div class="list-group" role="presentation">
-                            <div data-role="container">
-                                <div data-role="content">
-                                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                                        <div class="media">
-                                            <div class="pr-10">
-                                                <span class="avatar avatar-sm avatar-online">
-                                                    <img src="../global/portraits/2.jpg" alt="..." />
-                                                    <i></i>
-                                                </span>
-                                            </div>
-                                            <div class="media-body">
-                                                <h6 class="media-heading">Mary Adams</h6>
-                                                <div class="media-meta">
-                                                    <time datetime="2018-06-17T20:22:05+08:00">30 minutes ago</time>
-                                                </div>
-                                                <div class="media-detail">Anyways, i would like just do it</div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                                        <div class="media">
-                                            <div class="pr-10">
-                                                <span class="avatar avatar-sm avatar-off">
-                                                    <img src="../global/portraits/3.jpg" alt="..." />
-                                                    <i></i>
-                                                </span>
-                                            </div>
-                                            <div class="media-body">
-                                                <h6 class="media-heading">Caleb Richards</h6>
-                                                <div class="media-meta">
-                                                    <time datetime="2018-06-17T12:30:30+08:00">12 hours ago</time>
-                                                </div>
-                                                <div class="media-detail">I checheck the document. But there seems</div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                                        <div class="media">
-                                            <div class="pr-10">
-                                                <span class="avatar avatar-sm avatar-busy">
-                                                    <img src="../global/portraits/4.jpg" alt="..." />
-                                                    <i></i>
-                                                </span>
-                                            </div>
-                                            <div class="media-body">
-                                                <h6 class="media-heading">June Lane</h6>
-                                                <div class="media-meta">
-                                                    <time datetime="2018-06-16T18:38:40+08:00">2 days ago</time>
-                                                </div>
-                                                <div class="media-detail">Lorem ipsum Id consectetur et minim</div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                                        <div class="media">
-                                            <div class="pr-10">
-                                                <span class="avatar avatar-sm avatar-away">
-                                                    <img src="../global/portraits/5.jpg" alt="..." />
-                                                    <i></i>
-                                                </span>
-                                            </div>
-                                            <div class="media-body">
-                                                <h6 class="media-heading">Edward Fletcher</h6>
-                                                <div class="media-meta">
-                                                    <time datetime="2018-06-15T20:34:48+08:00">3 days ago</time>
-                                                </div>
-                                                <div class="media-detail">Dolor et irure cupidatat commodo nostrud nostrud.</div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="dropdown-menu-footer" role="presentation">
-                            <a class="dropdown-menu-footer-btn" href="javascript:void(0)" role="button">
-                                <i class="icon wb-settings" aria-hidden="true"></i>
-                            </a>
-                            <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
-                                See all messages
-                            </a>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item" id="toggleChat">
-                    <a class="nav-link" data-toggle="site-sidebar" href="javascript:void(0)" title="Chat"
-                       data-url="site-sidebar.tpl">
-                        <i class="icon wb-chat" aria-hidden="true"></i>
-                    </a>
-                </li>
             </ul>
             <!-- End Navbar Toolbar Right -->
         </div>
@@ -253,26 +150,32 @@
             <div>
                 <ul class="site-menu" data-plugin="menu">
                     <li class="dropdown site-menu-item has-sub">
-                        <a data-toggle="dropdown" data-dropdown-toggle="false">
+                        <a asp-controller="Home" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
+                            <i class="fa-sharp fa-solid fa-house"></i>
+                            <span class="site-menu-title">Home</span>
+                        </a>
+                    </li>
+                    <li class="dropdown site-menu-item has-sub">
+                        <a asp-controller="Vehicle" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
                             <i class="fa-solid fa-car"></i>
                             <span class="site-menu-title">Veículos</span>
                         </a>
                     </li>
                     <li class="dropdown site-menu-item has-sub">
-                        <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
+                        <a asp-controller="Guard" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
                             <i class="fa-solid fa-person-military-pointing"></i>
                             <span class="site-menu-title">Guardas</span>
                         </a>
                     </li>
                     <li class="dropdown site-menu-item has-sub">
-                        <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
+                        <a asp-controller="User" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
                             <i class="fa-solid fa-users"></i>
                             <span class="site-menu-title">Usuários</span>
                         </a>
                     </li>
                     <li class="dropdown site-menu-item has-sub">
-                        <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
-                            <i class="fa-regular fa-credit-card"></i>                     
+                        <a asp-controller="Payments" asp-action="Payments" data-toggle="dropdown" data-dropdown-toggle="false">
+                            <i class="fa-regular fa-credit-card"></i>
                             <span class="site-menu-title">Pagamentos</span>
                             <span class="site-menu-arrow"></span>
                         </a>
@@ -301,7 +204,6 @@
                         <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                             <i class="site-menu-icon wb-layout" aria-hidden="true"></i>
                             <span class="site-menu-title">Notificações</span>
-                            <span class="site-menu-arrow"></span>
                         </a>
                     </li>
                 </ul>
@@ -312,16 +214,18 @@
 <!-- Page -->
 <div class="page">
     <div class="page-content container-fluid">
-              <div class="row" data-plugin="matchHeight" data-by-row="true">
+        <div class="row" data-plugin="matchHeight" data-by-row="true">
                 @RenderBody()
-               </div>
+        </div>
     </div>
 </div>
-       <!-- End Page -->
-<footer class="site-footer">
-    <div class="site-footer-legal">© 2022 <a asp-controller="">Sobre nós</a></div>
+<!-- End Page -->
+<footer class="site-footer font-size-footer">
+    <div class="site-footer-legal">© 2022 <a asp-controller="About" asp-action="Index">Área21</a></div>
     <div class="site-footer-right">
-        Crafted with <i class="red-600 wb wb-heart"></i> by <a href="https://themeforest.net/user/creation-studio">Creation Studio</a>
+        Feito por <a target="_blank" href="https://www.linkedin.com/in/kauaamaral/">Kauã Amaral</a>, <a target="_blank" href="https://www.linkedin.com/in/claudiohr/">Cláudio Raimundo</a>,
+        <a target="_blank" href="https://www.linkedin.com/in/efraim-calebe-mertens/">Efraim Mertens</a>, <a target="_blank" href="https://www.linkedin.com/in/wellington-scaburri/">Wellington Scaburri</a> e
+        <a target="_blank" href="https://www.linkedin.com/in/leonardopokreweckysalvador/">Leonardo Pokrewecky</a>
     </div>
 </footer>
 <!-- End Edit Dialog -->
@@ -374,7 +278,7 @@
 
 <script src="~/Theme/assets/examples/js/dashboard/team.js"></script>
 
-        @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Scripts", required: false)
 
 </body>
 </html>
