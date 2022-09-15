@@ -65,13 +65,10 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             return View();
         }
 
-        [HttpPost("/paypal/")]
+        [HttpPost]
         //public JsonResult Paypal(string precio) ---> EDITAR POR LA LINEA DE ABAJO
         public async Task<JsonResult> Paypal(string precio, string producto)
         {
-            precio = "50,00";
-            producto = "Passe para carro";
-
             bool status = false;
             string respuesta = string.Empty;
 
