@@ -1,24 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Entra21.CSharp.Area21.Application.Models;
+using Entra21.CSharp.Area21.Application.Models.PaypalOrder;
+using Entra21.CSharp.Area21.Application.Models.PaypalTransaction;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
-
 namespace Entra21.CSharp.Area21.Application.Controllers
 {
+    [Route("paypal")]
     public class PaypalController : Controller
     {
-        public ActionResult Index()
+        public IActionResult Index()
         {
             return View();
         }
 
-        public async Task<ActionResult> About()
+        public async Task<IActionResult> About()
         {
 
             //id de la autorizacion para obtener el dinero
-            string token = Request.QueryString["token"];
+            //string token = HttpContextRequest.QueryString["token"];
+            var token = HttpContext.Request.Query["token"];
 
-            bool status = false;
+
+            var status = false;
 
             using (var client = new HttpClient())
             {
@@ -53,17 +58,19 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public IActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
             return View();
         }
 
-        [HttpPost]
+        [HttpPost("/paypal/")]
         //public JsonResult Paypal(string precio) ---> EDITAR POR LA LINEA DE ABAJO
         public async Task<JsonResult> Paypal(string precio, string producto)
         {
+            precio = "50,00";
+            producto = "Passe para carro";
 
             bool status = false;
             string respuesta = string.Empty;
@@ -84,11 +91,11 @@ namespace Entra21.CSharp.Area21.Application.Controllers
                 var orden = new PaypalOrder()
                 {
                     intent = "CAPTURE",
-                    purchase_units = new List<Models.Paypal_Order.PurchaseUnit>() {
+                    purchase_units = new List<Models.PaypalOrder.PurchaseUnit>() {
 
-                        new Models.Paypal_Order.PurchaseUnit() {
+                        new Models.PaypalOrder.PurchaseUnit() {
 
-                            amount = new Models.Paypal_Order.Amount() {
+                            amount = new Models.PaypalOrder.Amount() {
                                 currency_code = "BRL",
                                 value = precio
                             },
@@ -116,10 +123,11 @@ namespace Entra21.CSharp.Area21.Application.Controllers
                 {
                     respuesta = response.Content.ReadAsStringAsync().Result;
                 }
-
+                
             }
 
-            return Json(new { status = status, respuesta = respuesta }, JsonRequestBehavior.All owGet);
+            return new JsonResult(status, respuesta);
+            //return Json(new { status = status, respuesta = respuesta };
 
         }
     }
