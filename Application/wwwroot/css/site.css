@@ -17,6 +17,16 @@ html {
     background-image: url("../Theme/global/portraits/Area21_Inicio_Log.jpg");
 }
 
+.background-image-about 
+{
+    background-image: url("../Theme/global/portraits/Sobre21.jpg");
+}
+
+.background-image-payments {
+    background-image: url("../Theme/global/portraits/Pagamentos.jpg");
+}
+}
+
 .background-menu {
     background: rgb(2,0,36);
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(61,6,95,1) 40%, rgba(16,5,77,1) 100%);
