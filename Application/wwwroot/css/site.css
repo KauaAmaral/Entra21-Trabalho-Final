@@ -8,12 +8,7 @@ html {
   }
 }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
+.body-login {
   margin: 0px !important;
   padding: 0px !important;
 }
@@ -29,4 +24,22 @@ body {
 
 .background-image-payments {
     background-image: url("../Theme/global/portraits/Pagamentos.jpg");
+}
+}
+
+.background-menu {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(61,6,95,1) 40%, rgba(16,5,77,1) 100%);
+}
+
+.color-icons{
+    color: white;
+}
+
+.a {
+    color: rgb(2,0,36) !important;
+}
+
+.font-size-footer{
+    font-size: 12px;
 }
