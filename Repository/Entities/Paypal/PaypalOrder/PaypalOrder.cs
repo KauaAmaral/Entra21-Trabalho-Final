@@ -1,4 +1,4 @@
-﻿namespace Entra21.CSharp.Area21.Application.Models.PaypalOrder
+﻿namespace Entra21.CSharp.Area21.Repository.Entities.Paypal.PaypalOrder
 {
     public class PaypalOrder
     {
@@ -7,19 +7,16 @@
         public ApplicationContext application_context { get; set; }
 
     }
-
     public class Amount
     {
         public string currency_code { get; set; }
         public string value { get; set; }
     }
-
     public class PurchaseUnit
     {
         public Amount amount { get; set; }
         public string description { get; set; }
     }
-
     public class ApplicationContext
     {
         public string brand_name { get; set; }

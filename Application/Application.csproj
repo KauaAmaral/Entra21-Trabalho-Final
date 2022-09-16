@@ -34,8 +34,4 @@
 		<ProjectReference Include="..\Service\Service.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<Folder Include="Controllers\Login\" />
-	</ItemGroup>
-
 </Project>

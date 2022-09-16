@@ -1,23 +1,27 @@
-﻿using Entra21.CSharp.Area21.Application.Models;
-using Entra21.CSharp.Area21.Application.Models.PaypalOrder;
+﻿using Entra21.CSharp.Area21.Application.Models.PaypalOrder;
+using Entra21.CSharp.Area21.Application.Models.PaypalTransaction;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
-
 namespace Entra21.CSharp.Area21.Application.Controllers
 {
     public class PaypalController : Controller
     {
-    
-        public async Task<ActionResult> About()
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> About()
         {
 
             //id de la autorizacion para obtener el dinero
-            //string token = Request.QueryString["token"];
-            string token = HttpContext.Request.Query["token"];
+            //string token = HttpContextRequest.QueryString["token"];
+            var token = HttpContext.Request.Query["token"];
 
-            bool status = false;
+
+            var status = false;
 
             using (var client = new HttpClient())
             {
@@ -52,7 +56,7 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public IActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
@@ -63,7 +67,6 @@ namespace Entra21.CSharp.Area21.Application.Controllers
         //public JsonResult Paypal(string precio) ---> EDITAR POR LA LINEA DE ABAJO
         public async Task<JsonResult> Paypal(string precio, string producto)
         {
-
             bool status = false;
             string respuesta = string.Empty;
 
@@ -118,7 +121,10 @@ namespace Entra21.CSharp.Area21.Application.Controllers
 
             }
 
-            return Json(new { status = status, respuesta = respuesta });
+
+
+            return new JsonResult(status, respuesta);
+            //return Json(new { status = status, respuesta = respuesta };
 
         }
     }
