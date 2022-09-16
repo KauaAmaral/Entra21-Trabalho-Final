@@ -1,11 +1,11 @@
 ﻿namespace Entra21.CSharp.Area21.Repository.Repositories.Generic
 {
-    public interface IGenericRepository<T> where T : class
+    public interface IGenericRepository<TEntity> where TEntity : class
     {
-        T Insert(T entity);
+        TEntity Add(TEntity entity);
         bool Delete(int id);
-        void Update(T entity);
-        T? GetById(int id);
-        IList<T> GetAll();
+        void Update(TEntity entity);
+        TEntity? GetById(int id);
+        IList<TEntity> GetAll();
     }
 }

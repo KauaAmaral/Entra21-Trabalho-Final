@@ -1,13 +1,10 @@
 ﻿using Entra21.CSharp.Area21.Repository.Entities;
+using Entra21.CSharp.Area21.Repository.Repositories.Generic;
 
 namespace Entra21.CSharp.Area21.Repository.Repositories.Vehicles
 {
-    public interface IVehicleRepository
+    public interface IVehicleRepository : IGenericRepository<Vehicle>
     {
-        Vehicle Insert(Vehicle vehicles);
-        void Update(Vehicle vehicle);
-        bool Delete(int id);
-        Vehicle? GetById(int id);
-        IList<Vehicle> GetAll(int id);
+        IList<Vehicle> GetAllById(int id);
     }
 }

@@ -22,7 +22,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Vehicles
         {
             var vehicle = _vehicleEntityMapping.RegisterWith(viewModel);
 
-            _vehicleRepository.Insert(vehicle);
+            _vehicleRepository.Add(vehicle);
 
             return vehicle;
         }
@@ -47,8 +47,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Vehicles
         public Vehicle? GetById(int id) =>
             _vehicleRepository.GetById(id);
 
-        public IList<Vehicle> GetAll(int id) =>
-            _vehicleRepository.GetAll(id);
-       
+        public IList<Vehicle> GetAllById(int id) =>
+            _vehicleRepository.GetAllById(id);       
     }
 }
