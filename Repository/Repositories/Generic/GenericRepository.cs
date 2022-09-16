@@ -3,7 +3,7 @@ using Entra21.CSharp.Area21.RepositoryDataBase;
 
 namespace Entra21.CSharp.Area21.Repository.Repositories.Generic
 {
-    public abstract class GenericRepository<T> : IDisposable, IGenericRepository<T> where T : EntityBase
+    public abstract class GenericRepository<TEntity> : IDisposable, IGenericRepository<TEntity> where TEntity : EntityBase
     {
         private readonly ShortTermParkingContext _context;
 
@@ -12,9 +12,9 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Generic
             _context = context;
         }
 
-        public virtual T Insert(T entity)
+        public virtual TEntity Add(TEntity entity)
         {
-            _context.Set<T>().Add(entity);
+            _context.Set<TEntity>().Add(entity);
             _context.SaveChanges();
 
             return entity;
@@ -22,28 +22,28 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Generic
 
         public bool Delete(int id)
         {
-            var entity = _context.Set<T>().FirstOrDefault(x => x.Id == id);
+            var entity = GetById(id);
 
             if (entity == null)
                 return false;
 
-            _context.Set<T>().Remove(entity);
+            _context.Set<TEntity>().Remove(entity);
             _context.SaveChanges();
 
             return true;
         }
 
-        public void Update(T entity)
+        public void Update(TEntity entity)
         {
-            _context.Set<T>().Update(entity);
+            _context.Set<TEntity>().Update(entity);
             _context.SaveChanges();
         }
 
-        public T? GetById(int id) =>
-            _context.Set<T>().FirstOrDefault(x => x.Id == id);
+        public virtual TEntity? GetById(int id) =>
+            _context.Set<TEntity>().FirstOrDefault(x => x.Id == id);
 
-        public IList<T> GetAll() =>
-            _context.Set<T>().ToList();
+        public virtual IList<TEntity> GetAll() =>
+            _context.Set<TEntity>().ToList();
 
         public void Dispose()
         {

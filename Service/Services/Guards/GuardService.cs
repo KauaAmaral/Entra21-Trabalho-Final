@@ -28,7 +28,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Guards
         {
             var guard = _guardEntityMapping.RegisterWith(viewModel);
 
-            _guardRepository.Insert(guard);
+            _guardRepository.Add(guard);
 
             return guard;
         }

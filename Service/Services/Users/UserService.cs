@@ -44,7 +44,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Users
         {
             var user = _userEntityMapping.RegisterWith(viewModel);
 
-            _userRepository.Insert(user);
+            _userRepository.Add(user);
 
             return user;
         }

@@ -30,7 +30,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             if (user == null)
                 return RedirectToAction("Index", "Home");
 
-            var vehicle = _vehicleService.GetAll(user.Id);
+            var vehicle = _vehicleService.GetAllById(user.Id);
 
             return View("Payments", vehicle);
         }

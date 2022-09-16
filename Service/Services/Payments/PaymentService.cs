@@ -13,7 +13,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Payments
         {
             var payment = _paymentEntityMapping.RegisterWith(registerViewModel);
 
-            _paymentRepository.Register(payment);
+            _paymentRepository.Add(payment);
 
             return payment;
         }
