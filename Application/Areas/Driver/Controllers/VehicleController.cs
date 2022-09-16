@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 {
     [Area("Driver")]
-    [Route("vehicle")]
+    [Route("driver/vehicle")]
     public class VehicleController : Controller // TODO ControleVehicle Revisar
     {
         private readonly IVehicleService _vehicleService;

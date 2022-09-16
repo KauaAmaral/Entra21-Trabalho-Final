@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 {
     [Area("Driver")]
-    [Route("pagamentos")]
+    [Route("driver/pagamentos")]
     public class PaymentsController : Controller
     {
         private readonly IPaymentService _paymentService;

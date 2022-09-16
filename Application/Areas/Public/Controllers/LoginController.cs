@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
 {
     [Area("Public")]
-    [Route("login")]
+    [Route("/")]
     public class LoginController : Controller
     {
         private readonly IUserService _userService;
@@ -48,7 +48,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
             else
                 TempData["Message"] = "Não existe um usuário com esse e-mail e/ou senha";
 
-            return View();
+            return View();  
         }
 
         [HttpGet("Logout")]

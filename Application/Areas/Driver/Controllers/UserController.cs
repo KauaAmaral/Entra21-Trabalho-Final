@@ -9,7 +9,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 {
     [Area("Driver")]
     [IsUserLogged]
-    [Route("user")]
+    [Route("driver/user")]
     public class UserController : Controller
     {
         private readonly IUserService _userService;

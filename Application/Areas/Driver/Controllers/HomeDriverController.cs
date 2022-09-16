@@ -5,7 +5,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 {
     [Area("Driver")]
     [IsUserLogged]
-    [Route("Home")]
+    [Route("driver/Home")]
     public class HomeDriverController : Controller
     {
         public IActionResult Index()
