@@ -4,8 +4,9 @@ using Entra21.CSharp.Area21.Service.Services.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Users;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Entra21.CSharp.Area21.Application.Controllers
+namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
 {
+    [Area("Public")]
     [Route("login")]
     public class LoginController : Controller
     {
@@ -26,7 +27,7 @@ namespace Entra21.CSharp.Area21.Application.Controllers
         public IActionResult Index()
         {
             if (_session.FindUserSession() != null)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home", new { Area = "driver" });
 
             return View("Login");
         }
@@ -42,7 +43,7 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             if (user != null)
             {
                 _session.CreateUserSession(user);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "HomeDriver", new { area = "Driver" });
             }
             else
                 TempData["Message"] = "Não existe um usuário com esse e-mail e/ou senha";
@@ -86,7 +87,7 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             var user = _userService.Insert(userRegisterViewModel);
 
             var confirmationLink = Url.Action("ConfirmEmail", "Login",
-                new { id = user.Id, token = token }, Request.Scheme);
+                new { id = user.Id, token }, Request.Scheme);
 
             var email = _email.SendEMail(user.Email, "Confirmação de email",
                 @$"<p>Olá, {user.Name}, como você está?
@@ -119,7 +120,7 @@ namespace Entra21.CSharp.Area21.Application.Controllers
                 TempData["message"] = "O usuário foi confirmado!";
                 _userService.UpdateVerifyEmail(user.Id);
             }
-                
+
             return View(nameof(ConfirmEmail));
         }
     }

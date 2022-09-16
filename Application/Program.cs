@@ -6,11 +6,23 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using System.Globalization;
 using Entra21.CSharp.Area21.Repository.Entities;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.Configure<RazorViewEngineOptions>(options =>
+{
+    options.AreaViewLocationFormats.Clear();
+    options.AreaViewLocationFormats.Add("/Areas/{2}/Views/{0}.cshtml");
+    options.AreaViewLocationFormats.Add("/Areas/{2}/Views/{1}/{0}.cshtml");
+    options.AreaViewLocationFormats.Add("/Areas/{2}/Views/Shared/{0}.cshtml");
+    options.AreaViewLocationFormats.Add("/Views/Shared/{0}.cshtml");
+    options.AreaViewLocationFormats.Add("/Views/{0}.cshtml");
+});
+
+
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddControllersWithViews();
 
 builder.Services
     .AddEntityFramework(builder.Configuration)
@@ -28,12 +40,12 @@ app.UseRequestLocalization(new RequestLocalizationOptions
     SupportedUICultures = supportedCultures
 });
 
-//using (var scopo = app.Services.CreateScope())
-//{
-//    var contexto = scopo.ServiceProvider
-//        .GetService<ShortTermParkingContext>();
-//    contexto.Database.Migrate();
-//}
+using (var scopo = app.Services.CreateScope())
+{
+    var contexto = scopo.ServiceProvider
+        .GetService<ShortTermParkingContext>();
+    contexto.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -53,10 +65,18 @@ app.UseAuthorization();
 
 app.UseSession();
 
-app.MapRazorPages();
-
 app.UseEndpoints(endpoint =>
 {
+    endpoint.MapAreaControllerRoute(
+        name: "AreaDriver",
+        areaName: "Driver",
+        pattern: "Driver/{controller=HomeDriver}/{action=Index}/{id?}");
+
+    endpoint.MapAreaControllerRoute(
+        name: "AreaPublic",
+        areaName: "Public",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+
     endpoint.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");

@@ -4,8 +4,9 @@ using Entra21.CSharp.Area21.Service.Services.Vehicles;
 using Entra21.CSharp.Area21.Service.ViewModels.Vehicles;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Entra21.CSharp.Area21.Application.Controllers
+namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 {
+    [Area("Driver")]
     [Route("vehicle")]
     public class VehicleController : Controller // TODO ControleVehicle Revisar
     {
@@ -60,13 +61,13 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             var vehicle = _vehicleService.GetById(id);
             var vehicleType = GetVehicleType();
             var user = _session.FindUserSession();
-                
+
             var vehicleUpdateViewMode = new VehicleUpdateViewModel
             {
-                 Id = vehicle.Id,
-                 LicensePlate = vehicle.LicensePlate,
-                 Model = vehicle.Model,
-                 //UserId = user.Id
+                Id = vehicle.Id,
+                LicensePlate = vehicle.LicensePlate,
+                Model = vehicle.Model,
+                //UserId = user.Id
             };
 
             ViewBag.VehicleType = vehicleType;
@@ -75,12 +76,12 @@ namespace Entra21.CSharp.Area21.Application.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update([FromForm]VehicleUpdateViewModel vehicleUpdateViewModel)
+        public IActionResult Update([FromForm] VehicleUpdateViewModel vehicleUpdateViewModel)
         {
             if (!ModelState.IsValid)
             {
                 ViewBag.VehicleType = GetVehicleType();
-                
+
                 return View(vehicleUpdateViewModel);
             }
 

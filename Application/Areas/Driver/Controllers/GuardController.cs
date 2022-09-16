@@ -3,8 +3,9 @@ using Entra21.CSharp.Area21.Service.Services.Guards;
 using Entra21.CSharp.Area21.Service.ViewModels.Guards;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Entra21.CSharp.Area21.Application.Controllers
+namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 {
+    [Area("Driver")]
     [Route("guard")]
     public class GuardController : Controller
     {

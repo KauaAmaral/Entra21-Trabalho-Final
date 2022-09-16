@@ -10,6 +10,6 @@ namespace Entra21.CSharp.Area21.Service.Services.Guards
         Guard? GetById(int id);
         IList<Guard> GetAll();
         bool Disable(User userChange);
-        int RandomIdentificationNumber();
+        //int RandomIdentificationNumber();
     }
 }
