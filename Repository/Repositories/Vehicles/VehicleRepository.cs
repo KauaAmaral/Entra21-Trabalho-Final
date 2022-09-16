@@ -12,8 +12,8 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Vehicles
         public VehicleRepository(ShortTermParkingContext context) : base(context)
         {
             _context = context;
-        }        
-        
+        }
+
         // INNER JOIN com a tabela de Usuario
         public override Vehicle? GetById(int id) =>
             _context.Vehicles
