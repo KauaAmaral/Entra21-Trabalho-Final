@@ -1,4 +1,4 @@
-﻿namespace Entra21.CSharp.Area21.Application.Models
+﻿namespace Entra21.CSharp.Area21.Application.Models.PaypalOrder
 {
     public class PaypalOrder
     {

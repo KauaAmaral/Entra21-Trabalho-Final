@@ -1,63 +1,13 @@
-﻿using Entra21.CSharp.Area21.Application.Models;
-using Entra21.CSharp.Area21.Application.Models.PaypalOrder;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System.Net.Http.Headers;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Entra21.CSharp.Area21.Application.Controllers
+namespace Entra21.CSharp.Area21.Service.Services.PaypalPayments
 {
-    public class PaypalController : Controller
+    internal class Paypal
     {
-    
-        public async Task<ActionResult> About()
-        {
-
-            //id de la autorizacion para obtener el dinero
-            //string token = Request.QueryString["token"];
-            string token = HttpContext.Request.Query["token"];
-
-            bool status = false;
-
-            using (var client = new HttpClient())
-            {
-
-                //INGRESA TUS CREDENCIALES AQUI -> CLIENT ID - SECRET
-                var userName = "AeHh1KwTDiCTJlkmPVoWT5qj9YMp0dwnhAStwYVE7VZiaPN2jfJjMm7UJ6B9TMXFkVqFNkmpzpfinpJR";
-                var passwd = "EHqhokF9mvWolaWgw04hay43lNAuCcLNHZ8XBpmm0cLSYUxdAYnbBI6dhiaCXtI54qJJ-EF3VS0IMGfx";
-
-                client.BaseAddress = new Uri("https://api-m.sandbox.paypal.com");
-
-                var authToken = Encoding.ASCII.GetBytes($"{userName}:{passwd}");
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authToken));
-
-                var data = new StringContent("{}", Encoding.UTF8, "application/json");
-
-                HttpResponseMessage response = await client.PostAsync($"/v2/checkout/orders/{token}/capture", data);
-
-                status = response.IsSuccessStatusCode;
-
-                ViewData["Status"] = status;
-                if (status)
-                {
-                    var jsonRespuesta = response.Content.ReadAsStringAsync().Result;
-
-                    PaypalTransaction objeto = JsonConvert.DeserializeObject<PaypalTransaction>(jsonRespuesta);
-
-                    ViewData["IdTransaccion"] = objeto.purchase_units[0].payments.captures[0].id;
-                }
-
-            }
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
 
         [HttpPost]
         //public JsonResult Paypal(string precio) ---> EDITAR POR LA LINEA DE ABAJO
@@ -83,11 +33,11 @@ namespace Entra21.CSharp.Area21.Application.Controllers
                 var orden = new PaypalOrder()
                 {
                     intent = "CAPTURE",
-                    purchase_units = new List<Models.PaypalOrder.PurchaseUnit>() {
+                    purchase_units = new List<Models.PurchaseUnit>() {
 
-                        new Models.PaypalOrder.PurchaseUnit() {
+                        new Models.PurchaseUnit() {
 
-                            amount = new Models.PaypalOrder.Amount() {
+                            amount = new Models.Amount() {
                                 currency_code = "BRL",
                                 value = precio
                             },
@@ -122,4 +72,5 @@ namespace Entra21.CSharp.Area21.Application.Controllers
 
         }
     }
+}
 }
