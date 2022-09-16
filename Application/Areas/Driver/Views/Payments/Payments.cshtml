@@ -3,8 +3,6 @@
     ViewData["Title"] = "Pagamentos";
 }
 
-<div class="page background-image-payments vertical-align">
-    <div class="table vertical-align-middle">
         <table class="table-center" id="vehicles-id" style="width:70%" align="center">
             <thead>
                 <tr>
@@ -20,7 +18,7 @@
                         <td><b><font color="white">@vehicles.Model</font></b></td>
                         <td><b><font color="white">@vehicles.LicensePlate</font></b></td>
                         <td>
-                            <a class="btn btn-animate mb-2 btn-animate-side btn-primary" asp-action="pagar">
+                            <a class="btn btn-animate mb-2 btn-animate-side btn-primary" onclick="pagar()">
                                 <i class="icon wb-shopping-cart" aria-hidden="true"></i>Pagar
                             </a>
                         </td>
@@ -29,5 +27,53 @@
             </tbody>
         </table>
         <a class="btn btn-lg mb-2 btn-primary float-right" aria-current="page" href="/">Voltar</a>
-    </div>
-</div>
+
+@section scripts{
+    <script>
+
+        function pagar() {
+
+
+            var body = {
+                precio: $("#precio").val(),
+                producto: "Microfono Hyperx Quadcast"
+            }
+
+
+
+            jQuery.ajax({
+                url: '@Url.Action("Paypal", "Paypal")',
+                type: "POST",
+                data: JSON.stringify(body),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    console.log(data);
+                    if (data.status) {
+
+                        var jsonresult = JSON.parse(data.respuesta);
+
+                        console.log(jsonresult);
+
+                        var links = jsonresult.links;
+
+                        var resultado = links.find(item => item.rel === "approve")
+
+                        window.location.href = resultado.href
+
+                        /*console.log(links)*/
+                        /*console.log(resultado)*/
+                    } else {
+                        alert("Vuelva a intentarlo más tarde")
+                    }
+
+
+                },
+                beforeSend: function () {
+                }
+            });
+        }
+    </script>
+
+    }

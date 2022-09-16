@@ -4,7 +4,10 @@
     {
         public User User { get; set; }
         public int UserId { get; set; }
-     
+        public string Token{ get; set; }
+        public string PayerId { get; set; }
+        public string TransactionId { get; set; }
+
         public Vehicle Vehicle { get; set; }
         public int? VehicleId { get; set; }
     }

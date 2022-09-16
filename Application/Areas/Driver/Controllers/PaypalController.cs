@@ -1,19 +1,24 @@
-﻿using Entra21.CSharp.Area21.Application.Models.PaypalOrder;
+﻿using Entra21.CSharp.Area21.Application.Filters;
+using Entra21.CSharp.Area21.Application.Models.PaypalOrder;
 using Entra21.CSharp.Area21.Application.Models.PaypalTransaction;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
-namespace Entra21.CSharp.Area21.Application.Controllers
+namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 {
+    [Area("Driver")]
+    [IsUserLogged]
+    [Route("driver/paypal")]
     public class PaypalController : Controller
     {
         public IActionResult Index()
         {
-            return View();
+            return View("Teste");
         }
 
-        public async Task<IActionResult> About()
+        [Route("approved")]
+        public async Task<IActionResult> Approved()
         {
 
             //id de la autorizacion para obtener el dinero
@@ -56,17 +61,12 @@ namespace Entra21.CSharp.Area21.Application.Controllers
             return View();
         }
 
-        public IActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
-        [HttpPost]
+        [HttpPost("Paypal")]
         //public JsonResult Paypal(string precio) ---> EDITAR POR LA LINEA DE ABAJO
         public async Task<JsonResult> Paypal(string precio, string producto)
         {
+            precio = "5";
+            producto = "teste";
             bool status = false;
             string respuesta = string.Empty;
 
@@ -102,8 +102,8 @@ namespace Entra21.CSharp.Area21.Application.Controllers
                         brand_name = "Mi Tienda",
                         landing_page = "NO_PREFERENCE",
                         user_action = "PAY_NOW", //Accion para que paypal muestre el monto de pago
-                        return_url = "https://localhost:44321/Home/About",// cuando se aprovo la solicitud del cobro
-                        cancel_url = "https://localhost:44321/Home/Index"// cuando cancela la operacion
+                        return_url = "https://localhost:7121/driver/Paypal/Approved/",// cuando se aprovo la solicitud del cobro
+                        cancel_url = "https://localhost:7121/driver/Home"// cuando cancela la operacion
                     }
                 };
 
@@ -121,10 +121,7 @@ namespace Entra21.CSharp.Area21.Application.Controllers
 
             }
 
-
-
-            return new JsonResult(status, respuesta);
-            //return Json(new { status = status, respuesta = respuesta };
+            return Json(new { status = status, respuesta = respuesta });
 
         }
     }
