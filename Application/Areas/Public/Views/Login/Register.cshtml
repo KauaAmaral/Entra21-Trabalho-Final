@@ -1,0 +1,53 @@
+﻿@model UserRegisterViewModel
+
+@{
+	Layout = "~/Public/Views/Shared/_LayoutUnlogged.cshtml";
+	ViewData["Title"] = "Cadastrar";
+}
+
+<div class="page background-image vertical-align text-center">
+	<div class="page-content vertical-align-middle">
+		<div class="panel">
+			<div class="panel-body">
+				<form asp-controller="Login" asp-action="Register" method="POST">
+					
+					<div class="form-group form-material floating" data-plugin="formMaterial">
+						<input asp-for="Email" type="email" class="form-control" />
+						<label asp-for="Email" class="floating-label"></label>
+						<span asp-validation-for="Email" class="text-danger"></span>
+					</div>
+
+					<div class="form-group form-material floating" data-plugin="formMaterial">
+						<input asp-for="Name" type="text" class="form-control" />
+						<label asp-for="Name" class="floating-label"></label>
+						<span asp-validation-for="Name" class="text-danger"></span>
+					</div>	
+					
+					<div class="form-group form-material floating" data-plugin="formMaterial">
+						<input asp-for="Cpf" type="text" class="form-control" />
+						<label asp-for="Cpf" class="floating-label"></label>
+						<span asp-validation-for="Cpf" class="text-danger"></span>
+					</div>
+														
+					<div class="form-group form-material floating" data-plugin="formMaterial">
+						<input asp-for="Password" type="password" class="form-control" />
+						<label asp-for="Password" class="floating-label"></label>
+						<span asp-validation-for="Password" class="text-danger"></span>
+					</div>
+					
+					<div class="form-group form-material floating" data-plugin="formMaterial">
+						<input asp-for="ConfirmPassword" type="password" class="form-control" />
+						<label asp-for="ConfirmPassword" class="floating-label"></label>
+						<span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+					</div>
+					@if(TempData["Message"] != null)
+					{
+						<p class="text-danger">@TempData["Message"]</p>
+					}
+					<button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Criar conta</button>
+				</form>
+				<Por>Já tem conta? <a asp-controller="Login" asp-action="Index">Entre aqui</a><p>
+			</div>
+		</div>
+	</div>
+</div>
