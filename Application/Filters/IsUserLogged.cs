@@ -13,13 +13,13 @@ namespace Entra21.CSharp.Area21.Application.Filters
             var session = context.HttpContext.Session.GetString("userSession");
 
             if (string.IsNullOrEmpty(session))
-               context.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Login" }, { "action", "Index" } });
+                context.Result = new RedirectToRouteResult(new RouteValueDictionary { { "area", "Public" }, { "controller", "Login" }, { "action", "Index" } });
             else
             {
                 var user = JsonConvert.DeserializeObject<User>(session);
 
                 if (user == null)
-                    context.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Login" }, { "action", "Index" } });
+                    context.Result = new RedirectToRouteResult(new RouteValueDictionary { { "area", "Public" }, { "controller", "Login" }, { "action", "Index" } });
             }
 
             base.OnActionExecuting(context);
