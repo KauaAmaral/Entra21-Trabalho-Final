@@ -1,12 +1,9 @@
 ﻿using Entra21.CSharp.Area21.Repository.Entities;
+using Entra21.CSharp.Area21.Repository.Repositories.Generic;
 
 namespace Entra21.CSharp.Area21.Repository.Repositories.Notifications
 {
-    public interface INotificationRepository
+    public interface INotificationRepository : IGenericRepository<Notification>
     {
-        Notification RegisterNotification(Notification notification);
-        void UpdateNotification(Notification notification);
-        Notification? GetById(int id);
-        IList<Notification> GetAll();
     }
 }
