@@ -118,8 +118,10 @@ namespace Entra21.CSharp.Area21.Application.Controllers
                 {
                     respuesta = response.Content.ReadAsStringAsync().Result;
                 }
-                
+
             }
+
+
 
             return new JsonResult(status, respuesta);
             //return Json(new { status = status, respuesta = respuesta };
