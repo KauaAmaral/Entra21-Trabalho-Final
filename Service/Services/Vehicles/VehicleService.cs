@@ -22,7 +22,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Vehicles
         {
             var vehicle = _vehicleEntityMapping.RegisterWith(viewModel);
 
-            _vehicleRepository.Insert(vehicle);
+            _vehicleRepository.Add(vehicle);
 
             return vehicle;
         }
