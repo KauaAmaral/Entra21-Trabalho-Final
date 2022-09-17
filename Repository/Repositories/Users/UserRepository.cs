@@ -19,5 +19,8 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Users
 
         public IList<User>? GetActiveUsers() =>
             _context.Users.Where(x => x.Status == true && x.IsEmailConfirmed == true).ToList();
+
+        public User? GetByCpf(string cpf) => _context.Users
+            .FirstOrDefault(x => x.Cpf == cpf);
     }
 }

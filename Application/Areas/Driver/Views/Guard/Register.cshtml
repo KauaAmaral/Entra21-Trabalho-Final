@@ -2,7 +2,7 @@
 @model GuardRegisterViewModel
 
 @{
-    Layout = "~/Driver/Views/Shared/_LayoutUnlogged.cshtml";
+    Layout = "_LayoutUnlogged";
     ViewData["Title"] = "Register";
 }
 
@@ -16,7 +16,7 @@
 
                 </div>
 
-                <form asp-action="register" asp-controller="register" method="POST">
+                <form asp-action="register" asp-controller="guard" method="POST">
 
                     <div class="form-group form-material floating" data-plugin="formMaterial">
                         <label asp-for="Cpf" class="sr-only" for="inputCpf">CPF</label>
