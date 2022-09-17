@@ -1,6 +1,8 @@
 ﻿using Entra21.CSharp.Area21.Application.Filters;
 using Entra21.CSharp.Area21.Application.Models.PaypalOrder;
 using Entra21.CSharp.Area21.Application.Models.PaypalTransaction;
+using Entra21.CSharp.Area21.Service.Authentication;
+using Entra21.CSharp.Area21.Service.Services.Vehicles;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
@@ -12,6 +14,20 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
     [Route("driver/paypal")]
     public class PaypalController : Controller
     {
+        private readonly IVehicleService _vehicleService;
+        private readonly ISessionAuthentication _session;
+
+        public PaypalController(
+             IVehicleService vehicleService,
+            ISessionAuthentication sessionAuthentication,
+            IPaymentService paymentService
+            )
+        {
+            _vehicleService = vehicleService;
+            _session = sessionAuthentication;
+            _paymentService = paymentService;
+        }
+
         public IActionResult Index()
         {
             return View("Teste");
@@ -63,7 +79,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
         [HttpPost("Paypal")]
         //public JsonResult Paypal(string precio) ---> EDITAR POR LA LINEA DE ABAJO
-        public async Task<JsonResult> Paypal(string precio, string producto)
+        public async Task<JsonResult> Paypal(string precio, string producto, int vehicleId)
         {
             precio = "5";
             producto = "teste";
@@ -123,6 +139,14 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
             return Json(new { status = status, respuesta = respuesta });
 
+        }
+
+        [HttpPost("Approved")]
+
+        public IActionResult Register()
+        {
+
+            return View();
         }
     }
 }
