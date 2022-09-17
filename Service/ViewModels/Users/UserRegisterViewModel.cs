@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Entra21.CSharp.Area21.Repository.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace Entra21.CSharp.Area21.Service.ViewModels.Users
 {
@@ -32,5 +33,6 @@ namespace Entra21.CSharp.Area21.Service.ViewModels.Users
         public string ConfirmPassword { get; set; }
         public Guid Token { get; set; }
         public DateTime TokenExpiredDate { get; set; }
+        public UserHierarchy Hierarchy { get; set; }
     }
 }

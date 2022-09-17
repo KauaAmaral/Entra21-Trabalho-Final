@@ -15,6 +15,7 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Users
                 Email = viewModel.Email,
                 Password = viewModel.Password.GetHash(),
                 Cpf = viewModel.Cpf,
+                Hierarchy = viewModel.Hierarchy,
                 CreatedAt = DateTime.Now
             };
 

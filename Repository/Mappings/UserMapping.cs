@@ -26,17 +26,17 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .IsRequired()
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(100);
-            
+
             builder.Property(x => x.Email)
                 .IsRequired()
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(50);
-                
+
             builder.Property(x => x.Password)
                 .IsRequired()
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(64);
-            
+
             builder.Property(x => x.Cpf)
                 .IsRequired()
                 .HasColumnType("VARCHAR")
@@ -53,6 +53,10 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
             builder.Property(x => x.UpdatedAt)
                 .HasColumnType("DATETIME2");
 
+            builder.Property(x => x.Hierarchy)
+                .HasColumnType("TINYINT")
+                .IsRequired();
+
             builder.Property(x => x.Status)
                 .IsRequired()
                 .HasColumnType("BIT");
@@ -66,13 +70,14 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 {
                     Id = 1,
                     Token = new Guid("924e32c0-6523-4efc-ac8f-04ff1ef63220"),
-                    TokenExpiredDate = new DateTime(2005-08-08),
+                    TokenExpiredDate = new DateTime(2005 - 08 - 08),
                     Name = "Admin",
                     Email = "admin@admin.com",
                     Password = "1234".GetHash(),
                     Cpf = "11111111111",
                     Phone = "1111111111",
-                    CreatedAt = new DateTime(2005-08-08),
+                    CreatedAt = new DateTime(2005 - 08 - 08),
+                    Hierarchy = Enums.UserHierarchy.Administrator,
                     Status = true,
                     IsEmailConfirmed = true
                 });

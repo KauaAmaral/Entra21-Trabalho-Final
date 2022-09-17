@@ -4,11 +4,12 @@ using Entra21.CSharp.Area21.Service.Services.Guards;
 using Entra21.CSharp.Area21.Service.ViewModels.Guards;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
+namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
 {
-    [Area("Driver")]
     [IsUserLogged]
-    [Route("driver/guard")]
+    [IsAdministrator]
+    [Area("Administrator")]
+    [Route("/Administrator/Guard/")]
     public class GuardController : Controller
     {
         private readonly IGuardService _guardService;
@@ -24,10 +25,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            if (_session.FindUserSession() != null)
-                return RedirectToAction("Index", "Home");
-
-            return View("Login");
+            return View();
         }
 
         [HttpGet("register")]

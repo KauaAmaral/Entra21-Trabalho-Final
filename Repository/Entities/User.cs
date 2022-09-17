@@ -1,4 +1,6 @@
-﻿namespace Entra21.CSharp.Area21.Repository.Entities
+﻿using Entra21.CSharp.Area21.Repository.Enums;
+
+namespace Entra21.CSharp.Area21.Repository.Entities
 {
     public class User : EntityBase
     {
@@ -10,6 +12,7 @@
         public string Cpf { get; set; }
         public string? Phone { get; set; }
         public bool IsEmailConfirmed { get; set; }
+        public UserHierarchy Hierarchy { get; set; } 
 
         public IList<Payment> Payments { get; set; }
         public IList<Vehicle> Vehicles { get; set; }
