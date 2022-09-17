@@ -18,9 +18,11 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         private readonly ISessionAuthentication _session;
 
         public GuardController(IGuardService guardService,
+                               IUserService userService,
                                ISessionAuthentication session)
         {
             _guardService = guardService;
+            _userService = userService;
             _session = session;
         }
 
@@ -44,10 +46,14 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         [HttpPost("register")]
         public IActionResult Register([FromForm] GuardRegisterViewModel viewModel)
         {
-            var user = new User();
+            var user = _userService.GetByCpf(viewModel.Cpf);
 
-            user = _userService.GetByCpf(viewModel.Cpf);
-
+            if (user == null)
+            {
+                TempData["Message"] = "Nenhum usuário com o CPF digitado";
+                return View(nameof(Register));
+            }
+            
             viewModel.UserId = user.Id;
 
             if (!ModelState.IsValid)
