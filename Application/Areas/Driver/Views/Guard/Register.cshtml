@@ -25,9 +25,9 @@
                         <span asp-validation-for="Cpf" class="text-danger"></span>
                     </div>
                     <div class="form-group form-material floating" data-plugin="formMaterial">
-                        <label asp-for="IdentificationNumber" class="sr-only" for="inputCpf"></label>
+                        <label asp-for="IdentificationNumber" class="sr-only" for="inputCpf">Número de identificação</label>
                         <input asp-for="IdentificationNumber" class="form-control"
-                               id="inputIdentificationNumber" name="IdentificationNumber" placeholder="CPF" />
+                               id="inputIdentificationNumber" name="IdentificationNumber" placeholder="Número de identificação" />
                         <span asp-validation-for="IdentificationNumber" class="text-danger"></span>
                     </div>
 
@@ -35,7 +35,7 @@
                     {
                         <p class="text-danger">@TempData["Message"]</p>
                     }
-                    <button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Criar conta</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Criar guarda</button>
                 </form>
             </div>
         </div>
