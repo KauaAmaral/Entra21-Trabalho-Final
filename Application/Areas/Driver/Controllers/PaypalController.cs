@@ -19,13 +19,13 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
         public PaypalController(
              IVehicleService vehicleService,
-            ISessionAuthentication sessionAuthentication,
-            IPaymentService paymentService
+            ISessionAuthentication sessionAuthentication
+            //IPaymentService paymentService
             )
         {
             _vehicleService = vehicleService;
             _session = sessionAuthentication;
-            _paymentService = paymentService;
+            // = paymentService;
         }
 
         public IActionResult Index()
