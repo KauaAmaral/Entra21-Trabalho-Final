@@ -2,6 +2,7 @@
 using Entra21.CSharp.Area21.Application.Models.PaypalOrder;
 using Entra21.CSharp.Area21.Application.Models.PaypalTransaction;
 using Entra21.CSharp.Area21.Service.Authentication;
+using Entra21.CSharp.Area21.Service.Services.Payments;
 using Entra21.CSharp.Area21.Service.Services.Vehicles;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -15,17 +16,18 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
     public class PaypalController : Controller
     {
         private readonly IVehicleService _vehicleService;
+        private readonly IPaymentService _paymentService;
         private readonly ISessionAuthentication _session;
 
         public PaypalController(
              IVehicleService vehicleService,
-            ISessionAuthentication sessionAuthentication
-            //IPaymentService paymentService
+            ISessionAuthentication sessionAuthentication,
+            IPaymentService paymentService
             )
         {
             _vehicleService = vehicleService;
             _session = sessionAuthentication;
-            // = paymentService;
+            _paymentService = paymentService;
         }
 
         public IActionResult Index()
@@ -79,13 +81,13 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
         [HttpPost("Paypal")]
         //public JsonResult Paypal(string precio) ---> EDITAR POR LA LINEA DE ABAJO
-        public async Task<JsonResult> Paypal(string precio, string producto, int vehicleId)
+        public async Task<JsonResult> Paypal(int vehicleId)
         {
-            precio = "5";
-            producto = "teste";
+            var precio = "1";
+            var producto = "teste";
             bool status = false;
             string respuesta = string.Empty;
-
+            
             using (var client = new HttpClient())
             {
 
@@ -124,6 +126,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
                 };
 
                 var json = JsonConvert.SerializeObject(orden);
+
                 var data = new StringContent(json, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage response = await client.PostAsync("/v2/checkout/orders", data);
@@ -145,7 +148,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
         public IActionResult Register()
         {
-
             return View();
         }
     }

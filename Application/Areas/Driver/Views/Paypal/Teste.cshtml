@@ -4,44 +4,31 @@
 
 <div class="jumbotron">
     <div class="row">
+
         <div class="col-sm-3">
             <img src="https://spacegamer.com.ar/img/Public/1058-producto-mic-hx3-2589.jpg" width="200" height="250" />
         </div>
+
         <div class="col-sm-9">
+
             <h3 class="text-primary">Microfono Hyperx Quadcast</h3>
+           
             <p>
                 Nullam faucibus at felis quis mattis. Vivamus non elementum risus. Mauris ac ipsum suscipit,
                 aliquam felis a, sodales nisi. Suspendisse potenti. Aenean non ornare risus.
             </p>
+           
             <input type="hidden" value="78.00" id="precio" />
+           
             <h3 class="text-danger">USD 78.00</h3>
+            
             <button class="btn btn-success" onclick="pagar()"><i class="fab fa-paypal"></i> Realizar Pago</button>
         </div>
 
     </div>
+
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
 
 
 @section scripts{
@@ -50,17 +37,17 @@
         function pagar() {
 
 
-            var body = {
-                precio: $("#precio").val(),
-                producto: "Microfono Hyperx Quadcast"
-            }
+            //var body = {
+            //    precio: $("#precio").val(),
+            //    producto: "Microfono Hyperx Quadcast"
+            //}
 
 
 
             jQuery.ajax({
                 url: '@Url.Action("Paypal", "Paypal")',
                 type: "POST",
-                data: JSON.stringify(body),
+                data: JSON.stringify("1","teste"), //
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {

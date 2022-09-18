@@ -19,6 +19,7 @@
                         <td><b><font color="white">@vehicles.LicensePlate</font></b></td>
                         <td>
                             <a class="btn btn-animate mb-2 btn-animate-side btn-primary" onclick="pagar()">
+                            <a class="btn btn-animate mb-2 btn-animate-side btn-primary" onclick="pagar()">
                                 <i class="icon wb-shopping-cart" aria-hidden="true"></i>Pagar
                             </a>
                         </td>
@@ -33,18 +34,14 @@
 
         function pagar() {
 
-
             var body = {
-                precio: $("#precio").val(),
-                producto: "Microfono Hyperx Quadcast"
+                precio: 1
             }
-
-
 
             jQuery.ajax({
                 url: '@Url.Action("Paypal", "Paypal")',
                 type: "POST",
-                data: JSON.stringify(body),
+                data: JSON.stringify(),
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
