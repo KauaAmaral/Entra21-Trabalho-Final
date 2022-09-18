@@ -12,7 +12,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
     public class VehicleController : Controller // TODO ControleVehicle Revisar
     {
         private readonly IVehicleService _vehicleService;
-        private readonly IPaymentService _paymentService;
         private readonly ISessionAuthentication _session;
 
         public VehicleController(
@@ -22,7 +21,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         {
             _vehicleService = vehicleService;
             _session = sessionAuthentication;
-
         }
 
         [HttpGet("register")]
@@ -113,7 +111,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
             var vehicles = _vehicleService.GetAllById(user.Id);
 
-            return View("Index", vehicles);
+            return View("Vehicle/Index", vehicles);//TUDO Problema de rota
         }
 
         [HttpGet("getById")]
