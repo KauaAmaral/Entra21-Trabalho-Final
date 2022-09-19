@@ -20,5 +20,10 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             _notificationService = notificationService;
             _guardService = guardService;
         }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
     }
 }
