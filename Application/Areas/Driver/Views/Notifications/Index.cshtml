@@ -1,0 +1,23 @@
+﻿@model List<Notification>
+
+<p class="h3">Notificações</p>
+
+<div class="row mb-3">
+    <div class="text-end">
+        <a asp-action="register" class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i> Cadastrar
+        </a>
+    </div>
+</div>
+
+<table class="table table-striped table-bordered" id="notification-table">
+    <thead>
+        <tr>
+            <th>Veículo</th>
+            <th>Endereço</th>
+            <th>Guarda</th>            
+        </tr>
+    </thead>
+</table>
+
+<partial name="Register" />
