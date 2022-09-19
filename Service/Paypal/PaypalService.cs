@@ -1,6 +1,5 @@
 ﻿using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.Repository.Entities.Paypal.PaypalOrder;
-using Entra21.CSharp.Area21.Repository.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
@@ -8,8 +7,6 @@ using System.Text;
 
 namespace Entra21.CSharp.Area21.Service.Services.Paypal
 {
-
-
     public class PaypalService
     {
         //Inform your credential
@@ -24,7 +21,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Paypal
         {
 
             double preci;
-            var product = (VehicleType)vehicle.Type;
+            var product = vehicle.LicensePlate;
 
             if (vehicle.Type == 0)
                 preci = 1.00;
@@ -79,8 +76,8 @@ namespace Entra21.CSharp.Area21.Service.Services.Paypal
                     respuesta = response.Content.ReadAsStringAsync().Result;
             }
 
-            var teste = Json(new { status, respuesta });
-            return teste;
+            //var teste = Json(new { status = status, respuesta = respuesta });
+            return null;
         }
     }
 }
