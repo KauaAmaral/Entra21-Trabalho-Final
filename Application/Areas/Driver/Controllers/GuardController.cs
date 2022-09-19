@@ -1,5 +1,4 @@
 ﻿using Entra21.CSharp.Area21.Application.Filters;
-using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.Service.Authentication;
 using Entra21.CSharp.Area21.Service.Services.Guards;
 using Entra21.CSharp.Area21.Service.Services.Users;
@@ -29,10 +28,9 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            if (_session.FindUserSession() != null)
-                return RedirectToAction("Index", "Home");
+            var guards = _guardService.GetAll();
 
-            return View("Login");
+            return View("guard/Index", guards);
         }
 
         [HttpGet("register")]
@@ -59,28 +57,9 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             if (!ModelState.IsValid)
                 return View(viewModel);
 
-            var guard = _guardService.Register(viewModel);
+            _guardService.Register(viewModel);
 
-            return RedirectToAction("Index", "Home");
-        }
-
-        [HttpGet("logout")]
-        public IActionResult Logout()
-        {
-            _session.RemoveUserSession();
-
-            return RedirectToAction(nameof(Register));
-        }
-
-        [HttpGet("disable")]
-        public IActionResult Disable()
-        {
-            var guard = _session.FindUserSession();
-
-            _guardService.Disable(guard);
-            _session.RemoveUserSession();
-
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("Index");
         }
     }
 }
