@@ -1,6 +1,7 @@
 ﻿using Entra21.CSharp.Area21.Application.Filters;
 using Entra21.CSharp.Area21.Application.Models.PaypalOrder;
 using Entra21.CSharp.Area21.Application.Models.PaypalTransaction;
+using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.Service.Authentication;
 using Entra21.CSharp.Area21.Service.Services.Payments;
 using Entra21.CSharp.Area21.Service.Services.Vehicles;
@@ -19,15 +20,19 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         private readonly IPaymentService _paymentService;
         private readonly ISessionAuthentication _session;
 
+        private readonly string _userName = "AeHh1KwTDiCTJlkmPVoWT5qj9YMp0dwnhAStwYVE7VZiaPN2jfJjMm7UJ6B9TMXFkVqFNkmpzpfinpJR";
+        private readonly string _passwd = "EHqhokF9mvWolaWgw04hay43lNAuCcLNHZ8XBpmm0cLSYUxdAYnbBI6dhiaCXtI54qJJ-EF3VS0IMGfx";
+        private readonly string _url = "https://api-m.sandbox.paypal.com";
+        private readonly string _urlReturn = "https://localhost:7121/driver/Paypal/Approved";
+        private readonly string _urlCancel = "https://localhost:7121/driver/Home";
+
         public PaypalController(
-             IVehicleService vehicleService,
-            ISessionAuthentication sessionAuthentication,
-            IPaymentService paymentService
+            IVehicleService vehicleService,
+            ISessionAuthentication sessionAuthentication
             )
         {
             _vehicleService = vehicleService;
             _session = sessionAuthentication;
-            _paymentService = paymentService;
         }
 
         public IActionResult Index()
@@ -38,24 +43,15 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         [Route("approved")]
         public async Task<IActionResult> Approved()
         {
-
-            //id de la autorizacion para obtener el dinero
-            //string token = HttpContextRequest.QueryString["token"];
             var token = HttpContext.Request.Query["token"];
-
 
             var status = false;
 
             using (var client = new HttpClient())
             {
+                client.BaseAddress = new Uri(_url);
 
-                //INGRESA TUS CREDENCIALES AQUI -> CLIENT ID - SECRET
-                var userName = "AeHh1KwTDiCTJlkmPVoWT5qj9YMp0dwnhAStwYVE7VZiaPN2jfJjMm7UJ6B9TMXFkVqFNkmpzpfinpJR";
-                var passwd = "EHqhokF9mvWolaWgw04hay43lNAuCcLNHZ8XBpmm0cLSYUxdAYnbBI6dhiaCXtI54qJJ-EF3VS0IMGfx";
-
-                client.BaseAddress = new Uri("https://api-m.sandbox.paypal.com");
-
-                var authToken = Encoding.ASCII.GetBytes($"{userName}:{passwd}");
+                var authToken = Encoding.ASCII.GetBytes($"{_userName}:{_passwd}");
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authToken));
 
                 var data = new StringContent("{}", Encoding.UTF8, "application/json");
@@ -73,33 +69,30 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
                     ViewData["IdTransaccion"] = objeto.purchase_units[0].payments.captures[0].id;
                 }
-
             }
-
             return View();
         }
 
         [HttpPost("Paypal")]
-        //public JsonResult Paypal(string precio) ---> EDITAR POR LA LINEA DE ABAJO
-        public async Task<JsonResult> Paypal(int vehicleId)
+        public async Task<JsonResult> Paypal(Vehicle vehicle)
         {
-            var precio = "1";
-            var producto = "teste";
+            var price = 1.10;
+            var product = vehicle.LicensePlate;
+
+            if (vehicle.Type == 0)
+                price = 1.00;
+            else
+                price = 0.75;
+
             bool status = false;
-            string respuesta = string.Empty;
+            string answer = string.Empty;
             
             using (var client = new HttpClient())
             {
+                client.BaseAddress = new Uri(_url);
 
-                //INGRESA TUS CREDENCIALES AQUI -> CLIENT ID - SECRET
-                var userName = "AeHh1KwTDiCTJlkmPVoWT5qj9YMp0dwnhAStwYVE7VZiaPN2jfJjMm7UJ6B9TMXFkVqFNkmpzpfinpJR";
-                var passwd = "EHqhokF9mvWolaWgw04hay43lNAuCcLNHZ8XBpmm0cLSYUxdAYnbBI6dhiaCXtI54qJJ-EF3VS0IMGfx";
-
-                client.BaseAddress = new Uri("https://api-m.sandbox.paypal.com");
-
-                var authToken = Encoding.ASCII.GetBytes($"{userName}:{passwd}");
+                var authToken = Encoding.ASCII.GetBytes($"{_userName}:{_passwd}");
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authToken));
-
 
                 var orden = new PaypalOrder()
                 {
@@ -110,18 +103,18 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
                             amount = new Models.PaypalOrder.Amount() {
                                 currency_code = "BRL",
-                                value = precio
+                                value = price.ToString()
                             },
-                            description = producto
+                            description = product
                         }
                     },
                     application_context = new ApplicationContext()
                     {
-                        brand_name = "Mi Tienda",
+                        brand_name = "Area21",
                         landing_page = "NO_PREFERENCE",
                         user_action = "PAY_NOW", //Accion para que paypal muestre el monto de pago
-                        return_url = "https://localhost:7121/driver/Paypal/Approved/",// cuando se aprovo la solicitud del cobro
-                        cancel_url = "https://localhost:7121/driver/Home"// cuando cancela la operacion
+                        return_url = _urlReturn,
+                        cancel_url = _urlCancel
                     }
                 };
 
@@ -135,17 +128,13 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
                 if (status)
                 {
-                    respuesta = response.Content.ReadAsStringAsync().Result;
+                    answer = response.Content.ReadAsStringAsync().Result;
                 }
-
             }
-
-            return Json(new { status = status, respuesta = respuesta });
-
+            return Json(new { status = status, respuesta = answer });
         }
 
         [HttpPost("Approved")]
-
         public IActionResult Register()
         {
             return View();
