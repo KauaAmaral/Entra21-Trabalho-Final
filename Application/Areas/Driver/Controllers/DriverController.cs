@@ -21,12 +21,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             _session = session;
         }
 
-        public IActionResult Index()
-        {
-            return View("Update");
-        }
-
-        [HttpGet("update")]
         public IActionResult Update()
         {
             var user = _session.FindUserSession();
@@ -39,7 +33,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
                 Phone = user.Phone,
             };
 
-            return View(userUpdateViewModel);
+            return View("user/Update", userUpdateViewModel);
         }
 
         [HttpPost("update")]

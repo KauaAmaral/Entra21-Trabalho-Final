@@ -99,6 +99,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
                 <br>
                 {confirmationLink}<p>");
 
+            TempData["Confirm"] = "Enviamos um email para você confirmar o seu login e se juntar ao nosso sistema!!!";
             return View(nameof(ConfirmEmail));
         }
 

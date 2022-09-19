@@ -111,7 +111,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
             var vehicles = _vehicleService.GetAllById(user.Id);
 
-            return View("Index", vehicles);
+            return View("vehicle/Index", vehicles);
         }
 
         [HttpGet("getById")]
