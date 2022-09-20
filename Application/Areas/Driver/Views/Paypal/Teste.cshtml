@@ -33,13 +33,14 @@
 
 @section scripts{
     <script>
-        function pagar() {
+        function pagar(vehicle) {
 
 
             //var body = {
             //    precio: $("#precio").val(),
             //    producto: "Microfono Hyperx Quadcast"
             //}
+
             jQuery.ajax({
                 url: '@Url.Action("Paypal", "Paypal")',
                 type: "POST",

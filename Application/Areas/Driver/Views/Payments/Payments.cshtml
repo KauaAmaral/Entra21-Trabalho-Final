@@ -17,9 +17,9 @@
                         <td><b><font>@vehicles.Model</font></b></td>
                         <td><b><font>@vehicles.LicensePlate</font></b></td>
                         <td>
-                            <a class="btn btn-animate mb-2 btn-animate-side btn-primary" onclick="pagar(@vehicles)">
+                            <button class="btn btn-animate mb-2 btn-animate-side btn-primary" onclick="pagar(@vehicles.Id)">
                                 <i class="icon wb-shopping-cart" aria-hidden="true"></i>Pagar
-                            </a>
+                            </button>
                         </td>
                     </tr>
                 }
@@ -29,16 +29,16 @@
 @section scripts{
     <script>
 
-        function pagar(Vehicle vehicle) {
+        function pagar(id) {
 
-            var body = {
-                vehicle
-            }
+            debugger;
+            console.log(id);
+
 
             jQuery.ajax({
                 url: '@Url.Action("Paypal", "Paypal")',
                 type: "POST",
-                data: JSON.stringify(),
+                data: JSON.stringify(id),
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
@@ -61,8 +61,6 @@
                     } else {
                         alert("Vuelva a intentarlo más tarde")
                     }
-
-
                 },
                 beforeSend: function () {
                 }
@@ -71,3 +69,57 @@
     </script>
 
     }
+
+@*@using Entra21.CSharp.ClinicaVeterinaria.Servico.Extensions
+
+<div class="row">
+    <div class="col-12">
+        <button class="btn btn-primary mb-2 float-end"
+                id="responsavel-cadastro"
+                data-target="#cadastroResponsavelContatoModal"
+                data-url="@Url.Action("CadastrarModal", "ResponsavelContato", new { responsavelId = Model.Id })">
+             <i class="fa-solid fa-floppy-disk"></i> Cadastrar
+        </button>
+    </div>
+</div>
+
+@if (!Model.Contatos.Any())
+{
+    <div class="row">
+        <div class="text-center pt-5">
+            <h6 class="h6">Nenhum registro cadastrado</h6>
+            <img src="~/images/no-records.png" alt="Caixa vazia"/>
+        </div>
+    </div>
+}
+else
+{
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>Tipo</th>
+            <th>Valor</th>
+            <th>Ação</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var contato in Model.Contatos)
+        {
+            <tr>
+                <td>@contato.Tipo.GetDisplayAttribute()</td>
+                <td>@contato.Valor</td>
+                <td>
+                    <button class="btn btn-primary responsavel-contato-editar" data-id="@contato.Id">
+                        <i class="fa-solid fa-pencil"></i> Editar
+                    </button>
+                    <button class="btn btn-outline-danger contato-button-apagar" data-id="@contato.Id">
+                        <i class="fa-solid fa-trash"></i> Apagar
+                    </button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+<div id="modal-contato"></div>*@
