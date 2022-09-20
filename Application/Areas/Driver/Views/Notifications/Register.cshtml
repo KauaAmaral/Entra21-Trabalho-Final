@@ -1,0 +1,52 @@
+﻿@using Entra21.CSharp.Area21.Service.ViewModels.Notifications
+@model NotificationRegisterViewModel
+
+@{
+    Layout = "_LayoutUnlogged";
+    ViewData["Title"] = "Register";
+}
+
+<div class="page background-image vertical-align text-center">
+    <div class="page-content vertical-align-middle">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="brand">
+
+                    <h1 class="brand-text font-size-18">Cadastro do Guarda</h1>
+
+                </div>
+
+                <form asp-action="register" asp-controller="register" method="POST">
+
+                    <div class="form-group form-material floating" data-plugin="formMaterial">
+                        <label asp-for="VehiclePlate" class="sr-only" for="inputVehiclePlate">Placa do Veículo</label>
+                        <input asp-for="VehiclePlate" class="form-control"
+                               id="inputVehiclePlate" name="VehiclePlate" placeholder="Placa do Veículo" />
+                        <span asp-validation-for="VehiclePlate" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group form-material floating" data-plugin="formMaterial">
+                        <label asp-for="Address" class="sr-only" for="inputAddress">Endereço</label>
+                        <input asp-for="Address" class="form-control"
+                               id="inputAddress" name="VehiclePlate" placeholder="Endereço" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group form-material floating" data-plugin="formMaterial">
+                        <label asp-for="Comments" class="sr-only" for="inputComments">Comentários</label>
+                        <input asp-for="Comments" class="form-control"
+                               id="inputComments" name="VehiclePlate" placeholder="Comentários" />
+                        <span asp-validation-for="Comments" class="text-danger"></span>
+                    </div>
+
+                    @if (TempData["Message"] != null)
+                    {
+                        <p class="text-danger">@TempData["Message"]</p>
+                    }
+                    <button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Criar Notificação</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
