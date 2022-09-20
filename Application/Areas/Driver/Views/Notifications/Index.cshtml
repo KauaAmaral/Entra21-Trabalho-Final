@@ -14,9 +14,20 @@
     <thead>
         <tr>
             <th>Placa Veículo</th>
-            <th>Endereço</th> 
-            <th>Horário</th>
+            <th>Endereço</th>             
             <th>Comentários</th>
+            <th>Horário</th>
         </tr>
     </thead>
+    <tbody>
+        @foreach (var notification in Model)
+        {
+            <tr>
+                <td>@notification.VehiclePlate</td>
+                <td>@notification.Address</td>
+                <td>@notification.Comments</td>
+                <td>@notification.CreatedAt</td>
+            </tr>
+        }
+    </tbody>
 </table>

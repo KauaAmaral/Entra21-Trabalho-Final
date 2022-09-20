@@ -19,7 +19,9 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var notifications = _notificationService.GetAll();
+
+            return View("notification/index", notifications);
         }
 
         [HttpPost("register")]

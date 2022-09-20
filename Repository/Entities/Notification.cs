@@ -4,6 +4,8 @@
     {
         public bool RegisteredVehicle { get; set; }
         public string Address { get; set; }
+        public string VehiclePlate { get; set; }
+        public string Comments { get; set; }
 
         public int GuardId { get; set; }
         public Guard Guard { get; set; }
