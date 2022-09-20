@@ -73,12 +73,13 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         }
 
         [HttpPost("Paypal")]
-        public async Task<JsonResult> Paypal(int id)
+        public async Task<JsonResult> Paypal(string id)
         {
-            
+            var vehicleId = Convert.ToInt32(id);
+
             var price = 1.10;
 
-            var vehicle = _vehicleService.GetById(id);
+            var vehicle = _vehicleService.GetById(vehicleId);
             var product = vehicle.LicensePlate;
 
             if (vehicle.Type == 0)

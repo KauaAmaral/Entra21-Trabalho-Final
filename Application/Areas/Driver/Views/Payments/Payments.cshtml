@@ -33,12 +33,11 @@
 
             debugger;
             console.log(id);
-
-
+            
             jQuery.ajax({
                 url: '@Url.Action("Paypal", "Paypal")',
                 type: "POST",
-                data: JSON.stringify(id),
+                data: JSON.stringify(""+id),
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
