@@ -8,24 +8,24 @@
             if ((bool)ViewData["Status"])
             {
                 <br />
-                <h1 class="text-success">Gracias!</h1>
+                <h1 class="text-success">Obrigado!</h1>
 
                 <i class="far fa-check-circle fa-9x text-success"></i>
 
-                <h2 class="text-success"> Su pago fue realizado con exito</h2>
-                <h4> ID de Transacción : @ViewData["IdTransaccion"]</h4>
+                <h2 class="text-success">Seu pagamento foi realizado com êxito</h2>
+                <h4> ID do pagamento: @ViewData["IdTransaccion"]</h4>
                 <br />
-                <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Volver a la tienda</a>
+                <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Voltar para Area21</a>
 
             }
             else
             {
                 <br />
-                <h1 class="text-danger">Lo sentimos</h1>
+                <h1 class="text-danger">Sentimos muito</h1>
                 <i class="fas fa-exclamation-circle fa-9x text-danger"></i>
-                <h2 class="text-danger"> Su pago no fue realizado</h2>
+                <h2 class="text-danger">Seu pagamento não foi realizado com êxito</h2>
                 <br />
-                <a href="@Url.Action("Index","Home")" class="btn btn-primary">Volver a la tienda</a>
+                <a href="@Url.Action("Index","Home")" class="btn btn-primary">Voltar para Area21</a>
             }
 
         }

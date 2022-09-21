@@ -16,7 +16,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
     public class PaypalController : Controller
     {
         private readonly IVehicleService _vehicleService;
-        private readonly IPaymentService _paymentService;
         private readonly ISessionAuthentication _session;
 
         private readonly string _userName = "AeHh1KwTDiCTJlkmPVoWT5qj9YMp0dwnhAStwYVE7VZiaPN2jfJjMm7UJ6B9TMXFkVqFNkmpzpfinpJR";
