@@ -82,7 +82,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             var product = vehicle.LicensePlate;
 
             if (vehicle.Type == 0)
-                price = "1.00";
+                price = "1.50";
             else
                 price = "0.75";
 
