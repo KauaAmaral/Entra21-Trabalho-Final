@@ -12,6 +12,24 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
 
             builder.HasKey(x => x.Id);
 
+            builder.Property(x => x.PayerId)
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(15)
+                .IsRequired()
+                .HasColumnName("payer_id");       
+            
+            builder.Property(x => x.Token)
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(20)
+                .IsRequired()
+                .HasColumnName("token");  
+            
+            builder.Property(x => x.TransactionId)
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(20)
+                .IsRequired()
+                .HasColumnName("transaction_id");
+
             builder.Property(x => x.CreatedAt)
                 .HasColumnType("DATETIME2")
                 .IsRequired()
@@ -29,7 +47,6 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
             builder.Property(x => x.VehicleId)
                 .HasColumnType("INT")
                 .HasColumnName("vehicle_id");
-
 
             builder.Property(x => x.UserId)
                 .HasColumnType("INT")
