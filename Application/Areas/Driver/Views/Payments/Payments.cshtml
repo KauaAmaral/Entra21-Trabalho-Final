@@ -17,7 +17,7 @@
                         <td><b><font>@vehicles.Model</font></b></td>
                         <td><b><font>@vehicles.LicensePlate</font></b></td>
                         <td>
-                            <button class="btn btn-animate mb-2 btn-animate-side btn-primary" onclick="pagar(@vehicles.Id)">
+                            <button class="btn btn-animate mb-2 btn-animate-side btn-primary" onclick="teste(@vehicles.Id)">
                                 <i class="icon wb-shopping-cart" aria-hidden="true"></i>Pagar
                             </button>
                         </td>
@@ -29,20 +29,15 @@
 @section scripts{
     <script>
 
-        function pagar(id) {
+       function teste(id) {
 
-            debugger;
-            console.log(id);
-            
-            jQuery.ajax({
-                url: '@Url.Action("Paypal", "Paypal")',
-                type: "POST",
-                data: JSON.stringify(""+id),
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-
-                    console.log(data);
+        $.ajax({
+            url: '@Url.Action("Paypal", "Paypal")',
+            type: "POST",
+            data: {id: id},
+            dataType: "json",
+            success: function(data) {
+                   console.log(data);
                     if (data.status) {
 
                         var jsonresult = JSON.parse(data.respuesta);
@@ -57,14 +52,50 @@
 
                         /*console.log(links)*/
                         /*console.log(resultado)*/
-                    } else {
+                    } 
+                    else {
                         alert("Vuelva a intentarlo más tarde")
                     }
-                },
-                beforeSend: function () {
                 }
             });
         }
+
+        //function pagar() {
+        //    debugger;
+        //    id = 1;
+        //    console.log(id);
+            
+        //    jQuery.ajax({
+        //        url: '@Url.Action("Paypal", "Paypal")',
+        //        type: "POST",
+        //        data: {id: "1"},
+        //        dataType: "json",
+        //        contentType: "application/json; charset=utf-8",
+        //        success: function (data) {
+
+        //            console.log(data);
+        //            if (data.status) {
+
+        //                var jsonresult = JSON.parse(data.respuesta);
+
+        //                console.log(jsonresult);
+
+        //                var links = jsonresult.links;
+
+        //                var resultado = links.find(item => item.rel === "approve")
+
+        //                window.location.href = resultado.href
+
+        //                /*console.log(links)*/
+        //                /*console.log(resultado)*/
+        //            } else {
+        //                alert("Vuelva a intentarlo más tarde")
+        //            }
+        //        },
+        //        beforeSend: function () {
+        //        }
+        //    });
+        //}
     </script>
 
     }
