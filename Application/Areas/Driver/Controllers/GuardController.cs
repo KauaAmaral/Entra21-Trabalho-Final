@@ -61,5 +61,13 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet("getAll")]
+        public IActionResult GetAll()
+        {
+            var guards = _guardService.GetAll();
+
+            return Ok(guards);
+        }
     }
 }
