@@ -77,15 +77,15 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         {
             var vehicleId = Convert.ToInt32(id);
 
-            var price = 1.10;
+            string price;
 
             var vehicle = _vehicleService.GetById(vehicleId);
             var product = vehicle.LicensePlate;
 
             if (vehicle.Type == 0)
-                price = 1.00;
+                price = "1.00";
             else
-                price = 0.75;
+                price = "0.75";
 
             bool status = false;
             string answer = string.Empty;
@@ -107,7 +107,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
                             amount = new Models.PaypalOrder.Amount() {
                                 currency_code = "BRL",
-                                value = price.ToString()
+                                value = price
                             },
                             description = product
                         }
@@ -116,7 +116,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
                     {
                         brand_name = "Area21",
                         landing_page = "NO_PREFERENCE",
-                        user_action = "PAY_NOW", //Accion para que paypal muestre el monto de pago
+                        user_action = "PAY_NOW",
                         return_url = _urlReturn,
                         cancel_url = _urlCancel
                     }
