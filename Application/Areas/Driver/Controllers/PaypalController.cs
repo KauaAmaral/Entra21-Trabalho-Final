@@ -134,7 +134,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
                     answer = response.Content.ReadAsStringAsync().Result;
                 }
             }
-            return Json(new { status = status, respuesta = answer });
+            return Json(new { status = status, response = answer });
         }
 
         [HttpPost("Approved")]
