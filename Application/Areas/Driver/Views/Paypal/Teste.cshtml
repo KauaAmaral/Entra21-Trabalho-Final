@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <div class="row">
+
+        <div class="col-sm-3">
+            <img src="https://spacegamer.com.ar/img/Public/1058-producto-mic-hx3-2589.jpg" width="200" height="250" />
+        </div>
+
+        <div class="col-sm-9">
+
+            <h3 class="text-primary">Microfono Hyperx Quadcast</h3>
+           
+            <p>
+                Nullam faucibus at felis quis mattis. Vivamus non elementum risus. Mauris ac ipsum suscipit,
+                aliquam felis a, sodales nisi. Suspendisse potenti. Aenean non ornare risus.
+            </p>
+           
+            <input type="hidden" value="78.00" id="precio" />
+           
+            <h3 class="text-danger">USD 78.00</h3>
+            
+            <button class="btn btn-success" onclick="pagar()"><i class="fab fa-paypal"></i> Realizar Pago</button>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+@section scripts{
+    <script>
+        function pagar(vehicle) {
+
+
+            //var body = {
+            //    precio: $("#precio").val(),
+            //    producto: "Microfono Hyperx Quadcast"
+            //}
+
+            jQuery.ajax({
+                url: '@Url.Action("Paypal", "Paypal")',
+                type: "POST",
+                data: JSON.stringify("1","teste"), //
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    console.log(data);
+                    if (data.status) {
+
+                        var jsonresult = JSON.parse(data.respuesta);
+
+                        console.log(jsonresult);
+
+                        var links = jsonresult.links;
+
+                        var resultado = links.find(item => item.rel === "approve")
+
+                        window.location.href = resultado.href
+
+                        /*console.log(links)*/
+                        /*console.log(resultado)*/
+                    } else {
+                        alert("Vuelva a intentarlo más tarde")
+                    }
+
+
+                },
+                beforeSend: function () {
+                }
+            });
+
+
+        }
+
+    </script>
+
+    }
