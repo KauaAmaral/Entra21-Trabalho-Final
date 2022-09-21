@@ -17,34 +17,5 @@ namespace Entra21.CSharp.Area21.Service.Services.Payments
 
             return payment;
         }
-
-        private string SaveFile(PaymentViewModel registerViewModel, string pathFiles, string? oldFile = "")
-        {
-            if (registerViewModel.File == null)
-                return string.Empty;
-
-            if (!string.IsNullOrEmpty(pathFiles))
-                DeleteOldFile(oldFile);
-
-            var fileInformation = new FileInfo(registerViewModel.File.FileName);
-            var fileName = Guid.NewGuid() + fileInformation.Extension;
-
-            var pathFile = Path.Combine(fileName);
-
-            using (var stream = new FileStream(pathFile, FileMode.Create))
-            {
-                registerViewModel.File.CopyTo(stream);
-
-                return fileName;
-            }
-        }
-
-        private void DeleteOldFile(string oldFile)
-        {
-            var pathOldFile = Path.Join(oldFile);
-
-            if (File.Exists(pathOldFile))
-                File.Delete(pathOldFile);
-        }
     }
 }

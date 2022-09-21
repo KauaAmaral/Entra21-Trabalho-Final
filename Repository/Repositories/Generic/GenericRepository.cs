@@ -14,6 +14,7 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Generic
 
         public virtual TEntity Add(TEntity entity)
         {
+            entity.CreatedAt = DateTime.Now;
             _context.Set<TEntity>().Add(entity);
             _context.SaveChanges();
 
