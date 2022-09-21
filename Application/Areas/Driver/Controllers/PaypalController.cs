@@ -4,6 +4,7 @@ using Entra21.CSharp.Area21.Application.Models.PaypalTransaction;
 using Entra21.CSharp.Area21.Service.Authentication;
 using Entra21.CSharp.Area21.Service.Services.Payments;
 using Entra21.CSharp.Area21.Service.Services.Vehicles;
+using Entra21.CSharp.Area21.Service.ViewModels.Payments;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
@@ -63,9 +64,14 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
                 {
                     var jsonRespuesta = response.Content.ReadAsStringAsync().Result;
 
-                    PaypalTransaction objeto = JsonConvert.DeserializeObject<PaypalTransaction>(jsonRespuesta);
+                    var objeto = JsonConvert.DeserializeObject<PaypalTransaction>(jsonRespuesta);
 
                     ViewData["IdTransaccion"] = objeto.purchase_units[0].payments.captures[0].id;
+
+                    var viewModel = new PaymentRegisterViewModel
+                    {
+                        //VehicleId 
+                    };
                 }
             }
             return View();
