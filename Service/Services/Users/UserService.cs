@@ -101,5 +101,12 @@ namespace Entra21.CSharp.Area21.Service.Services.Users
 
             return user;
         }
+
+        public User? GetByCpf(string cpf)
+        {
+            var user = _userRepository.GetByCpf(cpf);
+
+            return user;
+        }
     }
 }

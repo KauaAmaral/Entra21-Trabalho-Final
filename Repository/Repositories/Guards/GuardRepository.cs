@@ -1,7 +1,7 @@
 using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.Repository.Repositories.Generic;
 using Entra21.CSharp.Area21.RepositoryDataBase;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Entra21.CSharp.Area21.Repository.Repositories.Guards
 {
@@ -16,12 +16,12 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Guards
 
         public override Guard? GetById(int id) =>
             _context.Guards
-            .Include(x => x.User)
-            .FirstOrDefault(x => x.Id == id);
+                .Include(x => x.User)
+                .FirstOrDefault(x => x.Id == id);
 
         public override IList<Guard> GetAll() =>
             _context.Guards
-            .Include(x => x.User)
-            .ToList();
+                .Include(x => x.User)
+                .ToList();
     }
 }

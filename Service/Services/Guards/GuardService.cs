@@ -21,9 +21,6 @@ namespace Entra21.CSharp.Area21.Service.Services.Guards
         public IList<Guard> GetAll() =>
             _guardRepository.GetAll();
 
-        public Guard? GetById(int id) =>
-            _guardRepository.GetById(id);
-
         public Guard Register(GuardRegisterViewModel viewModel)
         {
             var guard = _guardEntityMapping.RegisterWith(viewModel);
@@ -32,30 +29,5 @@ namespace Entra21.CSharp.Area21.Service.Services.Guards
 
             return guard;
         }
-
-        public bool Delete(int id) =>
-           _guardRepository.Delete(id);
-
-        public bool Disable(User userChange)
-        {
-            var guard = _guardRepository.GetById(userChange.Id);
-
-            if (guard == null)
-                return false;
-
-            guard.Status = false;
-            _guardRepository.Update(guard);
-
-            return true;
-        }
-
-        //public int RandomIdentificationNumber()
-        //{
-        //    var random = new Random();
-
-        //    var nandomIdentificationNumber = random.Next(000000000, 1000000000);
-
-
-        //}
     }
 }
