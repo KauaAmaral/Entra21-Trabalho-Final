@@ -7,5 +7,6 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Users
     {       
         User? GetByEmailAndPassword(string email, string password);
         IList<User>? GetActiveUsers();
+        User? GetByCpf(string cpf);
     }
 }
