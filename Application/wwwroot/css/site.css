@@ -25,6 +25,9 @@ html {
 .background-image-payments {
     background-image: url("../Theme/global/portraits/Pagamentos.jpg");
 }
+
+.background-image-vehicles {
+    background-image: url("../Theme/global/portraits/ListaVeiculos.jpg");
 }
 
 .background-menu {
