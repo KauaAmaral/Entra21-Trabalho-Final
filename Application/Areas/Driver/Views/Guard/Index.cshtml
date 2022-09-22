@@ -1,28 +1,29 @@
-﻿@*<p class="h3">Lista de Guardas</p>
+﻿@model List<Guard>
 
-<div class="row">
-    <div class="col-12">
-        <button type="button" class="btn btn-primary mb-2 float-end" data-bs-toggle="model" data-bs-target="#cadastroGuardaModal">
+<div class="row mb-3">
+    <div class="text-end">
+        <p class="h3">Lista de Guardas</p>
+        <a asp-action="register" class="btn btn-primary">
             <i class="fa-solid fa-plus"></i> Cadastrar
-        </button>
+        </a>
     </div>
 </div>
-
-<table class="table table-striped table-bordered" id="guarda-table">
+<table class="table table-striped table-bordered">
     <thead>
         <tr>
-            <th>Número de identificação</th>
-            <th>Nome</th>
-            <th>CPF</th>
-            <th>Ação</th>
+            <th><b>Nome</b></th>
+            <th><b>CPF</b></th>
+            <th><b>Número de identificação</b></th>
         </tr>
     </thead>
+    <tbody>
+        @foreach (var guard in Model)
+        {
+            <tr>
+                <td>@guard.User.Name</td>
+                <td>@guard.User.Cpf</td>
+                <td>@guard.IdentificationNumber</td>
+            </tr>
+        }
+    </tbody>
 </table>
-
-<partial name="Register"/>
-
-@section Scripts{
-    <script src="~/js/guard/guard-delete.js"></script>
-    <script src="~/js/guard/guard-register.js"></script>
-    <script src="~/js/guard/guard-update.js"></script>
-}*@

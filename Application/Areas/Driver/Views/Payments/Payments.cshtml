@@ -28,18 +28,17 @@
 @section scripts{
     <script>
 
-        function teste(id) {
-            //debugger;
-            $.ajax({
-                url: '@Url.Action("Paypal", "Paypal")',
-                type: "POST",
-                data: { id: id },
-                dataType: "json",
-                success: function (data) {
-                    console.log(data);
+       function teste(id) {
+        $.ajax({
+            url: '@Url.Action("Paypal", "Paypal")',
+            type: "POST",
+            data: {id: id},
+            dataType: "json",
+            success: function(data) {
+                   console.log(data);
                     if (data.status) {
 
-                        var jsonresult = JSON.parse(data.respuesta);
+                        var jsonresult = JSON.parse(data.response);
 
                         console.log(jsonresult);
 
@@ -48,12 +47,9 @@
                         var resultado = links.find(item => item.rel === "approve")
 
                         window.location.href = resultado.href
-
-                        /*console.log(links)*/
-                        /*console.log(resultado)*/
-                    }
+                    } 
                     else {
-                        alert("Volte mais tarde!")
+                        alert("Volte mais tarde, o serviço de pagamento não está funcionado!")
                     }
                 }
             });

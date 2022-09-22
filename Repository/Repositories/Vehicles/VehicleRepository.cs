@@ -1,7 +1,7 @@
 ﻿using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.Repository.Repositories.Generic;
 using Entra21.CSharp.Area21.RepositoryDataBase;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Entra21.CSharp.Area21.Repository.Repositories.Vehicles
 {
