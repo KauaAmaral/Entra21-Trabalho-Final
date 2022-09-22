@@ -1,5 +1,4 @@
 ﻿using Entra21.CSharp.Area21.Application.Filters;
-using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.Service.Services.Notifications;
 using Entra21.CSharp.Area21.Service.Services.Vehicles;
 using Entra21.CSharp.Area21.Service.ViewModels.Notifications;
@@ -24,7 +23,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         }
 
         public IActionResult Index()
-        {
+        {            
             var notifications = _notificationService.GetAll();
 
             return View("notification/index", notifications);

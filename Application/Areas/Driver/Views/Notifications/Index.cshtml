@@ -14,7 +14,8 @@
     <thead>
         <tr>
             <th>Placa Veículo</th>
-            <th>Endereço</th>             
+            <th>Usuário</th> 
+            <th>Guarda</th>
             <th>Comentários</th>
             <th>Horário</th>
         </tr>
@@ -24,7 +25,8 @@
         {
             <tr>
                 <td>@notification.Vehicle.LicensePlate</td>
-                <td>@notification.Address</td>
+                <td>@notification.Vehicle.User</td>
+                <td>@notification.Guard</td>
                 <td>@notification.Comments</td>
                 <td>@notification.CreatedAt</td>
             </tr>

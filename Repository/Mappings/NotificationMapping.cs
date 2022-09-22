@@ -54,6 +54,18 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .HasMaxLength(100)
                 .IsRequired()
                 .HasColumnName("address");
+
+            builder.Property(x => x.VehicleLicensePlate)
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(8)
+                .IsRequired()
+                .HasColumnName("vehicle_license_plate");
+
+            builder.Property(x => x.Comments)
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(100)
+                .IsRequired()
+                .HasColumnName("comments");
         }
     }
 }
