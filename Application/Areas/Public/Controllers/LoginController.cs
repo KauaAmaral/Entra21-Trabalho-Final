@@ -77,7 +77,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
             {
                 TempData["Message"] = "Já existe uma conta com esse email, tente novamente";
 
-                return RedirectToAction(nameof(Login));
+                return RedirectToAction(nameof(Register));
             }
 
             var token = Guid.NewGuid();

@@ -108,7 +108,9 @@
                         </span>
                     </a>
                     <div class="dropdown-menu" role="menu">
-                        <a asp-controller="user" asp-action="update" class="dropdown-item" role="menuitem"><i class="icon wb-user" aria-hidden="true"></i> Perfil</a>
+                        <a asp-area="Driver" asp-controller="User" asp-action="Index" class="dropdown-item" role="menuitem">
+                            <i class="icon wb-user" aria-hidden="true"></i> Perfil
+                            </a>
                         <a asp-action="Payments" asp-controller="Payments" class="dropdown-item">
                             <i class="icon wb-payment"></i> Pagamentos
                         </a>
