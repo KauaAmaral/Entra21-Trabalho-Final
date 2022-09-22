@@ -9,9 +9,13 @@
 
 	<ItemGroup>
 		<Compile Remove="Areas\Driver\Controllers\Login\**" />
+		<Compile Remove="Controllers\**" />
 		<Content Remove="Areas\Driver\Controllers\Login\**" />
+		<Content Remove="Controllers\**" />
 		<EmbeddedResource Remove="Areas\Driver\Controllers\Login\**" />
+		<EmbeddedResource Remove="Controllers\**" />
 		<None Remove="Areas\Driver\Controllers\Login\**" />
+		<None Remove="Controllers\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -32,10 +36,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Repository\Repository.csproj" />
 		<ProjectReference Include="..\Service\Service.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Controllers\" />
 	</ItemGroup>
 
 </Project>

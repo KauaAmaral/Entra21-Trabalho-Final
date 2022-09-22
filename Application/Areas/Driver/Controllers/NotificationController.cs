@@ -22,11 +22,12 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             _vehicleService = vehicleService;
         }
 
+        [HttpGet("")]
         public IActionResult Index()
         {            
             var notifications = _notificationService.GetAll();
 
-            return View("notification/index", notifications);
+            return View("Notifications/Index", notifications);
         }
 
         [HttpPost("register")]
