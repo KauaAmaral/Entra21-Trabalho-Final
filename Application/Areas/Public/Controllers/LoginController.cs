@@ -77,7 +77,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
             {
                 TempData["Message"] = "Já existe uma conta com esse email, tente novamente";
 
-                return RedirectToAction(nameof(Login));
+                return RedirectToAction(nameof(Register));
             }
 
             var token = Guid.NewGuid();
@@ -109,13 +109,13 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
             var user = _userService.GetById(id);
 
             if (user == null || user.Token != token)
-                TempData["message"] = "Não existe nenhum usuário referido!";
+                TempData["Confirm"] = "Não existe nenhum usuário referido!";
 
             else if (user.IsEmailConfirmed == true)
-                TempData["message"] = "O usuário já possui o link confirmado!";
+                TempData["Confirm"] = "O usuário já possui o link confirmado!";
 
             else if (user.TokenExpiredDate.TimeOfDay < DateTime.Now.TimeOfDay)
-                TempData["message"] = "O link foi espirado! Tente criar outra conta";
+                TempData["Confirm"] = "O link foi espirado! Tente criar outra conta";
 
             else
             {
