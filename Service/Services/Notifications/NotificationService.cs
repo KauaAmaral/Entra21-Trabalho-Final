@@ -21,7 +21,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
         {
             var notification = _notificationEntityMapping.RegisterWith(viewModel);
 
-            _notificationRepository.RegisterNotification(notification);
+            _notificationRepository.Add(notification);
 
             return notification;
         }
@@ -35,7 +35,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
 
             notification = _notificationEntityMapping.UpdateWith(notification, viewModel);
 
-            _notificationRepository.UpdateNotification(notification);
+            _notificationRepository.Update(notification);
 
             return true;
         }

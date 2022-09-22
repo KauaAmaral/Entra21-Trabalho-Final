@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
@@ -8,15 +8,16 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Remove="Controllers\Login\**" />
-		<Content Remove="Controllers\Login\**" />
-		<EmbeddedResource Remove="Controllers\Login\**" />
-		<None Remove="Controllers\Login\**" />
+		<Compile Remove="Areas\Driver\Controllers\Login\**" />
+		<Content Remove="Areas\Driver\Controllers\Login\**" />
+		<EmbeddedResource Remove="Areas\Driver\Controllers\Login\**" />
+		<None Remove="Areas\Driver\Controllers\Login\**" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="EntityFramework" Version="6.4.4" />
 		<PackageReference Include="Font.Awesome" Version="5.15.4" />
+		<PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.9" />
 		<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.6" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.8" />
@@ -34,7 +35,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Controllers\Login\" />
+	  <Folder Include="Controllers\" />
 	</ItemGroup>
 
 </Project>

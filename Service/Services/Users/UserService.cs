@@ -44,7 +44,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Users
         {
             var user = _userEntityMapping.RegisterWith(viewModel);
 
-            _userRepository.Insert(user);
+            _userRepository.Add(user);
 
             return user;
         }
@@ -90,6 +90,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Users
             return true;
         }
 
+        //TODO: Criar EntityMapping para mudar propriedades
         public User UpdateVerifyEmail(int id)
         {
             var user = _userRepository.GetById(id);
@@ -98,6 +99,13 @@ namespace Entra21.CSharp.Area21.Service.Services.Users
             user.Status = true;
 
             _userRepository.Update(user);
+
+            return user;
+        }
+
+        public User? GetByCpf(string cpf)
+        {
+            var user = _userRepository.GetByCpf(cpf);
 
             return user;
         }

@@ -8,8 +8,12 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Payments
         public Payment RegisterWith(PaymentRegisterViewModel registerViewModel) =>
             new Payment
             {
-                UserId = registerViewModel.UserId.GetValueOrDefault(),
-                VehicleId = registerViewModel.VehicleId.GetValueOrDefault()
+                Token = registerViewModel.Token,
+                PayerId = registerViewModel.PayerId,
+                TransactionId = registerViewModel.TransactionId,
+                UserId = registerViewModel.UserId,
+                VehicleId = registerViewModel.VehicleId,
+                Value = registerViewModel.Value
             };
     }
 }

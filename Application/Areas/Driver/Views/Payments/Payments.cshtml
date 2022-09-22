@@ -1,0 +1,59 @@
+﻿@model List<Vehicle>
+@{
+    ViewData["Title"] = "Pagamentos";
+}
+        <table class="table-center" id="vehicles-id" style="width:70%" align="center">
+            <thead>
+                <tr>
+                    <th style="width:15%"><font size="5"><b><font>Modelo</font></b></font></th>
+                    <th style="width:7%"><font size="5"><b><font>Placa</font></b></font></th>
+                    <th style="width:3%"><font size="5"><b><font>Ação</font></b></font></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var vehicles in Model)
+                {
+                    <tr>
+                        <td><b><font>@vehicles.Model</font></b></td>
+                        <td><b><font>@vehicles.LicensePlate</font></b></td>
+                        <td>
+                            <button class="btn btn-animate mb-2 btn-animate-side btn-primary" onclick="teste(@vehicles.Id)">
+                                <i class="icon wb-shopping-cart" aria-hidden="true"></i>Pagar
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+@section scripts{
+    <script>
+
+       function teste(id) {
+        $.ajax({
+            url: '@Url.Action("Paypal", "Paypal")',
+            type: "POST",
+            data: {id: id},
+            dataType: "json",
+            success: function(data) {
+                   console.log(data);
+                    if (data.status) {
+
+                        var jsonresult = JSON.parse(data.response);
+
+                        console.log(jsonresult);
+
+                        var links = jsonresult.links;
+
+                        var resultado = links.find(item => item.rel === "approve")
+
+                        window.location.href = resultado.href
+                    } 
+                    else {
+                        alert("Volte mais tarde, o serviço de pagamento não está funcionado!")
+                    }
+                }
+            });
+        }
+    </script>
+    }

@@ -1,0 +1,37 @@
+﻿@model List<Vehicle>
+<div class="row mb-3">
+    <div class="text-end">
+        <a asp-action="Register" class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i> Cadastrar
+        </a>
+    </div>
+</div>
+
+<table class="table-center" id="vehicles-id" style="width:70%" align="center"> 
+    <thead>
+    <tr>
+        <th style="width:15%"><font size="5"><b><font>Nome</font></b></th>
+        <th style="width:15%"><font size="5"><b><font>Descrição</font></b></th>
+        <th style="width:15%"><font size="5"><b><font>Tipo Veículo</font></b></th>
+        <th style="width:15%"><font size="5"><b><font>Ação</font></b></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var vehicles in Model)
+    {
+        <tr>
+            <td>@vehicles.LicensePlate</td>
+            <td>@vehicles.Model</td>
+            <td>@vehicles.Type</td>
+           <td>
+                <a class="btn btn-primary" asp-action="update" asp-route-id="@vehicles.Id">
+                    <i class="fa-solid fa-pencil"></i> Editar
+                </a>
+                <a class="btn btn-outline-danger" asp-action="delete" asp-route-id="@vehicles.Id">
+                    <i class="fa-solid fa-trash"></i> Apagar
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

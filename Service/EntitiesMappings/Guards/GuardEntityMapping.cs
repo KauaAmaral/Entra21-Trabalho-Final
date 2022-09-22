@@ -8,13 +8,9 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Guards
         public Guard RegisterWith(GuardRegisterViewModel viewModel) =>
             new Guard
             {
+                IdentificationNumber = viewModel.IdentificationNumber,
                 UserId = viewModel.UserId.GetValueOrDefault(),
                 CreatedAt = DateTime.Now
             };
-
-        public void UpdateWith(Guard guard, GuardUpdateViewModel viewModel)
-        {
-            guard.UpdatedAt = DateTime.Now;
-        }
     }
 }
