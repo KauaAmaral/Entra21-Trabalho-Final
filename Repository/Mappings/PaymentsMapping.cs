@@ -56,6 +56,11 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .IsRequired()
                 .HasColumnName("user_id");
 
+            builder.Property(x => x.Value)
+                .HasColumnType("DECIMAL")
+                .IsRequired()
+                .HasColumnName("value");
+
             builder.HasOne(x => x.Vehicle)
                 .WithMany(x => x.Payments)
                 .HasForeignKey(x => x.VehicleId)

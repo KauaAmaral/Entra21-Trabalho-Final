@@ -58,9 +58,9 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
                 ViewData["Status"] = status;
                 if (status)
                 {
-                    var jsonRespuesta = response.Content.ReadAsStringAsync().Result;
+                    var jsonResponse = response.Content.ReadAsStringAsync().Result;
 
-                    var objeto = JsonConvert.DeserializeObject<PaypalTransaction>(jsonRespuesta);
+                    var objeto = JsonConvert.DeserializeObject<PaypalTransaction>(jsonResponse);
 
                     ViewData["IdTransaccion"] = objeto.purchase_units[0].payments.captures[0].id;
 
@@ -70,7 +70,8 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
                         UserId = idUser,
                         Token = token,
                         PayerId = PayerID,
-                        TransactionId = objeto.purchase_units[0].payments.captures[0].id
+                        TransactionId = objeto.purchase_units[0].payments.captures[0].id,
+                        Value = Convert.ToDecimal(objeto.purchase_units[0].payments.captures[0].amount.value)
                     };
 
                     _paymentService.Register(viewModel);

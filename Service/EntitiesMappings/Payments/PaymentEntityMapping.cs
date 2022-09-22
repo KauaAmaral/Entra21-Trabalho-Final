@@ -13,6 +13,7 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Payments
                 TransactionId = registerViewModel.TransactionId,
                 UserId = registerViewModel.UserId,
                 VehicleId = registerViewModel.VehicleId,
+                Value = registerViewModel.Value
             };
     }
 }
