@@ -1,6 +1,7 @@
 ﻿using Entra21.CSharp.Area21.Application.Filters;
 using Entra21.CSharp.Area21.Repository.Enums;
 using Entra21.CSharp.Area21.Service.Authentication;
+using Entra21.CSharp.Area21.Service.Services.Payments;
 using Entra21.CSharp.Area21.Service.Services.Vehicles;
 using Entra21.CSharp.Area21.Service.ViewModels.Vehicles;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,8 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
         public VehicleDriverController(
             IVehicleService vehicleService,
-            ISessionAuthentication sessionAuthentication)
+            ISessionAuthentication sessionAuthentication            
+            )
         {
             _vehicleService = vehicleService;
             _session = sessionAuthentication;
@@ -111,7 +113,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
             var vehicles = _vehicleService.GetAllById(user.Id);
 
-            return View("vehicle/Index", vehicles);
+            return View("Vehicle/Index", vehicles);//TUDO Problema de rota
         }
 
         [HttpGet("getById")]

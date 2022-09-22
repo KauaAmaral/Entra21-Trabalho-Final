@@ -4,6 +4,7 @@ using Entra21.CSharp.Area21.RepositoryDataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entra21.CSharp.Area21.Repository.Migrations
 {
     [DbContext(typeof(ShortTermParkingContext))]
-    partial class ShortTermParkingContextModelSnapshot : ModelSnapshot
+    [Migration("20220917005036_DatabaseCpf")]
+    partial class DatabaseCpf
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -172,9 +174,6 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("VARCHAR(50)");
 
-                    b.Property<byte>("Hierarchy")
-                        .HasColumnType("TINYINT");
-
                     b.Property<bool>("IsEmailConfirmed")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("BIT")
@@ -219,7 +218,6 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                             Cpf = "111.111.111-11",
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(1989),
                             Email = "admin@admin.com",
-                            Hierarchy = (byte)0,
                             IsEmailConfirmed = true,
                             Name = "Admin",
                             Password = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
@@ -241,7 +239,7 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME2")
-                        .HasDefaultValue(new DateTime(2022, 9, 17, 9, 58, 36, 444, DateTimeKind.Local).AddTicks(8440))
+                        .HasDefaultValue(new DateTime(2022, 9, 16, 21, 50, 36, 192, DateTimeKind.Local).AddTicks(3702))
                         .HasColumnName("created_at");
 
                     b.Property<string>("LicensePlate")
@@ -280,7 +278,7 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 9, 17, 9, 58, 36, 445, DateTimeKind.Local).AddTicks(1664),
+                            CreatedAt = new DateTime(2022, 9, 16, 21, 50, 36, 192, DateTimeKind.Local).AddTicks(5287),
                             LicensePlate = "fhf-1234",
                             Model = "123121234",
                             Status = true,

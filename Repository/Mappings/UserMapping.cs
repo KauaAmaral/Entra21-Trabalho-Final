@@ -74,7 +74,7 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                     Name = "Admin",
                     Email = "admin@admin.com",
                     Password = "1234".GetHash(),
-                    Cpf = "11111111111",
+                    Cpf = "111.111.111-11",
                     Phone = "1111111111",
                     CreatedAt = new DateTime(2005 - 08 - 08),
                     Hierarchy = Enums.UserHierarchy.Administrator,

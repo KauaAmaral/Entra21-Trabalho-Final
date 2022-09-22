@@ -86,7 +86,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             _userService.Disable(user);
             _session.RemoveUserSession();
 
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("User/Index", "Login");
         }
     }
 }
