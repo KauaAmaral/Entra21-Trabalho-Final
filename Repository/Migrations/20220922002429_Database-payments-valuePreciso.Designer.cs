@@ -4,6 +4,7 @@ using Entra21.CSharp.Area21.RepositoryDataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entra21.CSharp.Area21.Repository.Migrations
 {
     [DbContext(typeof(ShortTermParkingContext))]
-    partial class ShortTermParkingContextModelSnapshot : ModelSnapshot
+    [Migration("20220922002429_Database-payments-valuePreciso")]
+    partial class DatabasepaymentsvaluePreciso
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

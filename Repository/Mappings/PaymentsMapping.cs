@@ -58,6 +58,7 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
 
             builder.Property(x => x.Value)
                 .HasColumnType("DECIMAL")
+                .HasPrecision(5, 2)
                 .IsRequired()
                 .HasColumnName("value");
 

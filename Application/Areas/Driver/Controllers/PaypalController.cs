@@ -71,7 +71,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
                         Token = token,
                         PayerId = PayerID,
                         TransactionId = objeto.purchase_units[0].payments.captures[0].id,
-                        Value = Convert.ToDecimal(objeto.purchase_units[0].payments.captures[0].amount.value)
+                        Value = Convert.ToDecimal(objeto.purchase_units[0].payments.captures[0].amount.value.Replace(".", ","))
                     };
 
                     _paymentService.Register(viewModel);
