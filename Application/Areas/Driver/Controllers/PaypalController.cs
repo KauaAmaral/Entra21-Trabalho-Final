@@ -4,6 +4,7 @@ using Entra21.CSharp.Area21.Application.Models.PaypalTransaction;
 using Entra21.CSharp.Area21.Service.Authentication;
 using Entra21.CSharp.Area21.Service.Services.Payments;
 using Entra21.CSharp.Area21.Service.Services.Vehicles;
+using Entra21.CSharp.Area21.Service.ViewModels.Payments;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
@@ -16,21 +17,19 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
     public class PaypalController : Controller
     {
         private readonly IVehicleService _vehicleService;
-        private readonly ISessionAuthentication _session;
+        private readonly IPaymentService _paymentService;
 
         private readonly string _userName = "AeHh1KwTDiCTJlkmPVoWT5qj9YMp0dwnhAStwYVE7VZiaPN2jfJjMm7UJ6B9TMXFkVqFNkmpzpfinpJR";
         private readonly string _passwd = "EHqhokF9mvWolaWgw04hay43lNAuCcLNHZ8XBpmm0cLSYUxdAYnbBI6dhiaCXtI54qJJ-EF3VS0IMGfx";
         private readonly string _url = "https://api-m.sandbox.paypal.com";
-        private readonly string _urlReturn = "https://localhost:7121/driver/Paypal/Approved";
         private readonly string _urlCancel = "https://localhost:7121/driver/Home";
 
         public PaypalController(
-            IVehicleService vehicleService,
-            ISessionAuthentication sessionAuthentication
-            )
+            IVehicleService vehicleService, 
+            IPaymentService paymentService)
         {
             _vehicleService = vehicleService;
-            _session = sessionAuthentication;
+            _paymentService = paymentService;
         }
 
         public IActionResult Index()
@@ -38,11 +37,9 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             return View("Teste");
         }
 
-        [Route("approved")]
-        public async Task<IActionResult> Approved()
+        [HttpGet("approved")]
+        public async Task<IActionResult> Approved([FromQuery] int idVehicle, int idUser, string token, string PayerID)
         {
-            var token = HttpContext.Request.Query["token"];
-
             var status = false;
 
             using (var client = new HttpClient())
@@ -61,11 +58,23 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
                 ViewData["Status"] = status;
                 if (status)
                 {
-                    var jsonRespuesta = response.Content.ReadAsStringAsync().Result;
+                    var jsonResponse = response.Content.ReadAsStringAsync().Result;
 
-                    PaypalTransaction objeto = JsonConvert.DeserializeObject<PaypalTransaction>(jsonRespuesta);
+                    var objeto = JsonConvert.DeserializeObject<PaypalTransaction>(jsonResponse);
 
                     ViewData["IdTransaccion"] = objeto.purchase_units[0].payments.captures[0].id;
+
+                    var viewModel = new PaymentRegisterViewModel
+                    {
+                        VehicleId = idVehicle,
+                        UserId = idUser,
+                        Token = token,
+                        PayerId = PayerID,
+                        TransactionId = objeto.purchase_units[0].payments.captures[0].id,
+                        Value = Convert.ToDecimal(objeto.purchase_units[0].payments.captures[0].amount.value.Replace(".", ","))
+                    };
+
+                    _paymentService.Register(viewModel);
                 }
             }
             return View();
@@ -74,12 +83,14 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         [HttpPost("Paypal")]
         public async Task<JsonResult> Paypal(string id)
         {
-            var vehicleId = Convert.ToInt32(id);
+            var IdVehicle = Convert.ToInt32(id);
 
             string price;
 
-            var vehicle = _vehicleService.GetById(vehicleId);
+            var vehicle = _vehicleService.GetById(IdVehicle);
             var product = vehicle.LicensePlate;
+
+            var idUser = vehicle.UserId;
 
             if (vehicle.Type == 0)
                 price = "1.50";
@@ -88,7 +99,9 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
             bool status = false;
             string answer = string.Empty;
-            
+
+            string _urlReturn = $"https://localhost:7121/driver/Paypal/Approved?idVehicle={IdVehicle}&IdUser={idUser}";
+
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(_url);
