@@ -90,6 +90,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Users
             return true;
         }
 
+        //TODO: Criar EntityMapping para mudar propriedades
         public User UpdateVerifyEmail(int id)
         {
             var user = _userRepository.GetById(id);
