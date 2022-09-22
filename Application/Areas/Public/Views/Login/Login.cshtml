@@ -1,6 +1,5 @@
 ﻿@model UserLoginViewModel
 @{
-	Layout = "_LayoutUnlogged";
 	ViewData["Title"] = "Login";
 }
 
@@ -9,7 +8,7 @@
 		<div class="panel">
 			<div class="panel-body">
 				<div class="brand">
-					<h2 class="brand-text font-size-18">Área 21</h2>
+					<img class="navbar-brand-logo" src="~/Theme/global/portraits/Logo Black.png">
 				</div>
 				<form asp-action="Login" asp-controller="login" method="POST">
 					<div class="form-group form-material floating" data-plugin="formMaterial">

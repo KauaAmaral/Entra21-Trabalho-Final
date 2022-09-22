@@ -10,23 +10,17 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
     [Area("Driver")]
     [IsUserLogged]
     [Route("driver/user")]
-    public class UserController : Controller
+    public class DriverController : Controller
     {
         private readonly IUserService _userService;
         private readonly ISessionAuthentication _session;
 
-        public UserController(IUserService userService, ISessionAuthentication session)
+        public DriverController(IUserService userService, ISessionAuthentication session)
         {
             _userService = userService;
             _session = session;
         }
 
-        public IActionResult Index()
-        {
-            return View("Update");
-        }
-
-        [HttpGet("update")]
         public IActionResult Update()
         {
             var user = _session.FindUserSession();
@@ -39,7 +33,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
                 Phone = user.Phone,
             };
 
-            return View(userUpdateViewModel);
+            return View("user/Update", userUpdateViewModel);
         }
 
         [HttpPost("update")]
