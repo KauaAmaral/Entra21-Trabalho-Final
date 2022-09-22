@@ -2,6 +2,7 @@
 using Entra21.CSharp.Area21.Repository.Repositories.Generic;
 using Entra21.CSharp.Area21.RepositoryDataBase;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Entra21.CSharp.Area21.Repository.Repositories.Vehicles
 {
@@ -30,5 +31,8 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Vehicles
             .Include(x => x.User)
             .Where(x => x.User.Id == id)
             .ToList();
+
+        public Vehicle? GetByVehiclePlate(string vehiclePlate) => _context.Vehicles
+            .FirstOrDefault(x => x.LicensePlate == vehiclePlate);
     }
 }

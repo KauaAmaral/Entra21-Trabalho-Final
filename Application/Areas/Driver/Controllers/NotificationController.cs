@@ -1,5 +1,7 @@
 ﻿using Entra21.CSharp.Area21.Application.Filters;
+using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.Service.Services.Notifications;
+using Entra21.CSharp.Area21.Service.Services.Vehicles;
 using Entra21.CSharp.Area21.Service.ViewModels.Notifications;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,11 +12,15 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
     [Route("driver/notification")]
     public class NotificationController : Controller
     {
-        private readonly INotificationService _notificationService;       
+        private readonly INotificationService _notificationService;
+        private readonly IVehicleService _vehicleService;
 
-        public NotificationController(INotificationService notificationService)
+        public NotificationController(
+            INotificationService notificationService,
+            IVehicleService vehicleService)
         {
-            _notificationService = notificationService;            
+            _notificationService = notificationService;
+            _vehicleService = vehicleService;
         }
 
         public IActionResult Index()
@@ -25,14 +31,24 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult Register([FromBody] NotificationRegisterViewModel notificationRegisterViewModel)
+        public IActionResult Register([FromForm] NotificationRegisterViewModel notificationRegisterViewModel)
         {
+            var vehicle = _vehicleService.GetByVehiclePlate(notificationRegisterViewModel.VehiclePlate);
+
+            if (vehicle == null)
+            {
+                TempData["Message"] = "Placa não cadastrada";
+                return View(nameof(Register));
+            }
+
+            notificationRegisterViewModel.VehicleId = vehicle.Id;
+
             if (!ModelState.IsValid)
-                return UnprocessableEntity(ModelState);
+                return View(notificationRegisterViewModel);
 
-            var notification = _notificationService.Register(notificationRegisterViewModel);
+            _notificationService.Register(notificationRegisterViewModel);
 
-            return Ok (notification);
+            return RedirectToAction("Index");
         }
 
         [HttpPost("update")]
