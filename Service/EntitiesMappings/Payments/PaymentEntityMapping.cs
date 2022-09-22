@@ -11,9 +11,9 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Payments
                 Token = registerViewModel.Token,
                 PayerId = registerViewModel.PayerId,
                 TransactionId = registerViewModel.TransactionId,
-                UserId = registerViewModel.UserId.GetValueOrDefault(),
-                VehicleId = registerViewModel.VehicleId.GetValueOrDefault(),
-                Status = registerViewModel.Status
+                UserId = registerViewModel.UserId,
+                VehicleId = registerViewModel.VehicleId,
+                Value = registerViewModel.Value
             };
     }
 }
