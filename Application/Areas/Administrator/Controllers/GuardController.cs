@@ -31,10 +31,10 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
         {
             var guards = _guardService.GetAll();
 
-            return View("guard/Index", guards);
+            return View("Guard/Index", guards);
         }
 
-        [HttpGet("register")]
+        [HttpGet("Register")]
         public IActionResult Register()
         {
             var viewModel = new GuardRegisterViewModel();
@@ -42,7 +42,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
             return View(viewModel);
         }
 
-        [HttpPost("register")]
+        [HttpPost("Register")]
         public IActionResult Register([FromForm] GuardRegisterViewModel viewModel)
         {
             var user = _userService.GetByCpf(viewModel.Cpf);
@@ -63,7 +63,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet("getAll")]
+        [HttpGet("GetAll")]
         public IActionResult GetAll()
         {
             var guards = _guardService.GetAll();

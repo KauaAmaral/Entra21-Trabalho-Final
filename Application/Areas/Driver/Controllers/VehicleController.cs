@@ -11,12 +11,12 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
     [Area("Driver")]
     [IsUserLogged]
     [Route("driver/vehicle")]
-    public class VehicleDriverController : Controller // TODO ControleVehicle Revisar
+    public class VehicleController : Controller // TODO ControleVehicle Revisar
     {
         private readonly IVehicleService _vehicleService;
         private readonly ISessionAuthentication _session;
 
-        public VehicleDriverController(
+        public VehicleController(
             IVehicleService vehicleService,
             ISessionAuthentication sessionAuthentication            
             )
