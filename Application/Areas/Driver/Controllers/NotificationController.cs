@@ -1,4 +1,5 @@
 ﻿using Entra21.CSharp.Area21.Application.Filters;
+using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.Service.Services.Notifications;
 using Entra21.CSharp.Area21.Service.Services.Vehicles;
 using Entra21.CSharp.Area21.Service.ViewModels.Notifications;
@@ -51,10 +52,10 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet("Checkout")]
+        [HttpGet("checkout")]
         public IActionResult Checkout()
         {
-            return View();
+            return View("Notifications/Checkout");
         }
 
         [HttpPost("update")]
