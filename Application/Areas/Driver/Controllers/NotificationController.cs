@@ -51,6 +51,12 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet("Checkout")]
+        public IActionResult Checkout()
+        {
+            return View();
+        }
+
         [HttpPost("update")]
         public IActionResult Update([FromBody] NotificationUpdateViewModel notificationUpdateViewModel)
         {

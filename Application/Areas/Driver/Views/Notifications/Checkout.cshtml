@@ -1,0 +1,29 @@
+﻿@model NotificationCheckoutViewModel
+
+<div class="page background-image vertical-align text-center">
+	<div class="page-content vertical-align-middle">
+		<div class="panel">
+			<div class="panel-body">
+				<h3 class="h3">Checar</h3>
+
+				<form asp-action="register" method="POST">
+					<div>
+						<label asp-for="LicensePlate" class="form-label" span-required=""></label>
+						<input asp-for="LicensePlate" class="form-control"/>
+						<span asp-validation-for="LicensePlate" class="text-danger"></span>
+					</div>
+
+					<div class="text-end">
+						<a asp-action="Index" class="btn btn-outline-danger">
+							<i class="fa-solid fa-xmark"></i> Cancelar
+						</a>
+						<button type="submit" class="btn btn-success">
+							<i class="fa-solid fa-floppy-disk"></i> Salvar
+						</button>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</div>
