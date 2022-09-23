@@ -15,7 +15,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
         {
         }
 
-        [HttpGet("obterTodos")]
+        [HttpGet("getAll")]
         public IActionResult GetAllPayments()
         {
             var payments = _paymentsService.GetAllPayments();
