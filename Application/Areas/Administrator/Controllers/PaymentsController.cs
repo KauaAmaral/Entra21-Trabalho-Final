@@ -11,16 +11,23 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
     public class PaymentsController : Controller
     {
         private readonly IPaymentService _paymentsService;
-        public PaymentsController()
+        public PaymentsController(IPaymentService paymentService)
         {
+            _paymentsService = paymentService;
         }
 
-        [HttpGet("getAll")]
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            return View("payments");
+        }
+
+        [HttpGet("GetAll")]
         public IActionResult GetAllPayments()
         {
             var payments = _paymentsService.GetAllPayments();
 
-            return View(payments);
+            return Ok(payments);
         }
     }
 }
