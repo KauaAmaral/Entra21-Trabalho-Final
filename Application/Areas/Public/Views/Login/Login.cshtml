@@ -27,8 +27,52 @@
 						}
 					<button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Entrar</button>
 				</form>
-				<Por>Sem conta? <a asp-controller="Login" asp-action="Register">Cadastre-se</a><p>
+				<button class="btn btn-primary" onclick="login()">Google</button>
+				<p>Sem conta? <a asp-controller="Login" asp-action="Register">Cadastre-se</a><p>
 			</div>
 		</div>
 	</div>
 </div>
+
+@section scripts{
+	<script type="module">
+	  // Import the functions you need from the SDKs you need
+	  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+	  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
+	  import { GoogleAuthProvider  } from "https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js";
+	  // TODO: Add SDKs for Firebase products that you want to use
+	  // https://firebase.google.com/docs/web/setup#available-libraries
+
+	  // Your web app's Firebase configuration
+	  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+	  const firebaseConfig = {
+		apiKey: "AIzaSyD-Uj1gQtGWiHTtu0sEaqT5ZUhoG721ROM",
+		authDomain: "area21-363323.firebaseapp.com",
+		projectId: "area21-363323",
+		storageBucket: "area21-363323.appspot.com",
+		messagingSenderId: "79499952480",
+		appId: "1:79499952480:web:3ff3de3e5a169178d41e05",
+		measurementId: "G-05ZSCEYBHX"
+	  };
+
+	  // Initialize Firebase
+	  const app = initializeApp(firebaseConfig);
+	  const analytics = getAnalytics(app);
+	  var provider = new firebase.auth.GoogleAuthProvider();
+	  provider.addScoped('https://www.googleapis.com/auth/contacts.readonly');
+
+	  function login(){
+		  debbugger;
+		  firebase
+		  .auth()
+		  .SignInWithPopup(provider)
+		  .then(result => {
+			var token = result.credential.accessToken;
+			var user = result.user;
+
+			console.log(token);
+			console.log(user);
+		  });
+	  }
+	</script>
+}

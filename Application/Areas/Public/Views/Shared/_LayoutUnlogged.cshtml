@@ -19,6 +19,9 @@
 <body class="body-login">
     <div class="background-image">
         @RenderBody()
+    </div>
+
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
 

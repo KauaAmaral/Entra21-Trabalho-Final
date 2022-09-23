@@ -20,6 +20,11 @@ builder.Services.Configure<RazorViewEngineOptions>(options =>
     options.AreaViewLocationFormats.Add("/Views/{0}.cshtml");
 });
 
+builder.Services.AddAuthentication().AddGoogle(googleOptions =>
+{
+    googleOptions.ClientId = builder.Configuration.GetValue<string>("Google:ClientId");
+    googleOptions.ClientSecret = builder.Configuration.GetValue<string>("Google:ClientSecret");
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
