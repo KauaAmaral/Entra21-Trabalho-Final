@@ -23,6 +23,14 @@
                 <td>@guard.User.Name</td>
                 <td>@guard.User.Cpf</td>
                 <td>@guard.IdentificationNumber</td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Update" asp-route-id="@guard.Id">
+                        <i class="fa-solid fa-pencil"></i> Editar
+                    </a>
+                    <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@guard.Id">
+                        <i class="fa-solid fa-trash"></i> Apagar
+                    </a>
+                </td>
             </tr>
         }
     </tbody>

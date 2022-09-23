@@ -21,6 +21,13 @@ namespace Entra21.CSharp.Area21.Service.Services.Guards
         public IList<Guard> GetAll() =>
             _guardRepository.GetAll();
 
+        public Guard GetById(int id)
+        {
+            var guard = _guardRepository.GetById(id);
+
+            return guard;
+        }
+
         public Guard Register(GuardRegisterViewModel viewModel)
         {
             var guard = _guardEntityMapping.RegisterWith(viewModel);
@@ -28,6 +35,20 @@ namespace Entra21.CSharp.Area21.Service.Services.Guards
             _guardRepository.Add(guard);
 
             return guard;
+        }
+
+        public void Update(GuardUpdateViewModel viewModel)
+        {
+            var guard = new Guard();
+            guard.Id = viewModel.Id;
+            guard.IdentificationNumber = viewModel.IdentificationNumber;
+
+            _guardRepository.Update(guard);
+        }
+
+        public void Delete(int id)
+        {
+            _guardRepository.Delete(id);
         }
     }
 }

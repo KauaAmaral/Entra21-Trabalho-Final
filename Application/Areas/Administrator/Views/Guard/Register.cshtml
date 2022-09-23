@@ -1,36 +1,48 @@
-﻿@using Entra21.CSharp.Area21.Service.ViewModels.Guards
-@model GuardRegisterViewModel
+﻿@model GuardRegisterViewModel
 
 @{
     ViewData["Title"] = "Register";
 }
 
-<div class="page-content row justify-content-center">
-    <div class="col-6">
-        <div class="brand">
-            <h1 class="brand-text font-size-18">Cadastro do Guarda</h1>
+<div class="page" align="center">
+    <div class="page vertical-align text-center">
+        <div class="page-content vertical-align-middle">
+            <div class="panel">
+                <div class="panel-body">
+
+                    <div class="brand">
+
+                        <h1 class="brand-text font-size-18">Cadastro do Guarda</h1>
+
+                    </div>
+
+                    <form asp-action="register" asp-controller="guard" method="POST">
+
+                        <div class="form-group form-material floating" data-plugin="formMaterial">
+                            <label asp-for="Cpf" class="sr-only" for="inputCpf">CPF</label>
+                            <input asp-for="Cpf" class="form-control"
+                                   id="inputCpf" name="cpf" placeholder="CPF" />
+                            <span asp-validation-for="Cpf" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group form-material floating" data-plugin="formMaterial">
+                            <label asp-for="IdentificationNumber" class="sr-only" for="inputCpf">Número de identificação</label>
+                            <input asp-for="IdentificationNumber" class="form-control"
+                                   id="inputIdentificationNumber" name="IdentificationNumber" placeholder="Número de identificação" />
+                            <span asp-validation-for="IdentificationNumber" class="text-danger"></span>
+                        </div>
+
+                        @if (TempData["Message"] != null)
+                        {
+                            <p class="text-danger">@TempData["Message"]</p>
+                        }
+
+                        <button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Criar guarda</button>
+
+                    </form>
+
+                </div>
+            </div>
         </div>
-
-        <form asp-action="register" asp-controller="guard" method="POST">
-
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-                <label asp-for="Cpf" class="sr-only" for="inputCpf">CPF</label>
-                <input asp-for="Cpf" class="form-control"
-                       id="inputCpf" name="cpf" placeholder="CPF" />
-                <span asp-validation-for="Cpf" class="text-danger"></span>
-            </div>
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-                <label asp-for="IdentificationNumber" class="sr-only" for="inputCpf">Número de identificação</label>
-                <input asp-for="IdentificationNumber" class="form-control"
-                       id="inputIdentificationNumber" name="IdentificationNumber" placeholder="Número de identificação" />
-                <span asp-validation-for="IdentificationNumber" class="text-danger"></span>
-            </div>
-
-            @if (TempData["Message"] != null)
-            {
-                <p class="text-danger">@TempData["Message"]</p>
-            }
-            <button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Criar guarda</button>
-        </form>
     </div>
 </div>
