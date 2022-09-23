@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Entra21.CSharp.Area21.Service.ViewModels.Notifications
 {
-    internal class NotificationCheckoutViewModel : NotificationViewModel
+    internal class NotificationCheckoutViewModel 
     {
         [Display(Name = "Placa")]
         [Required(ErrorMessage = "{0} deve ser preenchido")]
