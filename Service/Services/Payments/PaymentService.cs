@@ -20,6 +20,9 @@ namespace Entra21.CSharp.Area21.Service.Services.Payments
             _paymentEntityMapping = paymentEntityMapping;
         }
 
+        public IList<Payment> GetPayments() =>
+            _paymentRepository.GetAll();
+
         public Payment Register(PaymentRegisterViewModel registerViewModel)
         {
             var payment = _paymentEntityMapping.RegisterWith(registerViewModel);

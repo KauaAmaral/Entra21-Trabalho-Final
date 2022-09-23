@@ -6,5 +6,6 @@ namespace Entra21.CSharp.Area21.Service.Services.Payments
     public interface IPaymentService
     {
         Payment Register(PaymentRegisterViewModel registerViewModel);
+        IList<Payment> GetAllPayments();
     }
 }
