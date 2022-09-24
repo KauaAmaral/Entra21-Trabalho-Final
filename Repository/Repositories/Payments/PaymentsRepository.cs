@@ -1,6 +1,7 @@
 ﻿using Entra21.CSharp.Area21.RepositoryDataBase;
 using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.Repository.Repositories.Generic;
+using System.Data.Entity;
 
 namespace Entra21.CSharp.Area21.Repository.Repositories.Payments
 {
@@ -12,6 +13,10 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Payments
         {
             _context = context;
         }
+
+        public override IList<Payment> GetAll() =>
+            _context.Payments
+            .ToList();
     }
 }
 

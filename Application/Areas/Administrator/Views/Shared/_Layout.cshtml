@@ -108,9 +108,7 @@
                         </span>
                     </a>
                     <div class="dropdown-menu" role="menu">
-                        <a asp-area="Driver" asp-controller="User" asp-action="Index" class="dropdown-item" role="menuitem">
-                            <i class="icon wb-user" aria-hidden="true"></i> Perfil
-                            </a>
+                        <a asp-controller="user" asp-action="update" class="dropdown-item" role="menuitem"><i class="icon wb-user" aria-hidden="true"></i> Perfil</a>
                         <a asp-action="Payments" asp-controller="Payments" class="dropdown-item">
                             <i class="icon wb-payment"></i> Pagamentos
                         </a>
@@ -160,6 +158,12 @@
                         <a asp-area="Driver" asp-controller="Vehicle" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
                             <i class="fa-solid fa-car"></i>
                             <span class="site-menu-title">Veículos</span>
+                        </a>
+                    </li>
+                    <li class="dropdown site-menu-item has-sub">
+                        <a asp-area="Driver" asp-controller="Guard" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
+                            <i class="fa-solid fa-person-military-pointing"></i>
+                            <span class="site-menu-title">Guardas</span>
                         </a>
                     </li>
                     <li class="dropdown site-menu-item has-sub">

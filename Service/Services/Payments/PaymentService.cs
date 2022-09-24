@@ -1,8 +1,6 @@
 ﻿using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.Repository.Repositories.Payments;
-using Entra21.CSharp.Area21.Repository.Repositories.Vehicles;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Payments;
-using Entra21.CSharp.Area21.Service.EntitiesMappings.Vehicles;
 using Entra21.CSharp.Area21.Service.ViewModels.Payments;
 
 namespace Entra21.CSharp.Area21.Service.Services.Payments
@@ -19,6 +17,9 @@ namespace Entra21.CSharp.Area21.Service.Services.Payments
             _paymentRepository = paymentRepository;
             _paymentEntityMapping = paymentEntityMapping;
         }
+
+        public IList<Payment> GetAllPayments() =>
+            _paymentRepository.GetAll();
 
         public Payment Register(PaymentRegisterViewModel registerViewModel)
         {
