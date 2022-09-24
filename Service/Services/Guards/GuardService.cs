@@ -37,13 +37,18 @@ namespace Entra21.CSharp.Area21.Service.Services.Guards
             return guard;
         }
 
-        public void Update(GuardUpdateViewModel viewModel)
+        public bool Update(GuardUpdateViewModel viewModel)
         {
-            var guard = new Guard();
-            guard.Id = viewModel.Id;
-            guard.IdentificationNumber = viewModel.IdentificationNumber;
+            var guard = _guardRepository.GetById(viewModel.Id);
+
+            if (guard == null)
+                return false;
+
+            _guardEntityMapping.UpdateWith(guard, viewModel);
 
             _guardRepository.Update(guard);
+
+            return true;
         }
 
         public void Delete(int id)

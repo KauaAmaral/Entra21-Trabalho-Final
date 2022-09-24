@@ -104,5 +104,13 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
 
             return Ok(guards);
         }
+
+        [HttpGet("GetById")]
+        public IActionResult GetById([FromQuery] int id)
+        {
+            var guards = _guardService.GetById(id);
+
+            return Ok(guards);
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Guards
         Guard Register(GuardRegisterViewModel viewModel);
         IList<Guard> GetAll();
         Guard GetById(int id);
-        void Update(GuardUpdateViewModel viewModel);
+        bool Update(GuardUpdateViewModel viewModel);
         void Delete(int id);
     }
 }

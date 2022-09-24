@@ -16,7 +16,7 @@
 
                     </div>
 
-                    <form asp-action="register" asp-controller="guard" method="POST">
+                    <form asp-action="Register" asp-controller="Guard" method="POST">
 
                         <div class="form-group form-material floating" data-plugin="formMaterial">
                             <label asp-for="Cpf" class="sr-only" for="inputCpf">CPF</label>
@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="form-group form-material floating" data-plugin="formMaterial">
-                            <label asp-for="IdentificationNumber" class="sr-only" for="inputCpf">Número de identificação</label>
+                            <label asp-for="IdentificationNumber" class="sr-only" for="inputIdentificationNumber">Número de identificação</label>
                             <input asp-for="IdentificationNumber" class="form-control"
                                    id="inputIdentificationNumber" name="IdentificationNumber" placeholder="Número de identificação" />
                             <span asp-validation-for="IdentificationNumber" class="text-danger"></span>
