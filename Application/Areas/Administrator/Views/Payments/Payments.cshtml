@@ -1,8 +1,8 @@
-﻿@model List<Vehicle>
+﻿@model List<Payment>
 @{
     ViewData["Title"] = "Pagamentos";
 }
-<table class="table caption-top table-hover" id="vehicles-id" style="width:85%" align="center">
+<table class="table caption-top table-hover" id="payments-id" style="width:85%" align="center">
     <thead>
         <tr>
             <th style="width:15%"><font size="5"><b><font>Modelo</font></b></font></th>
@@ -11,48 +11,17 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var vehicles in Model)
+        @foreach (var payments in Model)
         {
-            <tr>
-                <td><b><font>@vehicles.Model</font></b></td>
-                <td><b><font>@vehicles.LicensePlate</font></b></td>
+             <tr>
+                <td><b><font>@payments.Vehicle.Model</font></b></td>
+                <td><b><font>@payments.Vehicle.LicensePlate</font></b></td>
                 <td>
-                    <button class="btn btn-primary" onclick="teste(@vehicles.Id)">
-                        <i aria-hidden="true"></i>Pagar
+                    <button class="btn btn-primary" onclick="teste()">
+                        <i aria-hidden="true"></i>Detalhes
                     </button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-@section scripts{
-    <script>
-
-       function teste(id) {
-        $.ajax({
-            url: '@Url.Action("Paypal", "Paypal")',
-            type: "POST",
-            data: {id: id},
-            dataType: "json",
-            success: function(data) {
-                   console.log(data);
-                    if (data.status) {
-
-                        var jsonresult = JSON.parse(data.response);
-
-                        console.log(jsonresult);
-
-                        var links = jsonresult.links;
-
-                        var resultado = links.find(item => item.rel === "approve")
-
-                        window.location.href = resultado.href
-                    } 
-                    else {
-                        alert("Volte mais tarde, o serviço de pagamento não está funcionado!")
-                    }
-                }
-            });
-        }
-    </script>
-    }
