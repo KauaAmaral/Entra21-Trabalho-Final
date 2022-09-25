@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Entra21.CSharp.Area21.Repository.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace Entra21.CSharp.Area21.Service.ViewModels.Notifications
 {
@@ -17,10 +18,13 @@ namespace Entra21.CSharp.Area21.Service.ViewModels.Notifications
 
         [Display(Name = "Observações")]
         [Required(ErrorMessage = "{0} deve ser preenchido")]
-        [MinLength(5, ErrorMessage = "{0} deve conter no mínimo {1} caracteres")]
+        [MinLength(2, ErrorMessage = "{0} deve conter no mínimo {1} caracteres")]
         [MaxLength(100, ErrorMessage = "{0} deve conter no máximo {1} caracteres")]
-        public string Comments { get; set; }
+        public string? Comments { get; set; }
 
+        [Display(Name = "Tipo do veículo: ")]
+        public VehicleType Type { get; set; }
+        public bool registered { get; set; }
         public int? UserId { get; set; }
         public int? VehicleId { get; set; }
     }    
