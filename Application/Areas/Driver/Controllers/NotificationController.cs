@@ -65,17 +65,16 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         {
             if (registered != true)
             {
-                var vehicle = _vehicleService.GetById(Convert.ToInt32(notificationRegisterViewModel.VehicleId));
                 ViewBag.VehicleType = GetVehicleType();
             }
             else
             {
+                var vehicle = _vehicleService.GetById(Convert.ToInt32(notificationRegisterViewModel.VehicleId));
                 var vehicleType = GetVehicleType();
                 ViewBag.VehicleType = vehicleType;
             }
-            var notificationRegister = new NotificationRegisterViewModel();
 
-            return View("Notifications/Register");
+            return View("Notifications/Register", notificationRegisterViewModel);
         }
 
         [HttpPost("register")]
@@ -116,21 +115,15 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             {
                 registered = false;
                 TempData["Message"] = "Placa não cadastrada";
-                return View(nameof(Register));
             }
             else
             {
                 notificationRegisterViewModel.VehicleId = vehicle.Id;
             }
 
-            if (!ModelState.IsValid)
-                return View(notificationRegisterViewModel);
-
-
             Register(notificationRegisterViewModel, registered);
 
             return RedirectToAction("Index");
-
 
         }
 

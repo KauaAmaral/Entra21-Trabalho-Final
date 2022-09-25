@@ -28,8 +28,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         [HttpGet("register")]
         public IActionResult Register()
         {
-            var vehicleType = GetVehicleType();
-
             ViewBag.VehicleType = GetVehicleType();
 
             var vehicleRegisterViewModel = new VehicleRegisterViewModel();
