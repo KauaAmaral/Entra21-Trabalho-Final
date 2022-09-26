@@ -61,15 +61,22 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         }
 
         [HttpGet("register")]
-        public IActionResult Register([FromQuery] NotificationRegisterViewModel notificationRegisterViewModel, bool registered)
+        public IActionResult Register([FromQuery] NotificationRegisterViewModel notificationRegisterViewModel)
         {
-            if (registered != true)
+            var plate = notificationRegisterViewModel.VehiclePlate;
+            var vehicle = _vehicleService.GetByVehiclePlate(plate);
+            var registered = true;
+            //var notificationRegisterViewModel = new NotificationRegisterViewModel();
+
+            if (vehicle == null)
             {
+                registered = false;
                 ViewBag.VehicleType = GetVehicleType();
             }
             else
             {
-                var vehicle = _vehicleService.GetById(Convert.ToInt32(notificationRegisterViewModel.VehicleId));
+                notificationRegisterViewModel.VehiclePlate = vehicle.LicensePlate;
+                notificationRegisterViewModel.Type = vehicle.Type;
                 var vehicleType = GetVehicleType();
                 ViewBag.VehicleType = vehicleType;
             }
@@ -78,7 +85,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult Register([FromForm] NotificationRegisterViewModel notificationRegisterViewModel)
+        public IActionResult Register([FromForm] NotificationRegisterViewModel notificationRegisterViewModel, bool registered)
         {
             var vehicle = _vehicleService.GetByVehiclePlate(notificationRegisterViewModel.VehiclePlate);
 
@@ -103,28 +110,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         public IActionResult Checkout()
         {
             return View("Notifications/Checkout");
-        }
-
-        [HttpPost("checkout")]
-        public IActionResult Checkout([FromForm] NotificationRegisterViewModel notificationRegisterViewModel)
-        {
-            var vehicle = _vehicleService.GetByVehiclePlate(notificationRegisterViewModel.VehiclePlate);
-            var registered = true;
-
-            if (vehicle == null)
-            {
-                registered = false;
-                TempData["Message"] = "Placa não cadastrada";
-            }
-            else
-            {
-                notificationRegisterViewModel.VehicleId = vehicle.Id;
-            }
-
-            Register(notificationRegisterViewModel, registered);
-
-            return RedirectToAction("Index");
-
         }
 
         private List<string> GetVehicleType()
