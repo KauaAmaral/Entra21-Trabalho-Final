@@ -24,7 +24,7 @@ namespace Entra21.CSharp.Area21.Service.ViewModels.Notifications
 
         [Display(Name = "Tipo do veículo: ")]
         public VehicleType Type { get; set; }
-        public bool registered { get; set; }
+        public bool Registered { get; set; }
         public int? UserId { get; set; }
         public int? VehicleId { get; set; }
     }    

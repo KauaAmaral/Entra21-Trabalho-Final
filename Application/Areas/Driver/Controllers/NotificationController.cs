@@ -1,8 +1,8 @@
 ﻿using Entra21.CSharp.Area21.Application.Filters;
-using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.Repository.Enums;
 using Entra21.CSharp.Area21.Service.Services.Notifications;
 using Entra21.CSharp.Area21.Service.Services.Vehicles;
+using Entra21.CSharp.Area21.Service.Services.Payments;
 using Entra21.CSharp.Area21.Service.ViewModels.Notifications;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,13 +15,17 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
     {
         private readonly INotificationService _notificationService;
         private readonly IVehicleService _vehicleService;
+        private readonly IPaymentService _paymentService;
 
         public NotificationController(
             INotificationService notificationService,
-            IVehicleService vehicleService)
+            IVehicleService vehicleService,
+            IPaymentService paymentService
+            )
         {
             _notificationService = notificationService;
             _vehicleService = vehicleService;
+            _paymentService = paymentService;
         }
 
         [HttpGet("")]
@@ -65,23 +69,32 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         {
             var plate = notificationRegisterViewModel.VehiclePlate;
             var vehicle = _vehicleService.GetByVehiclePlate(plate);
-            var registered = true;
-            //var notificationRegisterViewModel = new NotificationRegisterViewModel();
+            var validPayment = false;
+            if (vehicle != null)
+                validPayment = _paymentService.ValidPayment(vehicle);
 
-            if (vehicle == null)
+            if (!validPayment)
             {
-                registered = false;
-                ViewBag.VehicleType = GetVehicleType();
+                if (vehicle == null)
+                {
+                    notificationRegisterViewModel.Registered = false;
+                    ViewBag.VehicleType = GetVehicleType();
+                }
+                else
+                {
+                    notificationRegisterViewModel.VehiclePlate = vehicle.LicensePlate;
+                    notificationRegisterViewModel.Type = vehicle.Type;
+                    notificationRegisterViewModel.Registered = true;
+                    var vehicleType = GetVehicleType();
+                    ViewBag.VehicleType = vehicleType;
+                }
+
+                return View("Notifications/Register", notificationRegisterViewModel);
             }
             else
             {
-                notificationRegisterViewModel.VehiclePlate = vehicle.LicensePlate;
-                notificationRegisterViewModel.Type = vehicle.Type;
-                var vehicleType = GetVehicleType();
-                ViewBag.VehicleType = vehicleType;
+                return RedirectToAction("Checkout");
             }
-
-            return View("Notifications/Register", notificationRegisterViewModel);
         }
 
         [HttpPost("register")]
