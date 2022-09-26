@@ -63,10 +63,48 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet("Update")]
+        public IActionResult Update([FromQuery] int id)
+        {
+            var guard = _guardService.GetById(id);
+
+            var guardUpdateViewModel = new GuardUpdateViewModel()
+            {
+                Id = guard.Id,
+                IdentificationNumber = guard.IdentificationNumber
+            };
+
+            return View(guardUpdateViewModel);
+        }
+
+        [HttpPost("Update")]
+        public IActionResult Update([FromForm] GuardUpdateViewModel viewModel)
+        {
+            _guardService.Update(viewModel);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet("Delete")]
+        public IActionResult Delete([FromQuery] int id)
+        {
+            _guardService.Delete(id);
+
+            return RedirectToAction("Index");
+        }
+
         [HttpGet("GetAll")]
         public IActionResult GetAll()
         {
             var guards = _guardService.GetAll();
+
+            return Ok(guards);
+        }
+
+        [HttpGet("GetById")]
+        public IActionResult GetById([FromQuery] int id)
+        {
+            var guards = _guardService.GetById(id);
 
             return Ok(guards);
         }
