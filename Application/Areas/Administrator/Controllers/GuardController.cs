@@ -80,9 +80,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
         [HttpPost("Update")]
         public IActionResult Update([FromForm] GuardUpdateViewModel viewModel)
         {
-            if (!ModelState.IsValid)
-                return View(viewModel);
-
             _guardService.Update(viewModel);
 
             return RedirectToAction("Index");
