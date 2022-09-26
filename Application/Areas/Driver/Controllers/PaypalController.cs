@@ -18,6 +18,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
     {
         private readonly IVehicleService _vehicleService;
         private readonly IPaymentService _paymentService;
+        private readonly ISessionAuthentication _session;
 
         private readonly string _userName = "AeHh1KwTDiCTJlkmPVoWT5qj9YMp0dwnhAStwYVE7VZiaPN2jfJjMm7UJ6B9TMXFkVqFNkmpzpfinpJR";
         private readonly string _passwd = "EHqhokF9mvWolaWgw04hay43lNAuCcLNHZ8XBpmm0cLSYUxdAYnbBI6dhiaCXtI54qJJ-EF3VS0IMGfx";
@@ -25,16 +26,98 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         private readonly string _urlCancel = "https://localhost:7121/driver/Home";
 
         public PaypalController(
-            IVehicleService vehicleService, 
-            IPaymentService paymentService)
+            IVehicleService vehicleService,
+            IPaymentService paymentService,
+            ISessionAuthentication sessionAuthentication)
         {
             _vehicleService = vehicleService;
             _paymentService = paymentService;
+            _session = sessionAuthentication;
         }
 
         public IActionResult Index()
         {
             return View("Teste");
+        }
+
+        [HttpPost("Paypal")]
+        public async Task<JsonResult> Paypal(string id)
+        {
+            var IdVehicle = 0;
+            string price = "";
+            var product = id;
+
+            try
+            {
+                IdVehicle = Convert.ToInt32(id);
+                var vehicle = _vehicleService.GetById(IdVehicle);
+                product = vehicle.LicensePlate;
+
+                if (vehicle.Type == 0)
+                    price = "1.50";
+                else
+                    price = "0.75";
+            }
+            catch
+            {
+
+            }
+
+            var user = _session.FindUserSession();
+            var idUser = user.Id;
+            bool status = false;
+            string answer = string.Empty;
+
+            string _urlReturn = $"https://localhost:7121/driver/Paypal/Approved?idVehicle={IdVehicle}&IdUser={idUser}";
+
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_url);
+
+                var authToken = Encoding.ASCII.GetBytes($"{_userName}:{_passwd}");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authToken));
+
+
+                var orden = new PaypalOrder()
+                {
+                    intent = "CAPTURE",
+                    purchase_units = new List<Models.PaypalOrder.PurchaseUnit>() {
+
+                        new Models.PaypalOrder.PurchaseUnit() {
+
+                            amount = new Models.PaypalOrder.Amount() {
+                                currency_code = "BRL",
+                                value = price
+                            },
+                            description = product
+                        }
+                    },
+                    application_context = new ApplicationContext()
+                    {
+                        brand_name = "Area21",
+                        landing_page = "NO_PREFERENCE",
+                        user_action = "PAY_NOW",
+                        return_url = _urlReturn,
+                        cancel_url = _urlCancel
+                    }
+                };
+
+
+                var json = JsonConvert.SerializeObject(orden);
+
+                var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await client.PostAsync("/v2/checkout/orders", data);
+
+                status = response.IsSuccessStatusCode;
+
+                if (status)
+                {
+                    answer = response.Content.ReadAsStringAsync().Result;
+                }
+            }
+            return Json(new { status = status, response = answer });
         }
 
         [HttpGet("approved")]
@@ -78,76 +161,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
                 }
             }
             return View();
-        }
-
-        [HttpPost("Paypal")]
-        public async Task<JsonResult> Paypal(string id)
-        {
-            var IdVehicle = Convert.ToInt32(id);
-
-            string price;
-
-            var vehicle = _vehicleService.GetById(IdVehicle);
-            var product = vehicle.LicensePlate;
-
-            var idUser = vehicle.UserId;
-
-            if (vehicle.Type == 0)
-                price = "1.50";
-            else
-                price = "0.75";
-
-            bool status = false;
-            string answer = string.Empty;
-
-            string _urlReturn = $"https://localhost:7121/driver/Paypal/Approved?idVehicle={IdVehicle}&IdUser={idUser}";
-
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(_url);
-
-                var authToken = Encoding.ASCII.GetBytes($"{_userName}:{_passwd}");
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authToken));
-
-
-                var orden = new PaypalOrder()
-                {
-                    intent = "CAPTURE",
-                    purchase_units = new List<Models.PaypalOrder.PurchaseUnit>() {
-
-                        new Models.PaypalOrder.PurchaseUnit() {
-
-                            amount = new Models.PaypalOrder.Amount() {
-                                currency_code = "BRL",
-                                value = price
-                            },
-                            description = product
-                        }
-                    },
-                    application_context = new ApplicationContext()
-                    {
-                        brand_name = "Area21",
-                        landing_page = "NO_PREFERENCE",
-                        user_action = "PAY_NOW",
-                        return_url = _urlReturn,
-                        cancel_url = _urlCancel
-                    }
-                };
-
-                var json = JsonConvert.SerializeObject(orden);
-
-                var data = new StringContent(json, Encoding.UTF8, "application/json");
-
-                HttpResponseMessage response = await client.PostAsync("/v2/checkout/orders", data);
-
-                status = response.IsSuccessStatusCode;
-
-                if (status)
-                {
-                    answer = response.Content.ReadAsStringAsync().Result;
-                }
-            }
-            return Json(new { status = status, response = answer });
         }
 
         [HttpPost("Approved")]

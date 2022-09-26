@@ -97,11 +97,11 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             }
         }
 
-        [HttpPost("register")]
-        public IActionResult Register([FromForm] NotificationRegisterViewModel notificationRegisterViewModel, bool registered)
+        [HttpPost("registerNotification")]
+        public IActionResult RegisterNotification([FromForm] NotificationRegisterViewModel notificationRegisterViewModel)
         {
             var vehicle = _vehicleService.GetByVehiclePlate(notificationRegisterViewModel.VehiclePlate);
-
+            
             if (vehicle == null)
             {
                 TempData["Message"] = "Placa não cadastrada";
