@@ -1,4 +1,5 @@
 ﻿using Entra21.CSharp.Area21.Application.Filters;
+using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.Service.Services.Payments;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +22,14 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
             var payments = _paymentsService.GetAllPayments();
 
             return View(payments);
+        }
+
+        [HttpGet("details")]
+        public IActionResult Details([FromQuery] Vehicle vehicle)
+        {
+           var details = _paymentsService.Details(vehicle);
+
+            return View(details);
         }
     }
 }

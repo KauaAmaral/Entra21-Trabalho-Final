@@ -11,13 +11,23 @@ namespace Entra21.CSharp.Area21.Service.Services.Payments
     {
         private readonly IPaymentsRepository _paymentRepository;
         private readonly IPaymentEntityMapping _paymentEntityMapping;
+        private readonly IVehicleRepository _vehicleRepository;
 
         public PaymentService(
            IPaymentsRepository paymentRepository,
-           IPaymentEntityMapping paymentEntityMapping)
+           IPaymentEntityMapping paymentEntityMapping,
+           IVehicleRepository vehicleRepository)
         {
             _paymentRepository = paymentRepository;
             _paymentEntityMapping = paymentEntityMapping;
+            _vehicleRepository = vehicleRepository;
+        }
+
+        public Payment Details(Vehicle vehicles)
+        {
+            var vehicle = _vehicleRepository.GetById(vehicles.Id);
+
+            return Details(vehicle);
         }
 
         public IList<Payment> GetAllPayments() =>

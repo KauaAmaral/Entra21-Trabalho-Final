@@ -7,5 +7,6 @@ namespace Entra21.CSharp.Area21.Service.Services.Payments
     {
         Payment Register(PaymentRegisterViewModel registerViewModel);
         IList<Payment> GetAllPayments();
+        Payment Details(Vehicle vehicle);
     }
 }
