@@ -16,11 +16,11 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
         public PaymentsController(IPaymentService paymentService, 
                 IVehicleService vehicleService)
         {
-            _paymentService = paymentService;
             _vehicleService = vehicleService;
+            _paymentService = paymentService;
         }
 
-        [HttpGet("")]
+        [HttpGet]
         public IActionResult GetAll()
         {
             var payments = _paymentService.GetAllPayments();
