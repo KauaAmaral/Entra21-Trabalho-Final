@@ -85,7 +85,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
             return RedirectToAction("Index");
         }
 
-
         [HttpGet("Delete")]
         public IActionResult Delete([FromQuery] int id)
         {
