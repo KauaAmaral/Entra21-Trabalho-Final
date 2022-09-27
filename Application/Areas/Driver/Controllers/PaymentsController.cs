@@ -11,12 +11,12 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
     [Route("driver/pagamentos")]
     public class PaymentsController : Controller
     {
-        private readonly IPaymentService _paymentService;
-        private readonly IVehicleService _vehicleService;
+        private readonly IUserService _paymentService;
+        private readonly IUserController _vehicleService;
         private readonly ISessionAuthentication _session;
 
-        public PaymentsController(IPaymentService paymentService
-            , IVehicleService vehicleService
+        public PaymentsController(IUserService paymentService
+            , IUserController vehicleService
             , ISessionAuthentication sessionAuthentication)
         {
 
@@ -28,9 +28,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         public IActionResult Payments()
         {
             var user = _session.FindUserSession();
-
-            if (user == null)
-                return RedirectToAction("Index", "Home");
 
             var vehicle = _vehicleService.GetAllById(user.Id);
 

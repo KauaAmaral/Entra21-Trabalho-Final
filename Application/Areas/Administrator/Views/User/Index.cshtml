@@ -1,0 +1,72 @@
+﻿@model List<User>
+@{
+    ViewData["Title"] = "Usuários";
+}
+
+<div class="row mb-3">
+    <div class="text-end">
+        <a asp-controller="UserAdministrator" asp-action="Register" class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i> Cadastrar
+        </a>
+    </div>
+</div>
+
+<table class="table caption-top table-hover" id="vehicles-id" style="width:85%" align="center">
+    <thead>
+        <tr>
+            <th style="width:25%"><font size="5"><b><font>Nome</font></b></font></th>
+            <th style="width:25%"><font size="5"><b><font>Email</font></b></font></th>
+            <th style="width:25%"><font size="5"><b><font>Hierarquia</font></b></font></th>
+            <th style="width:25%"><font size="5"><b><font>Ação</font></b></font></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td><b><font>@user.Name</font></b></td>
+                <td><b><font>@user.Email</font></b></td>
+                <td><b><font>@user.Hierarchy</font></b></td>
+                <td>
+                    <a class="btn btn-primary" asp-action="update" asp-route-id="@user.Id">
+                        <i class="fa-solid fa-pencil"></i> Editar
+                    </a>
+                    <a class="btn btn-outline-danger" asp-action="delete" asp-route-id="@user.Id">
+                        <i class="fa-solid fa-trash"></i> Apagar
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script>
+
+        function teste(id) {
+            $.ajax({
+                url: '@Url.Action("Paypal", "Paypal")',
+                type: "POST",
+                data: { id: id },
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    if (data.status) {
+
+                        var jsonresult = JSON.parse(data.response);
+
+                        console.log(jsonresult);
+
+                        var links = jsonresult.links;
+
+                        var resultado = links.find(item => item.rel === "approve")
+
+                        window.location.href = resultado.href
+                    }
+                    else {
+                        alert("Volte mais tarde, o serviço de pagamento não está funcionado!")
+                    }
+                }
+            });
+        }
+    </script>
+    }

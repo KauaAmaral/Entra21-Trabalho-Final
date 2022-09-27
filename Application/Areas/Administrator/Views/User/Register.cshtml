@@ -1,0 +1,40 @@
+﻿@model UserRegisterViewModel
+
+@{
+    var userHierarchy = new SelectList(ViewBag.UserHierarchy as List<string>);
+
+    ViewData["Title"] = "Cadastrar";
+}
+
+<form asp-controller="UserAdministrator" asp-action="Register" method="POST">
+
+    <label asp-for="Email" class="form-label"></label>
+    <input asp-for="Email" type="email" class="form-control" />
+    <span asp-validation-for="Email" class="text-danger"></span>
+
+    <label asp-for="Name" class="form-label"></label>
+    <input asp-for="Name" type="text" class="form-control" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+
+    <label asp-for="Cpf" class="form-label"></label>
+    <input asp-for="Cpf" type="text" class="form-control" />
+    <span asp-validation-for="Cpf" class="text-danger"></span>
+
+    <label asp-for="Hierarchy" class="form-label" span-required=""></label>
+    <select asp-for="Hierarchy" asp-items="userHierarchy" class="form-control">
+    </select>
+
+    <label asp-for="Password" class="form-label"></label>
+    <input asp-for="Password" type="password" class="form-control" />
+    <span asp-validation-for="Password" class="text-danger"></span>
+
+    <label asp-for="ConfirmPassword" class="form-label"></label>
+    <input asp-for="ConfirmPassword" type="password" class="form-control" />
+    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+
+        @if (TempData["Message"] != null)
+        {
+            <p class="text-danger">@TempData["Message"]</p>
+        }
+    <button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Criar conta</button>
+</form>
