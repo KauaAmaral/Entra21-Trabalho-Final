@@ -17,14 +17,15 @@
                 <td><b><font>@payments.Vehicle.Model</font></b></td>
                 <td><b><font>@payments.Vehicle.LicensePlate</font></b></td>
                 <td>
-                    <a class="btn btn-primary" asp-controller="Payments" asp-action="details" asp-route-id="@payments.Vehicle.Id" data-bs-target="#detailsPaymentModal">
+                    <button class="btn btn-primary detailsPayments" data-id="@payments.Id">
                         <i class="bi bi-info-circle"></i> Detalhes
-                    </a>
+                    </button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+<partial name="Details" model="ViewBag.Payment" />
 @section Scripts{
     <script src="~/js/DetailsPayments.js"></script>
 }

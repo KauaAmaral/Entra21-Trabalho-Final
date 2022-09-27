@@ -1,15 +1,6 @@
-﻿$('table').on('click', 'button.detailsPayments', (event) => {
-    let element = event.target.tagName === 'I'
-        ? event.target.parentElement
-        : event.target;
-
-    petEditarPreencherModal(element);
-});
-let modal = new bootstrap.Modal(document.getElementById('detailsPaymentModal'), {});
-modal.show();
-
+﻿
 // Limpar os campos quando a modal for fechada
-document.getElementById('detailsPaymentModal').addEventListener('hide.bs.modal', () => petLimparCampos());
+//document.getElementById('detailsPaymentModal').addEventListener('hide.bs.modal', () => petLimparCampos());
 
 let petEditarPreencherModal = (botaoEditar) => {
     let id = botaoEditar.getAttribute('data-id');
@@ -21,6 +12,10 @@ let petEditarPreencherModal = (botaoEditar) => {
 
             return response.json();
         })
+
+    //let modal = new bootstrap.Modal(document.getElementById('detailsPaymentModal'), {});
+    //modal.show();
+
         //.then((data) => {
         //    if (statusResponse === 200) {
 
@@ -49,3 +44,10 @@ let petEditarPreencherModal = (botaoEditar) => {
         //})
         //.catch((error) => console.log(error));
 };
+$('table').on('click', 'button.detailsPayments', (event) => {
+    let element = event.target.tagName === 'I'
+        ? event.target.parentElement
+        : event.target;
+
+    petEditarPreencherModal(element);
+});
