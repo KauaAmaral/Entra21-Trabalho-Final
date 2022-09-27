@@ -63,6 +63,42 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet("update")]
+        public IActionResult Update([FromQuery] int id)
+        {
+            var user = _userService.GetById(id);
+            var vehicleType = GetUserHierarchy();
+
+            var userUpdateAdministratorViewMode = new UserUpdateAdministratorViewModel
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Phone = user.Phone,
+                Cpf = user.Cpf,
+                Email = user.Email,
+                Hierarchy = user.Hierarchy
+            };
+
+            ViewBag.UserHierarchy = GetUserHierarchy();
+
+            return View(userUpdateAdministratorViewMode);
+        }
+
+        [HttpPost("update")]
+        public IActionResult Update([FromForm] UserUpdateAdministratorViewModel userUpdateAdministratorViewMode)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.UserHierarchy = GetUserHierarchy();
+
+                return View(userUpdateAdministratorViewMode);
+            }
+
+            _userService.Update(userUpdateAdministratorViewMode);
+
+            return RedirectToAction("Index");
+        }
+
         private List<string> GetUserHierarchy()
         {
             return Enum
