@@ -17,11 +17,10 @@
                 </div>
 
                 <form asp-action="registerNotification" method="POST">
-
+                    <input type="hidden" asp-for="Registered"/>
                     <div class="form-group form-material floating" data-plugin="formMaterial">
-                        <label asp-for="VehiclePlate" class="sr-only" for="inputVehiclePlate">Placa do Veículo</label>
-                        <input asp-for="VehiclePlate" class="form-control"
-                               id="inputVehiclePlate" name="VehiclePlate" placeholder="Placa do Veículo" />
+                        <label asp-for="VehiclePlate"  class="form-label" span-required="">Placa do Veículo</label>
+                        <input asp-for="VehiclePlate" class="form-control"/>
                         <span asp-validation-for="VehiclePlate" class="text-danger"></span>
                     </div>
 
@@ -33,24 +32,23 @@
 					</div>
 
                     <div class="form-group form-material floating" data-plugin="formMaterial">
-                        <label asp-for="Address" class="sr-only" for="inputAddress">Endereço</label>
-                        <input asp-for="Address" class="form-control"
-                               id="inputAddress" name="VehiclePlate" placeholder="Endereço" />
+                        <label asp-for="Address" class="sr-only" span-required="">Endereço</label>
+                        <input asp-for="Address" class="form-control"/>
                         <span asp-validation-for="Address" class="text-danger"></span>
                     </div>
 
                     <div class="form-group form-material floating" data-plugin="formMaterial">
-                        <label asp-for="Comments" class="sr-only" for="inputComments">Comentários</label>
-                        <input asp-for="Comments" class="form-control"
-                               id="inputComments" name="VehiclePlate" placeholder="Comentários" />
+                        <label asp-for="Comments" class="sr-only" span-required="">Comentários</label>
+                        <input asp-for="Comments" class="form-control"/>
                         <span asp-validation-for="Comments" class="text-danger"></span>
                     </div>
-                    <input type="hidden" asp-for="Registered"/>
+                    
                     @if (TempData["Message"] != null)
                     {
                         <p class="text-danger">@TempData["Message"]</p>
                     }
                     <button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Criar Notificação</button>
+                
                 </form>
             </div>
         </div>

@@ -105,14 +105,18 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             
             if (vehicle == null)
             {
-                TempData["Message"] = "Placa não cadastrada";
+                notificationRegisterViewModel.VehicleId = 0;
                 return View(nameof(Register));
             }
 
             notificationRegisterViewModel.VehicleId = vehicle.Id;
 
             if (!ModelState.IsValid)
+            {
+                ViewBag.VehicleType = GetVehicleType();
+
                 return View(notificationRegisterViewModel);
+            }
 
             _notificationService.Register(notificationRegisterViewModel);
 

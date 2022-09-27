@@ -17,6 +17,7 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Payments
         public Payment? ValidPayment(int id) =>
             _context.Payments
             .Include(x => x.Vehicle)
+            .OrderByDescending(x => x.Id)
             .FirstOrDefault(x => x.VehicleId == id);
     }
 }
