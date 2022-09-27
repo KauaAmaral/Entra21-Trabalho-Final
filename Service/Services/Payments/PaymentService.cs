@@ -31,7 +31,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Payments
         {
             var validPayment = true;
             var payment = _paymentRepository.ValidPayment(vehicle.Id);
-            if (payment.CreatedAt.AddHours(1) <= (DateTime.Now))
+            if (payment == null || payment.CreatedAt.AddHours(1) <= (DateTime.Now))
             {
                 validPayment = false;
             }

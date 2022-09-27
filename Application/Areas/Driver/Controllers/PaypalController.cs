@@ -46,25 +46,18 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             var IdVehicle = 0;
             string price = "";
             var product = id;
-
-            try
-            {
-                IdVehicle = Convert.ToInt32(id);
-                var vehicle = _vehicleService.GetById(IdVehicle);
-                product = vehicle.LicensePlate;
-
-                if (vehicle.Type == 0)
-                    price = "1.50";
-                else
-                    price = "0.75";
-            }
-            catch
-            {
-
-            }
-
             var user = _session.FindUserSession();
             var idUser = user.Id;
+
+            IdVehicle = Convert.ToInt32(id);
+            var vehicle = _vehicleService.GetById(IdVehicle);
+            product = vehicle.LicensePlate;
+
+            if (vehicle.Type == 0)
+                price = "1.50";
+            else
+                price = "0.75";
+
             bool status = false;
             string answer = string.Empty;
 

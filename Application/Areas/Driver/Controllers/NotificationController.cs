@@ -100,6 +100,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         [HttpPost("registerNotification")]
         public IActionResult RegisterNotification([FromForm] NotificationRegisterViewModel notificationRegisterViewModel)
         {
+            var NotificationText = "";
             var vehicle = _vehicleService.GetByVehiclePlate(notificationRegisterViewModel.VehiclePlate);
             
             if (vehicle == null)

@@ -45,7 +45,7 @@
                                id="inputComments" name="VehiclePlate" placeholder="Comentários" />
                         <span asp-validation-for="Comments" class="text-danger"></span>
                     </div>
-
+                    <input type="hidden" asp-for="Registered"/>
                     @if (TempData["Message"] != null)
                     {
                         <p class="text-danger">@TempData["Message"]</p>
