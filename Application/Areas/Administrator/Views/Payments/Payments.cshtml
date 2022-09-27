@@ -13,15 +13,18 @@
     <tbody>
         @foreach (var payments in Model)
         {
-             <tr>
-                <td><b><font>@payments.PayerId</font></b></td>
-                <td><b><font>@payments.Id</font></b></td>
+            <tr>
+                <td><b><font>@payments.Vehicle.Model</font></b></td>
+                <td><b><font>@payments.Vehicle.LicensePlate</font></b></td>
                 <td>
-                    <button class="btn btn-primary" asp-action="details">
-                        <i aria-hidden="true"></i>Detalhes
-                    </button>
+                    <a class="btn btn-primary" asp-controller="Payments" asp-action="details" asp-route-id="@payments.Vehicle.Id" data-bs-target="#detailsPaymentModal">
+                        <i class="bi bi-info-circle"></i> Detalhes
+                    </a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+@section Scripts{
+    <script src="~/js/DetailsPayments.js"></script>
+}

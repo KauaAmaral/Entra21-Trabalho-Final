@@ -21,6 +21,13 @@ namespace Entra21.CSharp.Area21.Service.Services.Payments
         public IList<Payment> GetAllPayments() =>
             _paymentRepository.GetAll();
 
+        public Payment GetById(int id)
+        {
+            var payment = _paymentRepository.GetById(id);
+
+            return payment;
+        }
+
         public Payment Register(PaymentRegisterViewModel registerViewModel)
         {
             var payment = _paymentEntityMapping.RegisterWith(registerViewModel);
