@@ -2,8 +2,8 @@
 // Limpar os campos quando a modal for fechada
 //document.getElementById('detailsPaymentModal').addEventListener('hide.bs.modal', () => petLimparCampos());
 
-let petEditarPreencherModal = (botaoEditar) => {
-    let id = botaoEditar.getAttribute('data-id');
+let petEditarPreencherModal = (detailsPayments) => {
+    let id = detailsPayments.getAttribute('data-id');
     let statusResponse = 0;
 
     fetch(`/administrator/Payments/details?id=${id}`)
@@ -13,8 +13,8 @@ let petEditarPreencherModal = (botaoEditar) => {
             return response.json();
         })
 
-    //let modal = new bootstrap.Modal(document.getElementById('detailsPaymentModal'), {});
-    //modal.show();
+    let modal = new bootstrap.Modal(document.getElementById('detailsPaymentModal'), {});
+    modal.show();
 
         //.then((data) => {
         //    if (statusResponse === 200) {
