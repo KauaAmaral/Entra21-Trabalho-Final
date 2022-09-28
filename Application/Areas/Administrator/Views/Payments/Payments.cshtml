@@ -1,0 +1,27 @@
+﻿@model List<Payment>
+@{
+    ViewData["Title"] = "Pagamentos";
+}
+<table class="table caption-top table-hover" id="payments-id" style="width:85%" align="center">
+    <thead>
+        <tr>
+            <th style="width:15%"><font size="5"><b><font>Modelo</font></b></font></th>
+            <th style="width:7%"><font size="5"><b><font>Placa</font></b></font></th>
+            <th style="width:3%"><font size="5"><b><font>Ação</font></b></font></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var payments in Model)
+        {
+             <tr>
+                <td><b><font>@payments.PayerId</font></b></td>
+                <td><b><font>@payments.Id</font></b></td>
+                <td>
+                    <button class="btn btn-primary" asp-action="details">
+                        <i aria-hidden="true"></i>Detalhes
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -108,9 +108,7 @@
                         </span>
                     </a>
                     <div class="dropdown-menu" role="menu">
-                        <a asp-area="Driver" asp-controller="User" asp-action="Index" class="dropdown-item" role="menuitem">
-                            <i class="icon wb-user" aria-hidden="true"></i> Perfil
-                            </a>
+                        <a asp-controller="user" asp-action="update" class="dropdown-item" role="menuitem"><i class="icon wb-user" aria-hidden="true"></i> Perfil</a>
                         <a asp-action="Payments" asp-controller="Payments" class="dropdown-item">
                             <i class="icon wb-payment"></i> Pagamentos
                         </a>
@@ -118,7 +116,7 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="/driver/notification" title="Notifications"
+                    <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" title="Notifications"
                        aria-expanded="false" data-animation="scale-up" role="button">
                         <i class="fa-solid fa-bell color-icons" aria-hidden="true"></i>
                         <span class="badge badge-pill badge-danger up">0</span>
@@ -133,7 +131,7 @@
                             <a class="dropdown-menu-footer-btn" href="javascript:void(0)" role="button">
                                 <i class="icon wb-settings" aria-hidden="true"></i>
                             </a>
-                            <a class="dropdown-item" href="Notification" role="menuitem">
+                            <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
                                 Todas Notificações
                             </a>
                         </div>
@@ -151,25 +149,31 @@
             <div>
                 <ul class="site-menu" data-plugin="menu">
                     <li class="dropdown site-menu-item has-sub">
-                        <a asp-area="Driver" asp-controller="Home" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
+                        <a asp-area="Administrator" asp-controller="Home" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
                             <i class="fa-sharp fa-solid fa-house"></i>
                             <span class="site-menu-title">Home</span>
                         </a>
                     </li>
                     <li class="dropdown site-menu-item has-sub">
-                        <a asp-area="Driver" asp-controller="Vehicle" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
+                        <a asp-area="Administrator" asp-controller="Vehicle" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
                             <i class="fa-solid fa-car"></i>
                             <span class="site-menu-title">Veículos</span>
                         </a>
                     </li>
                     <li class="dropdown site-menu-item has-sub">
-                        <a asp-area="Driver" asp-controller="User" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
+                        <a asp-area="Administrator" asp-controller="Guard" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
+                            <i class="fa-solid fa-person-military-pointing"></i>
+                            <span class="site-menu-title">Guardas</span>
+                        </a>
+                    </li>
+                    <li class="dropdown site-menu-item has-sub">
+                        <a asp-area="Administrator" asp-controller="User" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
                             <i class="fa-solid fa-users"></i>
                             <span class="site-menu-title">Usuários</span>
                         </a>
                     </li>
                     <li class="dropdown site-menu-item has-sub">
-                        <a asp-area="Driver" asp-controller="Payments" asp-action="Payments" data-toggle="dropdown" data-dropdown-toggle="false">
+                        <a asp-area="Administrator" asp-controller="Payments" asp-action="Payments" data-toggle="dropdown" data-dropdown-toggle="false">
                             <i class="fa-regular fa-credit-card"></i>
                             <span class="site-menu-title">Pagamentos</span>
                             <span class="site-menu-arrow"></span>
@@ -196,7 +200,7 @@
                         </div>
                     </div>
                     <li class="dropdown site-menu-item has-sub">
-                        <a data-toggle="dropdown" href="notification/checkout" data-dropdown-toggle="false">
+                        <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                             <i class="site-menu-icon wb-layout" aria-hidden="true"></i>
                             <span class="site-menu-title">Notificações</span>
                         </a>

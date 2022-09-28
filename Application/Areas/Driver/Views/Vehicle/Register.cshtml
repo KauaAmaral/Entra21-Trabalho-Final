@@ -1,49 +1,42 @@
 ﻿@model VehicleRegisterViewModel
 
 @{
-	var vehicleType = ViewBag.VehicleType as List<string>;
-	vehicleType.Add(string.Empty);
+    var vehicleType = ViewBag.VehicleType as List<string>;
+    vehicleType.Add(string.Empty);
 
-	var selectVehicleType = new SelectList(vehicleType, string.Empty);
+    var selectVehicleType = new SelectList(vehicleType, string.Empty);
 }
-<div class="page background-image vertical-align text-center">
-	<div class="page-content vertical-align-middle">
-		<div class="panel">
-			<div class="panel-body">
-				<h3 class="h3">Cadastro de veículo</h3>
-				<form asp-action="register" method="POST">
+<div class="page-content row justify-content-center">
+    <div class="col-6">
+        <h3 class="h3">Cadastro de veículo</h3>
+        <form asp-action="register" method="POST">
+            <div>
+                <label asp-for="LicensePlate" class="form-label" span-required=""></label>
+                <input asp-for="LicensePlate" class="form-control" />
+                <span asp-validation-for="LicensePlate" class="text-danger"></span>
+            </div>
 
-					<div>
-						<label asp-for="LicensePlate" class="form-label" span-required=""></label>
-						<input asp-for="LicensePlate" class="form-control"/>
-						<span asp-validation-for="LicensePlate" class="text-danger"></span>
-					</div>
+            <div>
+                <label asp-for="Model" class="form-label" span-required=""></label>
+                <input asp-for="Model" class="form-control" />
+                <span asp-validation-for="Model" class="text-danger"></span>
+            </div>
 
-					   <div>
-						<label asp-for="Model" class="form-label" span-required=""></label>
-						<input asp-for="Model" class="form-control"/>
-						<span asp-validation-for="Model" class="text-danger"></span>
-					</div>
+            <div class="mb-3">
+                <label asp-for="Type" class="form-label" span-required=""></label>
+                <select asp-for="Type" asp-items="selectVehicleType" class="form-select">
+                </select>
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
 
-					<div>
-						<label asp-for="Type" class="form-label" span-required=""></label>
-						<select asp-for="Type" asp-items="selectVehicleType" class="form-select">
-						</select>
-						<span asp-validation-for="Type" class="text-danger"></span>
-					</div>
-
-					<div class="text-end">
-						<a asp-action="Index" class="btn btn-outline-danger">
-							<i class="fa-solid fa-xmark"></i> Cancelar
-						</a>
-						<button type="submit" class="btn btn-success">
-							<i class="fa-solid fa-floppy-disk"></i> Salvar
-						</button>
-					</div>
-
-				</form>
-
-			</div>
-		</div>
-	</div>
+            <div class="text-end">
+                <a asp-action="Index" class="btn btn-outline-danger">
+                    <i class="fa-solid fa-xmark"></i> Cancelar
+                </a>
+                <button type="submit" class="btn btn-success">
+                    <i class="fa-solid fa-floppy-disk"></i> Salvar
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
