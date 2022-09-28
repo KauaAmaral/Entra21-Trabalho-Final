@@ -7,6 +7,7 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Users
     {
         User RegisterWith(UserRegisterViewModel viewModel);
         User UpdateWith(User user, UserUpdateViewModel viewModel);
+        User UpdateWithAdministrator(User user, UserUpdateAdministratorViewModel viewModel);
         User UpdatePasswordWith(User user, UserChangePasswordViewModel viewModel);
     }
 }

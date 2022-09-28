@@ -65,7 +65,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
 
         [HttpGet("update")]
         public IActionResult Update([FromQuery] int id)
-        {
+            {
             var user = _userService.GetById(id);
             var vehicleType = GetUserHierarchy();
 
@@ -81,7 +81,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
 
             ViewBag.UserHierarchy = GetUserHierarchy();
 
-            return View(userUpdateAdministratorViewMode);
+            return View("User/update", userUpdateAdministratorViewMode);
         }
 
         [HttpPost("update")]
@@ -91,14 +91,21 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
             {
                 ViewBag.UserHierarchy = GetUserHierarchy();
 
-                return View(userUpdateAdministratorViewMode);
+                return View("User/update", userUpdateAdministratorViewMode);
             }
 
-            _userService.Update(userUpdateAdministratorViewMode);
+            _userService.UpdateAdministrator(userUpdateAdministratorViewMode);
 
             return RedirectToAction("Index");
         }
 
+        [HttpGet("delete")]
+        public IActionResult Delete([FromQuery] int id)
+        {
+            _userService.Delete(id);
+
+            return RedirectToAction("Index");
+        }
         private List<string> GetUserHierarchy()
         {
             return Enum

@@ -1,4 +1,4 @@
-﻿@model UserRegisterViewModel
+﻿@model UserUpdateAdministratorViewModel
 
 @{
     var userHierarchy = new SelectList(ViewBag.UserHierarchy as List<string>);
@@ -7,6 +7,7 @@
 }
 
 <form asp-controller="UserAdministrator" asp-action="Update" method="POST">
+    <input type="hidden" asp-for="Id" />
 
     <label asp-for="Email" class="form-label"></label>
     <input asp-for="Email" type="email" class="form-control" />
@@ -19,6 +20,10 @@
     <label asp-for="Cpf" class="form-label"></label>
     <input asp-for="Cpf" type="text" class="form-control" />
     <span asp-validation-for="Cpf" class="text-danger"></span>
+
+    <label asp-for="Phone" class="form-label"></label>
+    <input asp-for="Phone" type="text" class="form-control" />
+    <span asp-validation-for="Phone" class="text-danger"></span>
 
     <label asp-for="Hierarchy" class="form-label" span-required=""></label>
     <select asp-for="Hierarchy" asp-items="userHierarchy" class="form-control">
