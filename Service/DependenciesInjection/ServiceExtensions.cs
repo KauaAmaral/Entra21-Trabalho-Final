@@ -19,9 +19,9 @@ namespace Entra21.CSharp.Area21.Service.DependenciesInjection
     {
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IVehicleService, VehicleService>();
-            services.AddScoped<IPaymentService, PaymentService>();
+            services.AddScoped<Services.Users.IUserService, UserService>();
+            services.AddScoped<IUserController, VehicleService>();
+            services.AddScoped<Services.Payments.IUserService, PaymentService>();
             services.AddScoped<IGuardService, GuardService>();
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<ISessionAuthentication, SessionAuthentication>();

@@ -11,10 +11,10 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
     [Route("/Administrator/Payments")]
     public class PaymentsController : Controller
     {
-        private readonly IPaymentService _paymentService;
-        private readonly IVehicleService _vehicleService;
-        public PaymentsController(IPaymentService paymentService, 
-                IVehicleService vehicleService)
+        private readonly IUserService _paymentService;
+        private readonly IUserController _vehicleService;
+        public PaymentsController(IUserService paymentService, 
+                IUserController vehicleService)
         {
             _vehicleService = vehicleService;
             _paymentService = paymentService;

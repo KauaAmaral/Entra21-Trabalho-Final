@@ -5,7 +5,7 @@ using Entra21.CSharp.Area21.Service.ViewModels.Payments;
 
 namespace Entra21.CSharp.Area21.Service.Services.Payments
 {
-    public class PaymentService : IPaymentService
+    public class PaymentService : IUserService
     {
         private readonly IPaymentsRepository _paymentRepository;
         private readonly IPaymentEntityMapping _paymentEntityMapping;
