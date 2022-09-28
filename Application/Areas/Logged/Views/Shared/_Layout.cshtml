@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html>
+<html class="no-js css-menubar" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="bootstrap admin template">
+    <meta name="author" content="">
+
+    <title>Area 21</title>
+
+    <link rel="shortcut icon" href="~/Theme/global/portraits/Logo Desenho Menor_Prancheta 1.png ">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="~/Theme/global/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Theme/global/css/bootstrap-extend.min.css">
+    <link rel="stylesheet" href="~/Theme/assets/css/site.min.css">
+    <link rel="stylesheet" href="~/css/site.css">
+
+    <!-- Plugins -->
+    <link rel="stylesheet" href="~/Theme/global/vendor/animsition/animsition.css">
+    <link rel="stylesheet" href="~/Theme/global/vendor/asscrollable/asScrollable.css">
+    <link rel="stylesheet" href="~/Theme/global/vendor/switchery/switchery.css">
+    <link rel="stylesheet" href="~/Theme/global/vendor/intro-js/introjs.css">
+    <link rel="stylesheet" href="~/Theme/global/vendor/slidepanel/slidePanel.css">
+    <link rel="stylesheet" href="~/Theme/global/vendor/flag-icon-css/flag-icon.css">
+    <link rel="stylesheet" href="~/Theme/global/vendor/chartist/chartist.css">
+    <link rel="stylesheet" href="~/Theme/global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css">
+    <link rel="stylesheet" href="~/Theme/global/vendor/aspieprogress/asPieProgress.css">
+    <link rel="stylesheet" href="~/Theme/global/vendor/jquery-selective/jquery-selective.css">
+    <link rel="stylesheet" href="~/Theme/global/vendor/bootstrap-datepicker/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="~/Theme/global/vendor/asscrollable/asScrollable.css">
+    <link rel="stylesheet" href="~/Theme/assets/examples/css/dashboard/team.css">
+
+    <link rel="stylesheet" href="~/css/Background.css">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="~/Theme/global/fonts/web-icons/web-icons.min.css">
+    <link rel="stylesheet" href="~/Theme/global/fonts/brand-icons/brand-icons.min.css">
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
+
+    <!--[if lt IE 9]>
+    <script src="~/Theme/global/vendor/html5shiv/html5shiv.min.js"></script>
+    <![endif]-->
+    <!--[if lt IE 10]>
+    <script src="~/Theme/global/vendor/media-match/media.match.min.js"></script>
+    <script src="~/Theme/global/vendor/respond/respond.min.js"></script>
+    <![endif]-->
+    <!-- Scripts -->
+    <script src="~/Theme/global/vendor/breakpoints/breakpoints.js"></script>
+    <script>
+        Breakpoints();
+    </script>
+</head>
+<body class="animsition site-navbar-small dashboard site-menubar-hide">
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <nav class="site-navbar navbar navbar-default navbar-fixed-top navbar-mega background-image"
+         role="navigation">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggler hamburger hamburger-close navbar-toggler-left hided"
+                    data-toggle="menubar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="hamburger-bar"></span>
+            </button>
+            <a class="navbar-brand navbar-brand-center" href="index.html">
+                <img class="navbar-brand-logo navbar-brand-logo" src="~/Theme/global/portraits/Logo Maior.png">
+            </a>
+        </div>
+
+        <div class="navbar-container container-fluid">
+            <!-- Navbar Collapse -->
+            <div class="collapse navbar-collapse navbar-collapse-toolbar" id="site-navbar-collapse">
+                <!-- Navbar Toolbar Right -->
+                <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" data-animation="scale-up"
+                           aria-expanded="false" role="button">
+                            <span class="flag-icon flag-icon-br"></span>
+                        </a>
+                        <div class="dropdown-menu" role="menu">
+                            <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
+                                <span class="flag-icon flag-icon-br"></span> Português
+                            </a>
+                            <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
+                                <span class="flag-icon flag-icon-us"></span> Inglês
+                                <html lang="fr">
+                            </html>
+                        </a>
+                        <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
+                            <span class="flag-icon flag-icon-es"></span> Espanhol
+                        </a>
+                        <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
+                            <span class="flag-icon flag-icon-de"></span> Alemão
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false"
+                       data-animation="scale-up" role="button">
+                        <span class="avatar avatar-online">
+                            <img src="~/Theme/global/portraits/userMaior.png" alt="...">
+                            <i></i>
+                        </span>
+                    </a>
+                    <div class="dropdown-menu" role="menu">
+                        <a asp-area="Driver" asp-controller="User" asp-action="Index" class="dropdown-item" role="menuitem">
+                            <i class="icon wb-user" aria-hidden="true"></i> Perfil
+                            </a>
+                        <a asp-action="Payments" asp-controller="Payments" class="dropdown-item">
+                            <i class="icon wb-payment"></i> Pagamentos
+                        </a>
+                        <a class="dropdown-item" asp-area="Public" asp-controller="Login" asp-action="Logout" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Sair</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" title="Notifications"
+                       aria-expanded="false" data-animation="scale-up" role="button">
+                        <i class="fa-solid fa-bell color-icons" aria-hidden="true"></i>
+                        <span class="badge badge-pill badge-danger up">0</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
+                        <div class="dropdown-menu-header">
+                            <h5>Notificações</h5>
+                            <span class="badge badge-round badge-danger"></span>
+                        </div>
+
+                        <div class="dropdown-menu-footer">
+                            <a class="dropdown-menu-footer-btn" href="javascript:void(0)" role="button">
+                                <i class="icon wb-settings" aria-hidden="true"></i>
+                            </a>
+                            <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
+                                Todas Notificações
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <!-- End Navbar Toolbar Right -->
+        </div>
+        <!-- End Navbar Collapse -->
+    </div>
+</nav>
+<div class="site-menubar site-menubar-light">
+    <div class="site-menubar-body">
+        <div>
+            <div>
+                <ul class="site-menu" data-plugin="menu">
+                    <li class="dropdown site-menu-item has-sub">
+                        <a asp-area="Driver" asp-controller="Home" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
+                            <i class="fa-sharp fa-solid fa-house"></i>
+                            <span class="site-menu-title">Home</span>
+                        </a>
+                    </li>
+                    <li class="dropdown site-menu-item has-sub">
+                        <a asp-area="Driver" asp-controller="Vehicle" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
+                            <i class="fa-solid fa-car"></i>
+                            <span class="site-menu-title">Veículos</span>
+                        </a>
+                    </li>
+                    <li class="dropdown site-menu-item has-sub">
+                        <a asp-area="Driver" asp-controller="User" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
+                            <i class="fa-solid fa-users"></i>
+                            <span class="site-menu-title">Usuários</span>
+                        </a>
+                    </li>
+                    <li class="dropdown site-menu-item has-sub">
+                        <a asp-area="Driver" asp-controller="Payments" asp-action="Payments" data-toggle="dropdown" data-dropdown-toggle="false">
+                            <i class="fa-regular fa-credit-card"></i>
+                            <span class="site-menu-title">Pagamentos</span>
+                            <span class="site-menu-arrow"></span>
+                        </a>
+                    </li>
+                    <div class="dropdown-menu">
+                        <div class="site-menu-scroll-wrap is-list">
+                            <div>
+                                <div>
+                                    <ul class="site-menu-sub site-menu-normal-list">
+                                        <li class="site-menu-item">
+                                            <a href="layouts/grids.html">
+                                                <span class="site-menu-title">Pagar</span>
+                                            </a>
+                                        </li>
+                                        <li class="site-menu-item">
+                                            <a href="layouts/grids.html">
+                                                <span class="site-menu-title">Pagamentos efetuados</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <li class="dropdown site-menu-item has-sub">
+                        <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
+                            <i class="site-menu-icon wb-layout" aria-hidden="true"></i>
+                            <span class="site-menu-title">Notificações</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page -->
+<div class="page">
+    <div class="page-content container-fluid">
+            @RenderBody()
+    </div>
+</div>
+<!-- End Page -->
+<footer class="site-footer font-size-footer">
+    <div class="site-footer-legal">© 2022 <a asp-controller="About" asp-action="Index">Área21</a></div>
+    <div class="site-footer-right">
+        Feito por <a target="_blank" href="https://www.linkedin.com/in/kauaamaral/">Kauã Amaral</a>, <a target="_blank" href="https://www.linkedin.com/in/claudiohr/">Cláudio Raimundo</a>,
+        <a target="_blank" href="https://www.linkedin.com/in/efraim-calebe-mertens/">Efraim Mertens</a>, <a target="_blank" href="https://www.linkedin.com/in/wellington-scaburri/">Wellington Scaburri</a> e
+        <a target="_blank" href="https://www.linkedin.com/in/leonardopokreweckysalvador/">Leonardo Pokrewecky</a>
+    </div>
+</footer>
+<!-- End Edit Dialog -->
+<script src="~/Theme/global/vendor/babel-external-helpers/babel-external-helpers.js"></script>
+<script src="~/Theme/global/vendor/jquery/jquery.js"></script>
+<script src="~/Theme/global/vendor/popper-js/umd/popper.min.js"></script>
+<script src="~/Theme/global/vendor/bootstrap/bootstrap.js"></script>
+<script src="~/Theme/global/vendor/animsition/animsition.js"></script>
+<script src="~/Theme/global/vendor/mousewheel/jquery.mousewheel.js"></script>
+<script src="~/Theme/global/vendor/asscrollbar/jquery-asScrollbar.js"></script>
+<script src="~/Theme/global/vendor/asscrollable/jquery-asScrollable.js"></script>
+
+<!-- Plugins -->
+<script src="~/Theme/global/vendor/switchery/switchery.js"></script>
+<script src="~/Theme/global/vendor/intro-js/intro.js"></script>
+<script src="~/Theme/global/vendor/screenfull/screenfull.js"></script>
+<script src="~/Theme/global/vendor/slidepanel/jquery-slidePanel.js"></script>
+<script src="~/Theme/global/vendor/chartist/chartist.js"></script>
+<script src="~/Theme/global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.js"></script>
+<script src="~/Theme/global/vendor/aspieprogress/jquery-asPieProgress.js"></script>
+<script src="~/Theme/global/vendor/matchheight/jquery.matchHeight-min.js"></script>
+<script src="~/Theme/global/vendor/jquery-selective/jquery-selective.min.js"></script>
+<script src="~/Theme/global/vendor/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+
+<!-- Scripts -->
+<script src="~/Theme/global/js/Component.js"></script>
+<script src="~/Theme/global/js/Plugin.js"></script>
+<script src="~/Theme/global/js/Base.js"></script>
+<script src="~/Theme/global/js/Config.js"></script>
+
+<script src="~/Theme/assets/js/Section/Menubar.js"></script>
+<script src="~/Theme/assets/js/Section/Sidebar.js"></script>
+<script src="~/Theme/assets/js/Section/PageAside.js"></script>
+<script src="~/Theme/assets/js/Plugin/menu.js"></script>
+
+<!-- Config -->
+<script src="~/Theme/global/js/config/colors.js"></script>
+<script src="~/Theme/assets/js/config/tour.js"></script>
+<script>Config.set('assets', '../assets');</script>
+
+<!-- Page -->
+<script src="~/Theme/assets/js/Site.js"></script>
+<script src="~/Theme/global/js/Plugin/asscrollable.js"></script>
+<script src="~/Theme/global/js/Plugin/slidepanel.js"></script>
+<script src="~/Theme/global/js/Plugin/switchery.js"></script>
+<script src="~/Theme/global/js/Plugin/matchheight.js"></script>
+<script src="~/Theme/global/js/Plugin/aspieprogress.js"></script>
+<script src="~/Theme/global/js/Plugin/bootstrap-datepicker.js"></script>
+<script src="~/Theme/global/js/Plugin/asscrollable.js"></script>
+
+<script src="~/Theme/assets/examples/js/dashboard/team.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>
