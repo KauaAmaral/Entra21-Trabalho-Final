@@ -11,6 +11,7 @@ namespace Entra21.CSharp.Area21.Service.ViewModels.Guards
 
         [Display(Name = "Número de identificação")]
         [Required(ErrorMessage = "{0} de ser preenchido")]
+        [MaxLength(10, ErrorMessage = "{0} deve conter no máximo {1} caracteres")]
         public string IdentificationNumber { get; set; }
 
         public int? UserId { get; set; }
