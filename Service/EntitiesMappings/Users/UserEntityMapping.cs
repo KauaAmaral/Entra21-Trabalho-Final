@@ -29,6 +29,21 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Users
 
             return user;
         }      
+
+        public User UpdateWithAdministrator(User user, UserUpdateAdministratorViewModel viewModel)
+        {
+            user.Name = viewModel.Name;
+            user.Email = viewModel.Email;
+            user.Cpf = viewModel.Cpf;
+            user.Phone = viewModel.Phone;
+            user.UpdatedAt = DateTime.Now;
+            user.Hierarchy = viewModel.Hierarchy;
+
+            if (viewModel.Password != null)
+                user.Password = viewModel.Password;
+
+            return user;
+        }      
         
         public User UpdatePasswordWith(User user, UserChangePasswordViewModel viewModel)
         {

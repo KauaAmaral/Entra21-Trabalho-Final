@@ -8,7 +8,6 @@
         public string PayerId { get; set; }
         public string TransactionId { get; set; }
         public decimal Value { get; set; }
-
         public Vehicle Vehicle { get; set; }
         public int? VehicleId { get; set; }
     }

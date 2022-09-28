@@ -9,9 +9,13 @@
 
 	<ItemGroup>
 		<Compile Remove="Areas\Driver\Controllers\Login\**" />
+		<Compile Remove="Controllers\**" />
 		<Content Remove="Areas\Driver\Controllers\Login\**" />
+		<Content Remove="Controllers\**" />
 		<EmbeddedResource Remove="Areas\Driver\Controllers\Login\**" />
+		<EmbeddedResource Remove="Controllers\**" />
 		<None Remove="Areas\Driver\Controllers\Login\**" />
+		<None Remove="Controllers\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -20,6 +24,7 @@
 		<PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.9" />
 		<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.6" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.9" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.8" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.8">
 			<PrivateAssets>all</PrivateAssets>
@@ -32,10 +37,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Repository\Repository.csproj" />
 		<ProjectReference Include="..\Service\Service.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Controllers\" />
 	</ItemGroup>
 
 </Project>

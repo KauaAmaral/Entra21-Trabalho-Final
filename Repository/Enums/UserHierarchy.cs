@@ -2,8 +2,8 @@
 {
     public enum UserHierarchy
     {
-        Administrator,
-        Guard,
-        Driver
+        Administrador,
+        Guarda,
+        Motorista
     }
 }

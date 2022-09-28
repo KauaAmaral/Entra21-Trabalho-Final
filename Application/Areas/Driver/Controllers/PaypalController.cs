@@ -16,8 +16,8 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
     [Route("driver/paypal")]
     public class PaypalController : Controller
     {
-        private readonly IVehicleService _vehicleService;
-        private readonly IPaymentService _paymentService;
+        private readonly IUserController _vehicleService;
+        private readonly IUserService _paymentService;
 
         private readonly string _userName = "AeHh1KwTDiCTJlkmPVoWT5qj9YMp0dwnhAStwYVE7VZiaPN2jfJjMm7UJ6B9TMXFkVqFNkmpzpfinpJR";
         private readonly string _passwd = "EHqhokF9mvWolaWgw04hay43lNAuCcLNHZ8XBpmm0cLSYUxdAYnbBI6dhiaCXtI54qJJ-EF3VS0IMGfx";
@@ -25,8 +25,8 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         private readonly string _urlCancel = "https://localhost:7121/driver/Home";
 
         public PaypalController(
-            IVehicleService vehicleService, 
-            IPaymentService paymentService)
+            IUserController vehicleService, 
+            IUserService paymentService)
         {
             _vehicleService = vehicleService;
             _paymentService = paymentService;

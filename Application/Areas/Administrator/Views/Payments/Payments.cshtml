@@ -13,15 +13,21 @@
     <tbody>
         @foreach (var payments in Model)
         {
-             <tr>
-                <td><b><font>@payments.PayerId</font></b></td>
-                <td><b><font>@payments.Id</font></b></td>
+            <tr>
+                <td><b><font>@payments.Vehicle.Model</font></b></td>
+                <td><b><font>@payments.Vehicle.LicensePlate</font></b></td>
                 <td>
-                    <button class="btn btn-primary" asp-action="details">
-                        <i aria-hidden="true"></i>Detalhes
+                    <button class="btn btn-primary detailsPayments" data-id="@payments.Id">
+                        <i class="bi bi-info-circle"></i> Detalhes
                     </button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<partial name="Details" model="ViewBag.Payment" />
+
+@section Scripts{
+    <script src="~/js/DetailsPayments.js"></script>
+}

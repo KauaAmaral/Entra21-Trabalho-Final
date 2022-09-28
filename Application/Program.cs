@@ -1,12 +1,11 @@
+using Entra21.CSharp.Area21.Application.DependenciesInjection;
 using Entra21.CSharp.Area21.Repository.DependeciesInjection;
 using Entra21.CSharp.Area21.RepositoryDataBase;
 using Entra21.CSharp.Area21.Service.DependenciesInjection;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
-using System.Globalization;
-using Entra21.CSharp.Area21.Repository.Entities;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,11 +24,12 @@ builder.Services.Configure<RazorViewEngineOptions>(options =>
 builder.Services.AddControllersWithViews();
 
 builder.Services
-    .AddEntityFramework(builder.Configuration)
     .AddServices()
     .AddRepository()
-    .AddEntitiesMapping();
-  
+    .AddEntitiesMapping()
+    .AddEntityFramework(builder.Configuration)
+    .IncrementNewtonsoftJson();
+
 var app = builder.Build();
 
 var supportedCultures = new[] { new CultureInfo("pt-BR") };
