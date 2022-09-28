@@ -16,13 +16,14 @@ let petEditarPreencherModal = (detailsPayments) => {
     let modal = new bootstrap.Modal(document.getElementById('detailsPaymentModal'), {});
     modal.show();
 
-        //.then((data) => {
-        //    if (statusResponse === 200) {
+        .then((data) => {
+            if (statusResponse === 200) {
 
-        //        document.getElementById('cadastroPetModalLabel').innerText = `Editar PET: ${data.nome}`
-        //        document.getElementById('cadastroPetModalId').value = data.id;
-        //        document.getElementById('cadastroPetModalNome').value = data.nome;
-        //        document.getElementById('cadastroPetModalIdade').value = data.idade;
+                document.getElementById('cadastroPetModalLabel').innerText = `Editar PET: ${data.nome}`
+                document.getElementById('cadastroPetModalId').value = data.id;
+                document.getElementById('cadastroPetModalNome').value = data.nome;
+                document.getElementById('cadastroPetModalIdade').value = data.idade;
+            }
         //        document.getElementById('cadastroPetModalAltura').value = String(data.altura).replace('.', ',');
         //        document.getElementById('cadastroPetModalPeso').value = String(data.peso).replace('.', ',');
 
