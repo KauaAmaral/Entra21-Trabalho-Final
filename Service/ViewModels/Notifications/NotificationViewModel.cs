@@ -20,12 +20,20 @@ namespace Entra21.CSharp.Area21.Service.ViewModels.Notifications
         [Required(ErrorMessage = "{0} deve ser preenchido")]
         [MinLength(2, ErrorMessage = "{0} deve conter no mínimo {1} caracteres")]
         [MaxLength(100, ErrorMessage = "{0} deve conter no máximo {1} caracteres")]
-        public string? Comments { get; set; }
+        public string Comments { get; set; }
 
         [Display(Name = "Tipo do veículo: ")]
         public VehicleType Type { get; set; }
         public bool Registered { get; set; }
-        public int? UserId { get; set; }
-        public int? VehicleId { get; set; }
+        
+        public int NotificationAmount { get; set; }
+       
+        public string Token { get; set; }
+        public string PayerId { get; set; }
+        public string TransactionId { get; set; }
+        public decimal Value { get; set; }
+        
+        public int GuardId { get; set; }
+        public int VehicleId { get; set; }
     }    
 }

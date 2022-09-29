@@ -11,20 +11,20 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
             builder.ToTable("notification");
 
             builder.HasKey(x => x.Id);
-
+         
             builder.Property(x => x.Status)
-                .HasColumnType("BIT")
-                .HasDefaultValue(true)
-                .HasColumnName("status");
+                .IsRequired()
+              .HasColumnType("BIT");
 
             builder.Property(x => x.CreatedAt)
+                .HasColumnName("created_at")
                 .HasColumnType("DATETIME2")
-                .IsRequired()
-                .HasColumnName("create_at");
+                .HasDefaultValue(DateTime.Now);
 
             builder.Property(x => x.UpdatedAt)
-                .HasColumnType("DATETIME2")
-                .HasColumnName("update_at");
+                .HasColumnName("update_at")
+                .HasColumnType("DATETIME2");
+
             //INNE JOIN 
             builder.Property(x => x.GuardId)
                 .HasColumnType("INT")
@@ -74,7 +74,8 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
             builder.Property(x => x.NotificationAmount)
                 .HasColumnName("notification_amount")
                 .IsRequired()
-                .HasColumnType("TINYINT");
+                .HasColumnType("TINYINT")
+                .HasDefaultValue(1);
             //Pagamento
             builder.Property(x => x.Token)
                 .HasColumnType("VARCHAR")
