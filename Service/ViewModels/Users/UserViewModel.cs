@@ -21,9 +21,8 @@ namespace Entra21.CSharp.Area21.Service.ViewModels.Users
         [RegularExpression(@"^\d{3}\.\d{3}\.\d{3}-\d{2}$", ErrorMessage = "{0} deve ser preenchido no formato '000.000.000-00'")]
         public string Cpf { get; set; }
 
-        [Display(Name = "Phone")]
-        [Required(ErrorMessage = "{0} deve ser completo")]
+        [Display(Name = "Telefone")]
         [RegularExpression(@"^\([1-9]{2}\) [0-9]{5}\-[0-9]{4}$", ErrorMessage = "{0} deve ser preenchido no formato '(99) 99999-9999'")]
-        public string Phone { get; set; }
+        public string? Phone { get; set; }
     }
 }

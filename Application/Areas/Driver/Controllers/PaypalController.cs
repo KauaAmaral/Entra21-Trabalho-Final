@@ -43,15 +43,14 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         [HttpPost("Paypal")]
         public async Task<JsonResult> Paypal(string id)
         {
-            var IdVehicle = 0;
-            string price = "";
-            var product = id;
-            var user = _session.FindUserSession();
-            var idUser = user.Id;
+            var IdVehicle = Convert.ToInt32(id);
 
-            IdVehicle = Convert.ToInt32(id);
+            string price;
+
             var vehicle = _vehicleService.GetById(IdVehicle);
-            product = vehicle.LicensePlate;
+            var product = vehicle.LicensePlate;
+
+            var idUser = vehicle.UserId;
 
             if (vehicle.Type == 0)
                 price = "1.50";
@@ -62,7 +61,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             string answer = string.Empty;
 
             string _urlReturn = $"https://localhost:7121/driver/Paypal/Approved?idVehicle={IdVehicle}&IdUser={idUser}";
-
 
             using (var client = new HttpClient())
             {
@@ -95,7 +93,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
                         cancel_url = _urlCancel
                     }
                 };
-
 
                 var json = JsonConvert.SerializeObject(orden);
 

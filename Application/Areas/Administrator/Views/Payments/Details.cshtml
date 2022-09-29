@@ -1,0 +1,49 @@
+﻿@model Payment;
+
+<div class="modal fade" id="detailsPayments" tabindex="-1" aria-labelledby="Details" aria-hidden="true">
+    <div class="modal-dialog modal-xl  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="details">Detalhes Pagamento</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6">
+                        <label asp-for="User.Name" class="form-label">Nome</label>
+                        <input asp-for="User.Name" class="form-select" />
+                    </div>
+                    <div class="col-6">
+                        <label asp-for="User.Cpf" class="form-label">Cpf</label>
+                        <input asp-for="User.Cpf" class="form-select"></>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <label asp-for="User.Email" class="form-label">E-mail</label>
+                        <input asp-for="User.Email" class="form-control" />
+                    </div>
+                    <div class="col-6">
+                        <label asp-for="User.Phone" class="form-label">Fone</label>
+                        <input asp-for="User.Phone" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-6">
+                        <div class="col-6">
+                            <label asp-for="Vehicle.Model" class="form-label">Modelo do Veiculo</label>
+                            <input asp-for="Vehicle.Model" class="form-control" />
+                        </div>
+                        <div class="col-6">
+                            <label asp-for="Vehicle.LicensePlate" class="form-label">Placa do Veiculo</label>
+                            <input asp-for="Vehicle.LicensePlate" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

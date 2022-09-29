@@ -10,12 +10,12 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
     [Area("Driver")]
     [IsUserLogged]
     [Route("driver/user")]
-    public class DriverController : Controller
+    public class UserController : Controller
     {
         private readonly IUserService _userService;
         private readonly ISessionAuthentication _session;
 
-        public DriverController(IUserService userService, ISessionAuthentication session)
+        public UserController(IUserService userService, ISessionAuthentication session)
         {
             _userService = userService;
             _session = session;

@@ -29,9 +29,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         {
             var user = _session.FindUserSession();
 
-            if (user == null)
-                return RedirectToAction("Index", "Home");
-
             var vehicle = _vehicleService.GetAllById(user.Id);
 
             return View("Payments", vehicle);
