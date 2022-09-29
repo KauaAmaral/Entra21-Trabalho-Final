@@ -12,11 +12,11 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
     public class PaymentsController : Controller
     {
         private readonly IUserService _paymentService;
-        private readonly IUserController _vehicleService;
+        private readonly IVehicleService _vehicleService;
         private readonly ISessionAuthentication _session;
 
         public PaymentsController(IUserService paymentService
-            , IUserController vehicleService
+            , IVehicleService vehicleService
             , ISessionAuthentication sessionAuthentication)
         {
 

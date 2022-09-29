@@ -83,7 +83,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
             var token = Guid.NewGuid();
 
             userRegisterViewModel.Token = token;
-            userRegisterViewModel.Hierarchy = Repository.Enums.UserHierarchy.Driver;
+            userRegisterViewModel.Hierarchy = Repository.Enums.UserHierarchy.Motorista;
 
             var user = _userService.Insert(userRegisterViewModel);
 
@@ -119,7 +119,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
 
             else
             {
-                TempData["message"] = "O usuário foi confirmado!";
+                TempData["Confirm"] = "O usuário foi confirmado!";
                 _userService.UpdateVerifyEmail(user.Id);
             }
 

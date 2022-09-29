@@ -1,3 +1,39 @@
-﻿<h1>
-    Bem vindo motorista, @TempData["name"]!!!
-</h1>
+﻿<div>
+    <h1>
+        Bem vindo motorista, @TempData["name"]!!!
+    </h1>
+</div>
+<div class="col-md-4">
+    <a asp-area="Driver" asp-controller="Vehicle" asp-action="Index">
+        <div class="card card-block p-30 bg-blue-600">
+            <div class="card-watermark darker font-size-80 m-15"><i class="fa-solid fa-car" aria-hidden="true"></i></div>
+            <div class="counter counter-md counter-inverse text-left">
+                <div class="counter-number-group">
+                    <span class="counter-number-related text-capitalize">Cadastre seu veículo!</span>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+<div class="col-md-4">
+    <a asp-area="Driver" asp-controller="Payments" asp-action="Index">
+        <div class="card card-block p-30 bg-red-600">
+            <div class="card-watermark darker font-size-80 m-15"><i class="fa-solid fa-credit-card" aria-hidden="true"></i></div>
+            <div class="counter counter-md counter-inverse text-left">
+                <div class="counter-number-group">
+                    <span class="counter-number-related text-capitalize">Faça um pagamento!</span>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+<div class="col-md-4">
+        <div class="card card-block p-30 bg-green-600">
+            <div class="card-watermark darker font-size-60 m-15"><i class="fa-solid fa-credit-card" aria-hidden="true"></i></div>
+            <div class="counter counter-md counter-inverse text-left">
+                <div class="counter-number-group">
+                    <span class="counter-number-related text-capitalize">Estacione!</span>
+                </div>
+            </div>
+        </div>
+</div>

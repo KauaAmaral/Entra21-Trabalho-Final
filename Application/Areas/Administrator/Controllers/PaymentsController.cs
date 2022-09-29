@@ -14,9 +14,9 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
     public class PaymentsController : Controller
     {
         private readonly IUserService _paymentService;
-        private readonly IUserController _vehicleService;
+        private readonly IVehicleService _vehicleService;
         public PaymentsController(IUserService paymentService, 
-                IUserController vehicleService)
+                IVehicleService vehicleService)
         {
             _vehicleService = vehicleService;
             _paymentService = paymentService;

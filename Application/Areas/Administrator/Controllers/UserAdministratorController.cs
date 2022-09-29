@@ -39,8 +39,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
         [HttpGet("register")]
         public IActionResult Register()
         {
-            var userHierarchy = GetUserHierarchy();
-
             ViewBag.UserHierarchy = GetUserHierarchy();
 
             var userRegisterViewModel = new UserRegisterViewModel();
@@ -58,7 +56,16 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
                 return View("User/register", userRegisterViewModel);
             }
 
-            _userService.Insert(userRegisterViewModel);
+            if (_userService.VerifyEmails(userRegisterViewModel.Email) == false)
+            {
+                TempData["Message"] = "Já existe uma conta com esse email, tente novamente";
+
+                ViewBag.UserHierarchy = GetUserHierarchy();
+
+                return View("User/register");
+            }
+
+            _userService.InsertAdministrator(userRegisterViewModel);
 
             return RedirectToAction("Index");
         }

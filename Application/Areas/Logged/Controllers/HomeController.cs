@@ -22,10 +22,10 @@ namespace Entra21.CSharp.Area21.Application.Areas.Logged.Controllers
 
             TempData["name"] = user.Name;
 
-            if (user.Hierarchy == Repository.Enums.UserHierarchy.Administrator)
+            if (user.Hierarchy == Repository.Enums.UserHierarchy.Administrador)
                 return View("HomeAdministrator");
 
-            else if (user.Hierarchy == Repository.Enums.UserHierarchy.Guard) 
+            else if (user.Hierarchy == Repository.Enums.UserHierarchy.Guarda) 
                 return View("HomeGuard");
 
             return View("HomeDriver");

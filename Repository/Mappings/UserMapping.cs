@@ -77,7 +77,7 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                     Cpf = "111.111.111-11",
                     Phone = "1111111111",
                     CreatedAt = new DateTime(2005 - 08 - 08),
-                    Hierarchy = Enums.UserHierarchy.Administrator,
+                    Hierarchy = Enums.UserHierarchy.Administrador,
                     Status = true,
                     IsEmailConfirmed = true
                 });

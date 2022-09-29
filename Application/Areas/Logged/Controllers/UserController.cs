@@ -5,11 +5,11 @@ using Entra21.CSharp.Area21.Service.Services.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Users;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
+namespace Entra21.CSharp.Area21.Application.Areas.Logged.Controllers
 {
-    [Area("Driver")]
+    [Area("Logged")]
     [IsUserLogged]
-    [Route("driver/user")]
+    [Route("logged/user")]
     public class UserController : Controller
     {
         private readonly IUserService _userService;
