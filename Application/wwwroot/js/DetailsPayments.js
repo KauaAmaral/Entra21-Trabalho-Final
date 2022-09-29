@@ -12,8 +12,6 @@ let petEditarPreencherModal = (detailsPayments) => {
             return response.json();
         })
 
-
-
         .then((data) => {
             if (statusResponse === 200) {
                 //        document.getElementById('cadastroPetModalLabel').innerText = `Editar PET: ${data.nome}`
