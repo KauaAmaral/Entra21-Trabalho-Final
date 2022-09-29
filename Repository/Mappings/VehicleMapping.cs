@@ -34,7 +34,7 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .HasColumnName("user_id");
 
             builder.Property(x => x.Status)
-              .IsRequired()
+                .IsRequired()
               .HasColumnType("BIT");
            
             builder.Property(x => x.CreatedAt)

@@ -17,7 +17,8 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
     public class PaypalController : Controller
     {
         private readonly IVehicleService _vehicleService;
-        private readonly IUserService _paymentService;
+        private readonly IPaymentService _paymentService;
+        private readonly ISessionAuthentication _session;
 
         private readonly string _userName = "AeHh1KwTDiCTJlkmPVoWT5qj9YMp0dwnhAStwYVE7VZiaPN2jfJjMm7UJ6B9TMXFkVqFNkmpzpfinpJR";
         private readonly string _passwd = "EHqhokF9mvWolaWgw04hay43lNAuCcLNHZ8XBpmm0cLSYUxdAYnbBI6dhiaCXtI54qJJ-EF3VS0IMGfx";
@@ -25,59 +26,18 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         private readonly string _urlCancel = "https://localhost:7121/driver/Home";
 
         public PaypalController(
-            IVehicleService vehicleService, 
-            IUserService paymentService)
+            IVehicleService vehicleService,
+            IPaymentService paymentService,
+            ISessionAuthentication sessionAuthentication)
         {
             _vehicleService = vehicleService;
             _paymentService = paymentService;
+            _session = sessionAuthentication;
         }
 
         public IActionResult Index()
         {
             return View("Teste");
-        }
-
-        [HttpGet("approved")]
-        public async Task<IActionResult> Approved([FromQuery] int idVehicle, int idUser, string token, string PayerID)
-        {
-            var status = false;
-
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(_url);
-
-                var authToken = Encoding.ASCII.GetBytes($"{_userName}:{_passwd}");
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authToken));
-
-                var data = new StringContent("{}", Encoding.UTF8, "application/json");
-
-                HttpResponseMessage response = await client.PostAsync($"/v2/checkout/orders/{token}/capture", data);
-
-                status = response.IsSuccessStatusCode;
-
-                ViewData["Status"] = status;
-                if (status)
-                {
-                    var jsonResponse = response.Content.ReadAsStringAsync().Result;
-
-                    var objeto = JsonConvert.DeserializeObject<PaypalTransaction>(jsonResponse);
-
-                    ViewData["IdTransaccion"] = objeto.purchase_units[0].payments.captures[0].id;
-
-                    var viewModel = new PaymentRegisterViewModel
-                    {
-                        VehicleId = idVehicle,
-                        UserId = idUser,
-                        Token = token,
-                        PayerId = PayerID,
-                        TransactionId = objeto.purchase_units[0].payments.captures[0].id,
-                        Value = Convert.ToDecimal(objeto.purchase_units[0].payments.captures[0].amount.value.Replace(".", ","))
-                    };
-
-                    _paymentService.Register(viewModel);
-                }
-            }
-            return View();
         }
 
         [HttpPost("Paypal")]
@@ -148,6 +108,49 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
                 }
             }
             return Json(new { status = status, response = answer });
+        }
+
+        [HttpGet("approved")]
+        public async Task<IActionResult> Approved([FromQuery] int idVehicle, int idUser, string token, string PayerID)
+        {
+            var status = false;
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_url);
+
+                var authToken = Encoding.ASCII.GetBytes($"{_userName}:{_passwd}");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authToken));
+
+                var data = new StringContent("{}", Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await client.PostAsync($"/v2/checkout/orders/{token}/capture", data);
+
+                status = response.IsSuccessStatusCode;
+
+                ViewData["Status"] = status;
+                if (status)
+                {
+                    var jsonResponse = response.Content.ReadAsStringAsync().Result;
+
+                    var objeto = JsonConvert.DeserializeObject<PaypalTransaction>(jsonResponse);
+
+                    ViewData["IdTransaccion"] = objeto.purchase_units[0].payments.captures[0].id;
+
+                    var viewModel = new PaymentRegisterViewModel
+                    {
+                        VehicleId = idVehicle,
+                        UserId = idUser,
+                        Token = token,
+                        PayerId = PayerID,
+                        TransactionId = objeto.purchase_units[0].payments.captures[0].id,
+                        Value = Convert.ToDecimal(objeto.purchase_units[0].payments.captures[0].amount.value.Replace(".", ","))
+                    };
+
+                    _paymentService.Register(viewModel);
+                }
+            }
+            return View();
         }
 
         [HttpPost("Approved")]

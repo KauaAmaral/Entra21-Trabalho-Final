@@ -1,4 +1,5 @@
 ﻿using Entra21.CSharp.Area21.Repository.Entities;
+using Entra21.CSharp.Area21.Repository.Enums;
 using Entra21.CSharp.Area21.Service.ViewModels.Notifications;
 
 namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Notifications
@@ -8,7 +9,17 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Notifications
         public Notification RegisterWith(NotificationRegisterViewModel viewModel) =>
             new Notification
             {
+                GuardId = viewModel.GuardId,
+                VehicleId = viewModel.VehicleId,
+                VehicleLicensePlate = viewModel.VehiclePlate,
+                RegisteredVehicle = viewModel.Registered,
+                Comments = viewModel.Comments,
                 Address = viewModel.Address,
+                NotificationAmount = viewModel.NotificationAmount,
+                Token = viewModel.Token,
+                PayerId = viewModel.PayerId,
+                TransactionId = viewModel.TransactionId,
+                Value = viewModel.Value,
                 CreatedAt = DateTime.Now
             };
 
