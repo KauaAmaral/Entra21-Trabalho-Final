@@ -5,7 +5,7 @@ using Entra21.CSharp.Area21.Service.ViewModels.Vehicles;
 
 namespace Entra21.CSharp.Area21.Service.Services.Vehicles
 {
-    internal class VehicleService : IUserController
+    internal class VehicleService : IVehicleService
     {
         private readonly IVehicleRepository _vehicleRepository;
         private readonly IVehicleEntityMapping _vehicleEntityMapping;
@@ -48,6 +48,13 @@ namespace Entra21.CSharp.Area21.Service.Services.Vehicles
             _vehicleRepository.GetById(id);
 
         public IList<Vehicle> GetAllById(int id) =>
-            _vehicleRepository.GetAllById(id);       
+            _vehicleRepository.GetAllById(id);
+
+        public Vehicle? GetByVehiclePlate(string vehiclePlate)
+        {
+            var vehicle = _vehicleRepository.GetByVehiclePlate(vehiclePlate);
+
+            return vehicle;
+        }
     }
 }
