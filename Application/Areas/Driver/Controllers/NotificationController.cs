@@ -6,19 +6,18 @@ using Entra21.CSharp.Area21.Service.Services.Payments;
 using Entra21.CSharp.Area21.Service.ViewModels.Notifications;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
+namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 {
+    [Area("Driver")]
     [IsUserLogged]
-    [IsGuard]
-    [Area("Guard")]
-    [Route("/Guard/Notifications/")]
-    public class NotificationsGuardController : Controller
+    [Route("driver/notification")]
+    public class NotificationController : Controller
     {
         private readonly INotificationService _notificationService;
         private readonly IVehicleService _vehicleService;
         private readonly IPaymentService _paymentService;
 
-        public NotificationsGuardController(
+        public NotificationController(
             INotificationService notificationService,
             IVehicleService vehicleService,
             IPaymentService paymentService
@@ -104,24 +103,20 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
             var NotificationText = "";
             var vehicle = _vehicleService.GetByVehiclePlate(notificationRegisterViewModel.VehiclePlate);
 
-            if (vehicle == null)
+            if (vehicle != null)
             {
-                notificationRegisterViewModel.VehicleId = 0;
-                return View(nameof(Register));
+                notificationRegisterViewModel.VehicleId = vehicle.Id;
             }
 
-            notificationRegisterViewModel.VehicleId = vehicle.Id;
-
-            if (!ModelState.IsValid)
-            {
-                ViewBag.VehicleType = GetVehicleType();
-
-                return View(notificationRegisterViewModel);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    ViewBag.VehicleType = GetVehicleType();
+            //    return View(notificationRegisterViewModel);
+            //}
 
             _notificationService.Register(notificationRegisterViewModel);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Home");
 
         }
 
