@@ -5,11 +5,11 @@ using Entra21.CSharp.Area21.Service.Services.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Users;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Entra21.CSharp.Area21.Application.Areas.Logged.Controllers
+namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 {
-    [Area("Logged")]
     [IsUserLogged]
-    [Route("logged/user")]
+    [Area("Driver")]
+    [Route("Driver")]
     public class UserController : Controller
     {
         private readonly IUserService _userService;
@@ -21,9 +21,12 @@ namespace Entra21.CSharp.Area21.Application.Areas.Logged.Controllers
             _session = session;
         }
 
+        [HttpGet("Update")]
         public IActionResult Update()
         {
             var user = _session.FindUserSession();
+            ViewBag.User = user;
+
             var userUpdateViewModel = new UserUpdateViewModel
             {
                 Id = user.Id,

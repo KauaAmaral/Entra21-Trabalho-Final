@@ -33,7 +33,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
         {
             var users = _userService.GetAll();
 
-            return View("User/Index", users);
+            return View("Index", users);
         }
 
         [HttpGet("register")]
@@ -43,7 +43,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
 
             var userRegisterViewModel = new UserRegisterViewModel();
 
-            return View("User/register", userRegisterViewModel);
+            return View("register", userRegisterViewModel);
         }
 
         [HttpPost("register")]
@@ -88,7 +88,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
 
             ViewBag.UserHierarchy = GetUserHierarchy();
 
-            return View("User/update", userUpdateAdministratorViewMode);
+            return View("update", userUpdateAdministratorViewMode);
         }
 
         [HttpPost("update")]
