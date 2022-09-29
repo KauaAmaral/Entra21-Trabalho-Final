@@ -5,5 +5,6 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Guards
 {
     public interface IGuardRepository : IGenericRepository<Guard>
     {
+        Guard GetByIdUser(int id);
     }
 }

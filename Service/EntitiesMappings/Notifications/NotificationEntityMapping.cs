@@ -10,16 +10,16 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Notifications
             new Notification
             {
                 GuardId = viewModel.GuardId,
-                VehicleId = viewModel.VehicleId,
+                VehicleId = (int)viewModel.VehicleId,
                 VehicleLicensePlate = viewModel.VehiclePlate,
                 RegisteredVehicle = viewModel.Registered,
                 Comments = viewModel.Comments,
                 Address = viewModel.Address,
-                NotificationAmount = viewModel.NotificationAmount,
+                NotificationAmount = (int)viewModel.NotificationAmount,
                 Token = viewModel.Token,
                 PayerId = viewModel.PayerId,
                 TransactionId = viewModel.TransactionId,
-                Value = viewModel.Value,
+                Value = (decimal)viewModel.Value,
                 CreatedAt = DateTime.Now
             };
 

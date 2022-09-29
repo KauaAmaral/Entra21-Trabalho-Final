@@ -16,12 +16,17 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Guards
 
         public override Guard? GetById(int id) =>
             _context.Guards
-                .Include(x => x.User)
+                .Include(x => x.Id)
                 .FirstOrDefault(x => x.Id == id);
 
         public override IList<Guard> GetAll() =>
             _context.Guards
                 .Include(x => x.User)
                 .ToList();
+
+        public Guard GetByIdUser(int id) =>
+            _context.Guards
+                .Include(x => x.User)
+                .FirstOrDefault(x => x.Id == id);
     }
 }

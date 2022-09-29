@@ -55,5 +55,12 @@ namespace Entra21.CSharp.Area21.Service.Services.Guards
         {
             _guardRepository.Delete(id);
         }
+
+        public Guard GetByIdUser(int id)
+        {
+            var guard = _guardRepository.GetByIdUser(id);
+
+            return guard;
+        }
     }
 }
