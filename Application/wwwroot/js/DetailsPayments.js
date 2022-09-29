@@ -25,14 +25,17 @@ let petEditarPreencherModal = (detailsPayments) => {
                 document.getElementById('User_Email').value = data.user.email;
                 document.getElementById('User_Phone').value = data.user.phone;
                 document.getElementById('Vehicle_Model').value = data.vehicle.model
-                document.getElementById('Vehicle_LicensePlate').value = data.vehicle.licenseplate
+                document.getElementById('Vehicle_LicensePlate').innerText = data.vehicle.licenseplate
                 document.getElementById('TransactionId').value = data.transactionid
                 document.getElementById('Value').value = data.value
-                document.getElementById('PayerId').value = data.payerid
+                getElementById('PayerId').value = data.payerid 
+
+                modal.show();
             }
         })
         .catch((error) => console.log(error));
 };
+
 $('table').on('click', 'button.detailsPayments', (event) => {
     let element = event.target.tagName === 'I'
         ? event.target.parentElement
