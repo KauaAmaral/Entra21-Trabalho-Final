@@ -68,13 +68,13 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
         {
             var guard = _guardService.GetById(id);
 
-            var guardUpdateViewModel = new GuardUpdateViewModel()
-            {
-                Id = guard.Id,
-                IdentificationNumber = guard.IdentificationNumber
-            };
+            //var guardUpdateViewModel = new GuardUpdateViewModel()
+            //{
+            //    Id = guard.Id,
+            //    IdentificationNumber = guard.IdentificationNumber
+            //};
 
-            return View(guardUpdateViewModel);
+            return Ok(guard);
         }
 
         [HttpPost("Update")]

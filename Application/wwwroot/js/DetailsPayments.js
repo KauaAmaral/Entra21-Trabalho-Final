@@ -28,7 +28,7 @@ let petEditarPreencherModal = (detailsPayments) => {
                 document.getElementById('Vehicle_LicensePlate').innerText = data.vehicle.licenseplate
                 document.getElementById('TransactionId').value = data.transactionid
                 document.getElementById('Value').value = data.value
-                getElementById('PayerId').value = data.payerid 
+                getElementById('PayerId').value = data.payerid
 
                 modal.show();
             }

@@ -1,11 +1,16 @@
 ﻿@model List<Guard>
 
-<div class="row mb-3">
+
+@{
+    ViewData["Title"] = "Guardas";
+}
+
+<div class="row mb-3" id="guard-Id">
     <div class="text-end">
         <p class="h3">Lista de Guardas</p>
-        <a asp-action="Register" class="btn btn-primary">
-            <i class="fa-solid fa-plus"></i> Cadastrar
-        </a>
+        <button class="btn btn-primary guardRegister" data-id="guard.Id">
+            <i class="bi bi-info-circle"></i> Cadastrar
+        </button>
     </div>
 </div>
 <table class="table caption-top table-hover" style="width:85%" align="center">
@@ -24,9 +29,9 @@
                 <td>@guard.User.Cpf</td>
                 <td>@guard.IdentificationNumber</td>
                 <td>
-                    <a class="btn btn-primary" asp-action="Update" asp-route-id="@guard.Id">
-                        <i class="fa-solid fa-pencil"></i> Editar
-                    </a>
+                    <button class="btn btn-primary guardUpdate" data-id="@guard.Id">
+                        <i class="bi bi-info-circle"></i> Editar
+                    </button>
                     <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@guard.Id">
                         <i class="fa-solid fa-trash"></i> Apagar
                     </a>
@@ -35,3 +40,9 @@
         }
     </tbody>
 </table>
+
+<partial name="Update" model="ViewBag.Guard" />
+
+@section Scripts{
+    <script src="~/js/Guard/GuardUpdate.js"></script>
+}

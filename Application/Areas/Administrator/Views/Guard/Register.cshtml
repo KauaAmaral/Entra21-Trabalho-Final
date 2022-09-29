@@ -1,9 +1,46 @@
-﻿@model GuardRegisterViewModel
+﻿@model Guard
 
-@{
+@*@{
     ViewData["Title"] = "Register";
-}
+}*@
 
+
+
+
+<div class="modal" id="guardRegister">
+    <div class="modal-dialog modal-simple">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Cadastro do Guarda</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+         @*           <div class="col-6">
+                        <label asp-for="Cpf" class="form-label">Cpf</label>
+                        <input asp-for="Cpf" class="form-control" />
+                    </div>*@
+                    <div class="col-6">
+                        <label asp-for="IdentificationNumber" class="form-label">Número de identificação</label>
+                        <input asp-for="IdentificationNumber" class="form-control"></>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Criar guarda</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+@*
 <div class="page" align="center">
     <div class="page vertical-align text-center">
         <div class="page-content vertical-align-middle">
@@ -46,3 +83,4 @@
         </div>
     </div>
 </div>
+*@
