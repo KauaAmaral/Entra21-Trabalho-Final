@@ -12,11 +12,11 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
     [Route("driver/vehicle")]
     public class VehicleController : Controller // TODO ControleVehicle Revisar
     {
-        private readonly IUserController _vehicleService;
+        private readonly IVehicleService _vehicleService;
         private readonly ISessionAuthentication _session;
 
         public VehicleController(
-            IUserController vehicleService,
+            IVehicleService vehicleService,
             ISessionAuthentication sessionAuthentication            
             )
         {
@@ -27,8 +27,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         [HttpGet("register")]
         public IActionResult Register()
         {
-            var vehicleType = GetVehicleType();
-
             ViewBag.VehicleType = GetVehicleType();
 
             var vehicleRegisterViewModel = new VehicleRegisterViewModel();
@@ -70,7 +68,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
                 Id = vehicle.Id,
                 LicensePlate = vehicle.LicensePlate,
                 Model = vehicle.Model,
-                //UserId = user.Id
+                Type = vehicle.Type
             };
 
             ViewBag.VehicleType = vehicleType;

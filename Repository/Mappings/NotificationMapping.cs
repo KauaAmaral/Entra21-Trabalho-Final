@@ -11,22 +11,21 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
             builder.ToTable("notification");
 
             builder.HasKey(x => x.Id);
-
+         
             builder.Property(x => x.Status)
-                .HasColumnType("BIT")
-                .HasDefaultValue(true)
-                .HasColumnName("status");
+                .IsRequired()
+              .HasColumnType("BIT");
 
             builder.Property(x => x.CreatedAt)
+                .HasColumnName("created_at")
                 .HasColumnType("DATETIME2")
-                .IsRequired()
-                .HasColumnName("create_at");
+                .HasDefaultValue(DateTime.Now);
 
             builder.Property(x => x.UpdatedAt)
-                .HasColumnType("DATETIME2")
-                .IsRequired()
-                .HasColumnName("update_at");
+                .HasColumnName("update_at")
+                .HasColumnType("DATETIME2");
 
+            //INNE JOIN 
             builder.Property(x => x.GuardId)
                 .HasColumnType("INT")
                 .HasColumnName("guard_id");
@@ -43,17 +42,60 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .WithMany(x => x.Notifications)
                 .HasForeignKey(x => x.VehicleId)
                 .OnDelete(DeleteBehavior.NoAction);
+            //Endereço e comentario
+            builder.Property(x => x.Address)
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(100)
+                .IsRequired()
+                .HasColumnName("address");
+
+            builder.Property(x => x.Comments)
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(100)
+                .IsRequired()
+                .HasColumnName("comments");
+            //Vehicle
+            builder.Property(x => x.VehicleLicensePlate)
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(8)
+                .IsRequired()
+                .HasColumnName("vehicle_license_plate");
 
             builder.Property(x => x.RegisteredVehicle)
                 .HasColumnType("BIT")
                 .HasDefaultValue(false)
                 .HasColumnName("register_vehicle");
 
-            builder.Property(x => x.Address)
-                .HasColumnType("VARCHAR")
-                .HasMaxLength(100)
+            builder.Property(x => x.Type)
+                .HasColumnName("vehicle_type")
                 .IsRequired()
-                .HasColumnName("address");
+                .HasColumnType("TINYINT");
+
+            builder.Property(x => x.NotificationAmount)
+                .HasColumnName("notification_amount")
+                .IsRequired()
+                .HasColumnType("TINYINT")
+                .HasDefaultValue(1);
+            //Pagamento
+            builder.Property(x => x.Token)
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(20)
+                .HasColumnName("token");
+
+            builder.Property(x => x.PayerId)
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(15)
+                .HasColumnName("payer_id");
+
+            builder.Property(x => x.TransactionId)
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(20)
+                .HasColumnName("transaction_id");
+
+            builder.Property(x => x.Value)
+                .HasColumnType("DECIMAL")
+                .HasPrecision(5, 2)
+                .HasColumnName("value");
         }
     }
 }
