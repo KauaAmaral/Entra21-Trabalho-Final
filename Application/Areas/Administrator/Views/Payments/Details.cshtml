@@ -1,21 +1,25 @@
 ﻿@model Payment;
 
-<div class="modal fade" id="detailsPayments" tabindex="-1" aria-labelledby="Details" aria-hidden="true">
-    <div class="modal-dialog modal-xl  modal-dialog-centered">
+
+<div class="modal" id="detailsPayments">
+    <div class="modal-dialog modal-simple">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="details">Detalhes Pagamento</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Detalhes de pagamento</h4>
             </div>
+
             <div class="modal-body">
                 <div class="row">
                     <div class="col-6">
                         <label asp-for="User.Name" class="form-label">Nome</label>
-                        <input asp-for="User.Name" class="form-select" />
+                        <input asp-for="User.Name" class="form-control" />
                     </div>
                     <div class="col-6">
                         <label asp-for="User.Cpf" class="form-label">Cpf</label>
-                        <input asp-for="User.Cpf" class="form-select"></>
+                        <input asp-for="User.Cpf" class="form-control"></>
                     </div>
                 </div>
 
@@ -29,18 +33,30 @@
                         <input asp-for="User.Phone" class="form-control" />
                     </div>
                 </div>
-
                 <div class="row">
-
                     <div class="col-6">
-                        <div class="col-6">
-                            <label asp-for="Vehicle.Model" class="form-label">Modelo do Veiculo</label>
-                            <input asp-for="Vehicle.Model" class="form-control" />
-                        </div>
-                        <div class="col-6">
-                            <label asp-for="Vehicle.LicensePlate" class="form-label">Placa do Veiculo</label>
-                            <input asp-for="Vehicle.LicensePlate" class="form-control" />
-                        </div>
+                        <label asp-for="Vehicle.Model" class="form-label">Modelo do Veiculo</label>
+                        <input asp-for="Vehicle.Model" class="form-control" />
+                    </div>
+                    <div class="col-6">
+                        <label asp-for="Vehicle.LicensePlate" class="form-label">Placa do Veiculo</label>
+                        <input asp-for="Vehicle.LicensePlate" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <label asp-for="TransactionId" class="form-label">Id da Transação</label>
+                        <input asp-for="TransactionId" class="form-control" />
+                    </div>
+                    <div class="col-6">
+                        <label asp-for="Value" class="form-label">Valor Pago</label>
+                        <input asp-for="Value" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <label asp-for="PayerId" class="form-label">Id do Pagador</label>
+                        <input asp-for="PayerId" class="form-control" />
                     </div>
                 </div>
             </div>
