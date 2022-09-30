@@ -59,15 +59,16 @@
 
 @section Scripts{
     <script>
-        let value = $("#selectHierarchy").val();
 
         $(document).ready(function () {
+            let value = $("#selectHierarchy").val();
             if (value == "Guarda") {
                 $("#identificationId").prop("disabled", false);
             }
         });
 
         $("#selectHierarchy").on("change", function () {
+            let value = $("#selectHierarchy").val();
             if (value == "Guarda") {
                 $("#identificationId").prop("disabled", false);
             }
