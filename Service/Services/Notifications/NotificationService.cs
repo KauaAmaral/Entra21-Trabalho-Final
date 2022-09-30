@@ -17,9 +17,17 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
             _notificationEntityMapping = notificationEntityMapping;
         }
 
-        public Notification Register(NotificationRegisterViewModel viewModel)
+        public Notification Register(NotificationRegisterViewModel viewModel) //TODO Definir valores
         {
+            viewModel.NotificationAmount = 1;
+            if ((int)viewModel.Type == 0)
+                viewModel.Value = Convert.ToDecimal(15);
+            else
+                viewModel.Value = Convert.ToDecimal(7.50);
+
             var notification = _notificationEntityMapping.RegisterWith(viewModel);
+
+            notification.CreatedAt = DateTime.Now;
 
             _notificationRepository.Add(notification);
 
