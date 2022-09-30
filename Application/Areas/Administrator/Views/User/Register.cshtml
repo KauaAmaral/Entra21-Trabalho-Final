@@ -21,8 +21,12 @@
     <span asp-validation-for="Cpf" class="text-danger"></span>
 
     <label asp-for="Hierarchy" class="form-label" span-required=""></label>
-    <select asp-for="Hierarchy" asp-items="userHierarchy" class="form-control">
+    <select asp-for="Hierarchy" asp-items="userHierarchy" id="selectHierarchy" class="form-control">
     </select>
+
+    <label asp-for="IdentificationId" class="form-label"></label>
+    <input asp-for="IdentificationId" type="password" class="form-control" />
+    <span asp-validation-for="IdentificationId" class="text-danger"></span>
 
     <label asp-for="Password" class="form-label"></label>
     <input asp-for="Password" type="password" class="form-control" />
@@ -32,9 +36,22 @@
     <input asp-for="ConfirmPassword" type="password" class="form-control" />
     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
 
-        @if (TempData["Message"] != null)
-        {
-            <p class="text-danger">@TempData["Message"]</p>
-        }
+    @if (TempData["Message"] != null)
+    {
+        <p class="text-danger">@TempData["Message"]</p>
+    }
     <button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Criar conta</button>
 </form>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            if ($(selectHierarchy).prop("Administrator")) {
+                $("#selectHierarchy").prop("Administrator");
+            }
+            else {
+                $("#selectHierarchy").prop("disabled", false);
+            }
+        });
+    </script>
+}
