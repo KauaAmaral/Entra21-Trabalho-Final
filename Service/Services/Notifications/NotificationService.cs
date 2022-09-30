@@ -35,15 +35,16 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
             return notification;
         }
 
-        private Notification UpdateNotificationAmount(Notification notification)
+        public Notification UpdateNotificationAmount(Notification notification)
         {
             notification.NotificationAmount++;
             notification.UpdatedAt = DateTime.Now;
 
             if (notification.Type == 0)
-                
+            {
 
-            return new Notification();
+            }
+                return notification;
         }
 
         public Notification SetNotification(NotificationRegisterViewModel viewModel)
@@ -53,11 +54,11 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
             
             if (notification == null || notification.CreatedAt != DateTime.Now.Date || notification.Address != viewModel.Address || notification.PayerId != null)
             {
-                Register(viewModel);
+               return Register(viewModel);
             }
-            else if(notification.CreatedAt.AddHours(1) >= DateTime.Now)
+            else if(notification.CreatedAt.AddHours(1) >= DateTime.Now && notification.NotificationAmount == 1)
             {
-                UpdateNotificationAmount(notification);
+               return UpdateNotificationAmount(notification);
             }
 
             return new Notification();
