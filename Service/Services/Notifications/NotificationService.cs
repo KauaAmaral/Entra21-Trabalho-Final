@@ -28,12 +28,41 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
             var notification = _notificationEntityMapping.RegisterWith(viewModel);
 
             notification.CreatedAt = DateTime.Now;
+            notification.UpdatedAt = DateTime.Now;
 
             _notificationRepository.Add(notification);
 
             return notification;
         }
 
+        private Notification UpdateNotificationAmount(Notification notification)
+        {
+            notification.NotificationAmount++;
+            notification.UpdatedAt = DateTime.Now;
+
+            if (notification.Type == 0)
+                
+
+            return new Notification();
+        }
+
+        public Notification SetNotification(NotificationRegisterViewModel viewModel)
+        {
+            var notification = new Notification();
+            notification = _notificationRepository.GetByPlate(viewModel.VehiclePlate);
+            
+            if (notification == null || notification.CreatedAt != DateTime.Now.Date || notification.Address != viewModel.Address || notification.PayerId != null)
+            {
+                Register(viewModel);
+            }
+            else if(notification.CreatedAt.AddHours(1) >= DateTime.Now)
+            {
+                UpdateNotificationAmount(notification);
+            }
+
+            return new Notification();
+        }
+       
         public bool Update(NotificationUpdateViewModel viewModel)
         {
             var notification = _notificationRepository.GetById(viewModel.Id);
