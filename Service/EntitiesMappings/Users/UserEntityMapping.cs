@@ -19,6 +19,19 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Users
                 CreatedAt = DateTime.Now
             };
 
+        public User RegisterWithAdministrator(UserRegisterViewModel viewModel) =>
+            new User
+            {
+                Name = viewModel.Name,
+                Token = viewModel.Token,
+                TokenExpiredDate = DateTime.Now.AddHours(2),
+                Email = viewModel.Email,
+                Password = viewModel.Password.GetHash(),
+                Cpf = viewModel.Cpf,
+                Hierarchy = viewModel.Hierarchy,
+                CreatedAt = DateTime.Now
+            };
+
         public User UpdateWith(User user, UserUpdateViewModel viewModel)
         {
             user.Name = viewModel.Name;
@@ -40,7 +53,7 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Users
             user.Hierarchy = viewModel.Hierarchy;
 
             if (viewModel.Password != null)
-                user.Password = viewModel.Password;
+                user.Password = viewModel.Password.GetHash();
 
             return user;
         }      
