@@ -28,6 +28,7 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Payments
         public override Payment? GetById(int id) =>
           _context.Payments
           .Include(x => x.Vehicle)
+          .Include(x => x.User)
           .FirstOrDefault(x => x.Id == id);
     }
 }

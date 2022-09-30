@@ -5,11 +5,11 @@ using Entra21.CSharp.Area21.Service.Services.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Users;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
+namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
 {
     [IsUserLogged]
-    [Area("Driver")]
-    [Route("Driver")]
+    [Area("Guard")]
+    [Route("Guard")]
     public class UserController : Controller
     {
         private readonly IUserService _userService;
@@ -60,7 +60,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
             return View(viewModel);
         }
-
 
         [HttpPost("changePassword")]
         public IActionResult ChangePassword([FromForm] UserChangePasswordViewModel userChangePasswordViewModel)
