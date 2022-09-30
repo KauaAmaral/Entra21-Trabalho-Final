@@ -1,0 +1,34 @@
+﻿@model List<Notification>
+
+<div class="row mb-3">
+    <div class="text-end">
+        <a asp-action="register" class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i> Criar Notificação
+        </a>
+    </div>
+</div>
+
+
+<table class="table-center style="width:70%" align="center" id="notification-id">
+    <thead>
+        <tr>
+            <th>Placa Veículo</th>
+            <th>Usuário</th> 
+            <th>Guarda</th>
+            <th>Comentários</th>
+            <th>Horário</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var notification in Model)
+        {
+            <tr>
+                <td>@notification.Vehicle.LicensePlate</td>
+                <td>@notification.Vehicle.User</td>
+                <td>@notification.Guard</td>
+                <td>@notification.Comments</td>
+                <td>@notification.CreatedAt</td>
+            </tr>
+        }
+    </tbody>
+</table>

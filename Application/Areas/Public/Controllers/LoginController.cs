@@ -43,7 +43,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
             if (user != null)
             {
                 _session.CreateUserSession(user);
-                return RedirectToAction("Index", "HomeDriver", new { area = "Driver" });
+                return RedirectToAction("Index", "Home", new { area = "Logged" });
             }
             else
                 TempData["Message"] = "Não existe um usuário com esse e-mail e/ou senha";
@@ -119,7 +119,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
 
             else
             {
-                TempData["message"] = "O usuário foi confirmado!";
+                TempData["Confirm"] = "O usuário foi confirmado!";
                 _userService.UpdateVerifyEmail(user.Id);
             }
 
