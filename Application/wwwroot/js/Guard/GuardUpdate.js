@@ -21,14 +21,12 @@ let petEditarPreencherModal = (guardUpdate) => {
                 modal.show
                 //        //document.getElementById('cadastroPetModalLabel').innerText = `Editar PET: ${data.nome}`
                 //        //document.getElementById('User_Name').value = data.user.name;
-                //        document.getElementById('User_Cpf').value = data.user.cpf;
+                document.getElementById('IdentificationNumber').value = data.identificationNumber;
 
-                //        modal.show();
-                //    }
-                //})
-                //.catch((error) => console.log(error));
-            };
+                modal.show();
+            }
         })
+        .catch((error) => console.log(error));
 };
 
 $('table').on('click', 'button.guardUpdate', (event) => {
