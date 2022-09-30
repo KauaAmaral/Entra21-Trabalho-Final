@@ -19,7 +19,7 @@ namespace Entra21.CSharp.Area21.Service.ViewModels.Users
         [Display(Name = "Confirmar senha nova")]
         [Compare("Password", ErrorMessage = "Senhas não conferem")]
         public string? ConfirmPassword { get; set; }
-
         public UserHierarchy Hierarchy { get; set; }
+        public string IdentificationId { get; set; }
     }
 }

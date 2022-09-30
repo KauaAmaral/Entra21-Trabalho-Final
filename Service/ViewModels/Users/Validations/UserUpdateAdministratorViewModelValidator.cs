@@ -2,9 +2,9 @@
 
 namespace Entra21.CSharp.Area21.Service.ViewModels.Users.Validations
 {
-    public class UserRegisterViewModelValidator : AbstractValidator<UserRegisterViewModel>
+    public class UserUpdateAdministratorViewModelValidator : AbstractValidator<UserUpdateAdministratorViewModel>
     {
-        public UserRegisterViewModelValidator()
+        public UserUpdateAdministratorViewModelValidator()
         {
             RuleFor(user => user.IdentificationId)
                 .Length(6)

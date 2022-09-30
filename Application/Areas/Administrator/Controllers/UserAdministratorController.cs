@@ -3,7 +3,9 @@ using Entra21.CSharp.Area21.Repository.Enums;
 using Entra21.CSharp.Area21.Service.Authentication;
 using Entra21.CSharp.Area21.Service.Services.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Users;
+using Entra21.CSharp.Area21.Service.ViewModels.Users.Validations;
 using Entra21.CSharp.Area21.Service.ViewModels.Vehicles;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
@@ -51,7 +53,10 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
         [HttpPost("register")]
         public IActionResult Register([FromForm] UserRegisterViewModel userRegisterViewModel)
         {
-            if (!ModelState.IsValid)
+            var validator = new UserRegisterViewModelValidator();
+            var result = validator.Validate(userRegisterViewModel);
+
+            if (!result.IsValid || !ModelState.IsValid)
             {
                 ViewBag.UserHierarchy = GetUserHierarchy();
 
@@ -87,7 +92,10 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
         [HttpPost("update")]
         public IActionResult Update([FromForm] UserUpdateAdministratorViewModel userUpdateAdministratorViewMode)
         {
-            if (!ModelState.IsValid)
+            var validator = new UserUpdateAdministratorViewModelValidator();
+            var result = validator.Validate(userUpdateAdministratorViewMode);
+
+            if (!result.IsValid || !ModelState.IsValid)
             {
                 ViewBag.UserHierarchy = GetUserHierarchy();
 
