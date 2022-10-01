@@ -3,42 +3,41 @@
     ViewData["Title"] = "Usuários";
 }
 
-<div class="row mb-3">
-    <div class="text-end">
-        <a asp-controller="UserAdministrator" asp-action="Register" class="btn btn-primary">
-            <i class="fa-solid fa-plus"></i> Cadastrar
-        </a>
-    </div>
-</div>
+<section class="p-5">
+    <a class="pb-2 btn btn-primary" href="/Administrator/Users/register">
+        <i class="fa-solid fa-plus"></i> Cadastrar
+    </a>
 
-<table class="table text-center caption-top table-hover" id="vehicles-id" style="width:95%" align="center">
-    <thead>
-        <tr>
-            <th style="width:25%"><font size="5"><b><font>Nome</font></b></font></th>
-            <th style="width:25%"><font size="5"><b><font>Email</font></b></font></th>
-            <th style="width:25%"><font size="5"><b><font>Hierarquia</font></b></font></th>
-            <th style="width:25%"><font size="5"><b><font>Ação</font></b></font></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model)
-        {
-            <tr>
-                <td><b><font>@user.Name</font></b></td>
-                <td><b><font>@user.Email</font></b></td>
-                <td><b><font>@user.Hierarchy</font></b></td>
-                <td>
-                    <a class="btn btn-primary" asp-action="update" asp-route-id="@user.Id">
-                        <i class="fa-solid fa-pencil"></i> Editar
-                    </a>
-                    <a class="btn btn-outline-danger" asp-action="delete" asp-route-id="@user.Id">
-                        <i class="fa-solid fa-trash"></i> Apagar
-                    </a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <div class="table-responsive" id="no-more-tables">
+        <table class="table table-hover" id="vehicles-id">
+            <thead>
+                <tr>
+                    <th><b>Nome</b></th>
+                    <th><b>Email</b></th>
+                    <th><b>Hierarquia</b></th>
+                    <th><b>Ação</b></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td data-title="Nome">Admin</td>
+                    <td data-title="Email">admin@admin.com</td>
+                    <td data-title="Hierarquia">Administrador</td>
+                    <td data-title="Ação">
+                        <a class="btn btn-primary" href="/Administrator/Users/update?id=1">
+                            <i class="fa-solid fa-pencil"></i> Editar
+                        </a>
+                        <a class="btn btn-outline-danger" href="/Administrator/Users/delete?id=1">
+                            <i class="fa-solid fa-trash"></i> Apagar
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
 @section scripts{
     <script>
 
