@@ -133,7 +133,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
                 return View(notificationRegisterViewModel);
             }
 
-            _notificationService.Register(notificationRegisterViewModel);
+            _notificationService.SetNotification(notificationRegisterViewModel);
 
             return RedirectToAction("Home");
 

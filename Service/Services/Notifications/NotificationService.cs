@@ -17,7 +17,24 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
             _notificationEntityMapping = notificationEntityMapping;
         }
 
-        public Notification Register(NotificationRegisterViewModel viewModel) //TODO Definir valores
+        public Notification SetNotification(NotificationRegisterViewModel viewModel)
+        {
+            var notification = new Notification();
+            notification = _notificationRepository.GetByPlate(viewModel.VehiclePlate);
+
+            if (notification == null || notification.CreatedAt.Date != DateTime.Now.Date || notification.Address != viewModel.Address || notification.PayerId != null)
+            {
+                return Register(viewModel);
+            }
+            else if (notification.CreatedAt.AddHours(1) <= DateTime.Now && notification.NotificationAmount == 1)
+            {
+                return UpdateNotificationAmount(notification);
+            }
+
+            return new Notification();
+        }
+
+        public Notification Register(NotificationRegisterViewModel viewModel)
         {
             viewModel.NotificationAmount = 1;
             if ((int)viewModel.Type == 0)
@@ -28,7 +45,6 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
             var notification = _notificationEntityMapping.RegisterWith(viewModel);
 
             notification.CreatedAt = DateTime.Now;
-            notification.UpdatedAt = DateTime.Now;
 
             _notificationRepository.Add(notification);
 
@@ -37,40 +53,26 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
 
         public Notification UpdateNotificationAmount(Notification notification)
         {
-            notification.NotificationAmount++;
+            notification.NotificationAmount = notification.NotificationAmount+1;
             notification.UpdatedAt = DateTime.Now;
 
-            if (notification.Type == 0)
-            {
+            if ((int)notification.Type == 0)
+                notification.Value = Convert.ToDecimal(16.50);
+            else
+                notification.Value = Convert.ToDecimal(8.25);
 
-            }
-                return notification;
+            _notificationRepository.Update(notification);
+
+            return notification;
         }
 
-        public Notification SetNotification(NotificationRegisterViewModel viewModel)
-        {
-            var notification = new Notification();
-            notification = _notificationRepository.GetByPlate(viewModel.VehiclePlate);
-            
-            if (notification == null || notification.CreatedAt != DateTime.Now.Date || notification.Address != viewModel.Address || notification.PayerId != null)
-            {
-               return Register(viewModel);
-            }
-            else if(notification.CreatedAt.AddHours(1) >= DateTime.Now && notification.NotificationAmount == 1)
-            {
-               return UpdateNotificationAmount(notification);
-            }
-
-            return new Notification();
-        }
-       
         public bool Update(NotificationUpdateViewModel viewModel)
         {
             var notification = _notificationRepository.GetById(viewModel.Id);
 
             if (notification == null)
                 return false;
-
+             
             notification = _notificationEntityMapping.UpdateWith(notification, viewModel);
 
             _notificationRepository.Update(notification);
