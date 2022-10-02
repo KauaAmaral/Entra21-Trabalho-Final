@@ -1,4 +1,6 @@
-﻿using Entra21.CSharp.Area21.Repository.Entities;
+﻿using Bogus;
+using Entra21.CSharp.Area21.Repository.Entities;
+using Entra21.CSharp.Area21.Repository.Enums;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Vehicles;
 using Entra21.CSharp.Area21.Service.ViewModels.Vehicles;
 using FluentAssertions;
@@ -18,18 +20,12 @@ namespace Tests.Unit.Service.EntitiesMappings
         public void Test_RegisterWith()
         {
             // Arrange
-            var viewModel = new VehicleRegisterViewModel
-            {
-                LicensePlate = "MFW7995",
-                Model = "Ford KA",
-                Type = Entra21.CSharp.Area21.Repository.Enums.VehicleType.Carro,
-                UserId = 2,
-            };
-
+            var viewModel = CreateRegisterVehicle(VehicleType.Carro);
+            
             // Act
             var vehicle = _vehicleEntityMapping.RegisterWith(viewModel);
 
-            // Assert 
+            // Assert
             vehicle.LicensePlate.Should().Be(viewModel.LicensePlate);
             vehicle.Model.Should().Be(viewModel.Model);
             vehicle.Type.Should().Be(viewModel.Type);
@@ -40,12 +36,39 @@ namespace Tests.Unit.Service.EntitiesMappings
         public void Test_UpdateWith()
         {
             // Arrange
-            var vehicle = new Vehicle
-            {
-                LicensePlate = "AXJ0F45",
-                Model = "Ford Focus",
-                Type = Entra21.CSharp.Area21.Repository.Enums.VehicleType.Carro,
-            };
+            var vehicle = CreateVehicle(VehicleType.Carro);
+
+            var viewModelEdit = UpdateVehicle(VehicleType.Moto);
+
+            // Act
+            _vehicleEntityMapping.UpdateWith(vehicle, viewModelEdit);
+
+            // Assert
+            vehicle.LicensePlate.Should().Be(viewModelEdit.LicensePlate);
+            vehicle.Model.Should().Be(viewModelEdit.Model);
+            vehicle.Type.Should().Be(viewModelEdit.Type);
         }
+
+        private VehicleRegisterViewModel CreateRegisterVehicle(VehicleType vehicleType)
+            => new Faker<VehicleRegisterViewModel>()
+            .RuleFor(x => x.LicensePlate, x => x.Random.Word())
+            .RuleFor(x => x.Model, x => x.Random.Word())
+            .RuleFor(x => x.Type, x => vehicleType)
+            .RuleFor(x => x.UserId, x => x.Random.Number())
+            .Generate();
+
+        private Vehicle CreateVehicle(VehicleType vehicleType)
+            => new Faker<Vehicle>()
+            .RuleFor(x => x.LicensePlate, x => x.Random.Word())
+            .RuleFor(x => x.Model, x => x.Random.Word())
+            .RuleFor(x => x.Type, x => vehicleType)
+            .Generate();
+
+        private VehicleUpdateViewModel UpdateVehicle(VehicleType vehicleType)
+            => new Faker<VehicleUpdateViewModel>()
+            .RuleFor(x => x.LicensePlate, x => x.Random.Word())
+            .RuleFor(x => x.Model, x => x.Random.Word())
+            .RuleFor(x => x.Type, x => vehicleType)
+            .Generate();
     }
 }

@@ -2,11 +2,6 @@
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Guards;
 using Entra21.CSharp.Area21.Service.ViewModels.Guards;
 using FluentAssertions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Tests.Unit.Service.EntitiesMappings
