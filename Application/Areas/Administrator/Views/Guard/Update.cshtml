@@ -11,6 +11,7 @@
             </div>
 
             <div class="modal-body">
+                <input id="cadastroGuardModalId" class="form-control" type="hidden"/>
                 <div class="row">
                     <div class="col-6">
                         <label asp-for="IdentificationNumber" class="form-label">Número de identificação</label>
@@ -18,7 +19,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-success">
+            <button type="button" class="btn btn-success" id="saveGuard">
                 <i class="fa-solid fa-floppy-disk"></i> Salvar
             </button>
         </div>
