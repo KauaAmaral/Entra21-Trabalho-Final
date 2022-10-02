@@ -63,18 +63,15 @@ namespace Entra21.CSharp.Area21.Service.Services.Users
             return true;
         }
 
-        public bool UpdateAdministrator(UserUpdateAdministratorViewModel viewModel)
+        public User UpdateAdministrator(UserUpdateAdministratorViewModel viewModel)
         {
             var user = _userRepository.GetById(viewModel.Id);
-
-            if (user == null)
-                return false;
 
             user = _userEntityMapping.UpdateWithAdministrator(user, viewModel);
 
             _userRepository.Update(user);
 
-            return true;
+            return user;
         }
 
         public bool UpdatePassword(UserChangePasswordViewModel viewModel)

@@ -18,6 +18,10 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Guards
             _context.Guards
                 .Include(x => x.User)
                 .FirstOrDefault(x => x.Id == id);
+        
+        public Guard? GetByUserId(int id) =>
+            _context.Guards
+                .FirstOrDefault(x => x.UserId == id);
 
         public override IList<Guard> GetAll() =>
             _context.Guards
