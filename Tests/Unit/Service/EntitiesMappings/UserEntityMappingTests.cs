@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
-using FluentAssertions;
+﻿using Entra21.CSharp.Area21.Repository.Entities;
+using Entra21.CSharp.Area21.Repository.Enums;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Users;
-using System.Data;
-using System.Security.Policy;
-using Entra21.CSharp.Area21.Repository.Entities;
-using Entra21.CSharp.Area21.Repository.Entities.Paypal.PaypalTransaction;
+using FluentAssertions;
+using Xunit;
 
 namespace Tests.Unit.Service.EntitiesMappings
 {
@@ -34,7 +27,7 @@ namespace Tests.Unit.Service.EntitiesMappings
                 Email = "efraim@gmail.com",
                 Password = "12345678",
                 Cpf = "123.456.789-10",
-                Hierarchy = Entra21.CSharp.Area21.Repository.Enums.UserHierarchy.Administrador,                
+                Hierarchy = UserHierarchy.Administrador,                
             };
 
             // Act 
@@ -94,7 +87,7 @@ namespace Tests.Unit.Service.EntitiesMappings
                 Cpf = "127.451.478-72",
                 Email = "marcos-jose@gmail.com",
                 Phone = "48941456577",
-                Hierarchy = Entra21.CSharp.Area21.Repository.Enums.UserHierarchy.Motorista
+                Hierarchy = UserHierarchy.Motorista
             };
 
             var viewModelEdit = new UserUpdateAdministratorViewModel
@@ -104,11 +97,11 @@ namespace Tests.Unit.Service.EntitiesMappings
                 Cpf = "121.454.122-78",
                 Email = "joao.gustavo@gmail.com",
                 Phone = "47991544963",
-                Hierarchy = Entra21.CSharp.Area21.Repository.Enums.UserHierarchy.Guarda
+                Hierarchy = UserHierarchy.Guarda
             };
 
             // Act
-            _userEntityMapping.UpdateWith(user, viewModelEdit);
+            _userEntityMapping.UpdateWithAdministrator(user, viewModelEdit);
 
             // Assert
             user.Id.Should().Be(viewModelEdit.Id);
@@ -124,8 +117,20 @@ namespace Tests.Unit.Service.EntitiesMappings
         {
             // Arrange
             var user = new User
-            {                
+            {       
+                Password = "ABCDE"
             };
+
+            var viewModelEdit = new UserChangePasswordViewModel
+            {
+                NewPassword = "1234567890123456789012345678901234567890123456789012345678901234"
+            };
+
+            // Act
+            _userEntityMapping.UpdatePasswordWith(user, viewModelEdit);
+
+            // Assert
+            user.Password.Should().Be(viewModelEdit.NewPassword);
         }
     }
 }
