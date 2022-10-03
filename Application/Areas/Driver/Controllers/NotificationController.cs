@@ -1,12 +1,12 @@
 ﻿using Entra21.CSharp.Area21.Application.Filters;
 using Entra21.CSharp.Area21.Repository.Enums;
-using Entra21.CSharp.Area21.Service.Services.Notifications;
-using Entra21.CSharp.Area21.Service.Services.Vehicles;
-using Entra21.CSharp.Area21.Service.Services.Payments;
-using Entra21.CSharp.Area21.Service.ViewModels.Notifications;
-using Microsoft.AspNetCore.Mvc;
 using Entra21.CSharp.Area21.Service.Authentication;
 using Entra21.CSharp.Area21.Service.Services.Guards;
+using Entra21.CSharp.Area21.Service.Services.Notifications;
+using Entra21.CSharp.Area21.Service.Services.Payments;
+using Entra21.CSharp.Area21.Service.Services.Vehicles;
+using Entra21.CSharp.Area21.Service.ViewModels.Notifications;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 {
@@ -20,7 +20,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         private readonly IPaymentService _paymentService;
         private readonly ISessionAuthentication _session;
         private readonly IGuardService _guardService;
-
 
         public NotificationController(
             INotificationService notificationService,
@@ -46,7 +45,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
             return View("Notifications/Index", notifications);
         }
-
 
         [HttpPost("update")]
         public IActionResult Update([FromBody] NotificationUpdateViewModel notificationUpdateViewModel)
@@ -111,14 +109,12 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         [HttpPost("registerNotification")]
         public IActionResult RegisterNotification([FromForm] NotificationRegisterViewModel notificationRegisterViewModel)
         {
-
             var user = _session.FindUserSession();
 
             if (user != null)
-                notificationRegisterViewModel.GuardId =  _guardService.GetByIdUser(user.Id).Id;
+                notificationRegisterViewModel.GuardId = _guardService.GetByIdUser(user.Id).Id;
             else
                 return RedirectToAction("Index", "Home");
-
 
             var vehicle = _vehicleService.GetByVehiclePlate(notificationRegisterViewModel.VehiclePlate);
 
@@ -136,7 +132,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             _notificationService.SetNotification(notificationRegisterViewModel);
 
             return RedirectToAction("Home");
-
         }
 
         [HttpGet("checkout")]

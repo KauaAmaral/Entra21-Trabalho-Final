@@ -31,7 +31,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
                 return UpdateNotificationAmount(notification);
             }
 
-            return new Notification();
+            return UpdateNotificationAmount(notification);
         }
 
         public Notification Register(NotificationRegisterViewModel viewModel)
@@ -53,7 +53,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
 
         public Notification UpdateNotificationAmount(Notification notification)
         {
-            notification.NotificationAmount = notification.NotificationAmount+1;
+            notification.NotificationAmount = notification.NotificationAmount + 1;
             notification.UpdatedAt = DateTime.Now;
 
             if ((int)notification.Type == 0)
@@ -72,7 +72,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
 
             if (notification == null)
                 return false;
-             
+
             notification = _notificationEntityMapping.UpdateWith(notification, viewModel);
 
             _notificationRepository.Update(notification);
