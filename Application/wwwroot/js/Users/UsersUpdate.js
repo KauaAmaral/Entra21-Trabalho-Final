@@ -2,11 +2,11 @@
 // Limpar os campos quando a modal for fechada
 //document.getElementById('detailsPaymentModal').addEventListener('hide.bs.modal', () => petLimparCampos());
 
-let petEditarPreencherModal = (guardUpdate) => {
-    let id = guardUpdate.getAttribute('data-id');
+let petEditarPreencherModal = (userUpdate) => {
+    let id = userUpdate.getAttribute('data-id');
     let statusResponse = 0;
 
-    fetch(`/Administrator/Guard/update?id=${id}`)
+    fetch(`/Administrator/Users/update?id=${id}`)
         .then((response) => {
             statusResponse = response.status;
 
@@ -17,7 +17,7 @@ let petEditarPreencherModal = (guardUpdate) => {
 
         .then((data) => {
             if (statusResponse === 200) {
-                let modal = new bootstrap.Modal(document.getElementById('guardUpdate'), {});
+                let modal = new bootstrap.Modal(document.getElementById('userUpdate'), {});
                 modal.show
                 //        //document.getElementById('cadastroPetModalLabel').innerText = `Editar PET: ${data.nome}`
                 //        //document.getElementById('User_Name').value = data.user.name;
@@ -29,7 +29,7 @@ let petEditarPreencherModal = (guardUpdate) => {
         .catch((error) => console.log(error));
 };
 
-$('table').on('click', 'button.guardUpdate', (event) => {
+$('table').on('click', 'button.userUpdate', (event) => {
     let element = event.target.tagName === 'I'
         ? event.target.parentElement
         : event.target;
@@ -37,53 +37,21 @@ $('table').on('click', 'button.guardUpdate', (event) => {
     petEditarPreencherModal(element);
 });
 
-let updateGuard = () => {
-    let identificationNumber = document.getElementById('IdentificationNumber').value;
-
-    let save = {
-        identificationNumber: identificationNumber
-    };
-    console.log(save);
-
-    fetch('/administrator/guard/update', {
-        method: 'POST',
-        body: JSON.stringify(save)
-    })
-        .then((data) => {
-            console.log(data);
-        })
-}
-
-document.getElementById('saveGuard')
-    .addEventListener('click', updateGuard);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//document.getElementById('saveUser')
+//    .addEventListener('click', () => petHandleCadastrarButton());
 
 //let petHandleCadastrarButton = () => {
-//    let id = document.getElementById('cadastroGuardModalId').value;
-//    let formData = guardCadastroEditarGerarFormData();
+//    let id = document.getElementById('cadastroUserModalId').value;
+//    let formData = userCadastroEditarGerarFormData();
 
 //    if (id === '') {
-//        guardCadastrarGuard(formData);
+//        userCadastrarUser(formData);
 //        return;
 //    }
 
 //    formData.append('id', id);
 
-//    guardEditarGuard(formData);
+//    userEditarUser(formData);
 //}
 
 //let guardLimparCampos = () => {
@@ -166,3 +134,4 @@ document.getElementById('saveGuard')
 
         //    toastr.error('Não foi possivel cadastrar o Guarda');
         //});
+}
