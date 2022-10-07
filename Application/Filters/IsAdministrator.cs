@@ -15,8 +15,8 @@ namespace Entra21.CSharp.Area21.Application.Filters
 
             if (user.Hierarchy != Repository.Enums.UserHierarchy.Administrador)
                 context.Result = new RedirectToRouteResult(new RouteValueDictionary { { "area", "Public" }, { "controller", "Alert" }, { "action", "Administrator" } });
-
             base.OnActionExecuting(context);
+
         }
     }
 }
