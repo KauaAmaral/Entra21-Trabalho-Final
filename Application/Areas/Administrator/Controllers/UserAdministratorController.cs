@@ -28,47 +28,51 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
             return View();
         }
 
-        [HttpGet]
+        [HttpGet("Index")]
         public IActionResult GetAll()
         {
             var users = _userService.GetAll();
 
-            return View("Index", users);
-        }
-
-        [HttpGet("register")]
-        public IActionResult Register()
-        {
-            ViewBag.UserHierarchy = GetUserHierarchy();
-
-            var userRegisterViewModel = new UserRegisterViewModel();
-
-            return View("register", userRegisterViewModel);
+            return Ok(users);
         }
 
         [HttpPost("register")]
-        public IActionResult Register([FromForm] UserRegisterViewModel userRegisterViewModel)
+        public IActionResult Register(UserRegisterViewModel userRegisterViewModel)
         {
-            if (!ModelState.IsValid)
-            {
-                ViewBag.UserHierarchy = GetUserHierarchy();
+            var userRegister = _userService.InsertAdministrator(userRegisterViewModel);
 
-                return View("User/register", userRegisterViewModel);
-            }
+            return Ok(userRegister);
 
-            if (_userService.VerifyEmails(userRegisterViewModel.Email) == false)
-            {
-                TempData["Message"] = "Já existe uma conta com esse email, tente novamente";
+            //ViewBag.UserHierarchy = GetUserHierarchy();
 
-                ViewBag.UserHierarchy = GetUserHierarchy();
+            //var userRegisterViewModel = new UserRegisterViewModel();
 
-                return View("User/register");
-            }
-
-            _userService.InsertAdministrator(userRegisterViewModel);
-
-            return RedirectToAction("Index");
+            //return View("register", userRegisterViewModel);
         }
+
+        //[HttpPost("register")]
+        //public IActionResult Register(UserRegisterViewModel userRegisterViewModel)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        ViewBag.UserHierarchy = GetUserHierarchy();
+
+        //        return View("User/register", userRegisterViewModel);
+        //    }
+
+        //    if (_userService.VerifyEmails(userRegisterViewModel.Email) == false)
+        //    {
+        //        TempData["Message"] = "Já existe uma conta com esse email, tente novamente";
+
+        //        ViewBag.UserHierarchy = GetUserHierarchy();
+
+        //        return View("User/register");
+        //    }
+
+        //    _userService.InsertAdministrator(userRegisterViewModel);
+
+        //    return Ok("Index");
+        //}
 
         [HttpGet("update")]
         public IActionResult Update([FromQuery] int id)

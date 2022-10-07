@@ -1,0 +1,105 @@
+﻿<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cadastro de Guarda</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="campo-email"
+                           class="form-label">Email</label>
+                    <input type="text" id="campo-email"
+                           class="form-control" />
+
+                </div>   <div class="form-group">
+                    <label for="campo-nome"
+                           class="form-label">Nome</label>
+                    <input type="text" id="campo-nome"
+                           class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label for="campo-cpf"
+                           class="form-label">CPF</label>
+                    <input type="number" id="campo-cpf"
+                           class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label for="campo-hierarchy" class="form-label">Hierarquia</label>
+                    <select id="campo-hierarchy" class="form-select"></select>
+                </div>
+
+                <div class="form-group">
+                    <label for="campo-password"
+                           class="form-label">Senha</label>
+                    <input type="text" id="campo-password"
+                           class="form-control" />
+                </div>
+
+            @*      <div class="form-group">
+                    <label for="campo-confirm-password"
+                           class="form-label">Confirmar Senha</label>
+                    <input type="text" id="campo-confirm-password"
+                           class="form-control" />
+                </div>*@
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" id="buttom-register-guard">Cadastrar</button>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+@*@model UserRegisterViewModel
+
+@{
+    var userHierarchy = new SelectList(ViewBag.UserHierarchy as List<string>);
+
+    ViewData["Title"] = "Cadastrar";
+}
+
+<form asp-controller="UserAdministrator" asp-action="Register" method="POST">
+
+    <label asp-for="Email" class="form-label"></label>
+    <input asp-for="Email" type="email" class="form-control" />
+    <span asp-validation-for="Email" class="text-danger"></span>
+
+    <label asp-for="Name" class="form-label"></label>
+    <input asp-for="Name" type="text" class="form-control" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+
+    <label asp-for="Cpf" class="form-label"></label>
+    <input asp-for="Cpf" type="text" class="form-control" />
+    <span asp-validation-for="Cpf" class="text-danger"></span>
+
+    <label asp-for="Hierarchy" class="form-label" span-required=""></label>
+    <select asp-for="Hierarchy" asp-items="userHierarchy" class="form-control">
+    </select>
+
+    <label asp-for="Password" class="form-label"></label>
+    <input asp-for="Password" type="password" class="form-control" />
+    <span asp-validation-for="Password" class="text-danger"></span>
+
+    <label asp-for="ConfirmPassword" class="form-label"></label>
+    <input asp-for="ConfirmPassword" type="password" class="form-control" />
+    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+
+        @if (TempData["Message"] != null)
+        {
+            <p class="text-danger">@TempData["Message"]</p>
+        }
+    <button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Criar conta</button>
+</form>
+*@

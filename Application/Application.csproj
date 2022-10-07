@@ -19,6 +19,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Remove="wwwroot\js\Users\user-datatable.js" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="wwwroot\js\Users\user-datatable.js" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="EntityFramework" Version="6.4.4" />
 		<PackageReference Include="Font.Awesome" Version="5.15.4" />
 		<PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.9" />
@@ -41,6 +49,10 @@
 
 	<ItemGroup>
 	  <Folder Include="wwwroot\js\Payment\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="wwwroot\js\Users\user-datatable.js" />
 	</ItemGroup>
 
 </Project>

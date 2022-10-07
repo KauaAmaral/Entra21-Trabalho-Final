@@ -22,5 +22,10 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Users
 
         public User? GetByCpf(string cpf) => _context.Users
             .FirstOrDefault(x => x.Cpf == cpf);
+
+        public override List<User> GetAll()
+        {
+            return
+        }
     }
 }
