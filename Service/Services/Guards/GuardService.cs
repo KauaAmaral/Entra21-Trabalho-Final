@@ -26,6 +26,13 @@ namespace Entra21.CSharp.Area21.Service.Services.Guards
             var guard = _guardRepository.GetById(id);
 
             return guard;
+        } 
+        
+        public Guard GetByUserId(int id)
+        {
+            var guard = _guardRepository.GetByUserId(id);
+
+            return guard;
         }
 
         public Guard Register(GuardRegisterViewModel viewModel)

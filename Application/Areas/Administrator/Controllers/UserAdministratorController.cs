@@ -1,9 +1,13 @@
 ﻿using Entra21.CSharp.Area21.Application.Filters;
 using Entra21.CSharp.Area21.Repository.Enums;
 using Entra21.CSharp.Area21.Service.Authentication;
+using Entra21.CSharp.Area21.Service.Services.Guards;
 using Entra21.CSharp.Area21.Service.Services.Users;
+using Entra21.CSharp.Area21.Service.ViewModels.Guards;
 using Entra21.CSharp.Area21.Service.ViewModels.Users;
+using Entra21.CSharp.Area21.Service.ViewModels.Users.Validations;
 using Entra21.CSharp.Area21.Service.ViewModels.Vehicles;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
@@ -16,12 +20,15 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
     {
         private readonly IUserService _userService;
         private readonly ISessionAuthentication _session;
+        private readonly IGuardService _guardService;
 
-        public UserAdministratorController(IUserService userService, 
-            ISessionAuthentication sessionAuthentication)
+        public UserAdministratorController(IUserService userService,
+            ISessionAuthentication sessionAuthentication,
+            IGuardService guardService)
         {
             _session = sessionAuthentication;
             _userService = userService;
+            _guardService = guardService;
         }
         public IActionResult Index()
         {
@@ -49,34 +56,39 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
         [HttpPost("register")]
         public IActionResult Register([FromForm] UserRegisterViewModel userRegisterViewModel)
         {
-            if (!ModelState.IsValid)
+            var validator = new UserRegisterViewModelValidator();
+            var result = validator.Validate(userRegisterViewModel);
+
+            if (!result.IsValid || !ModelState.IsValid)
             {
                 ViewBag.UserHierarchy = GetUserHierarchy();
 
                 return View("User/register", userRegisterViewModel);
             }
 
-            if (_userService.VerifyEmails(userRegisterViewModel.Email) == false)
+            var user = _userService.Insert(userRegisterViewModel);
+
+            if (userRegisterViewModel.IdentificationId != null)
             {
-                TempData["Message"] = "Já existe uma conta com esse email, tente novamente";
+                var guardRegisterViewModel = new GuardRegisterViewModel
+                {
+                    Cpf = user.Cpf,
+                    IdentificationNumber = userRegisterViewModel.IdentificationId,
+                    UserId = user.Id
+                };
 
-                ViewBag.UserHierarchy = GetUserHierarchy();
-
-                return View("User/register");
+                _guardService.Register(guardRegisterViewModel);
             }
-
-            _userService.InsertAdministrator(userRegisterViewModel);
 
             return RedirectToAction("Index");
         }
 
         [HttpGet("update")]
         public IActionResult Update([FromQuery] int id)
-            {
+        {
             var user = _userService.GetById(id);
-            var vehicleType = GetUserHierarchy();
 
-            var userUpdateAdministratorViewMode = new UserUpdateAdministratorViewModel
+            var userUpdateAdministratorViewModel = new UserUpdateAdministratorViewModel
             {
                 Id = user.Id,
                 Name = user.Name,
@@ -86,22 +98,49 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
                 Hierarchy = user.Hierarchy
             };
 
+            if (user.Hierarchy == UserHierarchy.Guarda)
+            {
+                var guard = _guardService.GetByUserId(user.Id);
+
+                userUpdateAdministratorViewModel.IdentificationId = guard.IdentificationNumber;
+            }
+
             ViewBag.UserHierarchy = GetUserHierarchy();
 
-            return View("update", userUpdateAdministratorViewMode);
+            return View("User/update", userUpdateAdministratorViewModel);
         }
 
         [HttpPost("update")]
         public IActionResult Update([FromForm] UserUpdateAdministratorViewModel userUpdateAdministratorViewMode)
         {
-            if (!ModelState.IsValid)
+            var validator = new UserUpdateAdministratorViewModelValidator();
+            var result = validator.Validate(userUpdateAdministratorViewMode);
+
+            if (!result.IsValid || !ModelState.IsValid)
             {
                 ViewBag.UserHierarchy = GetUserHierarchy();
 
                 return View("User/update", userUpdateAdministratorViewMode);
             }
 
-            _userService.UpdateAdministrator(userUpdateAdministratorViewMode);
+            var user = _userService.UpdateAdministrator(userUpdateAdministratorViewMode);
+
+            if (userUpdateAdministratorViewMode.IdentificationId != null)
+            {
+                var guardRegisterViewModel = new GuardRegisterViewModel
+                {
+                    Cpf = user.Cpf,
+                    IdentificationNumber = userUpdateAdministratorViewMode.IdentificationId,
+                    UserId = user.Id
+                };
+
+                _guardService.Register(guardRegisterViewModel);
+            }
+            else
+            {
+                var guard = _guardService.GetByUserId(user.Id);
+                _guardService.Delete(guard.Id);
+            }
 
             return RedirectToAction("Index");
         }
