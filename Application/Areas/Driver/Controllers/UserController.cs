@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 {
-    [Area("Driver")]
     [IsUserLogged]
-    [Route("driver/user")]
+    [Area("Driver")]
+    [Route("Driver")]
     public class UserController : Controller
     {
         private readonly IUserService _userService;
@@ -21,9 +21,12 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             _session = session;
         }
 
+        [HttpGet("Update")]
         public IActionResult Update()
         {
             var user = _session.FindUserSession();
+            ViewBag.User = user;
+
             var userUpdateViewModel = new UserUpdateViewModel
             {
                 Id = user.Id,

@@ -11,11 +11,7 @@ namespace Entra21.CSharp.Area21.Application.Filters
         {
             var session = context.HttpContext.Session.GetString("userSession");
 
-            if (string.IsNullOrEmpty(session))
-                context.Result = new RedirectToRouteResult(new RouteValueDictionary { { "area", "Public" }, { "controller", "Login" }, { "action", "Index" } });
-            else
-            {
-                var user = JsonConvert.DeserializeObject<User>(session);
+            var user = JsonConvert.DeserializeObject<User>(session);
 
                 if (user.Hierarchy != Repository.Enums.UserHierarchy.Administrador)
                     context.Result = new RedirectToRouteResult(new RouteValueDictionary { { "area", "Public" }, { "controller", "Alert" }, { "action", "Administrator" } });

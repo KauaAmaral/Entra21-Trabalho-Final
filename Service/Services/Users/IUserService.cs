@@ -7,6 +7,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Users
     {
         bool Delete(int id);
         User Insert(UserRegisterViewModel viewModel);
+        User InsertAdministrator(UserRegisterViewModel viewModel);
         bool Update(UserUpdateViewModel viewModel);
         User UpdateAdministrator(UserUpdateAdministratorViewModel viewModel);
         User? GetById(int id);

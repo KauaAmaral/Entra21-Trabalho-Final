@@ -78,26 +78,6 @@
                 <!-- Navbar Toolbar Right -->
                 <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
                     <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" data-animation="scale-up"
-                           aria-expanded="false" role="button">
-                            <span class="flag-icon flag-icon-br"></span>
-                        </a>
-                        <div class="dropdown-menu" role="menu">
-                            <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
-                                <span class="flag-icon flag-icon-br"></span> Português
-                            </a>
-                            <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
-                                <span class="flag-icon flag-icon-us"></span> Inglês
-                            </a>
-                            <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
-                                <span class="flag-icon flag-icon-es"></span> Espanhol
-                            </a>
-                            <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
-                                <span class="flag-icon flag-icon-de"></span> Alemão
-                            </a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
                         <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false"
                            data-animation="scale-up" role="button">
                             <span class="avatar avatar-online">
@@ -106,7 +86,7 @@
                             </span>
                         </a>
                         <div class="dropdown-menu" role="menu">
-                            <a asp-controller="user" asp-action="update" class="dropdown-item" role="menuitem"><i class="icon wb-user" aria-hidden="true"></i> Perfil</a>
+                            <a asp-area="Administrator" asp-controller="user" asp-action="update" class="dropdown-item" role="menuitem"><i class="icon wb-user" aria-hidden="true"></i> Perfil</a>
                             <a asp-action="Payments" asp-controller="Payments" class="dropdown-item">
                                 <i class="icon wb-payment"></i> Pagamentos
                             </a>
@@ -147,19 +127,19 @@
                 <div>
                     <ul class="site-menu" data-plugin="menu">
                         <li class="dropdown site-menu-item has-sub">
-                            <a asp-area="Driver" asp-controller="Home" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
+                            <a asp-area="Logged" asp-controller="Home" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
                                 <i class="fa-sharp fa-solid fa-house"></i>
                                 <span class="site-menu-title">Home</span>
                             </a>
                         </li>
                         <li class="dropdown site-menu-item has-sub">
-                            <a asp-area="Driver" asp-controller="Vehicle" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
+                            <a asp-area="Administrator" asp-controller="Vehicle" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
                                 <i class="fa-solid fa-car"></i>
                                 <span class="site-menu-title">Veículos</span>
                             </a>
                         </li>
                         <li class="dropdown site-menu-item has-sub">
-                            <a asp-area="Driver" asp-controller="Guard" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
+                            <a asp-area="Administrator" asp-controller="Guard" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
                                 <i class="fa-solid fa-person-military-pointing"></i>
                                 <span class="site-menu-title">Guardas</span>
                             </a>
@@ -171,34 +151,13 @@
                             </a>
                         </li>
                         <li class="dropdown site-menu-item has-sub">
-                            <a asp-area="Driver" asp-controller="Payments" asp-action="Payments" data-toggle="dropdown" data-dropdown-toggle="false">
+                            <a asp-area="Administrator" asp-controller="Payments" asp-action="GetAll" data-toggle="dropdown" data-dropdown-toggle="false">
                                 <i class="fa-regular fa-credit-card"></i>
                                 <span class="site-menu-title">Pagamentos</span>
-                                <span class="site-menu-arrow"></span>
                             </a>
                         </li>
-                        <div class="dropdown-menu">
-                            <div class="site-menu-scroll-wrap is-list">
-                                <div>
-                                    <div>
-                                        <ul class="site-menu-sub site-menu-normal-list">
-                                            <li class="site-menu-item">
-                                                <a href="layouts/grids.html">
-                                                    <span class="site-menu-title">Pagar</span>
-                                                </a>
-                                            </li>
-                                            <li class="site-menu-item">
-                                                <a href="layouts/grids.html">
-                                                    <span class="site-menu-title">Pagamentos efetuados</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <li class="dropdown site-menu-item has-sub">
-                            <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
+                            <a asp-area="Administrator" asp-controller="Notification" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
                                 <i class="site-menu-icon wb-layout" aria-hidden="true"></i>
                                 <span class="site-menu-title">Notificações</span>
                             </a>

@@ -48,6 +48,19 @@ namespace Entra21.CSharp.Area21.Service.Services.Users
 
             return user;
         }
+        
+        public User InsertAdministrator(UserRegisterViewModel viewModel)
+        {
+            var user = _userEntityMapping.RegisterWith(viewModel);
+
+
+            user.IsEmailConfirmed = true;
+            user.Status = true;
+
+            _userRepository.Add(user);
+
+            return user;
+        }
 
         public bool Update(UserUpdateViewModel viewModel)
         {

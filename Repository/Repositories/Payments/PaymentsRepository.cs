@@ -14,14 +14,21 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Payments
             _context = context;
         }
 
-        public override IList<Payment> GetAll() =>
+        public Payment? ValidPayment(int id) =>
             _context.Payments
             .Include(x => x.Vehicle)
-            .ToList();
+            .OrderByDescending(x => x.Id)
+            .FirstOrDefault(x => x.VehicleId == id);
+
+        public override IList<Payment> GetAll() =>
+           _context.Payments
+           .Include(x => x.Vehicle)
+           .ToList();
 
         public override Payment? GetById(int id) =>
           _context.Payments
           .Include(x => x.Vehicle)
+          .Include(x => x.User)
           .FirstOrDefault(x => x.Id == id);
     }
 }

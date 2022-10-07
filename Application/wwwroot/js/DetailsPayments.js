@@ -1,7 +1,6 @@
 ﻿
 // Limpar os campos quando a modal for fechada
 //document.getElementById('detailsPaymentModal').addEventListener('hide.bs.modal', () => petLimparCampos());
-
 let petEditarPreencherModal = (detailsPayments) => {
     let id = detailsPayments.getAttribute('data-id');
     let statusResponse = 0;
@@ -13,38 +12,25 @@ let petEditarPreencherModal = (detailsPayments) => {
             return response.json();
         })
 
-    let modal = new bootstrap.Modal(document.getElementById('detailsPaymentModal'), {});
-    modal.show();
-
         .then((data) => {
             if (statusResponse === 200) {
-
-                document.getElementById('cadastroPetModalLabel').innerText = `Editar PET: ${data.nome}`
-                document.getElementById('cadastroPetModalId').value = data.id;
-                document.getElementById('cadastroPetModalNome').value = data.nome;
-                document.getElementById('cadastroPetModalIdade').value = data.idade;
+                //        document.getElementById('cadastroPetModalLabel').innerText = `Editar PET: ${data.nome}`
+                document.getElementById('User_Name').value = data.user.name;
+                let modal = new bootstrap.Modal(document.getElementById('detailsPayments'), {});
+                modal.show();
+                document.getElementById('User_Cpf').value = data.user.cpf;
+                document.getElementById('User_Email').value = data.user.email;
+                document.getElementById('User_Phone').value = data.user.phone;
+                document.getElementById('Vehicle_Model').value = data.vehicle.model;
+                document.getElementById('Vehicle_LicensePlate').value = data.vehicle.licensePlate;
+                document.getElementById('TransactionId').value = data.transactionId;
+                document.getElementById('Value').value = data.value;
+                document.getElementById('PayerId').value = data.payerId;
             }
-        //        document.getElementById('cadastroPetModalAltura').value = String(data.altura).replace('.', ',');
-        //        document.getElementById('cadastroPetModalPeso').value = String(data.peso).replace('.', ',');
-
-        //        if (data.genero === 0)
-        //            document.getElementById('cadastroPetGeneroFeminino').checked = true;
-        //        else
-        //            document.getElementById('cadastroPetGeneroMasculino').checked = true;
-
-        //        $('#cadastroPetModalResponsavel')
-        //            .append(new Option(data.responsavel.nomeCompleto, data.responsavel.id, false, false))
-        //            .val(data.responsavel.id)
-        //            .trigger('change');
-        //        $('#cadastroPetModalRaca')
-        //            .append(new Option(data.raca.nome, data.raca.id, false, false))
-        //            .val(data.raca.id)
-        //            .trigger('change');
-
-        //    }
-        //})
-        //.catch((error) => console.log(error));
+        })
+        .catch((error) => console.log(error));
 };
+
 $('table').on('click', 'button.detailsPayments', (event) => {
     let element = event.target.tagName === 'I'
         ? event.target.parentElement

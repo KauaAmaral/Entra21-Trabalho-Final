@@ -13,10 +13,10 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
     [Route("/Administrator/Payments")]
     public class PaymentsController : Controller
     {
-        private readonly IUserService _paymentService;
-        private readonly IUserController _vehicleService;
-        public PaymentsController(IUserService paymentService, 
-                IUserController vehicleService)
+        private readonly IPaymentService _paymentService;
+        private readonly IVehicleService _vehicleService;
+        public PaymentsController(IPaymentService paymentService,
+                IVehicleService vehicleService)
         {
             _vehicleService = vehicleService;
             _paymentService = paymentService;
@@ -37,9 +37,9 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
         }
 
         [HttpGet("details")]
-        public IActionResult Details([FromQuery]int id)
+        public IActionResult Details([FromQuery] int id)
         {
-             var details = _paymentService.GetById(id);
+            var details = _paymentService.GetById(id);
 
             return Ok(details);
         }
