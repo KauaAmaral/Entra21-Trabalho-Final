@@ -31,6 +31,9 @@ namespace Entra21.CSharp.Area21.Service.ViewModels.Users
         [Required(ErrorMessage = "{0} deve ser preenchida")]
         [Compare("Password", ErrorMessage = "Senhas não conferem")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Id de identificação")]
+        public string? IdentificationId { get; set; }
         public Guid Token { get; set; }
         public DateTime TokenExpiredDate { get; set; }
         public UserHierarchy Hierarchy { get; set; }

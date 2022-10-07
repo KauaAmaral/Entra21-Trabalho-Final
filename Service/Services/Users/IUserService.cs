@@ -9,7 +9,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Users
         User Insert(UserRegisterViewModel viewModel);
         User InsertAdministrator(UserRegisterViewModel viewModel);
         bool Update(UserUpdateViewModel viewModel);
-        bool UpdateAdministrator(UserUpdateAdministratorViewModel viewModel);
+        User UpdateAdministrator(UserUpdateAdministratorViewModel viewModel);
         User? GetById(int id);
         IList<User> GetAll();
         User? GetByEmailAndPassword(string email, string password);

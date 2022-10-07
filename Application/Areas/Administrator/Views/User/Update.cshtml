@@ -1,38 +1,87 @@
 ﻿@model UserUpdateViewModel;
 
-<div class="page-content row justify-content-center">
-    <div class="col-6">
-        <form asp-controller="User" asp-action="Update" method="POST">
-            <input type="hidden" asp-for="Id" name="id" />
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label class="form-control-label" for="name">Nome</label>
-                    <input asp-for="Name" type="text" class="form-control" id="name" name="name" placeholder="Nome">
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="form-control-label" for="email">Email</label>
-                    <input asp-for="Email" type="email" class="form-control" id="email" name="email" placeholder="Email">
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-            </div>
+@{
+    var userHierarchy = new SelectList(ViewBag.UserHierarchy as List<string>);
 
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label class="form-control-label" for="cpf">CPF</label>
-                    <input asp-for="Cpf" type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF">
-                    <span asp-validation-for="Cpf" class="text-danger"></span>
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="form-control-label" for="phone">Telefone</label>
-                    <input asp-for="Phone" type="text" class="form-control" id="phone" name="phone" placeholder="Telefone">
-                    <span asp-validation-for="Phone" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Editar</button>
-            </div>
-        </form>
-        <a asp-controller="User" asp-action="ChangePassword" class="btn btn-primary">Trocar senha</a>
+    ViewData["Title"] = "Cadastrar";
+}
+
+<form asp-controller="UserAdministrator" asp-action="Update" method="POST">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" type="email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
     </div>
-</div>
+
+    <div class="form-group">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" type="text" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Cpf" class="form-label"></label>
+        <input asp-for="Cpf" type="text" class="form-control" />
+        <span asp-validation-for="Cpf" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Hierarchy" class="form-label" span-required=""></label>
+        <select asp-for="Hierarchy" asp-items="userHierarchy" id="selectHierarchy" class="form-control">
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IdentificationId" class="form-label"></label>
+        <input asp-for="IdentificationId" type="text" class="form-control" id="identificationId" />
+        <span asp-validation-for="IdentificationId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Password" class="form-label"></label>
+        <input asp-for="Password" type="password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ConfirmPassword" class="form-label"></label>
+        <input asp-for="ConfirmPassword" type="password" class="form-control" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>
+
+    @if (TempData["Message"] != null)
+    {
+        <p class="text-danger">@TempData["Message"]</p>
+    }
+    <button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Editar conta</button>
+</form>
+
+@section Scripts{
+    <script>
+
+        $(document).ready(function () {
+            let value = $("#selectHierarchy").val();
+            if (value == "Guarda") {
+                $("#identificationId").prop("disabled", false);
+            }
+            else {
+                $("#identificationId").prop("disabled", true);
+            }
+        });
+
+        $("#selectHierarchy").on("change", function () {
+            let value = $("#selectHierarchy").val();
+            $("#identificationId").prop("disabled", true);
+
+            if (value == "Guarda") {
+                $("#identificationId").prop("disabled", false);
+            }
+            else {
+                $("#identificationId").prop("disabled", true);
+                $("#identificationId").val("");
+            }
+        });
+    </script>
+}

@@ -2,6 +2,8 @@ using Entra21.CSharp.Area21.Application.DependenciesInjection;
 using Entra21.CSharp.Area21.Repository.DependeciesInjection;
 using Entra21.CSharp.Area21.RepositoryDataBase;
 using Entra21.CSharp.Area21.Service.DependenciesInjection;
+using Entra21.CSharp.Area21.Service.ViewModels.Users.Validations;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
@@ -23,13 +25,14 @@ builder.Services.Configure<RazorViewEngineOptions>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddFluentValidation(p => p.RegisterValidatorsFromAssemblyContaining<UserRegisterViewModelValidator>());
+
 builder.Services
     .AddServices()
     .AddRepository()
     .AddEntitiesMapping()
     .AddEntityFramework(builder.Configuration)
     .IncrementNewtonsoftJson();
-
 var app = builder.Build();
 
 var supportedCultures = new[] { new CultureInfo("pt-BR") };
