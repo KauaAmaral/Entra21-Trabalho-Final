@@ -12,12 +12,12 @@
         { data: 'email' },
         { data: 'hierarchy' },
         {
-        data: null,
-        width: '20%',
-        render: function (data, type, user) {
-            `<button class="btn btn-light user-update" data-id="${user.id}">Editar</button>`;
+            data: null,
+            width: '20%',
+            render: function (data, type, user) {
+                return `<button class="btn btn-light user-update" data-id="${user.id}">Editar</button>`;
+            }
+
         }
-            return "";
-    }
     ],
 });
