@@ -1,4 +1,5 @@
-﻿using Entra21.CSharp.Area21.Repository.Entities;
+﻿using System.Runtime.InteropServices;
+using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.Repository.Repositories.Guards;
 using Entra21.CSharp.Area21.Repository.Repositories.Notifications;
 using Entra21.CSharp.Area21.Repository.Repositories.Payments;
@@ -26,9 +27,18 @@ namespace Entra21.CSharp.Area21.Repository.DependeciesInjection
         }
 
         public static IServiceCollection AddEntityFramework(this IServiceCollection services, ConfigurationManager configurationManager)
-        {
-            services.AddDbContext<ShortTermParkingContext>(options =>
-            options.UseSqlServer(configurationManager.GetConnectionString("SqlServer")));
+        {   
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                services.AddDbContext<ShortTermParkingContext>(options =>
+                    options.UseSqlServer(configurationManager.GetConnectionString("SqlServerMac")));
+            }
+            else
+            {
+                services.AddDbContext<ShortTermParkingContext>(options => 
+                    options.UseSqlServer(configurationManager.GetConnectionString("SqlServer")));
+            }
+            
 
             return services;
         }
