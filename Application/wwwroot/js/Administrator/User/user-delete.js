@@ -23,26 +23,33 @@ let userQuestDelete = (botaoApagar) => {
 let userDelete = (botaoApagar) => {
     let id = botaoApagar.getAttribute('data-id');
 
-    //toastr.clear();
+    toastr.clear();
 
     fetch(`/administrator/users/delete?id=${id}`)
         .then((response) => {
             let statusResponse = response.status;
 
-            //switch (statusresponse) {
-            //    case 200:
-            //        toastr.success('usuario apagado com sucesso');
-            //        $('#table-user-adm').datatable().ajax.reload();
-            //        break;
-            //    case 404:
-            //        toastr.error('Não foi possível encontrar o usuario');
-            //        break;
-            //    default:
-            //        toastr.error('Não foi possível apagar o usuario');
-            //}
+            switch (statusresponse) {
+                case 200:
+                    toastr.success('usuario apagado com sucesso');
+                    $('#table-user-adm').Datatable().ajax.reload();
+                    break;
+                case 404:
+                    toastr.error('Não foi possível encontrar o usuario');
+                    break;
+                default:
+                    toastr.error('Não foi possível apagar o usuario');
+            }
 
             swal.stopLoading();
             swal.close();
         })
         .catch((error) => console.log(error));
 }
+
+$('.Sim').click(function () {
+    // handle deletion here
+    var id = $('#table-user-adm').data('id');
+    $('[data-id=' + id + ']').remove();
+    $('#table-user-adm').modal('hide');
+});
