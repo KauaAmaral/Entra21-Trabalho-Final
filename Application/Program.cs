@@ -71,6 +71,16 @@ app.UseSession();
 app.UseEndpoints(endpoint =>
 {
     endpoint.MapAreaControllerRoute(
+        name: "AreaAdministrator",
+        areaName: "Administrator",
+        pattern: "Administrator/{controller=HomeDriver}/{action=Index}/{id?}");
+    
+    endpoint.MapAreaControllerRoute(
+        name: "AreaGuard",
+        areaName: "Guard",
+        pattern: "Guard/{controller=HomeDriver}/{action=Index}/{id?}");
+
+    endpoint.MapAreaControllerRoute(
         name: "AreaDriver",
         areaName: "Driver",
         pattern: "Driver/{controller=HomeDriver}/{action=Index}/{id?}");
