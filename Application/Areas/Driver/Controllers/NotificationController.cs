@@ -112,7 +112,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             var user = _session.FindUserSession();
 
             if (user != null)
-                notificationRegisterViewModel.GuardId = _guardService.GetByIdUser(user.Id).Id;
+                notificationRegisterViewModel.GuardId = _guardService.GetByUserId(user.Id).Id;
             else
                 return RedirectToAction("Index", "Home");
 

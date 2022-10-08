@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
+
 namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 {
     [Area("Driver")]
@@ -68,7 +69,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
                 var authToken = Encoding.ASCII.GetBytes($"{_userName}:{_passwd}");
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authToken));
-
 
                 var orden = new PaypalOrder()
                 {

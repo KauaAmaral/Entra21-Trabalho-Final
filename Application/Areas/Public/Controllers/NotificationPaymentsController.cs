@@ -10,7 +10,7 @@ using System.Text;
 namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
 {
     [Area("Public")]
-    [Route("Public/paypal")]
+    [Route("Public/Notification")]
     public class NotificationPaymentsController : Controller
     {
         private readonly INotificationService _notificationService;
@@ -18,7 +18,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
         private readonly string _userName = "AeHh1KwTDiCTJlkmPVoWT5qj9YMp0dwnhAStwYVE7VZiaPN2jfJjMm7UJ6B9TMXFkVqFNkmpzpfinpJR";
         private readonly string _passwd = "EHqhokF9mvWolaWgw04hay43lNAuCcLNHZ8XBpmm0cLSYUxdAYnbBI6dhiaCXtI54qJJ-EF3VS0IMGfx";
         private readonly string _url = "https://api-m.sandbox.paypal.com";
-        private readonly string _urlCancel = "https://localhost:7121/driver/Home"; //TUDO Trocar rotas
+        private readonly string _urlCancel = "https://localhost:7121/driver/Home";
 
         public NotificationPaymentsController(
             INotificationService notificationService
@@ -27,21 +27,40 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
             _notificationService = notificationService;
         }
 
-        public IActionResult Index()
+        [HttpGet("check")]
+
+        public IActionResult NotificationCheck([FromQuery] int id)
         {
-            return View("Teste");
+            var notification = _notificationService.GetById(id);
+
+            if (notification == null)
+                return RedirectToAction("Home");
+
+            var notificationCheckoutViewModal = new NotificationCheckoutViewModel
+            {
+                Id = notification.Id,
+                VehiclePlate = notification.VehicleLicensePlate,
+                Status = notification.Status,
+                Value = notification.Value,
+                Address = notification.Address,
+                CreatedAt = notification.CreatedAt,
+                UpdatedAt = notification.UpdatedAt
+            };
+
+            return View("notifications/notificationcheck", notificationCheckoutViewModal);
         }
 
-        [HttpPost("Paypal")]
+        [HttpPost]
         public async Task<JsonResult> Paypal(string id)
         {
             var idNotificaton = Convert.ToInt32(id);
+
             var notification = _notificationService.GetById(idNotificaton);
-            
+
             bool status = false;
             string answer = string.Empty;
 
-            string urlReturn = $"https://localhost:7121/Public/NotificationPayments/Approved?idNotification={notification.Id}&IdGuard={notification.GuardId}";
+            string urlReturn = $"https://localhost:7121/Public/NotificationPayments/Approved?id={notification.Id}&IdGuard={notification.GuardId}";
 
             using (var client = new HttpClient())
             {
@@ -49,7 +68,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
 
                 var authToken = Encoding.ASCII.GetBytes($"{_userName}:{_passwd}");
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authToken));
-
 
                 var orden = new PaypalOrder()
                 {
@@ -60,7 +78,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
 
                             amount = new Models.PaypalOrder.Amount() {
                                 currency_code = "BRL",
-                                value = (notification.Value).ToString()
+                                value = (notification.Value).ToString().Replace(",",".")
                             },
                             description = notification.VehicleLicensePlate
                         }
