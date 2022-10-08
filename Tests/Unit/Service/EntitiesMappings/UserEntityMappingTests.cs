@@ -1,8 +1,11 @@
-﻿using Entra21.CSharp.Area21.Repository.Entities;
+﻿using Bogus.DataSets;
+using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.Repository.Enums;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Users;
 using FluentAssertions;
+using FluentAssertions.Extensions;
+using NSubstitute;
 using Xunit;
 
 namespace Tests.Unit.Service.EntitiesMappings
@@ -25,9 +28,9 @@ namespace Tests.Unit.Service.EntitiesMappings
                 Token = Guid.Empty,
                 TokenExpiredDate = DateTime.Now.AddHours(2),
                 Email = "efraim@gmail.com",
-                Password = "12345678",
+                Password = "123456789",
                 Cpf = "123.456.789-10",
-                Hierarchy = UserHierarchy.Administrador,                
+                Hierarchy = UserHierarchy.Administrador,
             };
 
             // Act 
@@ -36,7 +39,8 @@ namespace Tests.Unit.Service.EntitiesMappings
             // Assert
             user.Name.Should().Be(viewModel.Name);
             user.Token.Should().Be(viewModel.Token);
-            user.TokenExpiredDate.Should().Be(viewModel.TokenExpiredDate);
+            user.TokenExpiredDate.Should().BeAfter(viewModel.TokenExpiredDate);
+            user.TokenExpiredDate.Should().BeBefore(DateTime.Now.AddHours(2));
             user.Email.Should().Be(viewModel.Email);
             user.Password.Should().Be(viewModel.Password);
             user.Cpf.Should().Be(viewModel.Cpf);
@@ -117,13 +121,13 @@ namespace Tests.Unit.Service.EntitiesMappings
         {
             // Arrange
             var user = new User
-            {       
+            {
                 Password = "ABCDE"
             };
 
             var viewModelEdit = new UserChangePasswordViewModel
             {
-                NewPassword = "1234567890123456789012345678901234567890123456789012345678901234"
+                NewPassword = "ghfhfd"
             };
 
             // Act

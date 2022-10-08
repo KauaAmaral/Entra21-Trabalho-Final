@@ -36,7 +36,7 @@ namespace Tests.Unit.Service.EntitiesMappings
         public void Test_UpdateWith()
         {
             // Arrange
-            var vehicle = CreateVehicle(VehicleType.Carro);
+            var vehicle = vehicleCreated(VehicleType.Carro);
 
             var viewModelEdit = UpdateVehicle(VehicleType.Moto);
 
@@ -57,7 +57,7 @@ namespace Tests.Unit.Service.EntitiesMappings
             .RuleFor(x => x.UserId, x => x.Random.Number())
             .Generate();
 
-        private Vehicle CreateVehicle(VehicleType vehicleType)
+        private Vehicle vehicleCreated(VehicleType vehicleType)
             => new Faker<Vehicle>()
             .RuleFor(x => x.LicensePlate, x => x.Random.Word())
             .RuleFor(x => x.Model, x => x.Random.Word())
