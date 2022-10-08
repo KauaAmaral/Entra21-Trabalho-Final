@@ -1,11 +1,9 @@
-﻿using Bogus.DataSets;
+﻿using Bogus;
 using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.Repository.Enums;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Users;
 using FluentAssertions;
-using FluentAssertions.Extensions;
-using NSubstitute;
 using Xunit;
 
 namespace Tests.Unit.Service.EntitiesMappings
@@ -21,6 +19,7 @@ namespace Tests.Unit.Service.EntitiesMappings
         [Fact]
         public void Test_RegisterWith()
         {
+            var faker = new Faker();
             // Arrange
             var viewModel = new UserRegisterViewModel
             {
@@ -28,7 +27,7 @@ namespace Tests.Unit.Service.EntitiesMappings
                 Token = Guid.Empty,
                 TokenExpiredDate = DateTime.Now.AddHours(2),
                 Email = "efraim@gmail.com",
-                Password = "123456789",
+                Password = faker.Internet.Password(),
                 Cpf = "123.456.789-10",
                 Hierarchy = UserHierarchy.Administrador,
             };

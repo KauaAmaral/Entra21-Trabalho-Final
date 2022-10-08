@@ -1,12 +1,8 @@
-﻿using Entra21.CSharp.Area21.Repository.Entities;
+﻿using Bogus;
+using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Notifications;
 using Entra21.CSharp.Area21.Service.ViewModels.Notifications;
 using FluentAssertions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Tests.Unit.Service.EntitiesMappings
@@ -23,20 +19,7 @@ namespace Tests.Unit.Service.EntitiesMappings
         public void Test_RegisterWith()
         {
             // Arrange
-            var viewModel = new NotificationRegisterViewModel
-            {
-                GuardId = 7,
-                VehicleId = 14,
-                VehiclePlate = "NFF7J99",
-                Registered = true,
-                Comments = "lalalal",
-                Address = "Rua 1234",
-                NotificationAmount = 1,
-                Token = "1XC47",
-                PayerId = "8",
-                TransactionId = "3",
-                Value = 16_50m
-            };
+            var viewModel = RegisterNotification();
 
             // Act
             var notification = _notificationEntityMapping.RegisterWith(viewModel);
@@ -59,14 +42,16 @@ namespace Tests.Unit.Service.EntitiesMappings
         public void Test_UpdateWith()
         {
             // Arrange
+            var faker = new Faker();
+
             var notification = new Notification
             {
-                Address = "Rua 1234"
+                Address = faker.Random.Word(),
             };
 
             var viewModelEdit = new NotificationUpdateViewModel
             {
-                Address = "Rua 5678"
+                Address = faker.Random.Word(),
             };
 
             // Act
@@ -75,5 +60,20 @@ namespace Tests.Unit.Service.EntitiesMappings
             // Assert
             notification.Address.Should().Be(viewModelEdit.Address);
         }
-    }    
+
+        private NotificationRegisterViewModel RegisterNotification()
+            => new Faker<NotificationRegisterViewModel>()
+            .RuleFor(x => x.GuardId, x => x.Random.Number())
+            .RuleFor(x => x.VehicleId, x => x.Random.Number())
+            .RuleFor(x => x.VehiclePlate, x => x.Random.Word())
+            .RuleFor(x => x.Registered, x => true)
+            .RuleFor(x => x.Comments, x => x.Random.Word())
+            .RuleFor(x => x.Address, x => x.Random.Word())
+            .RuleFor(x => x.NotificationAmount, x => x.Random.Number())
+            .RuleFor(x => x.Token, x => x.Random.Word())
+            .RuleFor(x => x.PayerId, x => x.Random.Word())
+            .RuleFor(x => x.TransactionId, x => x.Random.Word())
+            .RuleFor(x => x.Value, x => x.Random.Number())
+            .Generate();
+    }
 }
