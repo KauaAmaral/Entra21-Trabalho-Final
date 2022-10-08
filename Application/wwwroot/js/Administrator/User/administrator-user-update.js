@@ -12,7 +12,7 @@ document.getElementById('userUpdateModal').addEventListener('hide.bs.modal', () 
 let administratorUserUpdateFillModal = (buttonUpdate) => {
     let id = buttonUpdate.getAttribute('data-id');
     let statusResponse = 0;
-    debugger;
+
     fetch(`/administrator/users/getById?id=${id}`)
         .then((response) => {
             statusResponse = response.status;
@@ -38,7 +38,7 @@ let administratorUserUpdateFillModal = (buttonUpdate) => {
         .catch((error) => console.log(error));
 }
 
-let petEditarPet = (formData) => {
+let userUpdate = (formData) => {
 
     let statusResponse = 0;
 
@@ -53,7 +53,7 @@ let petEditarPet = (formData) => {
         })
         .then((data) => {
             if (statusResponse === 200) {
-                bootstrap.Modal.getInstance(document.getElementById('table-user-adm')).hide();
+                bootstrap.Modal.getInstance(document.getElementById('userUpdateModal')).hide();
 
                 userClearFields();
 
@@ -64,11 +64,14 @@ let petEditarPet = (formData) => {
                 return;
             }
 
-            showNotificationErrorsOfValidation(data);
+            //showNotificationErrorsOfValidation(data);
         })
-        .catch((error) => {
-            console.error(error);
+        //.catch((error) => {
+        //    console.error(error);
 
-            toastr.error('Não foi possível alterar o usuario');
-        });
+        //    toastr.error('Não foi possível alterar o usuario');
+        //});
 };
+
+document.getElementById("button-update-user")
+    .addEventListener("click", userUpdate);
