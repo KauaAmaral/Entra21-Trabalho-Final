@@ -17,7 +17,11 @@
     <link rel="stylesheet" href="~/Theme/global/css/bootstrap-extend.min.css">
     <link rel="stylesheet" href="~/Theme/assets/css/site.min.css">
     <link rel="stylesheet" href="~/css/site.css">
+
+    <!-- DataTable -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css" />
 
     <!-- Plugins -->
     <link rel="stylesheet" href="~/Theme/global/vendor/animsition/animsition.css">
@@ -50,7 +54,6 @@
     <![endif]-->
     <!-- Scripts -->
     <script src="~/Theme/global/vendor/breakpoints/breakpoints.js"></script>
-
 
     <script>
         Breakpoints();
@@ -89,7 +92,6 @@
                             </span>
                         </a>
                         <div class="dropdown-menu" role="menu">
-                            <a asp-area="Administrator" asp-controller="user" asp-action="update" class="dropdown-item" role="menuitem"><i class="icon wb-user" aria-hidden="true"></i> Perfil</a>
                             <a asp-action="Payments" asp-controller="Payments" class="dropdown-item">
                                 <i class="icon wb-payment"></i> Pagamentos
                             </a>

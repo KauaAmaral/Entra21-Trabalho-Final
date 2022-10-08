@@ -43,7 +43,14 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
             if (user != null)
             {
                 _session.CreateUserSession(user);
-                return RedirectToAction("Index", "Home", new { area = "Logged" });
+                if (user.Hierarchy == Repository.Enums.UserHierarchy.Administrador)
+                    return RedirectToAction("Index", "Home", new { area = "Administrator" }); 
+                
+                if (user.Hierarchy == Repository.Enums.UserHierarchy.Guarda)
+                    return RedirectToAction("Index", "Home", new { area = "Guard" });
+                
+                if (user.Hierarchy == Repository.Enums.UserHierarchy.Motorista)
+                    return RedirectToAction("Index", "Home", new { area = "Driver" });
             }
             else
                 TempData["Message"] = "Não existe um usuário com esse e-mail e/ou senha";
