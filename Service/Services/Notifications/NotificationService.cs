@@ -73,7 +73,10 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
             if (notification == null)
                 return false;
 
-            notification = _notificationEntityMapping.UpdateWith(notification, viewModel);
+            if(viewModel.Token == null)
+                notification = _notificationEntityMapping.UpdateWith(notification, viewModel);
+            else
+                notification = _notificationEntityMapping.UpdateWithPayment(notification, viewModel);
 
             _notificationRepository.Update(notification);
 

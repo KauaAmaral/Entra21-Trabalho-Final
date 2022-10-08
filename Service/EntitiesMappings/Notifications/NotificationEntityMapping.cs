@@ -26,5 +26,15 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Notifications
 
             return notification;
         }
+
+        public Notification UpdateWithPayment(Notification notification, NotificationUpdateViewModel viewModel)
+        {
+            notification.PayerId = viewModel.PayerId;
+            notification.TransactionId = viewModel.TransactionId;
+            notification.Token = viewModel.Token;
+            notification.Status = false;
+
+            return notification;
+        }
     }
 }

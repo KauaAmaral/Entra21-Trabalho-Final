@@ -57,10 +57,15 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
 
             var notification = _notificationService.GetById(idNotificaton);
 
+            if (notification.Status == false)
+            {
+                //return RedirectToAction(_urlCancel);
+            }
+
             bool status = false;
             string answer = string.Empty;
 
-            string urlReturn = $"https://localhost:7121/Public/NotificationPayments/Approved?id={notification.Id}&IdGuard={notification.GuardId}";
+            string urlReturn = $"https://localhost:7121/Public/Notification/Approved?id={notification.Id}";
 
             using (var client = new HttpClient())
             {
@@ -110,7 +115,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
         }
 
         [HttpGet("approved")]
-        public async Task<IActionResult> Approved([FromQuery] int idNotification, int idGuard, string token, string PayerID)//TUDO REFATORAR
+        public async Task<IActionResult> Approved([FromQuery] int id, string token, string PayerID)//TUDO REFATORAR
         {
             var status = false;
 
@@ -136,8 +141,11 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
 
                     ViewData["IdTransaccion"] = objeto.purchase_units[0].payments.captures[0].id;
 
-                    var viewModel = new NotificationUpdateViewModel//TUDO INFORMAR O AI DO CAMPO
+                    var notification = _notificationService.GetById(id);
+
+                    var viewModel = new NotificationUpdateViewModel
                     {
+                        Id = id,
                         Token = token,
                         PayerId = PayerID,
                         TransactionId = objeto.purchase_units[0].payments.captures[0].id,
