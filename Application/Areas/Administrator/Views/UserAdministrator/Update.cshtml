@@ -1,45 +1,60 @@
-﻿@model UserUpdateAdministratorViewModel
+﻿<div class="modal fade" id="table-user-adm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
 
-@{
-    var userHierarchy = new SelectList(ViewBag.UserHierarchy as List<string>);
+                <div class="form-group">
+                    <label for="campo-email" class="form-label">Email</label>
+                    <input type="text" id="campo-email" class="form-control" />
+                </div>
 
-    ViewData["Title"] = "Cadastrar";
-}
+                <div class="form-group">
+                    <label for="campo-name" class="form-label">Nome Completo</label>
+                    <input type="text" id="campo-name" class="form-control" />
+                </div>
 
-<form asp-controller="UserAdministrator" asp-action="Update" method="POST">
-    <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label for="campo-cpf" class="form-label">CPF</label>
+                    <input type="text" id="campo-cpf" class="form-control" />
+                </div>
 
-    <label asp-for="Email" class="form-label"></label>
-    <input asp-for="Email" type="email" class="form-control" />
-    <span asp-validation-for="Email" class="text-danger"></span>
+                <div class="form-group">
+                    <label for="campo-phone" class="form-label">Telefone</label>
+                    <input type="text" id="campo-phone" class="form-control" />
+                </div>
 
-    <label asp-for="Name" class="form-label"></label>
-    <input asp-for="Name" type="text" class="form-control" />
-    <span asp-validation-for="Name" class="text-danger"></span>
+                <div class="form-group">
+                    <label for="campo-hierarchy"
+                           class="form-label">Veterinario</label>
+                    <select id="campo-hierarchy" class="form-select"></select>
+                </div>
 
-    <label asp-for="Cpf" class="form-label"></label>
-    <input asp-for="Cpf" type="text" class="form-control" />
-    <span asp-validation-for="Cpf" class="text-danger"></span>
+                <div class="form-group">
+                    <label for="campo-procedimento"
+                           class="form-label">Procedimento</label>
+                    <input type="text" id="campo-procedimento"
+                           class="form-control" />
+                </div>
 
-    <label asp-for="Phone" class="form-label"></label>
-    <input asp-for="Phone" type="text" class="form-control" />
-    <span asp-validation-for="Phone" class="text-danger"></span>
+                <div class="form-group">
+                    <label for="campo-password" class="form-label">Senha</label>
+                    <input type="password" id="campo-password" class="form-control" />
+                </div>
 
-    <label asp-for="Hierarchy" class="form-label" span-required=""></label>
-    <select asp-for="Hierarchy" asp-items="userHierarchy" class="form-control">
-    </select>
+                <div class="form-group">
+                    <label for="campo-confirm-password" class="form-label">Confirmar Senha</label>
+                    <input type="password" id="campo-confirm-password" class="form-control" />
+                </div>
 
-    <label asp-for="Password" class="form-label"></label>
-    <input asp-for="Password" type="password" class="form-control" />
-    <span asp-validation-for="Password" class="text-danger"></span>
-
-    <label asp-for="ConfirmPassword" class="form-label"></label>
-    <input asp-for="ConfirmPassword" type="password" class="form-control" />
-    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-
-    @if (TempData["Message"] != null)
-    {
-        <p class="text-danger">@TempData["Message"]</p>
-    }
-    <button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Editar conta</button>
-</form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="button-update-user">Editar</button>
+            </div>
+        </div>
+    </div>
+</div>

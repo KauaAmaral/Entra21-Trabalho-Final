@@ -6,8 +6,6 @@ using Entra21.CSharp.Area21.Service.Services.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Guards;
 using Entra21.CSharp.Area21.Service.ViewModels.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Users.Validations;
-using Entra21.CSharp.Area21.Service.ViewModels.Vehicles;
-using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
@@ -35,12 +33,12 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
             return View();
         }
 
-        [HttpGet]
+        [HttpGet("getAll")]
         public IActionResult GetAll()
         {
             var users = _userService.GetAll();
 
-            return View("Index", users);
+            return Ok(users);
         }
 
         [HttpGet("register")]
