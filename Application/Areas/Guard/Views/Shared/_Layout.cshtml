@@ -18,6 +18,11 @@
     <link rel="stylesheet" href="~/Theme/assets/css/site.min.css">
     <link rel="stylesheet" href="~/css/site.css">
 
+    <!-- DataTable -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css" />
+
     <!-- Plugins -->
     <link rel="stylesheet" href="~/Theme/global/vendor/animsition/animsition.css">
     <link rel="stylesheet" href="~/Theme/global/vendor/asscrollable/asScrollable.css">
@@ -86,6 +91,9 @@
                         </span>
                     </a>
                     <div class="dropdown-menu" role="menu">
+                        <a asp-area="Driver" asp-controller="User" asp-action="Update" class="dropdown-item" role="menuitem">
+                            <i class="icon wb-user" aria-hidden="true"></i> Perfil
+                        </a>
                         <a asp-action="Payments" asp-controller="Payments" class="dropdown-item">
                             <i class="icon wb-payment"></i> Pagamentos
                         </a>
@@ -239,6 +247,12 @@
 <script src="~/Theme/global/js/Plugin/asscrollable.js"></script>
 
 <script src="~/Theme/assets/examples/js/dashboard/team.js"></script>
+
+<!-- DataTable -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 
