@@ -18,6 +18,11 @@
     <link rel="stylesheet" href="~/Theme/assets/css/site.min.css">
     <link rel="stylesheet" href="~/css/site.css">
 
+    <!-- DataTable -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css" />
+
     <!-- Plugins -->
     <link rel="stylesheet" href="~/Theme/global/vendor/animsition/animsition.css">
     <link rel="stylesheet" href="~/Theme/global/vendor/asscrollable/asScrollable.css">
@@ -77,28 +82,6 @@
             <div class="collapse navbar-collapse navbar-collapse-toolbar" id="site-navbar-collapse">
                 <!-- Navbar Toolbar Right -->
                 <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" data-animation="scale-up"
-                           aria-expanded="false" role="button">
-                            <span class="flag-icon flag-icon-br"></span>
-                        </a>
-                        <div class="dropdown-menu" role="menu">
-                            <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
-                                <span class="flag-icon flag-icon-br"></span> Português
-                            </a>
-                            <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
-                                <span class="flag-icon flag-icon-us"></span> Inglês
-                                <html lang="fr">
-                            </html>
-                        </a>
-                        <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
-                            <span class="flag-icon flag-icon-es"></span> Espanhol
-                        </a>
-                        <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
-                            <span class="flag-icon flag-icon-de"></span> Alemão
-                        </a>
-                    </div>
-                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false"
                        data-animation="scale-up" role="button">
@@ -110,7 +93,7 @@
                     <div class="dropdown-menu" role="menu">
                         <a asp-area="Driver" asp-controller="User" asp-action="Update" class="dropdown-item" role="menuitem">
                             <i class="icon wb-user" aria-hidden="true"></i> Perfil
-                            </a>
+                        </a>
                         <a asp-action="Payments" asp-controller="Payments" class="dropdown-item">
                             <i class="icon wb-payment"></i> Pagamentos
                         </a>
@@ -160,12 +143,6 @@
                         <a asp-area="Driver" asp-controller="Vehicle" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
                             <i class="fa-solid fa-car"></i>
                             <span class="site-menu-title">Veículos</span>
-                        </a>
-                    </li>
-                    <li class="dropdown site-menu-item has-sub">
-                        <a asp-area="Driver" asp-controller="User" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
-                            <i class="fa-solid fa-users"></i>
-                            <span class="site-menu-title">Usuários</span>
                         </a>
                     </li>
                     <li class="dropdown site-menu-item has-sub">
@@ -270,6 +247,12 @@
 <script src="~/Theme/global/js/Plugin/asscrollable.js"></script>
 
 <script src="~/Theme/assets/examples/js/dashboard/team.js"></script>
+
+<!-- DataTable -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 
