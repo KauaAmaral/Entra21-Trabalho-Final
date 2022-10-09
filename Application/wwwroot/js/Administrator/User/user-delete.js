@@ -9,11 +9,11 @@
 let userQuestDelete = (botaoApagar) => {
     swal({
         title: 'AVISO',
-        text: 'Deseja apagar este registro?',
+        text: 'Deseja apagar este usuario?',
         icon: 'warning',
         buttons: ['Não', 'Sim'],
         dangerMode: true,
-        closeModal: false
+        closeModal: true
     }).then((confirmou) => {
         if (confirmou)
             userDelete(botaoApagar);
@@ -23,15 +23,13 @@ let userQuestDelete = (botaoApagar) => {
 let userDelete = (botaoApagar) => {
     let id = botaoApagar.getAttribute('data-id');
 
-    toastr.clear();
-
     fetch(`/administrator/users/delete?id=${id}`)
         .then((response) => {
             let statusResponse = response.status;
 
-            switch (statusresponse) {
+            switch (statusResponse) {
                 case 200:
-                    toastr.success('usuario apagado com sucesso');
+                    toastr.success('Usuario apagado com sucesso');
                     $('#table-user-adm').Datatable().ajax.reload();
                     break;
                 case 404:
@@ -46,10 +44,3 @@ let userDelete = (botaoApagar) => {
         })
         .catch((error) => console.log(error));
 }
-
-$('.Sim').click(function () {
-    // handle deletion here
-    var id = $('#table-user-adm').data('id');
-    $('[data-id=' + id + ']').remove();
-    $('#table-user-adm').modal('hide');
-});
