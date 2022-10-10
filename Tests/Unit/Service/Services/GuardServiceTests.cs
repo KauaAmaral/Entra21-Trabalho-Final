@@ -49,18 +49,22 @@ namespace Tests.Unit.Service.Services
                 UserId = 2
             };
 
-            //var guard = new Guard()
-            //{
-            //    Id = 1,
-            //    IdentificationNumber = "1234567890"
-            //};
+            var guard = new Guard()
+            {
+                Id = 1,
+                IdentificationNumber = "1234567890",
+                UserId = 2
+            };
 
             // Act
             _guardService.Register(viewModel);
 
             // Assert
-            _guardRepository.Received(1).Add(Arg.Is<Guard>(
-                guard => ValidateGuard(guard, viewModel)));
+            //guard.IdentificationNumber.Should().Be(viewModel.IdentificationNumber);
+            //guard.UserId.Should().Be(viewModel.UserId);
+
+            Assert.Equal(guard.IdentificationNumber, viewModel.IdentificationNumber);
+            Assert.Equal(guard.UserId, viewModel.UserId);
         }
 
         [Fact]
@@ -69,13 +73,12 @@ namespace Tests.Unit.Service.Services
             // Arrange
             var viewModel = new GuardUpdateViewModel
             {
-                Id = 2,
+                Id = 3,
                 IdentificationNumber = "2145620179",
-                //Cpf = "456.985.744-77",
                 UserId = 9
             };
 
-            var guardToEdit = new Guard
+            var guard = new Guard
             {
                 Id = 3,
                 IdentificationNumber = "2155556894",
@@ -84,15 +87,15 @@ namespace Tests.Unit.Service.Services
 
             _guardRepository
                 .GetById(Arg.Is(viewModel.Id))
-                .Returns(guardToEdit);
+                .Returns(guard);
 
             // Act
             _guardService.Update(viewModel);
 
             // Assert
-            _guardRepository.Received(1).Update(Arg.Is<Guard>(guard =>
-                ValidateGuardWithGuardUpdateViewModel(guard, viewModel)));
-
+            guard.Id.Should().Be(viewModel.Id);
+            guard.IdentificationNumber.Should().Be(viewModel.IdentificationNumber);
+            guard.UserId.Should().Be(viewModel.UserId);
         }
 
         [Fact]
