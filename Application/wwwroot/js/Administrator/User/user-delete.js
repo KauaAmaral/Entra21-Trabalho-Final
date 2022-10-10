@@ -19,7 +19,7 @@ let userQuestDelete = (botaoApagar) => {
             userDelete(botaoApagar);
     });
 }
-
+debugger;
 let userDelete = (botaoApagar) => {
     let id = botaoApagar.getAttribute('data-id');
     debugger;
@@ -30,7 +30,7 @@ let userDelete = (botaoApagar) => {
             switch (statusResponse) {
                 case 200:
                     toastr.success('Usuario apagado com sucesso');
-                    $('#table-user-adm').Datatable().ajax.reload();
+                    $('#table-user-adm').DataTable().ajax.reload();
                     break;
                 case 404:
                     toastr.error('Não foi possível encontrar o usuario');
