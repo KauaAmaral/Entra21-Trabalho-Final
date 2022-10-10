@@ -57,9 +57,9 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
 
             var notification = _notificationService.GetById(idNotificaton);
 
-            if (notification.Status == false)
+            if (notification.Token != null || notification.CreatedAt.Date > notification.CreatedAt.Date.AddDays(15))
             {
-                //return RedirectToAction(_urlCancel);
+                return null;
             }
 
             bool status = false;
