@@ -22,7 +22,7 @@ let userQuestDelete = (botaoApagar) => {
 
 let userDelete = (botaoApagar) => {
     let id = botaoApagar.getAttribute('data-id');
-
+    debugger;
     fetch(`/administrator/users/delete?id=${id}`)
         .then((response) => {
             let statusResponse = response.status;
