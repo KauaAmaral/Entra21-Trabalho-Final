@@ -149,9 +149,12 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
         [HttpGet("delete")]
         public IActionResult Delete([FromQuery] int id)
         {
-            _userService.Delete(id);
+           var delete = _userService.Delete(id);
 
-            return RedirectToAction("Index");
+            if(!delete)
+                return NotFound();
+
+            return Ok();
         }
         private List<string> GetUserHierarchy()
         {

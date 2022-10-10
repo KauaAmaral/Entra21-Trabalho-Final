@@ -40,7 +40,7 @@
             width: '20%',
             render: function (data, type, user) {
                 return `<button class="btn btn-primary user-update" data-id="${user.id}">Editar</button>
-                <button class="btn btn-danger user-update" data-id="${user.id}">Apagar</button>`;
+                <button class="btn btn-danger user-delete" data-id="${user.id}">Apagar</button>`;
             }
 
         }
