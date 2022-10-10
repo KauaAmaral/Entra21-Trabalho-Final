@@ -19,7 +19,7 @@ let userQuestDelete = (botaoApagar) => {
             userDelete(botaoApagar);
     });
 }
-debugger;
+
 let userDelete = (botaoApagar) => {
     let id = botaoApagar.getAttribute('data-id');
     debugger;
