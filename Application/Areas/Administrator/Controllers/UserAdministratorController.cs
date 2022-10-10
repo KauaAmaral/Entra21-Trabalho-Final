@@ -8,6 +8,8 @@ using Entra21.CSharp.Area21.Service.ViewModels.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Users.Validations;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
 {
@@ -153,12 +155,16 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
 
             return RedirectToAction("Index");
         }
-        private List<string> GetUserHierarchy()
+
+        [HttpGet("getUserHierarchy")]
+        public IActionResult GetUserHierarchy()
         {
-            return Enum
+            var hierarchy = Enum
                 .GetNames<UserHierarchy>()
                 .OrderBy(x => x)
                 .ToList();
+
+            return Ok(hierarchy);
         }
 
         [HttpGet("getById")]
