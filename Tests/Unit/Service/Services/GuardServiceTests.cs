@@ -78,24 +78,22 @@ namespace Tests.Unit.Service.Services
                 UserId = 9
             };
 
-            var guard = new Guard
+            var guardToEdit = new Guard
             {
                 Id = 3,
-                IdentificationNumber = "2155556894",
+                IdentificationNumber = "2145620178",
                 UserId = 9
             };
 
-            _guardRepository
-                .GetById(Arg.Is(viewModel.Id))
-                .Returns(guard);
+            _guardRepository.GetById(Arg.Is(viewModel.Id)).Returns(guardToEdit);
 
             // Act
             _guardService.Update(viewModel);
 
             // Assert
-            guard.Id.Should().Be(viewModel.Id);
-            guard.IdentificationNumber.Should().Be(viewModel.IdentificationNumber);
-            guard.UserId.Should().Be(viewModel.UserId);
+            guardToEdit.Id.Should().Be(viewModel.Id);
+            guardToEdit.IdentificationNumber.Should().Be(viewModel.IdentificationNumber);
+            guardToEdit.UserId.Should().Be(viewModel.UserId);
         }
 
         [Fact]
