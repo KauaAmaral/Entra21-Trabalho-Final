@@ -6,8 +6,7 @@ using Entra21.CSharp.Area21.Service.Services.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Guards;
 using Entra21.CSharp.Area21.Service.ViewModels.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Users.Validations;
-using Entra21.CSharp.Area21.Service.ViewModels.Vehicles;
-using FluentValidation;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
@@ -35,12 +34,12 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
             return View();
         }
 
-        [HttpGet]
+        [HttpGet("getAll")]
         public IActionResult GetAll()
         {
             var users = _userService.GetAll();
 
-            return View("Index", users);
+            return Ok(users);
         }
 
         [HttpGet("register")]
@@ -83,74 +82,79 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet("update")]
-        public IActionResult Update([FromQuery] int id)
-        {
-            var user = _userService.GetById(id);
+        //[HttpGet("update")]
+        //public IActionResult Update([FromQuery] int id)
+        //{
+        //    var user = _userService.GetById(id);
 
-            var userUpdateAdministratorViewModel = new UserUpdateAdministratorViewModel
-            {
-                Id = user.Id,
-                Name = user.Name,
-                Phone = user.Phone,
-                Cpf = user.Cpf,
-                Email = user.Email,
-                Hierarchy = user.Hierarchy
-            };
+        //    var userUpdateAdministratorViewModel = new UserUpdateAdministratorViewModel
+        //    {
+        //        Id = user.Id,
+        //        Name = user.Name,
+        //        Phone = user.Phone,
+        //        Cpf = user.Cpf,
+        //        Email = user.Email,
+        //        Hierarchy = user.Hierarchy
+        //    };
 
-            if (user.Hierarchy == UserHierarchy.Guarda)
-            {
-                var guard = _guardService.GetByUserId(user.Id);
+        //    if (user.Hierarchy == UserHierarchy.Guarda)
+        //    {
+        //        var guard = _guardService.GetByUserId(user.Id);
 
-                userUpdateAdministratorViewModel.IdentificationId = guard.IdentificationNumber;
-            }
+        //        userUpdateAdministratorViewModel.IdentificationId = guard.IdentificationNumber;
+        //    }
 
-            ViewBag.UserHierarchy = GetUserHierarchy();
+        //    ViewBag.UserHierarchy = GetUserHierarchy();
 
-            return View("User/update", userUpdateAdministratorViewModel);
-        }
+        //    return View("User/update", userUpdateAdministratorViewModel);
+        //}
 
         [HttpPost("update")]
-        public IActionResult Update([FromForm] UserUpdateAdministratorViewModel userUpdateAdministratorViewMode)
+        public IActionResult Update(UserUpdateAdministratorViewModel userUpdateAdministratorViewMode)
         {
             var validator = new UserUpdateAdministratorViewModelValidator();
             var result = validator.Validate(userUpdateAdministratorViewMode);
 
-            if (!result.IsValid || !ModelState.IsValid)
-            {
-                ViewBag.UserHierarchy = GetUserHierarchy();
+            //if (!result.IsValid || !ModelState.IsValid)
+            //{
+            //    return UnprocessableEntity(ModelState);
+            //}
 
-                return View("User/update", userUpdateAdministratorViewMode);
-            }
+            //var user = _userService.UpdateAdministrator(userUpdateAdministratorViewMode);
 
-            var user = _userService.UpdateAdministrator(userUpdateAdministratorViewMode);
+            //if (userUpdateAdministratorViewMode.IdentificationId != null)
+            //{
+            //    var guardRegisterViewModel = new GuardRegisterViewModel
+            //    {
+            //        Cpf = user.Cpf,
+            //        IdentificationNumber = userUpdateAdministratorViewMode.IdentificationId,
+            //        UserId = user.Id
+            //    };
 
-            if (userUpdateAdministratorViewMode.IdentificationId != null)
-            {
-                var guardRegisterViewModel = new GuardRegisterViewModel
-                {
-                    Cpf = user.Cpf,
-                    IdentificationNumber = userUpdateAdministratorViewMode.IdentificationId,
-                    UserId = user.Id
-                };
+            //    _guardService.Register(guardRegisterViewModel);
+            //}
+            //else
+            //{
+            //    var guard = _guardService.GetByUserId(user.Id);
+            //    _guardService.Delete(guard.Id);
+            //}
+            if (!ModelState.IsValid)
+                return UnprocessableEntity(userUpdateAdministratorViewMode);
 
-                _guardService.Register(guardRegisterViewModel);
-            }
-            else
-            {
-                var guard = _guardService.GetByUserId(user.Id);
-                _guardService.Delete(guard.Id);
-            }
+            var atualizou = _userService.Update(userUpdateAdministratorViewMode);
 
-            return RedirectToAction("Index");
+            return Ok(new { status = atualizou });
         }
 
         [HttpGet("delete")]
         public IActionResult Delete([FromQuery] int id)
         {
-            _userService.Delete(id);
+           var delete = _userService.Delete(id);
 
-            return RedirectToAction("Index");
+            if(!delete)
+                return NotFound();
+
+            return Ok();
         }
         private List<string> GetUserHierarchy()
         {
@@ -158,6 +162,14 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
                 .GetNames<UserHierarchy>()
                 .OrderBy(x => x)
                 .ToList();
+        }
+
+        [HttpGet("getById")]
+        public IActionResult GetById([FromQuery] int id)
+        {
+            var user = _userService.GetById(id);
+
+            return Ok(user);
         }
     }
 }
