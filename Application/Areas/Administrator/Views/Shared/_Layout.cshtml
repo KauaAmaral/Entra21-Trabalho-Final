@@ -150,7 +150,7 @@
                             </a>
                         </li>
                         <li class="dropdown site-menu-item has-sub">
-                            <a asp-area="Administrator" asp-controller="Payments" asp-action="GetAll" data-toggle="dropdown" data-dropdown-toggle="false">
+                            <a asp-area="Administrator" asp-controller="Payments" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
                                 <i class="fa-regular fa-credit-card"></i>
                                 <span class="site-menu-title">Pagamentos</span>
                             </a>
@@ -234,6 +234,12 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.js"></script>
+
+    <!-- DataTable -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 

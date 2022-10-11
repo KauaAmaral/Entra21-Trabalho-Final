@@ -2,7 +2,6 @@
 using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.Service.Services.Payments;
 using Entra21.CSharp.Area21.Service.Services.Vehicles;
-using Entra21.CSharp.Area21.Service.ViewModels.Users;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
@@ -22,10 +21,15 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
             _paymentService = paymentService;
         }
 
-        [HttpGet]
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet("getAll")]
         public IActionResult GetAll()
         {
-            var payments = _paymentService.GetAllPayments();
+            var payments = _paymentService.GetAll();
 
             var payment = new Payment
             {
@@ -33,7 +37,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
             };
             ViewBag.Payment = payment;
 
-            return View("payments", payments);
+            return Ok(payments);
         }
 
         [HttpGet("details")]

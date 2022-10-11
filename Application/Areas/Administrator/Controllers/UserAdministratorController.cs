@@ -3,10 +3,8 @@ using Entra21.CSharp.Area21.Repository.Enums;
 using Entra21.CSharp.Area21.Service.Authentication;
 using Entra21.CSharp.Area21.Service.Services.Guards;
 using Entra21.CSharp.Area21.Service.Services.Users;
-using Entra21.CSharp.Area21.Service.ViewModels.Guards;
 using Entra21.CSharp.Area21.Service.ViewModels.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Users.Validations;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
