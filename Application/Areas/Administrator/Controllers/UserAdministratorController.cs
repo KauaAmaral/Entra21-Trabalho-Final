@@ -112,7 +112,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
         //}
 
         [HttpPost("update")]
-        public IActionResult Update(UserUpdateAdministratorViewModel userUpdateAdministratorViewMode)
+        public IActionResult Update([FromForm] UserUpdateAdministratorViewModel userUpdateAdministratorViewMode)
         {
             var validator = new UserUpdateAdministratorViewModelValidator();
             var result = validator.Validate(userUpdateAdministratorViewMode);
@@ -162,6 +162,11 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
             var hierarchy = Enum
                 .GetNames<UserHierarchy>()
                 .OrderBy(x => x)
+                .Select(x => new
+                {
+                    Id = (int)(UserHierarchy)Enum.Parse(typeof(UserHierarchy), x),
+                    Text = x
+                })
                 .ToList();
 
             return Ok(hierarchy);
