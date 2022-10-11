@@ -30,6 +30,6 @@
             console.log(error);
         });
 }
-
+debugger;
 document.getElementById("button-register-vehicle")
     .addEventListener("click", registerVehicle);
