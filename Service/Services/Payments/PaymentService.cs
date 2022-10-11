@@ -18,8 +18,17 @@ namespace Entra21.CSharp.Area21.Service.Services.Payments
             _paymentEntityMapping = paymentEntityMapping;
         }
 
-        public IList<Payment> GetAllPayments() =>
-            _paymentRepository.GetAll();
+        public IList<PaymentIndexViewModel> GetAll()
+        {
+            var payments = _paymentRepository.GetAll();
+
+            return payments.Select(x => new PaymentIndexViewModel
+            {
+                Id = x.Id,
+                Model = x.Vehicle.Model,
+                LicensePlate = x.Vehicle.LicensePlate
+            }).ToList();
+        }
 
         public Payment GetById(int id)
         {
@@ -47,5 +56,12 @@ namespace Entra21.CSharp.Area21.Service.Services.Payments
             }
             return validPayment;
         }
+    }
+
+    public class PaymentIndexViewModel
+    {
+        public int Id { get; set; }
+        public string LicensePlate { get; set; }
+        public string Model { get; set; }
     }
 }
