@@ -1,4 +1,56 @@
-﻿@model VehicleRegisterViewModel
+﻿<!-- Modal -->
+<div class="modal fade" id="modalRegisterVehicle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cadastro de Agendamento</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label for="campo-license-plate" class="form-label">Placa</label>
+                    <input id="campo-license-plate" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label for="campo-model"
+                           class="form-label">Modelo</label>
+                    <input id="campo-model" class="form-control" />
+                </div>
+                <div>
+                    <div class="form-group">
+                        <label for="campo-type"
+                               class="form-label">Tipo de Veiculo</label>
+                        <select id="campo-type" class="form-select"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="button-register-vehicle">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@model VehicleRegisterViewModel
 
 @{
     var vehicleType = ViewBag.VehicleType as List<string>;
@@ -39,4 +91,4 @@
             </div>
         </form>
     </div>
-</div>
+</div>*@
