@@ -43,28 +43,17 @@ namespace Tests.Unit.Service.Services
         {
             // Arrange
             var viewModel = new GuardRegisterViewModel
-            {
-                Cpf = "123.456.789-10",
+            {                
                 IdentificationNumber = "1234567890",
                 UserId = 2
-            };
-
-            var guard = new Guard()
-            {
-                Id = 1,
-                IdentificationNumber = "1234567890",
-                UserId = 2
-            };
+            };           
 
             // Act
             _guardService.Register(viewModel);
 
             // Assert
-            //guard.IdentificationNumber.Should().Be(viewModel.IdentificationNumber);
-            //guard.UserId.Should().Be(viewModel.UserId);
-
-            Assert.Equal(guard.IdentificationNumber, viewModel.IdentificationNumber);
-            Assert.Equal(guard.UserId, viewModel.UserId);
+            _guardRepository.Received(1).Add(Arg.Is<Guard>(
+                guard => ValidateGuard(guard, viewModel)));
         }
 
         [Fact]
@@ -91,9 +80,8 @@ namespace Tests.Unit.Service.Services
             _guardService.Update(viewModel);
 
             // Assert
-            guardToEdit.Id.Should().Be(viewModel.Id);
-            guardToEdit.IdentificationNumber.Should().Be(viewModel.IdentificationNumber);
-            guardToEdit.UserId.Should().Be(viewModel.UserId);
+            _guardRepository.Received(1).Update(Arg.Is<Guard>(guard =>
+                ValidateGuardWithGuardUpdateViewModel(guard,viewModel)));
         }
 
         [Fact]
