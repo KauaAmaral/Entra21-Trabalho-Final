@@ -35,6 +35,7 @@
     <script>
         debugger;
        function payment(id) {
+        debugger;
         $.ajax({
             url: '@Url.Action( "Paypal" , "Notificationpayments" )',
             type: "POST",
@@ -55,7 +56,8 @@
                         window.location.href = resultado.href
                     } 
                     else {
-                        alert("Volte mais tarde, o serviço de pagamento não está funcionado!")
+                        alert("Já esta pago ou Fora da data limite")
+                        window.location.href = "https://localhost:7121"
                     }
                 }
             });

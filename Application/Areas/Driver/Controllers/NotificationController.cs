@@ -45,100 +45,114 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
             return View("Notifications/Index", notifications);
         }
+        
+        
+        
+        
+        
+        
+        
+        //[HttpGet("")]
+        //public IActionResult Index()
+        //{
+        //    var notifications = _notificationService.GetAll();
 
-        [HttpPost("update")]
-        public IActionResult Update([FromBody] NotificationUpdateViewModel notificationUpdateViewModel)
-        {
-            if (!ModelState.IsValid)
-                return UnprocessableEntity(ModelState);
+        //    return View("Notifications/Index", notifications);
+        //}
 
-            var update = _notificationService.Update(notificationUpdateViewModel);
+        //[HttpPost("update")]
+        //public IActionResult Update([FromBody] NotificationUpdateViewModel notificationUpdateViewModel)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return UnprocessableEntity(ModelState);
 
-            return Ok(new { status = update });
-        }
+        //    var update = _notificationService.Update(notificationUpdateViewModel);
 
-        [HttpGet("getAll")]
-        public IActionResult GetAll()
-        {
-            var notifications = _notificationService.GetAll();
+        //    return Ok(new { status = update });
+        //}
 
-            return Ok(notifications);
-        }
+        //[HttpGet("getAll")]
+        //public IActionResult GetAll()
+        //{
+        //    var notifications = _notificationService.GetAll();
 
-        [HttpGet("getById")]
-        public IActionResult GetById([FromQuery] int id)
-        {
-            var notifications = _notificationService.GetById(id);
+        //    return Ok(notifications);
+        //}
 
-            return Ok(notifications);
-        }
+        //[HttpGet("getById")]
+        //public IActionResult GetById([FromQuery] int id)
+        //{
+        //    var notifications = _notificationService.GetById(id);
 
-        [HttpGet("register")]
-        public IActionResult Register([FromQuery] NotificationRegisterViewModel notificationRegisterViewModel)
-        {
-            var plate = notificationRegisterViewModel.VehiclePlate;
-            var vehicle = _vehicleService.GetByVehiclePlate(plate);
-            var validPayment = false;
-            if (vehicle != null)
-                validPayment = _paymentService.ValidPayment(vehicle);
+        //    return Ok(notifications);
+        //}
 
-            if (!validPayment)
-            {
-                if (vehicle == null)
-                {
-                    notificationRegisterViewModel.Registered = false;
-                    ViewBag.VehicleType = GetVehicleType();
-                }
-                else
-                {
-                    notificationRegisterViewModel.VehiclePlate = vehicle.LicensePlate;
-                    notificationRegisterViewModel.Type = vehicle.Type;
-                    notificationRegisterViewModel.Registered = true;
-                    var vehicleType = GetVehicleType();
-                    ViewBag.VehicleType = vehicleType;
-                }
+        //[HttpGet("register")]
+        //public IActionResult Register([FromQuery] NotificationRegisterViewModel notificationRegisterViewModel)
+        //{
+        //    var plate = notificationRegisterViewModel.VehiclePlate;
+        //    var vehicle = _vehicleService.GetByVehiclePlate(plate);
+        //    var validPayment = false;
+        //    if (vehicle != null)
+        //        validPayment = _paymentService.ValidPayment(vehicle);
 
-                return View("Notifications/Register", notificationRegisterViewModel);
-            }
-            else
-            {
-                return RedirectToAction("Checkout");
-            }
-        }
+        //    if (!validPayment)
+        //    {
+        //        if (vehicle == null)
+        //        {
+        //            notificationRegisterViewModel.Registered = false;
+        //            ViewBag.VehicleType = GetVehicleType();
+        //        }
+        //        else
+        //        {
+        //            notificationRegisterViewModel.VehiclePlate = vehicle.LicensePlate;
+        //            notificationRegisterViewModel.Type = vehicle.Type;
+        //            notificationRegisterViewModel.Registered = true;
+        //            var vehicleType = GetVehicleType();
+        //            ViewBag.VehicleType = vehicleType;
+        //        }
 
-        [HttpPost("registerNotification")]
-        public IActionResult RegisterNotification([FromForm] NotificationRegisterViewModel notificationRegisterViewModel)
-        {
-            var user = _session.FindUserSession();
+        //        return View("Notifications/Register", notificationRegisterViewModel);
+        //    }
+        //    else
+        //    {
+        //        return RedirectToAction("Checkout");
+        //    }
+        //}
 
-            if (user != null)
-                notificationRegisterViewModel.GuardId = _guardService.GetByUserId(user.Id).Id;
-            else
-                return RedirectToAction("Index", "Home");
+        //[HttpPost("registerNotification")]
+        //public IActionResult RegisterNotification([FromForm] NotificationRegisterViewModel notificationRegisterViewModel)
+        //{
+        //    var user = _session.FindUserSession();
 
-            var vehicle = _vehicleService.GetByVehiclePlate(notificationRegisterViewModel.VehiclePlate);
+        //    if (user != null)
+        //        notificationRegisterViewModel.GuardId = _guardService.GetByUserId(user.Id).Id;
+        //    else
+        //        return RedirectToAction("Index", "Home");
 
-            if (vehicle != null)
-            {
-                notificationRegisterViewModel.VehicleId = vehicle.Id;
-            }
+        //    var vehicle = _vehicleService.GetByVehiclePlate(notificationRegisterViewModel.VehiclePlate);
 
-            if (!ModelState.IsValid)
-            {
-                ViewBag.VehicleType = GetVehicleType();
-                return View(notificationRegisterViewModel);
-            }
+        //    if (vehicle != null)
+        //    {
+        //        notificationRegisterViewModel.VehicleId = vehicle.Id;
+        //    }
 
-            _notificationService.SetNotification(notificationRegisterViewModel);
+        //    if (!ModelState.IsValid)
+        //    {
+        //        ViewBag.VehicleType = GetVehicleType();
+        //        return View(notificationRegisterViewModel);
+        //    }
 
-            return RedirectToAction("Home");
-        }
+        //    _notificationService.SetNotification(notificationRegisterViewModel);
 
-        [HttpGet("checkout")]
-        public IActionResult Checkout()
-        {
-            return View("Notifications/Checkout");
-        }
+        //    return RedirectToAction("Home");
+        //}
+
+        //[HttpGet("checkout")]
+        //public IActionResult Checkout()
+        //{
+        //    return View("Notifications/Checkout");
+        //}
 
         private List<string> GetVehicleType()
         {

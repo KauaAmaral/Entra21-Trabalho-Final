@@ -14,7 +14,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
     [IsGuard]
     [Area("Guard")]
     [Route("/Guard/Notifications/")]
-  public class NotificationController : Controller
+    public class NotificationController : Controller
     {
         private readonly INotificationService _notificationService;
         private readonly IVehicleService _vehicleService;
@@ -132,7 +132,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
 
             _notificationService.SetNotification(notificationRegisterViewModel);
 
-            return RedirectToAction("Home");
+            return RedirectToAction("Checkout");
         }
 
         [HttpGet("checkout")]

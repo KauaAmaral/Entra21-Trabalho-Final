@@ -1,7 +1,9 @@
 ﻿using Entra21.CSharp.Area21.Repository.Entities;
-using Entra21.CSharp.Area21.Repository.Repositories.Notifications;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Notifications;
+using Entra21.CSharp.Area21.Repository.Repositories.Notifications;
 using Entra21.CSharp.Area21.Service.ViewModels.Notifications;
+using Entra21.CSharp.Area21.Service.Authentication;
+using Entra21.CSharp.Area21.Service.Services.Vehicles;
 
 namespace Entra21.CSharp.Area21.Service.Services.Notifications
 {
@@ -9,10 +11,15 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
     {
         private readonly INotificationRepository _notificationRepository;
         private readonly INotificationEntityMapping _notificationEntityMapping;
+        private readonly IVehicleService _vehicleService;
+
+
 
         public NotificationService(INotificationRepository notificationRepository,
-            INotificationEntityMapping notificationEntityMapping)
+            INotificationEntityMapping notificationEntityMapping,
+            IVehicleService vehicleService)
         {
+            _vehicleService = vehicleService;
             _notificationRepository = notificationRepository;
             _notificationEntityMapping = notificationEntityMapping;
         }
@@ -73,7 +80,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
             if (notification == null)
                 return false;
 
-            if(viewModel.Token == null)
+            if (viewModel.Token == null)
                 notification = _notificationEntityMapping.UpdateWith(notification, viewModel);
             else
                 notification = _notificationEntityMapping.UpdateWithPayment(notification, viewModel);
@@ -88,5 +95,21 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
 
         public IList<Notification> GetAll() =>
             _notificationRepository.GetAll();
+
+        public IList<Notification> GetByVehicleId(int id)
+        {
+            var vehicles = _vehicleService.GetAllById(id);
+
+            var notifications = new List<Notification>();
+            for (int i = 0; i > vehicles.Count; i++)
+            {
+                var notificationCurrent = _notificationRepository.GetByVehicleId(vehicles[i].Id);
+
+                if (notificationCurrent != null)
+                    notifications.AddRange(notificationCurrent); 
+            }
+
+            return notifications;
+        }
     }
 }
