@@ -22,7 +22,7 @@
             $('#vehicles-id').DataTable().ajax.reload();
 
             bootstrap.Modal.getInstance(
-                document.getElementById('exampleModal')).hide();//exampleModal id da modal do bootstrap
+                document.getElementById('modalRegisterVehicle')).hide();//exampleModal id da modal do bootstrap
         })
         .catch((error) => {
             toastr.error("Não foi possivel agendar a consulta");
@@ -30,6 +30,6 @@
             console.log(error);
         });
 }
-debugger;
+
 document.getElementById("button-register-vehicle")
     .addEventListener("click", registerVehicle);
