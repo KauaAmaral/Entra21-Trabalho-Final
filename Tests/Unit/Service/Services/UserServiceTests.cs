@@ -1,12 +1,11 @@
 ﻿using Entra21.CSharp.Area21.Repository.Entities;
-using Entra21.CSharp.Area21.Repository.Enums;
 using Entra21.CSharp.Area21.Repository.Repositories.Users;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Users;
 using Entra21.CSharp.Area21.Service.Services.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Users;
 using FluentAssertions;
 using NSubstitute;
-using System.Data.Entity.Hierarchy;
+using NSubstitute.ReturnsExtensions;
 using Xunit;
 
 namespace Tests.Unit.Service.Services
@@ -43,14 +42,11 @@ namespace Tests.Unit.Service.Services
         public void Test_Register()
         {
             // Arrange
-            var user = new User();
-
             var viewModel = new UserRegisterViewModel
             {
                 Name = "Luiz Roberto",
                 Cpf = "198.445.012-45",
                 Email = "luiz-roberto@gmail.com",
-                Hierarchy = UserHierarchy.Administrador
             };
 
             // Act
@@ -60,15 +56,122 @@ namespace Tests.Unit.Service.Services
             _userRepository.Received(1).Add(Arg.Is<User>(
                 user => ValidateUser(user, viewModel)));
         }
-            private bool ValidateUser(User user, UserRegisterViewModel viewModel)
-            {
-                user.Name.Should().Be(viewModel.Name);
-                user.Cpf.Should().Be(viewModel.Cpf);
-                user.Email.Should().Be(viewModel.Email);
-                user.Hierarchy.Should().Be(viewModel.Hierarchy);
 
-                return true;
-            }
+        [Fact]
+        public void Test_Update_With_User_Found()
+        {
+            // Arrange
+            var viewModel = new UserUpdateViewModel
+            {
+                Id = 3,
+                Name = "Luiz Roberto",
+                Cpf = "198.445.012-45",
+                Email = "luiz-roberto@gmail.com",
+            };
+
+            var userToEdit = new User
+            {
+                Id = 3,
+                Name = "Luis Roberto",
+                Cpf = "198.445.012-44",
+                Email = "luis_roberto@gmail.com",
+            };
+
+            _userRepository.GetById(Arg.Is(viewModel.Id)).Returns(userToEdit);
+
+            // Act
+            _userService.Update(viewModel);
+
+            // Assert
+            _userRepository.Received(1).Update(Arg.Is<User>(user =>
+                ValidateUserWithUserUpdateViewModel(user, viewModel)));
+        }
+
+        [Fact]
+        public void Test_Update_With_User_Not_Found()
+        {
+            // Arrange
+            var viewModel = new UserUpdateViewModel
+            {
+                Id = 3,
+                Name = "Miguel Coelho",
+                Cpf = "101.477.012-03",
+                Email = "miguelcoelho@outlook.com",
+            };
+
+            _userRepository.GetById(Arg.Is(viewModel.Id)).ReturnsNull();
+
+            // Act
+            _userService.Update(viewModel);
+
+            // Assert
+            _userRepository
+                .DidNotReceive()
+                .Update(Arg.Any<User>());
+        }
+
+        [Fact]
+        public void Test_GetById_With_User_Found()
+        {
+            // Arrange
+            var id = 3;
+
+            var expectedUser = new User
+            {
+                Id = 3,
+                Name = "Miguel Coelho",
+                Cpf = "101.477.012-03",
+                Email = "miguelcoelho@outlook.com",
+            };
+
+            _userRepository.GetById(Arg.Is(id))
+                .Returns(expectedUser);
+
+            // Act
+            var user = _userService.GetById(id);
+
+            // Assert
+            user.Name.Should().Be(expectedUser.Name);
+            user.Cpf.Should().Be(expectedUser.Cpf);
+            user.Email.Should().Be(expectedUser.Email);
+        }
+
+        [Fact]
+        public void Test_GetById_With_User_Not_Found()
+        {
+            // Arrange
+            var id = 15;
+
+            _userRepository.GetById(Arg.Is(15)).ReturnsNull();
+
+            // Act
+            var user = _userService.GetById(id);
+
+            // Assert
+            user.Should().BeNull();
+
+            _userRepository.Received(1).GetById(Arg.Is(15));
+        }
+
+        private bool ValidateUser(User user, UserRegisterViewModel viewModel)
+        {
+            user.Name.Should().Be(viewModel.Name);
+            user.Cpf.Should().Be(viewModel.Cpf);
+            user.Email.Should().Be(viewModel.Email);
+
+            return true;
+        }
+
+        private bool ValidateUserWithUserUpdateViewModel(
+           User user, UserUpdateViewModel viewModel)
+        {
+            user.Id.Should().Be(viewModel.Id);
+            user.Name.Should().Be(viewModel.Name);
+            user.Cpf.Should().Be(viewModel.Cpf);
+            user.Email.Should().Be(viewModel.Email);
+
+            return true;
+        }
 
     }
 }

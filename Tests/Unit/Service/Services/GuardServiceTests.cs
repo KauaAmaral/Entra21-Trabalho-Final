@@ -43,12 +43,13 @@ namespace Tests.Unit.Service.Services
         {
             // Arrange
             var viewModel = new GuardRegisterViewModel
-            {                
+            {     
+                Cpf = "144.474.877-89",
                 IdentificationNumber = "1234567890",
                 UserId = 2
-            };           
+            };
 
-            // Act
+            // Act            
             _guardService.Register(viewModel);
 
             // Assert
@@ -104,7 +105,6 @@ namespace Tests.Unit.Service.Services
             _guardRepository
                 .DidNotReceive()
                 .Update(Arg.Any<Guard>());
-
         }
 
         [Fact]
