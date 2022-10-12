@@ -28,7 +28,6 @@ let userCleanFields = () => {
     $('#campo-hierarchy').val('').trigger('change');
 }
 
-
 let UserGetFormData = () => {
     let email = document.getElementById('campo-email').value;
     let name = document.getElementById('campo-name').value;
