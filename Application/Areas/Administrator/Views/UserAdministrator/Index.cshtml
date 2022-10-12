@@ -15,9 +15,30 @@
     </div>
 </div>
 
-<partial name="Update" />
+<partial name="UpdateRegister" />
 
 @section scripts{
     <script src="~/js/Administrator/User/administrator-user-datatable.js"></script>
     <script src="~/js/Administrator/User/administrator-user-update.js"></script>
+    <script src="~/js/Administrator/User/administrator-user-select2.js"></script>
+    <script src="~/js/Administrator/User/administrator-user-register.js"></script>
+    <script>
+        $(document).ready(function () {
+            let value = $("#campo-hierarchy").val();
+            if (value == "Guarda") {
+                $("#campo-identification").prop("disabled", false);
+            }
+        });
+
+        $("#campo-hierarchy").on("change", function () {
+            let value = $("#campo-hierarchy").val();
+            if (value == 1) {
+                $("#campo-identification").prop("disabled", false);
+            }
+            else {
+                $("#campo-identification").prop("disabled", true);
+                $("#campo-identification").val("");
+            }
+        });
+    </script>
 }

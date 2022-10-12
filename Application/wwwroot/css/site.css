@@ -50,3 +50,13 @@ html {
 .font-size-footer{
     font-size: 12px;
 }
+
+.select2-container {
+    z-index: 10000 !important;
+    width: 100% !important;
+}
+
+.select2-selection {
+    height: 38px !important;
+    border: 1px solid #ced4da !important;
+}
