@@ -23,14 +23,19 @@ let administratorUserUpdateFillModal = (buttonUpdate) => {
             if (statusResponse === 200) {
                 let modal = new bootstrap.Modal(document.getElementById('userUpdateModal'), {});
 
-                //document.getElementById('cadastroPetModalLabel').innerText = `Editar PET: ${data.nome}`
+                document.getElementById('campo-id').value = data.id;
                 document.getElementById('campo-email').value = data.email;
                 document.getElementById('campo-name').value = data.name;
                 document.getElementById('campo-cpf').value = data.cpf;
                 document.getElementById('campo-phone').value = data.phone;
-                //document.getElementById('campo-procedimento').value = data.procedimento;
+                document.getElementById('campo-identification').value = data.identificationId;
                 document.getElementById('campo-password').value = "";
                 document.getElementById('campo-confirm-password').value = "";
+
+                $('#campo-hierarchy')
+                    .append(new Option(data.hierarchy, false, false))
+                    .val(data.hierarchy)
+                    .trigger('change');
 
                 modal.show();
             }
@@ -39,9 +44,7 @@ let administratorUserUpdateFillModal = (buttonUpdate) => {
 }
 
 let userUpdate = (formData) => {
-
     let statusResponse = 0;
-
     fetch('/administrator/users/update', {
         method: 'POST',
         body: formData
@@ -53,9 +56,11 @@ let userUpdate = (formData) => {
         })
         .then((data) => {
             if (statusResponse === 200) {
-                bootstrap.Modal.getInstance(document.getElementById('userUpdateModal')).hide();
+                let modal = new bootstrap.Modal(document.getElementById('userUpdateModal'), {});
 
-                userClearFields();
+                modal.hide();
+
+                userCleanFields();
 
                 $('#table-user-adm').DataTable().ajax.reload();
 

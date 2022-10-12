@@ -23,6 +23,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css" />
 
+    <!-- Select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <!-- Plugins -->
     <link rel="stylesheet" href="~/Theme/global/vendor/animsition/animsition.css">
     <link rel="stylesheet" href="~/Theme/global/vendor/asscrollable/asScrollable.css">
@@ -40,7 +43,6 @@
 
     <link rel="stylesheet" href="~/css/Background.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
-
 
     <!-- Fonts -->
     <link rel="stylesheet" href="~/Theme/global/fonts/web-icons/web-icons.min.css">
@@ -146,19 +148,13 @@
                             </a>
                         </li>
                         <li class="dropdown site-menu-item has-sub">
-                            <a asp-area="Administrator" asp-controller="Guard" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
-                                <i class="fa-solid fa-person-military-pointing"></i>
-                                <span class="site-menu-title">Guardas</span>
-                            </a>
-                        </li>
-                        <li class="dropdown site-menu-item has-sub">
                             <a asp-area="Administrator" asp-controller="UserAdministrator" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
                                 <i class="fa-solid fa-users"></i>
                                 <span class="site-menu-title">Usuários</span>
                             </a>
                         </li>
                         <li class="dropdown site-menu-item has-sub">
-                            <a asp-area="Administrator" asp-controller="Payments" asp-action="GetAll" data-toggle="dropdown" data-dropdown-toggle="false">
+                            <a asp-area="Administrator" asp-controller="Payments" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
                                 <i class="fa-regular fa-credit-card"></i>
                                 <span class="site-menu-title">Pagamentos</span>
                             </a>
@@ -245,6 +241,15 @@
     <script src="~/js/shared/notification-error.js" asp-append-version="true"></script>
 
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.js"></script>
+
+    <!-- DataTable -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+
+    <!-- Select2 -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 
