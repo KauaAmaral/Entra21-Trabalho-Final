@@ -129,12 +129,29 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             return Ok(vehicle);
         }
 
-        private List<string> GetVehicleType()
+
+        //private List<string> GetVehicleType()
+        //{
+        //    return Enum
+        //        .GetNames<VehicleType>()
+        //        .OrderBy(x => x)
+        //        .ToList();
+        //}
+
+        [HttpGet("getVehicleType")]
+        public IActionResult GetVehicleType()
         {
-            return Enum
+            var type = Enum
                 .GetNames<VehicleType>()
                 .OrderBy(x => x)
+                .Select(x => new
+                {
+                    Id = (int)(VehicleType)Enum.Parse(typeof(VehicleType), x),
+                    Text = x
+                })
                 .ToList();
+
+            return Ok(type);
         }
     }
 }

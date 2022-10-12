@@ -7,7 +7,6 @@
     dados.append("licensePlate", licensePlate);
     dados.append("model", model);
     dados.append("type", type);
-
     console.log(dados);
 
     fetch('/driver/vehicle/register', {
