@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using Entra21.CSharp.Area21.Repository.Authentication;
 using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.Repository.Enums;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Users;
@@ -41,7 +42,7 @@ namespace Tests.Unit.Service.EntitiesMappings
             user.TokenExpiredDate.Should().BeAfter(viewModel.TokenExpiredDate);
             user.TokenExpiredDate.Should().BeBefore(DateTime.Now.AddHours(2));
             user.Email.Should().Be(viewModel.Email);
-            user.Password.Should().Be(viewModel.Password);
+            user.Password.Should().Be(viewModel.Password.GetHash());
             user.Cpf.Should().Be(viewModel.Cpf);
             user.Hierarchy.Should().Be(viewModel.Hierarchy);
         }
@@ -133,7 +134,7 @@ namespace Tests.Unit.Service.EntitiesMappings
             _userEntityMapping.UpdatePasswordWith(user, viewModelEdit);
 
             // Assert
-            user.Password.Should().Be(viewModelEdit.NewPassword);
+            user.Password.Should().Be(viewModelEdit.NewPassword.GetHash());
         }
     }
 }
