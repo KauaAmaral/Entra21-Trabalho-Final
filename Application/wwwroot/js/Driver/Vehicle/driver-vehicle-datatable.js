@@ -1,4 +1,4 @@
-﻿$('#vehicles-id').DataTable({
+﻿$('#table-vehicle-driver').DataTable({
     language: {
         url: 'https://raw.githubusercontent.com/DataTables/Plugins/master/i18n/pt-BR.json'
     },
@@ -8,7 +8,7 @@
     },
     processing: true,
     columns: [
-        { data: 'licensePlate' },//cada chave é uma coluna da tabela e tem que ter todas as colunas da tabela se não vai dar BO
+        { data: 'licensePlate' },
         { data: 'model' },
         { data: 'type' },
         {
