@@ -1,7 +1,6 @@
 ﻿document.getElementById('button-save-user')
     .addEventListener('click', () => UserHandleRegisterButton());
 
-
 let UserHandleRegisterButton = () => {
     let id = document.getElementById('campo-id').value;
     let formData = UserGetFormData();
