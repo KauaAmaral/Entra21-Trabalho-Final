@@ -32,5 +32,3 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Payments
           .FirstOrDefault(x => x.Id == id);
     }
 }
-
-

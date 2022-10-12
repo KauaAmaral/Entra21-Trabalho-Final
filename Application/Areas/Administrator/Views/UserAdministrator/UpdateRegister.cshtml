@@ -7,6 +7,8 @@
             </div>
             <div class="modal-body">
 
+                <input type="hidden" id="campo-id"/>
+
                 <div class="form-group">
                     <label for="campo-email" class="form-label">Email</label>
                     <input type="text" id="campo-email" class="form-control" />
@@ -28,16 +30,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="campo-hierarchy"
-                           class="form-label">Hierarquia</label>
+                    <label for="campo-hierarchy" class="form-label">Hierarquia</label>
                     <select id="campo-hierarchy" class="form-select"></select>
                 </div>
 
                 <div class="form-group">
-                    <label for="campo-procedimento"
-                           class="form-label">Procedimento</label>
-                    <input type="text" id="campo-procedimento"
-                           class="form-control" />
+                    <label for="campo-identification" class="form-label">ID de identificação</label>
+                    <input type="text" class="form-control" id="campo-identification" disabled />
                 </div>
 
                 <div class="form-group">
@@ -52,8 +51,8 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="button-update-user">Editar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="button-save-user">Salvar</button>
             </div>
         </div>
     </div>
