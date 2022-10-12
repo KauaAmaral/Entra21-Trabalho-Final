@@ -57,11 +57,4 @@ namespace Entra21.CSharp.Area21.Service.Services.Payments
             return validPayment;
         }
     }
-
-    public class PaymentIndexViewModel
-    {
-        public int Id { get; set; }
-        public string LicensePlate { get; set; }
-        public string Model { get; set; }
-    }
 }
