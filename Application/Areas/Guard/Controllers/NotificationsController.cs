@@ -13,7 +13,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
     [IsUserLogged]
     [IsGuard]
     [Area("Guard")]
-    [Route("/Guard/Notifications/")]
+    [Route("/Guard/Notification/")]
     public class NotificationController : Controller
     {
         private readonly INotificationService _notificationService;
@@ -39,12 +39,12 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
 
         }
 
-        [HttpGet("")]
+        [HttpGet]
         public IActionResult Index()
         {
             var notifications = _notificationService.GetAll();
 
-            return View("Notifications/Index", notifications);
+            return View("Index", notifications);
         }
 
         [HttpPost("update")]
@@ -99,7 +99,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
                     ViewBag.VehicleType = vehicleType;
                 }
 
-                return View("Notifications/Register", notificationRegisterViewModel);
+                return View("Register", notificationRegisterViewModel);
             }
             else
             {
@@ -138,7 +138,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
         [HttpGet("checkout")]
         public IActionResult Checkout()
         {
-            return View("Notifications/Checkout");
+            return View("Checkout");
         }
 
         private List<string> GetVehicleType()

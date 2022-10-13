@@ -101,7 +101,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
             var vehicles = _vehicleService.GetAllById(id);
 
             var notifications = new List<Notification>();
-            for (int i = 0; i > vehicles.Count; i++)
+            for (int i = 0; i < vehicles.Count; i++)
             {
                 var notificationCurrent = _notificationRepository.GetByVehicleId(vehicles[i].Id);
 

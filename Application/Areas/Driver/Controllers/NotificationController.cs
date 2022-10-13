@@ -12,7 +12,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 {
     [Area("Driver")]
     [IsUserLogged]
-    [Route("driver/notification")]
+    [Route("Driver/Notification")]
     public class NotificationController : Controller
     {
         private readonly INotificationService _notificationService;
@@ -38,20 +38,32 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
         }
 
-        [HttpGet("")]
+        [HttpGet]
         public IActionResult Index()
         {
-            var notifications = _notificationService.GetAll();
+            var user = _session.FindUserSession();
+            var notifications = _notificationService.GetByVehicleId(user.Id);
 
-            return View("Notifications/Index", notifications);
+            return View("Index", notifications);
         }
-        
-        
-        
-        
-        
-        
-        
+
+     
+
+        //[HttpGet("GetByVehicleId")]
+        //public IActionResult GetByVehicleId()
+        //{
+        //    var user = _session.FindUserSession();
+        //    var notificatios = _notificationService.GetByVehicleId(user.Id);
+
+        //    return Ok(notificatios);
+        //}
+
+
+
+
+
+
+
         //[HttpGet("")]
         //public IActionResult Index()
         //{

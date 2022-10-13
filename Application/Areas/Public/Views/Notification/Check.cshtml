@@ -37,7 +37,7 @@
        function payment(id) {
         debugger;
         $.ajax({
-            url: '@Url.Action( "Paypal" , "Notificationpayments" )',
+            url: '@Url.Action( "Paypal" , "Notification" )',
             type: "POST",
             data: {id: id},
             dataType: "json",

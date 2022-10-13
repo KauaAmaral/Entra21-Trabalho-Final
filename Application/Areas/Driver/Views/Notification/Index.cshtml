@@ -1,0 +1,33 @@
+﻿@model List<Notification>
+
+<table class="table-center style="width:70%" align="center" id="notification-id">
+	<thead>
+		<tr>
+			<th style="width:15%"><font size="5"><b><font>Placa Veículo</font></b></th>
+			<th style="width:15%"><font size="5"><b><font>Guarda</font></b></th>
+			<th style="width:15%"><font size="5"><b><font>Rua</font></b></th>
+			<th style="width:15%"><font size="5"><b><font>Comentários</font></b></th>
+			<th style="width:15%"><font size="5"><b><font>Horário</font></b></th>
+			<th style="width:15%"><font size="5"><b><font>Ação</font></b></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var notification in Model)
+		{
+				<tr>
+					<td>@notification.VehicleLicensePlate</td>
+					<td>@notification.Guard.IdentificationNumber </td>
+					<td>@notification.Address</td>
+					<td>@notification.Comments</td>
+					<td>@notification.CreatedAt</td>
+					<td>
+					<a a class="btn btn-primary" asp-area="Public" asp-controller="Notification" asp-action="Check" asp-route-id="@notification.Id" >
+						<i class="fa-solid fa-pencil"></i>
+						<span class="site-menu-title">Pagar</span>
+					</a>
+					</td>
+
+				</tr>
+		}
+	</tbody>
+</table>

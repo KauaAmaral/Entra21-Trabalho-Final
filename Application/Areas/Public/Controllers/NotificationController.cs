@@ -11,7 +11,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
 {
     [Area("Public")]
     [Route("Public/Notification")]
-    public class NotificationPaymentsController : Controller
+    public class NotificationController : Controller
     {
         private readonly INotificationService _notificationService;
 
@@ -20,16 +20,22 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
         private readonly string _url = "https://api-m.sandbox.paypal.com";
         private readonly string _urlCancel = "https://localhost:7121/driver/Home";
 
-        public NotificationPaymentsController(
+        public NotificationController(
             INotificationService notificationService
             )
         {
             _notificationService = notificationService;
         }
 
-        [HttpGet("check")]
+        [HttpGet]
 
-        public IActionResult NotificationCheck([FromQuery] int id)
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet("Check")]
+        public IActionResult Check([FromQuery] int id)
         {
             var notification = _notificationService.GetById(id);
 
@@ -47,10 +53,10 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
                 UpdatedAt = notification.UpdatedAt
             };
 
-            return View("notifications/notificationcheck", notificationCheckoutViewModal);
+            return View("notification/check", notificationCheckoutViewModal);
         }
 
-        [HttpPost]
+        [HttpPost("Paypal")]
         public async Task<JsonResult> Paypal(string id)
         {
             var idNotificaton = Convert.ToInt32(id);
@@ -152,7 +158,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
                     _notificationService.Update(viewModel);
                 }
             }
-            return View("Notifications/Approved");
+            return Ok();
         }
 
         [HttpPost("Approved")]
