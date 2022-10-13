@@ -1,0 +1,35 @@
+﻿$('table').on('click', '.vehicle-pay', (event) => {
+    let element = event.target.tagName === 'I'
+        ? event.target.parentElement
+        : event.target;
+
+    let id = element.getAttribute("data-id");
+    realizarPagamento(id)
+});
+
+function realizarPagamento(id) {
+    $.ajax({
+        url: '/driver/paypal',
+        type: "POST",
+        data: { id: id },
+        dataType: "json",
+        success: function (data) {
+            console.log(data);
+            if (data.status) {
+
+                let jsonresult = JSON.parse(data.response);
+
+                console.log(jsonresult);
+
+                let links = jsonresult.links;
+
+                let resultado = links.find(item => item.rel === "approve")
+
+                window.location.href = resultado.href
+            }
+            else {
+                alert("Volte mais tarde, o serviço de pagamento não está funcionado!")
+            }
+        }
+    });
+}
