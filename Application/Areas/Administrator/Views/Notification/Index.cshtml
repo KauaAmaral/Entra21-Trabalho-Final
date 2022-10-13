@@ -20,17 +20,16 @@
 				<td>@notification.Address</td>
 				<td>@notification.Comments</td>
 				<td>@notification.CreatedAt</td>
+
 				<td>
-			@{
-				if (@notification.Token == null)
-				{
-					<a a class="btn btn-primary" asp-area="Public" asp-controller="Notification" asp-action="Check" asp-route-id="@notification.Id ">
-						<i class="fa-solid fa-pencil"></i>
-						<span class="site-menu-title">Pagar</span>
+					<a class="btn btn-primary" asp-action="update" asp-route-id="@notification.Id">
+					     <i class="fa-solid fa-pencil"></i> Editar
 					</a>
-				}
-			}
+					<a class="btn btn-outline-danger" asp-action="delete" asp-route-id="@notification.Id">
+					     <i class="fa-solid fa-trash"></i> Apagar
+					</a>
 				</td>
+
 			</tr>
 		}
 	</tbody>
