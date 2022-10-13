@@ -29,7 +29,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         {
             var user = _session.FindUserSession();
 
-            var vehicle = _vehicleService.GetAllById(user.Id);
+            var vehicle = _vehicleService.GetByUserId(user.Id);
 
             return View("Payments", vehicle);
         }
