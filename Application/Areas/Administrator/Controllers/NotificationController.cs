@@ -19,6 +19,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
             _session = sessionAuthentication;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
