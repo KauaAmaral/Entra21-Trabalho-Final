@@ -56,26 +56,26 @@ let userUpdate = (formData) => {
         })
         .then((data) => {
             if (statusResponse === 200) {
-                let modal = new bootstrap.Modal(document.getElementById('userUpdateModal'), {});
-
-                modal.hide();
+                debugger;
+                jQuery.noConflict();
+                $('#table-user-adm').modal('hide'); 
 
                 userCleanFields();
 
                 $('#table-user-adm').DataTable().ajax.reload();
 
-                toastr.success('Usuario alterado com sucesso');
+                toastr.success('Usuário alterado com sucesso');
 
                 return;
             }
 
-            //showNotificationErrorsOfValidation(data);
+            showNotificationErrorsOfValidation(data);
         })
-        //.catch((error) => {
-        //    console.error(error);
+        .catch((error) => {
+            console.error(error);
 
-        //    toastr.error('Não foi possível alterar o usuario');
-        //});
+            toastr.error('Não foi possível alterar o usuario');
+        });
 };
 
 document.getElementById("button-update-user")
