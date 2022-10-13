@@ -26,10 +26,10 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Vehicles
             .Include(x => x.User)
             .ToList();
 
-        public IList<Vehicle> GetAllById(int id) =>
+        public IList<Vehicle> GetByUserId(int userId) =>
             _context.Vehicles
             .Include(x => x.User)
-            .Where(x => x.User.Id == id)
+            .Where(x => x.User.Id == userId)
             .ToList();
 
         public Vehicle? GetByVehiclePlate(string vehiclePlate) => _context.Vehicles
