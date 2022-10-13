@@ -9,8 +9,8 @@
     },
     processing: true,
     columns: [
-        { data: 'model' },
         { data: 'licensePlate' },
+        { data: 'model' },
         {
             data: null,
             width: '20%',
