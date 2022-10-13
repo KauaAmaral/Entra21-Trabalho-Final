@@ -17,18 +17,8 @@ namespace Tests.Unit.Service.EntitiesMappings
         [Fact]
         public void Test_RegisterWith()
         {
-            // Arrange
-            var faker = new Faker();
-
-            var viewModel = new PaymentRegisterViewModel
-            {
-                Token = faker.Random.Word(),
-                PayerId = "14",
-                TransactionId = "17",
-                UserId = faker.Random.Number(),
-                VehicleId = faker.Random.Number(),
-                Value = faker.Random.Number()
-            };
+            // Arrange            
+            var viewModel = RegisterPayment();
 
             // Act
             var payment = _paymentEntityMapping.RegisterWith(viewModel);
@@ -41,5 +31,15 @@ namespace Tests.Unit.Service.EntitiesMappings
             payment.VehicleId.Should().Be(viewModel.VehicleId);
             payment.Value.Should().Be(viewModel.Value);
         }
+
+        private PaymentRegisterViewModel RegisterPayment()
+            => new Faker<PaymentRegisterViewModel>()
+            .RuleFor(x => x.Token, p => p.Random.Word())
+            .RuleFor(x => x.PayerId, p => p.Random.Word())
+            .RuleFor(x => x.TransactionId, p => p.Random.Word())
+            .RuleFor(x => x.UserId, p => p.Random.Number())
+            .RuleFor(x => x.VehicleId, p => p.Random.Number())
+            .RuleFor(x => x.Value, p => p.Random.Number())
+            .Generate();
     }
 }

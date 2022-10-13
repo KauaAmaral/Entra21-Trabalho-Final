@@ -20,7 +20,7 @@ namespace Tests.Unit.Service.EntitiesMappings
         public void Test_RegisterWith()
         {
             // Arrange
-            var viewModel = CreateRegisterVehicle(VehicleType.Carro);
+            var viewModel = RegisterVehicle(VehicleType.Carro);
             
             // Act
             var vehicle = _vehicleEntityMapping.RegisterWith(viewModel);
@@ -36,7 +36,7 @@ namespace Tests.Unit.Service.EntitiesMappings
         public void Test_UpdateWith()
         {
             // Arrange
-            var vehicle = vehicleCreated(VehicleType.Carro);
+            var vehicle = VehicleCreated(VehicleType.Carro);
 
             var viewModelEdit = UpdateVehicle(VehicleType.Moto);
 
@@ -49,7 +49,7 @@ namespace Tests.Unit.Service.EntitiesMappings
             vehicle.Type.Should().Be(viewModelEdit.Type);
         }
 
-        private VehicleRegisterViewModel CreateRegisterVehicle(VehicleType vehicleType)
+        private VehicleRegisterViewModel RegisterVehicle(VehicleType vehicleType)
             => new Faker<VehicleRegisterViewModel>()
             .RuleFor(x => x.LicensePlate, x => x.Random.Word())
             .RuleFor(x => x.Model, x => x.Random.Word())
@@ -57,7 +57,7 @@ namespace Tests.Unit.Service.EntitiesMappings
             .RuleFor(x => x.UserId, x => x.Random.Number())
             .Generate();
 
-        private Vehicle vehicleCreated(VehicleType vehicleType)
+        private Vehicle VehicleCreated(VehicleType vehicleType)
             => new Faker<Vehicle>()
             .RuleFor(x => x.LicensePlate, x => x.Random.Word())
             .RuleFor(x => x.Model, x => x.Random.Word())

@@ -41,18 +41,10 @@ namespace Tests.Unit.Service.EntitiesMappings
         [Fact]
         public void Test_UpdateWith()
         {
-            // Arrange
-            var faker = new Faker();
+            // Arrange            
+            var notification = NotificationCreated();
 
-            var notification = new Notification
-            {
-                Address = faker.Random.Word(),
-            };
-
-            var viewModelEdit = new NotificationUpdateViewModel
-            {
-                Address = faker.Random.Word(),
-            };
+            var viewModelEdit = UpdateNotification();
 
             // Act
             _notificationEntityMapping.UpdateWith(notification, viewModelEdit);
@@ -67,6 +59,32 @@ namespace Tests.Unit.Service.EntitiesMappings
             .RuleFor(x => x.VehicleId, x => x.Random.Number())
             .RuleFor(x => x.VehiclePlate, x => x.Random.Word())
             .RuleFor(x => x.Registered, x => true)
+            .RuleFor(x => x.Comments, x => x.Random.Word())
+            .RuleFor(x => x.Address, x => x.Random.Word())
+            .RuleFor(x => x.NotificationAmount, x => x.Random.Number())
+            .RuleFor(x => x.Token, x => x.Random.Word())
+            .RuleFor(x => x.PayerId, x => x.Random.Word())
+            .RuleFor(x => x.TransactionId, x => x.Random.Word())
+            .RuleFor(x => x.Value, x => x.Random.Number())
+            .Generate();
+
+        private Notification NotificationCreated()
+            => new Faker<Notification>()
+            .RuleFor(x => x.GuardId, x => x.Random.Number())
+            .RuleFor(x => x.VehicleId, x => x.Random.Number())      
+            .RuleFor(x => x.Comments, x => x.Random.Word())
+            .RuleFor(x => x.Address, x => x.Random.Word())
+            .RuleFor(x => x.NotificationAmount, x => x.Random.Number())
+            .RuleFor(x => x.Token, x => x.Random.Word())
+            .RuleFor(x => x.PayerId, x => x.Random.Word())
+            .RuleFor(x => x.TransactionId, x => x.Random.Word())
+            .RuleFor(x => x.Value, x => x.Random.Number())
+            .Generate();
+
+        private NotificationUpdateViewModel UpdateNotification()
+            => new Faker<NotificationUpdateViewModel>()
+            .RuleFor(x => x.GuardId, x => x.Random.Number())
+            .RuleFor(x => x.VehicleId, x => x.Random.Number())            
             .RuleFor(x => x.Comments, x => x.Random.Word())
             .RuleFor(x => x.Address, x => x.Random.Word())
             .RuleFor(x => x.NotificationAmount, x => x.Random.Number())

@@ -20,18 +20,8 @@ namespace Tests.Unit.Service.EntitiesMappings
         [Fact]
         public void Test_RegisterWith()
         {
-            var faker = new Faker();
             // Arrange
-            var viewModel = new UserRegisterViewModel
-            {
-                Name = "Efraim Calebe",
-                Token = Guid.Empty,
-                TokenExpiredDate = DateTime.Now.AddHours(2),
-                Email = "efraim@gmail.com",
-                Password = faker.Internet.Password(),
-                Cpf = "123.456.789-10",
-                Hierarchy = UserHierarchy.Administrador,
-            };
+            var viewModel = RegisterUser(UserHierarchy.Administrador);
 
             // Act 
             var user = _userEntityMapping.RegisterWith(viewModel);
@@ -51,29 +41,14 @@ namespace Tests.Unit.Service.EntitiesMappings
         public void Test_UpdateWith()
         {
             // Arrange
-            var user = new User
-            {
-                Id = 11,
-                Name = "Marcos José",
-                Cpf = "127.451.478-72",
-                Email = "marcos-jose@gmail.com",
-                Phone = "48941456577"
-            };
+            var user = UserCreated();
 
-            var viewModelEdit = new UserUpdateViewModel
-            {
-                Id = 11,
-                Name = "João Gustavo",
-                Cpf = "121.454.122-78",
-                Email = "joao.gustavo@gmail.com",
-                Phone = "47991544963"
-            };
+            var viewModelEdit = UpdateUser();
 
             // Act
             _userEntityMapping.UpdateWith(user, viewModelEdit);
 
-            // Assert
-            user.Id.Should().Be(viewModelEdit.Id);
+            // Assert            
             user.Name.Should().Be(viewModelEdit.Name);
             user.Cpf.Should().Be(viewModelEdit.Cpf);
             user.Email.Should().Be(viewModelEdit.Email);
@@ -84,31 +59,14 @@ namespace Tests.Unit.Service.EntitiesMappings
         public void Test_UpdateWithAdministrator()
         {
             // Arrange
-            var user = new User
-            {
-                Id = 11,
-                Name = "Marcos José",
-                Cpf = "127.451.478-72",
-                Email = "marcos-jose@gmail.com",
-                Phone = "48941456577",
-                Hierarchy = UserHierarchy.Motorista
-            };
-
-            var viewModelEdit = new UserUpdateAdministratorViewModel
-            {
-                Id = 11,
-                Name = "João Gustavo",
-                Cpf = "121.454.122-78",
-                Email = "joao.gustavo@gmail.com",
-                Phone = "47991544963",
-                Hierarchy = UserHierarchy.Guarda
-            };
+            var user = UserCreated();               
+            
+            var viewModelEdit = UpdateUserAdministrator(UserHierarchy.Guarda);
 
             // Act
             _userEntityMapping.UpdateWithAdministrator(user, viewModelEdit);
 
-            // Assert
-            user.Id.Should().Be(viewModelEdit.Id);
+            // Assert          
             user.Name.Should().Be(viewModelEdit.Name);
             user.Cpf.Should().Be(viewModelEdit.Cpf);
             user.Email.Should().Be(viewModelEdit.Email);
@@ -136,5 +94,41 @@ namespace Tests.Unit.Service.EntitiesMappings
             // Assert
             user.Password.Should().Be(viewModelEdit.NewPassword.GetHash());
         }
+
+        private UserRegisterViewModel RegisterUser(UserHierarchy userHierarchy)
+            => new Faker<UserRegisterViewModel>()
+            .RuleFor(x => x.Name, f => f.Random.Word())
+            .RuleFor(x => x.Token, f => f.Random.Guid())
+            .RuleFor(x => x.TokenExpiredDate, f => DateTime.Now.AddHours(2))
+            .RuleFor(x => x.Email, f => f.Internet.Email())
+            .RuleFor(x => x.Password, f => f.Internet.Password())
+            .RuleFor(x => x.Cpf, f => f.Random.Word())
+            .RuleFor(x => x.Hierarchy, f => userHierarchy)
+            .Generate();
+
+        private User UserCreated()
+            => new Faker<User>()
+            .RuleFor(x => x.Name, f => f.Random.Word())
+            .RuleFor(x => x.Cpf, f => f.Random.Word())
+            .RuleFor(x => x.Email, f => f.Internet.Email())
+            .RuleFor(x => x.Phone, f => f.Random.Word())
+            .Generate();
+
+        private UserUpdateViewModel UpdateUser()
+            => new Faker<UserUpdateViewModel>()
+            .RuleFor(x => x.Name, f => f.Random.Word())
+            .RuleFor(x => x.Cpf, f => f.Random.Word())
+            .RuleFor(x => x.Email, f => f.Internet.Email())
+            .RuleFor(x => x.Phone, f => f.Random.Word())
+            .Generate();
+
+        private UserUpdateAdministratorViewModel UpdateUserAdministrator(UserHierarchy userHierarchy)
+            => new Faker<UserUpdateAdministratorViewModel>()          
+            .RuleFor(x => x.Name, f => f.Random.Word())
+            .RuleFor(x => x.Cpf, f => f.Random.Word())
+            .RuleFor(x => x.Email, f => f.Internet.Email())
+            .RuleFor(x => x.Phone, f => f.Random.Word())
+            .RuleFor(x => x.Hierarchy, f => userHierarchy)
+            .Generate();
     }
 }
