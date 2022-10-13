@@ -95,7 +95,7 @@
                         <a asp-area="Driver" asp-controller="User" asp-action="Update" class="dropdown-item" role="menuitem">
                             <i class="icon wb-user" aria-hidden="true"></i> Perfil
                         </a>
-                        <a asp-action="Payments" asp-controller="Payments" class="dropdown-item">
+                        <a asp-area="Driver" asp-action="Index" asp-controller="Payments" class="dropdown-item">
                             <i class="icon wb-payment"></i> Pagamentos
                         </a>
                         <a class="dropdown-item" asp-area="Public" asp-controller="Login" asp-action="Logout" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Sair</a>
@@ -153,10 +153,9 @@
                             </a>
                         </li>
                         <li class="dropdown site-menu-item has-sub">
-                            <a asp-area="Driver" asp-controller="Payments" asp-action="Payments" data-toggle="dropdown" data-dropdown-toggle="false">
+                            <a asp-area="Driver" asp-controller="Payments" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
                                 <i class="fa-regular fa-credit-card"></i>
                                 <span class="site-menu-title">Pagamentos</span>
-                                <span class="site-menu-arrow"></span>
                             </a>
                         </li>
                         <div class="dropdown-menu">

@@ -35,12 +35,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             _session = sessionAuthentication;
         }
 
-        public IActionResult Index()
-        {
-            return View("Teste");
-        }
-
-        [HttpPost("Paypal")]
+        [HttpPost]
         public async Task<JsonResult> Paypal(string id)
         {
             var IdVehicle = Convert.ToInt32(id);
