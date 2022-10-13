@@ -98,7 +98,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
 
         public IList<Notification> GetByVehicleId(int id)
         {
-            var vehicles = _vehicleService.GetAllById(id);
+            var vehicles = _vehicleService.GetByUserId(id);
 
             var notifications = new List<Notification>();
             for (int i = 0; i < vehicles.Count; i++)
@@ -111,5 +111,8 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
 
             return notifications;
         }
+
+        public bool Delete(int id) =>
+            _notificationRepository.Delete(id);
     }
 }

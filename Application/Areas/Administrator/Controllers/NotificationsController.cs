@@ -1,56 +1,67 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Entra21.CSharp.Area21.Service.Authentication;
+using Entra21.CSharp.Area21.Service.Services.Notifications;
+using Entra21.CSharp.Area21.Service.ViewModels.Notifications;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
 {
-    public class NotificationsController : Controller
+    public class NotificationController : Controller
     {
+        private readonly INotificationService _notificationService;
+        private readonly ISessionAuthentication _session;
+
+        public NotificationController(
+            INotificationService notificationService,
+            ISessionAuthentication sessionAuthentication
+            )
+        {
+            _notificationService = notificationService;
+            _session = sessionAuthentication;
+        }
+
         public IActionResult Index()
         {
             return View();
         }
 
-        //[HttpGet("update")]
-        //public IActionResult Update([FromQuery] int id)
-        //{
-        //    var vehicle = _vehicleService.GetById(id);
-        //    var vehicleType = GetVehicleType();
-        //    var user = _session.FindUserSession();
+        [HttpGet("update")]
+        public IActionResult Update([FromQuery] int id)
+        {
+            var notification = _notificationService.GetById(id);
 
-        //    var vehicleUpdateViewMode = new VehicleUpdateViewModel
-        //    {
-        //        Id = vehicle.Id,
-        //        LicensePlate = vehicle.LicensePlate,
-        //        Model = vehicle.Model,
-        //        Type = vehicle.Type
-        //    };
+            var notificationUpdateViewMode = new NotificationUpdateViewModel
+            {
+                Id = notification.Id,
+            };
 
-        //    ViewBag.VehicleType = vehicleType;
+            return View();
+        }
 
-        //    return View(vehicleUpdateViewMode);
-        //}
+        [HttpPost("update")]
+        public IActionResult Update([FromForm] NotificationUpdateViewModel notificationUpdateViewModel)
+        {
+            if (!ModelState.IsValid)
+                return View(notificationUpdateViewModel);
 
-        //[HttpPost("update")]
-        //public IActionResult Update([FromForm] VehicleUpdateViewModel vehicleUpdateViewModel)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        ViewBag.VehicleType = GetVehicleType();
+            var update = _notificationService.Update(notificationUpdateViewModel);
 
-        //        return View(vehicleUpdateViewModel);
-        //    }
+            return RedirectToAction("Index");
+        }
 
-        //    _vehicleService.Update(vehicleUpdateViewModel);
+        [HttpGet("getall")]
+        public IActionResult GetAll()
+        {
+            var notifications = _notificationService.GetAll();
 
-        //    return RedirectToAction("Index");
-        //}
+            return View("Index", notifications);
+        }
 
+        [HttpGet("delete")]
+        public IActionResult Delete([FromQuery] int id)
+        {
+            _notificationService.Delete(id);
 
-        //[HttpGet("delete")]
-        //public IActionResult Delete([FromQuery] int id)
-        //{
-        //    _vehicleService.Delete(id);
-
-        //    return RedirectToAction("Index");
-        //}
+            return RedirectToAction("Index");
+        }
     }
 }
