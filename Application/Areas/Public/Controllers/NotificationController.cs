@@ -67,7 +67,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
             string answer = string.Empty;
 
             if (notification.Token != null || notification.CreatedAt.Date > notification.CreatedAt.Date.AddDays(15))
-                return Json(new { status = status, response = answer });    
+                return Json(new { status = status, response = answer });
 
             string urlReturn = $"https://localhost:7121/Public/Notification/Approved?id={notification.Id}";
 
