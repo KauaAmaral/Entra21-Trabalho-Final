@@ -22,7 +22,7 @@ let userCleanFields = () => {
     document.getElementById('campo-phone').value = '';
     document.getElementById('campo-identification').value = '';
     document.getElementById('campo-password').value = '';
-    document.getElementById('campo-confirm-password') = '';
+    document.getElementById('campo-confirm-password').value = '';
 
     $('#campo-hierarchy').val('').trigger('change');
 }
