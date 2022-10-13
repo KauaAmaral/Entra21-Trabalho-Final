@@ -16,26 +16,15 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
     public class NotificationController : Controller
     {
         private readonly INotificationService _notificationService;
-        private readonly IVehicleService _vehicleService;
-        private readonly IPaymentService _paymentService;
         private readonly ISessionAuthentication _session;
-        private readonly IGuardService _guardService;
 
         public NotificationController(
             INotificationService notificationService,
-            IVehicleService vehicleService,
-            IGuardService guardService,
-            IPaymentService paymentService,
             ISessionAuthentication sessionAuthentication
-
             )
         {
             _notificationService = notificationService;
-            _vehicleService = vehicleService;
-            _paymentService = paymentService;
             _session = sessionAuthentication;
-            _guardService = guardService;
-
         }
 
         [HttpGet]
@@ -47,8 +36,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             return View("Index", notifications);
         }
 
-     
-
         //[HttpGet("GetByVehicleId")]
         //public IActionResult GetByVehicleId()
         //{
@@ -57,10 +44,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
         //    return Ok(notificatios);
         //}
-
-
-
-
 
 
 
