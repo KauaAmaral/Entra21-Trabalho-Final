@@ -124,7 +124,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
             var vehicles = _vehicleService.GetByUserId(user.Id);
 
-            return Ok(vehicles);//TDO Problema de rota
+            return Ok(vehicles);
         }
 
         [HttpGet("getById")]
