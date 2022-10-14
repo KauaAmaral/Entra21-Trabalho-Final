@@ -18,7 +18,6 @@ let administratorUserUpdateFillModal = (buttonUpdate) => {
         })
         .then((data) => {
             if (statusResponse === 200) {
-                debugger;
 
                 let modal = new bootstrap.Modal(document.getElementById('userUpdateModal'), {});
                 document.getElementById('campo-id').value = data.id;
@@ -30,7 +29,11 @@ let administratorUserUpdateFillModal = (buttonUpdate) => {
                 document.getElementById('campo-password').value = "";
                 document.getElementById('campo-confirm-password').value = "";
 
-                $('#campo-hierarchy').val("Administrador").change();
+                debugger;
+
+                $('campo-hierarchy')
+                    .val(data.hierarchy)
+                    .trigger('change');
 
                 modal.show();
             }
@@ -51,7 +54,6 @@ let userUpdate = (formData) => {
         })
         .then((data) => {
             if (statusResponse === 200) {
-                debugger;
                 $("#userUpdateModal .close").click();
 
                 userCleanFields();

@@ -59,7 +59,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
             return Ok(new { status = register });
         }
 
-            [HttpPost("update")]
+        [HttpPost("update")]
         public IActionResult Update([FromForm] UserUpdateAdministratorViewModel userUpdateAdministratorViewModel)
         {
             var validator = new UserUpdateAdministratorViewModelValidator();
