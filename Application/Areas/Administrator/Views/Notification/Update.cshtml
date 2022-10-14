@@ -1,0 +1,57 @@
+﻿@model NotificationUpdateViewModel
+@{
+    var vehicleType = ViewBag.VehicleType as List<string>;
+    vehicleType.Add(string.Empty);
+
+    var selectVehicleType = new SelectList(vehicleType, string.Empty);
+}
+
+<div class="page background-image vertical-align text-center">
+    <div class="page-content vertical-align-middle">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="brand">
+
+                    <h1 class="brand-text font-size-18">Atualizando Notificações</h1>
+
+                </div>
+
+                <form asp-action="updateNotification" method="POST">
+          
+                       <input type="hidden" asp-for="Registered" />
+                    <div class="form-group form-material floating" data-plugin="formMaterial">
+                        <label asp-for="VehiclePlate" class="form-label" span-required="">Placa do Veículo</label>
+                        <input asp-for="VehiclePlate" class="form-control" />
+                        <span asp-validation-for="VehiclePlate" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Type" class="form-label" span-required=""></label>
+                        <select asp-for="Type" asp-items="selectVehicleType" class="form-select">
+                        </select>
+                        <span asp-validation-for="Type" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group form-material floating" data-plugin="formMaterial">
+                        <label asp-for="Address" class="sr-only" span-required="">Endereço</label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group form-material floating" data-plugin="formMaterial">
+                        <label asp-for="Comments" class="sr-only" span-required="">Comentários</label>
+                        <input asp-for="Comments" class="form-control" />
+                        <span asp-validation-for="Comments" class="text-danger"></span>
+                    </div>
+
+                    @if (TempData["Message"] != null)
+                    {
+                        <p class="text-danger">@TempData["Message"]</p>
+                    }
+                    <button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Atualizando Notificação</button>
+                   
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

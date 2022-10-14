@@ -36,7 +36,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
             _paymentService = paymentService;
             _session = sessionAuthentication;
             _guardService = guardService;
-
         }
 
         [HttpGet]
