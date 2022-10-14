@@ -5,6 +5,8 @@ using Entra21.CSharp.Area21.Service.Services.Guards;
 using Entra21.CSharp.Area21.Service.Services.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Users.Validations;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
@@ -107,39 +109,26 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
         //    return View("User/update", userUpdateAdministratorViewModel);
         //}
 
+        //[HttpPost("register")]
+        //public IActionResult Register([FromForm] UserRegisterViewModel userRegisterViewModel)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return UnprocessableEntity(ModelState);
+        //}
+
         [HttpPost("update")]
-        public IActionResult Update([FromForm] UserUpdateAdministratorViewModel userUpdateAdministratorViewMode)
+        public IActionResult Update([FromForm] UserUpdateAdministratorViewModel userUpdateAdministratorViewModel)
         {
             var validator = new UserUpdateAdministratorViewModelValidator();
-            var result = validator.Validate(userUpdateAdministratorViewMode);
+            var result = validator.Validate(userUpdateAdministratorViewModel);
 
-            //if (!result.IsValid || !ModelState.IsValid)
-            //{
-            //    return UnprocessableEntity(ModelState);
-            //}
+            if (!result.IsValid)
+                result.AddToModelState(ModelState);
 
-            //var user = _userService.UpdateAdministrator(userUpdateAdministratorViewMode);
-
-            //if (userUpdateAdministratorViewMode.IdentificationId != null)
-            //{
-            //    var guardRegisterViewModel = new GuardRegisterViewModel
-            //    {
-            //        Cpf = user.Cpf,
-            //        IdentificationNumber = userUpdateAdministratorViewMode.IdentificationId,
-            //        UserId = user.Id
-            //    };
-
-            //    _guardService.Register(guardRegisterViewModel);
-            //}
-            //else
-            //{
-            //    var guard = _guardService.GetByUserId(user.Id);
-            //    _guardService.Delete(guard.Id);
-            //}
             if (!ModelState.IsValid)
-                return UnprocessableEntity(userUpdateAdministratorViewMode);
+                return UnprocessableEntity(ModelState);
 
-            var atualizou = _userService.Update(userUpdateAdministratorViewMode);
+            var atualizou = _userService.Update(userUpdateAdministratorViewModel);
 
             return Ok(new { status = atualizou });
         }
@@ -147,9 +136,9 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
         [HttpGet("delete")]
         public IActionResult Delete([FromQuery] int id)
         {
-           var delete = _userService.Delete(id);
+            var delete = _userService.Delete(id);
 
-            if(!delete)
+            if (!delete)
                 return NotFound();
 
             return Ok();
