@@ -1,5 +1,4 @@
-﻿debugger;
-$('table').on('click', '.vehicle-delete', (event) => {
+﻿$('table').on('click', '.vehicle-delete', (event) => {
     let element = event.target.tagName === 'I'
         ? event.target.parentElement
         : event.target;

@@ -8,9 +8,6 @@ using Entra21.CSharp.Area21.Service.ViewModels.Users.Validations;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
 
 namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
 {
