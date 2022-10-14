@@ -78,14 +78,16 @@ namespace Tests.Unit.Service.EntitiesMappings
         public void Test_UpdatePasswordWith()
         {
             // Arrange
+            var faker = new Faker();
+
             var user = new User
             {
-                Password = "ABCDE"
+                Password = faker.Internet.Password()
             };
 
             var viewModelEdit = new UserChangePasswordViewModel
             {
-                NewPassword = "ghfhfd"
+                NewPassword = faker.Internet.Password()
             };
 
             // Act

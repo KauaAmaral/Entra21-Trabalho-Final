@@ -4,6 +4,7 @@ using Entra21.CSharp.Area21.Service.EntitiesMappings.Users;
 using Entra21.CSharp.Area21.Service.Services.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Users;
 using FluentAssertions;
+using Microsoft.AspNet.Identity;
 using NSubstitute;
 using NSubstitute.ReturnsExtensions;
 using Xunit;
@@ -43,11 +44,26 @@ namespace Tests.Unit.Service.Services
         {
             // Arrange
             var viewModel = new UserRegisterViewModel
-            {
+            {                
                 Name = "Luiz Roberto",
                 Cpf = "198.445.012-45",
                 Email = "luiz-roberto@gmail.com",
+                Token = Guid.NewGuid(),
+                Password = "154d612"
             };
+
+            var user = new User()
+            {
+                Name = viewModel.Name,
+                Cpf = viewModel.Cpf,
+                Email = viewModel.Email,
+                Token = viewModel.Token,
+                Password = viewModel.Password
+            };
+
+            _userEntityMapping.RegisterWith(Arg.Is<UserRegisterViewModel>(
+                x => x.Name == viewModel.Name))
+                .Returns(user);
 
             // Act
             _userService.Insert(viewModel);
@@ -64,21 +80,27 @@ namespace Tests.Unit.Service.Services
             var viewModel = new UserUpdateViewModel
             {
                 Id = 3,
-                Name = "Luiz Roberto",
+                Name = "Foi Editado",
                 Cpf = "198.445.012-45",
                 Email = "luiz-roberto@gmail.com",
+                Phone = "47988452610"
             };
 
             var userToEdit = new User
             {
                 Id = 3,
-                Name = "Luis Roberto",
+                Name = "Para Editar",
                 Cpf = "198.445.012-44",
                 Email = "luis_roberto@gmail.com",
+                Phone = "47991206630"
             };
 
+            /*_userEntityMapping.UpdateWith(Arg.Is<User>(userToEdit), Arg.Is<UserUpdateViewModel>(
+                x => x.Name == viewModel.Name))
+                .Returns(viewModel); */             
+                              
             _userRepository.GetById(Arg.Is(viewModel.Id)).Returns(userToEdit);
-
+            
             // Act
             _userService.Update(viewModel);
 
@@ -97,6 +119,7 @@ namespace Tests.Unit.Service.Services
                 Name = "Miguel Coelho",
                 Cpf = "101.477.012-03",
                 Email = "miguelcoelho@outlook.com",
+                Phone = "47999856336"
             };
 
             _userRepository.GetById(Arg.Is(viewModel.Id)).ReturnsNull();
@@ -155,8 +178,7 @@ namespace Tests.Unit.Service.Services
 
         private bool ValidateUser(User user, UserRegisterViewModel viewModel)
         {
-            user.Name.Should().Be(viewModel.Name);
-            user.Cpf.Should().Be(viewModel.Cpf);
+            user.Name.Should().Be(viewModel.Name);           
             user.Email.Should().Be(viewModel.Email);
 
             return true;
@@ -169,6 +191,7 @@ namespace Tests.Unit.Service.Services
             user.Name.Should().Be(viewModel.Name);
             user.Cpf.Should().Be(viewModel.Cpf);
             user.Email.Should().Be(viewModel.Email);
+            user.Phone.Should().Be(viewModel.Phone);
 
             return true;
         }

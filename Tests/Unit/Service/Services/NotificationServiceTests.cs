@@ -44,6 +44,26 @@ namespace Tests.Unit.Service.Services
                 VehiclePlate = "ONS0209"
             };
 
+            var notification = new Notification()
+            {
+                Address = viewModel.Address,
+                Comments = viewModel.Comments,
+                GuardId = viewModel.GuardId,
+                NotificationAmount = viewModel.NotificationAmount,
+                PayerId = viewModel.PayerId,
+                RegisteredVehicle = viewModel.Registered,
+                Token = viewModel.Token,
+                TransactionId = viewModel.TransactionId,
+                Type = viewModel.Type,
+                Value = viewModel.Value,
+                VehicleId = viewModel.VehicleId,
+                VehicleLicensePlate = viewModel.VehiclePlate
+            };
+
+            _notificationEntityMapping.RegisterWith(Arg.Is<NotificationRegisterViewModel>(
+                x => x.Address == viewModel.Address))
+                .Returns(notification);
+
             // Act
             _notificationService.Register(viewModel);
 

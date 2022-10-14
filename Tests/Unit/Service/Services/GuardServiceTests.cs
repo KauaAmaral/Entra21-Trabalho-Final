@@ -3,7 +3,9 @@ using Entra21.CSharp.Area21.Repository.Repositories.Guards;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Guards;
 using Entra21.CSharp.Area21.Service.Services.Guards;
 using Entra21.CSharp.Area21.Service.ViewModels.Guards;
+using Entra21.CSharp.Area21.Service.ViewModels.Users;
 using FluentAssertions;
+using Microsoft.AspNet.Identity;
 using NSubstitute;
 using NSubstitute.ReturnsExtensions;
 using Xunit;
@@ -43,11 +45,20 @@ namespace Tests.Unit.Service.Services
         {
             // Arrange
             var viewModel = new GuardRegisterViewModel
-            {     
-                Cpf = "144.474.877-89",
+            {  
                 IdentificationNumber = "1234567890",
                 UserId = 2
             };
+
+            var guard = new Guard()
+            {
+                IdentificationNumber = viewModel.IdentificationNumber,
+                UserId = viewModel.UserId.Value
+            };
+
+            _guardEntityMapping.RegisterWith(Arg.Is<GuardRegisterViewModel>(
+                x => x.IdentificationNumber == viewModel.IdentificationNumber))
+                .Returns(guard);
 
             // Act            
             _guardService.Register(viewModel);

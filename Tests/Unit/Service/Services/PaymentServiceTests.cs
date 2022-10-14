@@ -37,6 +37,20 @@ namespace Tests.Unit.Service.Services
                 Value = 1.50m
             };
 
+            var payment = new Payment()
+            {
+                PayerId = viewModel.PayerId,
+                Token = viewModel.Token,
+                TransactionId = viewModel.TransactionId,
+                UserId = viewModel.UserId,
+                VehicleId = viewModel.VehicleId,
+                Value = viewModel.Value
+            };
+
+            _paymentEntityMapping.RegisterWith(Arg.Is<PaymentRegisterViewModel>(
+                x => x.PayerId == viewModel.PayerId))
+                .Returns(payment);
+
             // Act
             _paymentService.Register(viewModel);
 

@@ -52,6 +52,18 @@ namespace Tests.Unit.Service.Services
                 UserId = 5
             };
 
+            var vehicle = new Vehicle()
+            {
+                LicensePlate = viewModel.LicensePlate,
+                Model = viewModel.Model,
+                Type = viewModel.Type,
+                UserId = viewModel.UserId
+            };
+
+            _vehicleEntityMapping.RegisterWith(Arg.Is<VehicleRegisterViewModel>(
+                x => x.LicensePlate == viewModel.LicensePlate))
+                .Returns(vehicle);
+
             // Act
             _vehicleService.Register(viewModel);
 
