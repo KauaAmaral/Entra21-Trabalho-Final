@@ -15,18 +15,24 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Notifications
                 RegisteredVehicle = viewModel.Registered,
                 Comments = viewModel.Comments,
                 Address = viewModel.Address,
-                NotificationAmount = viewModel.NotificationAmount,
-                Token = viewModel.Token,
-                PayerId = viewModel.PayerId,
-                TransactionId = viewModel.TransactionId,
-                Value = viewModel.Value,
-                CreatedAt = DateTime.Now
+                Value = (decimal)viewModel.Value,
+                Type = viewModel.Type
             };
 
         public Notification UpdateWith(Notification notification, NotificationUpdateViewModel viewModel)
         {
-            notification.Address = viewModel.Address;
+            notification.NotificationAmount = (int)viewModel.NotificationAmount;
             notification.UpdatedAt = DateTime.Now; 
+
+            return notification;
+        }
+
+        public Notification UpdateWithPayment(Notification notification, NotificationUpdateViewModel viewModel)
+        {
+            notification.PayerId = viewModel.PayerId;
+            notification.TransactionId = viewModel.TransactionId;
+            notification.Token = viewModel.Token;
+            notification.Status = false;
 
             return notification;
         }

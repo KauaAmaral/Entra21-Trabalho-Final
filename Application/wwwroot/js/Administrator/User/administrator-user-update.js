@@ -6,9 +6,6 @@
     administratorUserUpdateFillModal(element);
 });
 
-// Limpar os campos quando a modal for fechada
-document.getElementById('userUpdateModal').addEventListener('hide.bs.modal', () => userClearFields());
-
 let administratorUserUpdateFillModal = (buttonUpdate) => {
     let id = buttonUpdate.getAttribute('data-id');
     let statusResponse = 0;
@@ -21,8 +18,9 @@ let administratorUserUpdateFillModal = (buttonUpdate) => {
         })
         .then((data) => {
             if (statusResponse === 200) {
-                let modal = new bootstrap.Modal(document.getElementById('userUpdateModal'), {});
+                debugger;
 
+                let modal = new bootstrap.Modal(document.getElementById('userUpdateModal'), {});
                 document.getElementById('campo-id').value = data.id;
                 document.getElementById('campo-email').value = data.email;
                 document.getElementById('campo-name').value = data.name;
@@ -32,10 +30,7 @@ let administratorUserUpdateFillModal = (buttonUpdate) => {
                 document.getElementById('campo-password').value = "";
                 document.getElementById('campo-confirm-password').value = "";
 
-                $('#campo-hierarchy')
-                    .append(new Option(data.hierarchy, false, false))
-                    .val(data.hierarchy)
-                    .trigger('change');
+                $('#campo-hierarchy').val("Administrador").change();
 
                 modal.show();
             }
@@ -56,27 +51,23 @@ let userUpdate = (formData) => {
         })
         .then((data) => {
             if (statusResponse === 200) {
-                let modal = new bootstrap.Modal(document.getElementById('userUpdateModal'), {});
-
-                modal.hide();
+                debugger;
+                $("#userUpdateModal .close").click();
 
                 userCleanFields();
 
                 $('#table-user-adm').DataTable().ajax.reload();
 
-                toastr.success('Usuario alterado com sucesso');
+                toastr.success('Usuário alterado com sucesso');
 
                 return;
             }
 
-            //showNotificationErrorsOfValidation(data);
+            showNotificationErrorsOfValidation(data);
         })
-        //.catch((error) => {
-        //    console.error(error);
+        .catch((error) => {
+            console.error(error);
 
-        //    toastr.error('Não foi possível alterar o usuario');
-        //});
+            toastr.error('Não foi possível alterar o usuario');
+        });
 };
-
-document.getElementById("button-update-user")
-    .addEventListener("click", userUpdate);

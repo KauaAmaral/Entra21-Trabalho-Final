@@ -1,62 +1,75 @@
-﻿using Entra21.CSharp.Area21.Application.Filters;
-using Entra21.CSharp.Area21.Application.Models.PaypalOrder;
+﻿using Entra21.CSharp.Area21.Application.Models.PaypalOrder;
 using Entra21.CSharp.Area21.Application.Models.PaypalTransaction;
-using Entra21.CSharp.Area21.Service.Authentication;
-using Entra21.CSharp.Area21.Service.Services.Payments;
-using Entra21.CSharp.Area21.Service.Services.Vehicles;
-using Entra21.CSharp.Area21.Service.ViewModels.Payments;
+using Entra21.CSharp.Area21.Service.Services.Notifications;
+using Entra21.CSharp.Area21.Service.ViewModels.Notifications;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
 
-namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
+namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
 {
-    [Area("Driver")]
-    [IsUserLogged]
-    [Route("driver/paypal")]
-    public class PaypalController : Controller
+    [Area("Public")]
+    [Route("Public/Notification")]
+    public class NotificationController : Controller
     {
-        private readonly IVehicleService _vehicleService;
-        private readonly IPaymentService _paymentService;
-        private readonly ISessionAuthentication _session;
+        private readonly INotificationService _notificationService;
 
         private readonly string _userName = "AeHh1KwTDiCTJlkmPVoWT5qj9YMp0dwnhAStwYVE7VZiaPN2jfJjMm7UJ6B9TMXFkVqFNkmpzpfinpJR";
         private readonly string _passwd = "EHqhokF9mvWolaWgw04hay43lNAuCcLNHZ8XBpmm0cLSYUxdAYnbBI6dhiaCXtI54qJJ-EF3VS0IMGfx";
         private readonly string _url = "https://api-m.sandbox.paypal.com";
         private readonly string _urlCancel = "https://localhost:7121/driver/Home";
 
-        public PaypalController(
-            IVehicleService vehicleService,
-            IPaymentService paymentService,
-            ISessionAuthentication sessionAuthentication)
+        public NotificationController(
+            INotificationService notificationService
+            )
         {
-            _vehicleService = vehicleService;
-            _paymentService = paymentService;
-            _session = sessionAuthentication;
+            _notificationService = notificationService;
         }
 
-        [HttpPost]
+        [HttpGet]
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet("Check")]
+        public IActionResult Check([FromQuery] int id)
+        {
+            var notification = _notificationService.GetById(id);
+
+            if (notification == null)
+                return RedirectToAction("Home");
+
+            var notificationCheckoutViewModal = new NotificationCheckoutViewModel
+            {
+                Id = notification.Id,
+                VehiclePlate = notification.VehicleLicensePlate,
+                Status = notification.Status,
+                Value = notification.Value,
+                Address = notification.Address,
+                CreatedAt = notification.CreatedAt,
+                UpdatedAt = notification.UpdatedAt
+            };
+
+            return View("notification/check", notificationCheckoutViewModal);
+        }
+
+        [HttpPost("Paypal")]
         public async Task<JsonResult> Paypal(string id)
         {
-            var IdVehicle = Convert.ToInt32(id);
+            var idNotificaton = Convert.ToInt32(id);
 
-            string price;
-
-            var vehicle = _vehicleService.GetById(IdVehicle);
-            var product = vehicle.LicensePlate;
-
-            var idUser = vehicle.UserId;
-
-            if (vehicle.Type == 0)
-                price = "1.50";
-            else
-                price = "0.75";
+            var notification = _notificationService.GetById(idNotificaton);
 
             bool status = false;
             string answer = string.Empty;
 
-            string _urlReturn = $"https://localhost:7121/driver/Paypal/Approved?idVehicle={IdVehicle}&IdUser={idUser}";
+            if (notification.Token != null || notification.CreatedAt.Date > notification.CreatedAt.Date.AddDays(15))
+                return Json(new { status = status, response = answer });
+
+            string urlReturn = $"https://localhost:7121/Public/Notification/Approved?id={notification.Id}";
 
             using (var client = new HttpClient())
             {
@@ -74,9 +87,9 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
                             amount = new Models.PaypalOrder.Amount() {
                                 currency_code = "BRL",
-                                value = price
+                                value = (notification.Value).ToString().Replace(",",".")
                             },
-                            description = product
+                            description = notification.VehicleLicensePlate
                         }
                     },
                     application_context = new ApplicationContext()
@@ -84,7 +97,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
                         brand_name = "Area21",
                         landing_page = "NO_PREFERENCE",
                         user_action = "PAY_NOW",
-                        return_url = _urlReturn,
+                        return_url = urlReturn,
                         cancel_url = _urlCancel
                     }
                 };
@@ -106,7 +119,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         }
 
         [HttpGet("approved")]
-        public async Task<IActionResult> Approved([FromQuery] int idVehicle, int idUser, string token, string PayerID)
+        public async Task<IActionResult> Approved([FromQuery] int id, string token, string PayerID)//TUDO REFATORAR
         {
             var status = false;
 
@@ -132,20 +145,20 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
                     ViewData["IdTransaccion"] = objeto.purchase_units[0].payments.captures[0].id;
 
-                    var viewModel = new PaymentRegisterViewModel
+                    var notification = _notificationService.GetById(id);
+
+                    var viewModel = new NotificationUpdateViewModel
                     {
-                        VehicleId = idVehicle,
-                        UserId = idUser,
+                        Id = id,
                         Token = token,
                         PayerId = PayerID,
                         TransactionId = objeto.purchase_units[0].payments.captures[0].id,
-                        Value = Convert.ToDecimal(objeto.purchase_units[0].payments.captures[0].amount.value.Replace(".", ","))
                     };
 
-                    _paymentService.Register(viewModel);
+                    _notificationService.Update(viewModel);
                 }
             }
-            return View();
+            return Ok();
         }
 
         [HttpPost("Approved")]
