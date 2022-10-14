@@ -26,7 +26,7 @@ let driverUpdateVehicle = (buttonUpdate) => {
                 //document.getElementById('cadastroPetModalLabel').innerText = `Editar PET: ${data.nome}`
                 document.getElementById('campo-licensePlate-update').value = data.licensePlate;
                 document.getElementById('campo-model-update').value = data.model;
-                document.getElementById('campo-type-update').value = data.type;
+                document.getElementById('campo-type-update').valeu = data.type;
 
                 modal.show();
             }
