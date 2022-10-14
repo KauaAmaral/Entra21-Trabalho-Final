@@ -64,11 +64,10 @@ let userRegister = (formData) => {
         })
         .then((data) => {
             if (statusResponse === 200) {
-                let modal = new bootstrap.Modal(document.getElementById('userUpdateModal'), {});
+                debugger;
+                $("#userUpdateModal .close").click();
 
-                modal.hide();
-
-                userClearFields();
+                userCleanFields();
 
                 $('#table-user-adm').DataTable().ajax.reload();
 
