@@ -7,6 +7,7 @@
     dados.append("licensePlate", licensePlate);
     dados.append("model", model);
     dados.append("type", type);
+
     console.log(dados);
 
     fetch('/driver/vehicle/register', {
@@ -14,21 +15,29 @@
         body: dados
     })
         .then((data) => {
+            
             console.log(data);
 
-            toastr.success("Consulta agendada com sucesso");
+            toastr.success("Veículo cadastrado com sucesso");
 
-            $('#vehicles-id').DataTable().ajax.reload();
+            $('#table-vehicle-driver').DataTable().ajax.reload();
 
-            bootstrap.Modal.getInstance(
-                document.getElementById('modalRegisterVehicle')).hide();//exampleModal id da modal do bootstrap
+            clearFieldsvehicle();
+
+            $("#modalRegisterVehicle .btn-close").click();
         })
         .catch((error) => {
-            toastr.error("Não foi possivel agendar a consulta");
-
             console.log(error);
+
+            toastr.error("Não foi possivel cadastrar o veículo");
         });
 }
 
 document.getElementById("button-register-vehicle")
     .addEventListener("click", registerVehicle);
+
+let clearFieldsvehicle = () => {
+    document.getElementById("campo-license-plate").value = '';
+    document.getElementById("campo-model").value = '';
+    $('#campo-type').val('').trigger('change');
+}
