@@ -11,7 +11,24 @@
     columns: [
         { data: 'licensePlate' },
         { data: 'model' },
-        { data: 'type' },
+        {
+            data: null,
+            render: function (data, tipo, vehicle) {
+                let cor = '';
+                let type = '';
+
+                if (vehicle.type === 0) {
+                    type = "Carro";
+                    cor = "success";
+                }
+                else if (vehicle.type === 1) {
+                    type = "Moto";
+                    cor = "info";
+                }
+
+                return `<span class="badge bg-${cor}">${type}</span>`;
+            }
+        },
         {
             data: null,
             width: '20%',
