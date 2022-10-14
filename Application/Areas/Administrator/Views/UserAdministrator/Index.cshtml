@@ -1,6 +1,7 @@
 ﻿<div class="container">
     <div class="row">
         <div class="col-lg-12">
+            <button class="btn btn-primary mb-2" id="button-register" data-toggle="modal" data-target="#userUpdateModal">Cadastrar <i class="fa fa-plus"></i></button>
             <table class="table table-bordered table-striped display nowrap" cellspacing="0" width="100%" id="table-user-adm">
                 <thead>
                     <tr>
@@ -22,6 +23,7 @@
     <script src="~/js/Administrator/User/administrator-user-update.js"></script>
     <script src="~/js/Administrator/User/administrator-user-select2.js"></script>
     <script src="~/js/Administrator/User/administrator-user-register.js"></script>
+    <script src="~/js/Administrator/User/administrator-user-delete.js"></script>
     <script>
         $(document).ready(function () {
             let value = $("#campo-hierarchy").val();

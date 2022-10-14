@@ -1,7 +1,5 @@
-﻿document.getElementById('button-save-user')
-    .addEventListener('click', () => UserHandleRegisterButton());
-
-let UserHandleRegisterButton = () => {
+﻿let UserHandleRegisterButton = () => {
+    debugger;
     let id = document.getElementById('campo-id').value;
     let formData = UserGetFormData();
 
@@ -14,6 +12,9 @@ let UserHandleRegisterButton = () => {
 
     userUpdate(formData);
 }
+
+document.getElementById('button-persist-user')
+    .addEventListener('click', () => UserHandleRegisterButton());
 
 let userCleanFields = () => {
     document.getElementById('campo-email').value = '';
@@ -43,7 +44,7 @@ let UserGetFormData = () => {
     formData.append('cpf', cpf);
     formData.append('phone', phone);
     formData.append('hierarchyId', hierarchyId);
-    formData.append('identification', identification);
+    formData.append('identificationId', identification);
     formData.append('password', password);
     formData.append('confirmPassword', confirmPassword);
 
@@ -71,7 +72,7 @@ let userRegister = (formData) => {
 
                 $('#table-user-adm').DataTable().ajax.reload();
 
-                toastr.success('PET cadastrado com sucesso');
+                toastr.success('Usuário cadastrado com sucesso');
 
                 return;
             }
@@ -81,6 +82,6 @@ let userRegister = (formData) => {
         .catch((error) => {
             console.error(error);
 
-            toastr.error('Não foi possível cadastrar o PET');
+            toastr.error('Não foi possível cadastrar o usuário');
         });
 }
