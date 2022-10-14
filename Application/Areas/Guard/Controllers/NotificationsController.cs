@@ -1,8 +1,10 @@
 ﻿using Entra21.CSharp.Area21.Application.Filters;
 using Entra21.CSharp.Area21.Repository.Enums;
+using Entra21.CSharp.Area21.Service.Authentication;
+using Entra21.CSharp.Area21.Service.Services.Guards;
 using Entra21.CSharp.Area21.Service.Services.Notifications;
-using Entra21.CSharp.Area21.Service.Services.Vehicles;
 using Entra21.CSharp.Area21.Service.Services.Payments;
+using Entra21.CSharp.Area21.Service.Services.Vehicles;
 using Entra21.CSharp.Area21.Service.ViewModels.Notifications;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,32 +13,38 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
     [IsUserLogged]
     [IsGuard]
     [Area("Guard")]
-    [Route("/Guard/Notifications/")]
-    public class NotificationsGuardController : Controller
+    [Route("/Guard/Notification/")]
+    public class NotificationController : Controller
     {
         private readonly INotificationService _notificationService;
         private readonly IVehicleService _vehicleService;
         private readonly IPaymentService _paymentService;
+        private readonly ISessionAuthentication _session;
+        private readonly IGuardService _guardService;
 
-        public NotificationsGuardController(
+        public NotificationController(
             INotificationService notificationService,
             IVehicleService vehicleService,
-            IPaymentService paymentService
+            IGuardService guardService,
+            IPaymentService paymentService,
+            ISessionAuthentication sessionAuthentication
+
             )
         {
             _notificationService = notificationService;
             _vehicleService = vehicleService;
             _paymentService = paymentService;
+            _session = sessionAuthentication;
+            _guardService = guardService;
         }
 
-        [HttpGet("")]
+        [HttpGet]
         public IActionResult Index()
         {
             var notifications = _notificationService.GetAll();
 
-            return View("Notifications/Index", notifications);
+            return View("Index", notifications);
         }
-
 
         [HttpPost("update")]
         public IActionResult Update([FromBody] NotificationUpdateViewModel notificationUpdateViewModel)
@@ -90,7 +98,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
                     ViewBag.VehicleType = vehicleType;
                 }
 
-                return View("Notifications/Register", notificationRegisterViewModel);
+                return View("Register", notificationRegisterViewModel);
             }
             else
             {
@@ -101,34 +109,35 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
         [HttpPost("registerNotification")]
         public IActionResult RegisterNotification([FromForm] NotificationRegisterViewModel notificationRegisterViewModel)
         {
-            var NotificationText = "";
+            var user = _session.FindUserSession();
+
+            if (user != null)
+                notificationRegisterViewModel.GuardId = _guardService.GetByUserId(user.Id).Id;
+            else
+                return RedirectToAction("Index", "Home");
+
             var vehicle = _vehicleService.GetByVehiclePlate(notificationRegisterViewModel.VehiclePlate);
 
-            if (vehicle == null)
+            if (vehicle != null)
             {
-                notificationRegisterViewModel.VehicleId = 0;
-                return View(nameof(Register));
+                notificationRegisterViewModel.VehicleId = vehicle.Id;
             }
-
-            notificationRegisterViewModel.VehicleId = vehicle.Id;
 
             if (!ModelState.IsValid)
             {
                 ViewBag.VehicleType = GetVehicleType();
-
                 return View(notificationRegisterViewModel);
             }
 
-            _notificationService.Register(notificationRegisterViewModel);
+            _notificationService.SetNotification(notificationRegisterViewModel);
 
-            return RedirectToAction("Index");
-
+            return RedirectToAction("Checkout");
         }
 
         [HttpGet("checkout")]
         public IActionResult Checkout()
         {
-            return View("Notifications/Checkout");
+            return View("Checkout");
         }
 
         private List<string> GetVehicleType()
