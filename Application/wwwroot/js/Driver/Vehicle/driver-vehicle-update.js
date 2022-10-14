@@ -23,7 +23,7 @@ let driverUpdateVehicle = (buttonUpdate) => {
             if (statusResponse === 200) {
                 let modal = new bootstrap.Modal(document.getElementById('vehicleUpdateModal'), {});
 
-                //document.getElementById('cadastroPetModalLabel').innerText = `Editar PET: ${data.nome}`
+                //document.getElementById('campo-model-update').innerText = `Editar veículo: ${data.model}`
                 document.getElementById('campo-licensePlate-update').value = data.licensePlate;
                 document.getElementById('campo-model-update').value = data.model;
                 document.getElementById('campo-type-update').valeu = data.type;
@@ -57,6 +57,8 @@ let vehicleUpdate = (formData) => {
 
                 toastr.success('Vehicle alterado com sucesso');
 
+                $("#vehicleUpdateModal .btn-close-update").click();
+
                 return;
             }
 
@@ -70,4 +72,4 @@ let vehicleUpdate = (formData) => {
 };
 
 document.getElementById("button-update-vehicle")
-    .addEventListener("click", vehicleUpdate);
+    .addEventListener("click", driverUpdateVehicle);
