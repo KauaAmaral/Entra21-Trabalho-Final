@@ -9,6 +9,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="FluentValidation" Version="11.2.2" />
+		<PackageReference Include="iTextSharp" Version="5.5.13.3" />
 		<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="2.2.0" />
