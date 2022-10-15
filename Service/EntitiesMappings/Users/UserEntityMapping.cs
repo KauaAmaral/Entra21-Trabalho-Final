@@ -50,7 +50,7 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Users
             user.Cpf = viewModel.Cpf;
             user.Phone = viewModel.Phone;
             user.UpdatedAt = DateTime.Now;
-            user.Hierarchy = viewModel.Hierarchy;
+            user.Hierarchy = viewModel.HierarchyId;
 
             if (viewModel.Password != null)
                 user.Password = viewModel.Password.GetHash();

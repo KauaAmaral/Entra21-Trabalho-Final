@@ -44,6 +44,7 @@
     <link rel="stylesheet" href="~/Theme/global/fonts/web-icons/web-icons.min.css">
     <link rel="stylesheet" href="~/Theme/global/fonts/brand-icons/brand-icons.min.css">
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
 
     <!--[if lt IE 9]>
     <script src="~/Theme/global/vendor/html5shiv/html5shiv.min.js"></script>
@@ -72,7 +73,7 @@
                 <span class="sr-only">Toggle navigation</span>
                 <span class="hamburger-bar"></span>
             </button>
-            <a class="navbar-brand navbar-brand-center" href="index.html">
+            <a class="navbar-brand navbar-brand-center" href="Index.html">
                 <img class="navbar-brand-logo navbar-brand-logo" src="~/Theme/global/portraits/Logo Maior.png">
             </a>
         </div>
@@ -93,7 +94,7 @@
                         <a asp-area="Driver" asp-controller="User" asp-action="Update" class="dropdown-item" role="menuitem">
                             <i class="icon wb-user" aria-hidden="true"></i> Perfil
                         </a>
-                        <a asp-action="Payments" asp-controller="Payments" class="dropdown-item">
+                        <a asp-area="Driver" asp-action="Index" asp-controller="Payments" class="dropdown-item">
                             <i class="icon wb-payment"></i> Pagamentos
                         </a>
                         <a class="dropdown-item" asp-area="Public" asp-controller="Login" asp-action="Logout" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Sair</a>
@@ -151,10 +152,9 @@
                             </a>
                         </li>
                         <li class="dropdown site-menu-item has-sub">
-                            <a asp-area="Driver" asp-controller="Payments" asp-action="Payments" data-toggle="dropdown" data-dropdown-toggle="false">
+                            <a asp-area="Driver" asp-controller="Payments" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
                                 <i class="fa-regular fa-credit-card"></i>
                                 <span class="site-menu-title">Pagamentos</span>
-                                <span class="site-menu-arrow"></span>
                             </a>
                         </li>
                         <div class="dropdown-menu">
@@ -178,7 +178,7 @@
                             </div>
                         </div>
                         <li class="dropdown site-menu-item has-sub">
-                            <a data-toggle="dropdown" href="notification/checkout" data-dropdown-toggle="false">
+                            <a asp-area="Driver" asp-controller="Notification" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
                                 <i class="site-menu-icon wb-layout" aria-hidden="true"></i>
                                 <span class="site-menu-title">Notificações</span>
                             </a>
@@ -252,6 +252,13 @@
     <script src="~/Theme/global/js/Plugin/asscrollable.js"></script>
 
     <script src="~/Theme/assets/examples/js/dashboard/team.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="~/js/toastr-configure.js" asp-append-version="true"></script>
+    <script src="~/js/shared/notification-error.js" asp-append-version="true"></script>
 
     <!-- DataTable -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>

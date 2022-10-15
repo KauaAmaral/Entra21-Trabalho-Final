@@ -11,10 +11,11 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
             builder.ToTable("notification");
 
             builder.HasKey(x => x.Id);
-         
+
             builder.Property(x => x.Status)
                 .IsRequired()
-              .HasColumnType("BIT");
+                .HasColumnType("BIT")
+                .HasDefaultValue(true);
 
             builder.Property(x => x.CreatedAt)
                 .HasColumnName("created_at")
@@ -52,7 +53,6 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
             builder.Property(x => x.Comments)
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(100)
-                .IsRequired()
                 .HasColumnName("comments");
             //Vehicle
             builder.Property(x => x.VehicleLicensePlate)
@@ -63,7 +63,6 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
 
             builder.Property(x => x.RegisteredVehicle)
                 .HasColumnType("BIT")
-                .HasDefaultValue(false)
                 .HasColumnName("register_vehicle");
 
             builder.Property(x => x.Type)

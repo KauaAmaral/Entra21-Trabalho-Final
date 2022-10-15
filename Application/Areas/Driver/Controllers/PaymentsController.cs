@@ -8,7 +8,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 {
     [Area("Driver")]
     [IsUserLogged]
-    [Route("driver/pagamentos")]
+    [Route("driver/payments")]
     public class PaymentsController : Controller
     {
         private readonly IPaymentService _paymentService;
@@ -25,13 +25,23 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             _vehicleService = vehicleService;
         }
 
-        public IActionResult Payments()
+        [HttpGet]
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet("getall")]
+        public IActionResult GetAll()
         {
             var user = _session.FindUserSession();
 
-            var vehicle = _vehicleService.GetAllById(user.Id);
+            if (user == null)
+                return RedirectToAction("Index", "Home");
 
-            return View("Payments", vehicle);
+            var payments = _vehicleService.GetByUserId(user.Id);
+
+            return Ok(payments);
         }
     }
 }
