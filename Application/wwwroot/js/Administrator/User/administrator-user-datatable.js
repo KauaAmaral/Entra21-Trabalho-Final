@@ -16,18 +16,16 @@
             render: function (data, type, user) {
                 let cor = '';
                 let hierarchy = '';
-                if (user.hierarchy === 0)
-                {
+
+                if (user.hierarchy === 0) {
                     hierarchy = "Administrador";
                     cor = "danger";
                 }
-                else if (user.hierarchy === 1)
-                {
+                else if (user.hierarchy === 1) {
                     hierarchy = "Guarda";
                     cor = "primary";
                 }
-                else if (user.hierarchy === 2)
-                {
+                else if (user.hierarchy === 2) {
                     hierarchy = "Motorista";
                     cor = "success";
                 }

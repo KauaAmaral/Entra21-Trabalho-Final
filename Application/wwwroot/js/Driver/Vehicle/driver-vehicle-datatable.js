@@ -1,4 +1,5 @@
 ﻿$('#table-vehicle-driver').DataTable({
+    responsive: true,
     language: {
         url: 'https://raw.githubusercontent.com/DataTables/Plugins/master/i18n/pt-BR.json'
     },
@@ -9,8 +10,25 @@
     processing: true,
     columns: [
         { data: 'licensePlate' },
+        {
+            data: null,
+            render: function (data, tipo, vehicle) {
+                let cor = '';
+                let type = '';
+
+                if (vehicle.type === 0) {
+                    type = "Carro";
+                    cor = "success";
+                }
+                else if (vehicle.type === 1) {
+                    type = "Moto";
+                    cor = "info";
+                }
+
+                return `<span class="badge bg-${cor}">${type}</span>`;
+            }
+        },
         { data: 'model' },
-        { data: 'type' },
         {
             data: null,
             width: '20%',

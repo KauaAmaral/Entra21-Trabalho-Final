@@ -7,5 +7,6 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Notifications
     {
         Notification RegisterWith(NotificationRegisterViewModel viewModel);
         Notification UpdateWith(Notification notification, NotificationUpdateViewModel viewModel);
+        Notification UpdateWithPayment(Notification notification, NotificationUpdateViewModel viewModel);
     }
 }
