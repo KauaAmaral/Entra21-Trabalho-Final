@@ -13,7 +13,7 @@ let driverUpdateVehicle = (buttonUpdate) => {
     let id = buttonUpdate.getAttribute('data-id');
     let statusResponse = 0;
 
-    fetch(`/driver/vehicle/getById?id=${id}`)
+    fetch(`/driver/vehicle/GetViewModelById?id=${id}`)
         .then((response) => {
             statusResponse = response.status;
 
@@ -23,11 +23,13 @@ let driverUpdateVehicle = (buttonUpdate) => {
             if (statusResponse === 200) {
                 let modal = new bootstrap.Modal(document.getElementById('vehicleUpdateModal'), {});
 
-                //document.getElementById('campo-model-update').innerText = `Editar veículo: ${data.model}`
                 document.getElementById('campo-licensePlate-update').value = data.licensePlate;
                 document.getElementById('campo-model-update').value = data.model;
-                document.getElementById('campo-type-update').valeu = data.type;
-
+                $('#campo-type-update')
+                    .append(new Option(data.typeName, data.type, false, false))
+                    .val(data.type)
+                    .trigger('change'); 
+                
                 modal.show();
             }
         })
