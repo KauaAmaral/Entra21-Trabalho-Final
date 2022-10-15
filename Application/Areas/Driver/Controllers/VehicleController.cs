@@ -56,25 +56,21 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             return Ok(vehicle);
         }
 
-        //[HttpGet("update")]
-        //public IActionResult Update([FromQuery] int id)
-        //{
-        //    var vehicle = _vehicleService.GetById(id);
-        //    var vehicleType = GetVehicleType();
-        //    var user = _session.FindUserSession();
+        [HttpGet("update")]
+        public IActionResult Update([FromQuery] int id)
+        {
+            var vehicle = _vehicleService.GetById(id);
 
-        //    var vehicleUpdateViewMode = new VehicleUpdateViewModel
-        //    {
-        //        Id = vehicle.Id,
-        //        LicensePlate = vehicle.LicensePlate,
-        //        Model = vehicle.Model,
-        //        Type = vehicle.Type
-        //    };
+            var vehicleUpdateViewMode = new VehicleUpdateViewModel
+            {
+                Id = vehicle.Id,
+                LicensePlate = vehicle.LicensePlate,
+                Model = vehicle.Model,
+                Type = vehicle.Type
+            };
 
-        //    ViewBag.VehicleType = vehicleType;
-
-        //    return View(vehicleUpdateViewMode);
-        //}
+            return Ok(vehicleUpdateViewMode);
+        }
 
         [HttpPost("update")]
         public IActionResult Update([FromForm] VehicleUpdateViewModel vehicleUpdateViewModel)
@@ -82,12 +78,12 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             if (!ModelState.IsValid)
                 return UnprocessableEntity(ModelState);
 
-            //    ViewBag.VehicleType = GetVehicleType();
+            ViewBag.VehicleType = GetVehicleType();
 
-            //    return View(vehicleUpdateViewModel);
-            //}
+            return View(vehicleUpdateViewModel);
 
-            //_vehicleService.Update(vehicleUpdateViewModel);
+
+            _vehicleService.Update(vehicleUpdateViewModel);
 
             //return RedirectToAction("Index");
 
@@ -157,6 +153,14 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
                 .ToList();
 
             return Ok(type);
+        }
+
+
+        [HttpGet("GetViewModelById")]
+        public IActionResult GetViewModelById([FromQuery] int id)
+        {
+            var viewModel = _vehicleService.GetViewModelById(id);
+            return Ok(viewModel);
         }
     }
 }
