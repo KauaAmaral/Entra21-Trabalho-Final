@@ -3,9 +3,7 @@ using Entra21.CSharp.Area21.Repository.Repositories.Guards;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Guards;
 using Entra21.CSharp.Area21.Service.Services.Guards;
 using Entra21.CSharp.Area21.Service.ViewModels.Guards;
-using Entra21.CSharp.Area21.Service.ViewModels.Users;
 using FluentAssertions;
-using Microsoft.AspNet.Identity;
 using NSubstitute;
 using NSubstitute.ReturnsExtensions;
 using Xunit;
@@ -86,6 +84,11 @@ namespace Tests.Unit.Service.Services
                 UserId = 9
             };
 
+            _guardEntityMapping.UpdateWith(
+                Arg.Is<Guard>(x => x.IdentificationNumber == guardToEdit.IdentificationNumber),
+                Arg.Is<GuardUpdateViewModel>(x => x.IdentificationNumber == viewModel.IdentificationNumber))
+                .Returns(guardToEdit);
+
             _guardRepository.GetById(Arg.Is(viewModel.Id)).Returns(guardToEdit);
 
             // Act
@@ -93,7 +96,7 @@ namespace Tests.Unit.Service.Services
 
             // Assert
             _guardRepository.Received(1).Update(Arg.Is<Guard>(guard =>
-                ValidateGuardWithGuardUpdateViewModel(guard,viewModel)));
+                ValidateGuardWithGuardUpdateViewModel(guard, guardToEdit)));
         }
 
         [Fact]
@@ -166,11 +169,11 @@ namespace Tests.Unit.Service.Services
         }
 
         private bool ValidateGuardWithGuardUpdateViewModel(
-            Guard guard, GuardUpdateViewModel viewModel)
+            Guard guard, Guard guardExpected)
         {
-            guard.Id.Should().Be(viewModel.Id);
-            guard.IdentificationNumber.Should().Be(viewModel.IdentificationNumber);
-            guard.UserId.Should().Be(viewModel.UserId);
+            guard.Id.Should().Be(guardExpected.Id);
+            guard.IdentificationNumber.Should().Be(guardExpected.IdentificationNumber);
+            guard.UserId.Should().Be(guardExpected.UserId);
 
             return true;
         }

@@ -3,7 +3,6 @@ using Entra21.CSharp.Area21.Repository.Enums;
 using Entra21.CSharp.Area21.Repository.Repositories.Vehicles;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Vehicles;
 using Entra21.CSharp.Area21.Service.Services.Vehicles;
-using Entra21.CSharp.Area21.Service.ViewModels.Guards;
 using Entra21.CSharp.Area21.Service.ViewModels.Vehicles;
 using FluentAssertions;
 using NSubstitute;
@@ -94,6 +93,11 @@ namespace Tests.Unit.Service.Services
                 UserId = 7
             };
 
+            _vehicleEntityMapping.UpdateWith(
+                Arg.Is<Vehicle>(x => x.LicensePlate == vehicleToEdit.LicensePlate),
+                Arg.Is<VehicleUpdateViewModel>(x => x.LicensePlate == viewModel.LicensePlate))
+                .Returns(vehicleToEdit);
+
             _vehicleRepository.GetById(Arg.Is(viewModel.Id)).Returns(vehicleToEdit);
 
             // Act
@@ -101,7 +105,7 @@ namespace Tests.Unit.Service.Services
 
             // Assert
             _vehicleRepository.Received(1).Update(Arg.Is<Vehicle>(vehicle =>
-                ValidateVehicleWithVehicleUpdateViewModel(vehicle, viewModel)));
+                ValidateVehicleWithVehicleUpdateViewModel(vehicle, vehicleToEdit)));
         }
 
         [Fact]
@@ -184,13 +188,13 @@ namespace Tests.Unit.Service.Services
         }
 
         private bool ValidateVehicleWithVehicleUpdateViewModel(
-            Vehicle vehicle, VehicleUpdateViewModel viewModel)
+            Vehicle vehicle, Vehicle vehicleExpected)
         {
-            vehicle.Id.Should().Be(viewModel.Id);
-            vehicle.LicensePlate.Should().Be(viewModel.LicensePlate);
-            vehicle.Model.Should().Be(viewModel.Model);
-            vehicle.Type.Should().Be(viewModel.Type);
-            vehicle.UserId.Should().Be(viewModel.UserId);
+            vehicle.Id.Should().Be(vehicleExpected.Id);
+            vehicle.LicensePlate.Should().Be(vehicleExpected.LicensePlate);
+            vehicle.Model.Should().Be(vehicleExpected.Model);
+            vehicle.Type.Should().Be(vehicleExpected.Type);
+            vehicle.UserId.Should().Be(vehicleExpected.UserId);
 
             return true;
         }

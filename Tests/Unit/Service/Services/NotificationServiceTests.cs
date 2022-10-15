@@ -106,6 +106,11 @@ namespace Tests.Unit.Service.Services
                 VehicleId = 26,
             };
 
+            _notificationEntityMapping.UpdateWith(
+                Arg.Is<Notification>(x => x.Address == notificationToEdit.Address),
+                Arg.Is<NotificationUpdateViewModel>(x => x.Address == viewModel.Address))
+                .Returns(notificationToEdit);
+
             _notificationRepository.GetById(Arg.Is(viewModel.Id)).Returns(notificationToEdit);
 
             // Act
@@ -113,7 +118,7 @@ namespace Tests.Unit.Service.Services
 
             // Assert
             _notificationRepository.Received(1).Update(Arg.Is<Notification>(notification =>
-                ValidateNotificationWithNotificationUpdateViewModel(notification, viewModel)));
+                ValidateNotificationWithNotificationUpdateViewModel(notification, notificationToEdit)));
         }
 
         [Fact]
@@ -221,19 +226,19 @@ namespace Tests.Unit.Service.Services
             return true;
         }
 
-        private bool ValidateNotificationWithNotificationUpdateViewModel(Notification notification, NotificationUpdateViewModel viewModel)
+        private bool ValidateNotificationWithNotificationUpdateViewModel(Notification notification, Notification notificationExpected)
         {
-            notification.Id.Should().Be(viewModel.Id);
-            notification.GuardId.Should().Be(viewModel.GuardId);
-            notification.VehicleId.Should().Be(viewModel.VehicleId);
-            notification.Comments.Should().Be(viewModel.Comments);
-            notification.Address.Should().Be(viewModel.Address);
-            notification.NotificationAmount.Should().Be(viewModel.NotificationAmount);
-            notification.Token.Should().Be(viewModel.Token);
-            notification.PayerId.Should().Be(viewModel.PayerId);
-            notification.TransactionId.Should().Be(viewModel.TransactionId);
-            notification.Value.Should().Be(viewModel.Value);
-            notification.Type.Should().Be(viewModel.Type);
+            notification.Id.Should().Be(notificationExpected.Id);
+            notification.GuardId.Should().Be(notificationExpected.GuardId);
+            notification.VehicleId.Should().Be(notificationExpected.VehicleId);
+            notification.Comments.Should().Be(notificationExpected.Comments);
+            notification.Address.Should().Be(notificationExpected.Address);
+            notification.NotificationAmount.Should().Be(notificationExpected.NotificationAmount);
+            notification.Token.Should().Be(notificationExpected.Token);
+            notification.PayerId.Should().Be(notificationExpected.PayerId);
+            notification.TransactionId.Should().Be(notificationExpected.TransactionId);
+            notification.Value.Should().Be(notificationExpected.Value);
+            notification.Type.Should().Be(notificationExpected.Type);
 
             return true;
         }

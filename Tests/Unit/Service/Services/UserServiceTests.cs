@@ -4,7 +4,6 @@ using Entra21.CSharp.Area21.Service.EntitiesMappings.Users;
 using Entra21.CSharp.Area21.Service.Services.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Users;
 using FluentAssertions;
-using Microsoft.AspNet.Identity;
 using NSubstitute;
 using NSubstitute.ReturnsExtensions;
 using Xunit;
@@ -95,9 +94,10 @@ namespace Tests.Unit.Service.Services
                 Phone = "47991206630"
             };
 
-            /*_userEntityMapping.UpdateWith(Arg.Is<User>(userToEdit), Arg.Is<UserUpdateViewModel>(
-                x => x.Name == viewModel.Name))
-                .Returns(viewModel); */             
+            _userEntityMapping.UpdateWith(
+                Arg.Is<User>(x => x.Name == userToEdit.Name),
+                Arg.Is<UserUpdateViewModel>(x => x.Name == viewModel.Name))
+                .Returns(userToEdit);
                               
             _userRepository.GetById(Arg.Is(viewModel.Id)).Returns(userToEdit);
             
@@ -106,7 +106,7 @@ namespace Tests.Unit.Service.Services
 
             // Assert
             _userRepository.Received(1).Update(Arg.Is<User>(user =>
-                ValidateUserWithUserUpdateViewModel(user, viewModel)));
+                ValidateUserWithUserUpdateViewModel(user, userToEdit)));
         }
 
         [Fact]
@@ -185,13 +185,13 @@ namespace Tests.Unit.Service.Services
         }
 
         private bool ValidateUserWithUserUpdateViewModel(
-           User user, UserUpdateViewModel viewModel)
+           User user, User userExpected)
         {
-            user.Id.Should().Be(viewModel.Id);
-            user.Name.Should().Be(viewModel.Name);
-            user.Cpf.Should().Be(viewModel.Cpf);
-            user.Email.Should().Be(viewModel.Email);
-            user.Phone.Should().Be(viewModel.Phone);
+            user.Id.Should().Be(userExpected.Id);
+            user.Name.Should().Be(userExpected.Name);
+            user.Cpf.Should().Be(userExpected.Cpf);
+            user.Email.Should().Be(userExpected.Email);
+            user.Phone.Should().Be(userExpected.Phone);
 
             return true;
         }
