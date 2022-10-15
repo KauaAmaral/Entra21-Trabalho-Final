@@ -36,13 +36,34 @@ let driverUpdateVehicle = (buttonUpdate) => {
     //.catch((error) => console.log(error));
 }
 
-let vehicleUpdate = (formData) => {
+let vehicleDriverUpdate = () => {
+    let licensePlate = document.getElementById("campo-license-plate").value;
+    let model = document.getElementById("campo-model").value;
+    let type = document.getElementById("campo-type").value;
+
+    let dados = new FormData();
+    dados.append("licensePlate", licensePlate);
+    dados.append("model", model);
+    dados.append("type", type);
+
+    console.log(dados);
+
+    return dados;
+}
+
+let saveUpdateVehicleDriver = () => {
+    let formData = vehicleDriverUpdate();
+
+    vehicleUpdate(formData);
+}
+
+let vehicleUpdate = (dados) => {
 
     let statusResponse = 0;
 
     fetch('/driver/vehicle/update', {
         method: 'POST',
-        body: formData
+        body: dados
     })
         .then((response) => {
             statusResponse = response.status;
@@ -74,4 +95,4 @@ let vehicleUpdate = (formData) => {
 };
 
 document.getElementById("button-update-vehicle")
-    .addEventListener("click", driverUpdateVehicle);
+    .addEventListener("click", saveUpdateVehicleDriver);

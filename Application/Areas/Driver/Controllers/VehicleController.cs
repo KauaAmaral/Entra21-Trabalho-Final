@@ -56,21 +56,21 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             return Ok(vehicle);
         }
 
-        [HttpGet("update")]
-        public IActionResult Update([FromQuery] int id)
-        {
-            var vehicle = _vehicleService.GetById(id);
+        //[HttpGet("update")]
+        //public IActionResult Update([FromQuery] int id)
+        //{
+        //    var vehicle = _vehicleService.GetById(id);
 
-            var vehicleUpdateViewMode = new VehicleUpdateViewModel
-            {
-                Id = vehicle.Id,
-                LicensePlate = vehicle.LicensePlate,
-                Model = vehicle.Model,
-                Type = vehicle.Type
-            };
+        //    var vehicleUpdateViewMode = new VehicleUpdateViewModel
+        //    {
+        //        Id = vehicle.Id,
+        //        LicensePlate = vehicle.LicensePlate,
+        //        Model = vehicle.Model,
+        //        Type = vehicle.Type
+        //    };
 
-            return Ok(vehicleUpdateViewMode);
-        }
+        //    return Ok(vehicleUpdateViewMode);
+        //}
 
         [HttpPost("update")]
         public IActionResult Update([FromForm] VehicleUpdateViewModel vehicleUpdateViewModel)
@@ -83,7 +83,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             return View(vehicleUpdateViewModel);
 
 
-            _vehicleService.Update(vehicleUpdateViewModel);
+            //_vehicleService.Update(vehicleUpdateViewModel);
 
             //return RedirectToAction("Index");
 
