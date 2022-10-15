@@ -1,5 +1,4 @@
 ﻿let UserHandleRegisterButton = () => {
-    debugger;
     let id = document.getElementById('campo-id').value;
     let formData = UserGetFormData();
 
@@ -33,7 +32,6 @@ let UserGetFormData = () => {
     let name = document.getElementById('campo-name').value;
     let cpf = document.getElementById('campo-cpf').value;
     let phone = document.getElementById('campo-phone').value;
-    debugger;
     let hierarchyId = document.getElementById('campo-hierarchy').value;
     let identification = document.getElementById('campo-identification').value;
     let password = document.getElementById('campo-password').value;

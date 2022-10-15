@@ -84,14 +84,17 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
             if (!ModelState.IsValid)
                 return UnprocessableEntity(ModelState);
 
-            var atualizou = _userService.Update(userUpdateAdministratorViewModel);
+            var updated = _userService.UpdateAdministrator(userUpdateAdministratorViewModel);
+
+            var userUpdated = _userService.GetByCpf(userUpdateAdministratorViewModel.Cpf);
 
             if (userUpdateAdministratorViewModel.IdentificationId != null)
             {
                 var guardViewModel = new GuardRegisterViewModel()
                 {
                     Cpf = userUpdateAdministratorViewModel.Cpf,
-                    IdentificationNumber = userUpdateAdministratorViewModel.IdentificationId
+                    IdentificationNumber = userUpdateAdministratorViewModel.IdentificationId,
+                    UserId = userUpdated.Id
                 };
 
                 var currentGuard = _guardService.GetByUserId(userUpdateAdministratorViewModel.Id);
@@ -104,7 +107,8 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
                     var guardUpdate = new GuardUpdateViewModel()
                     {
                         Id = currentGuard.Id,
-                        IdentificationNumber = currentGuard.IdentificationNumber
+                        IdentificationNumber = userUpdateAdministratorViewModel.IdentificationId,
+                        UserId = userUpdated.Id
                     };
 
                     _guardService.Update(guardUpdate);
@@ -118,7 +122,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
                     _guardService.Delete(currentGuard.Id);
             }
 
-            return Ok(new { status = atualizou });
+            return Ok(new { status = updated });
         }
 
         [HttpGet("delete")]
@@ -164,6 +168,12 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
             return Ok(guard);
         }
 
+        [HttpGet("getViewModelById")]
+        public IActionResult GetViewModelById([FromQuery] int id)
+        {
+            var viewModel = _userService.GetViewModelById(id);
+            return Ok(viewModel);
+        }
 
     }
 }
