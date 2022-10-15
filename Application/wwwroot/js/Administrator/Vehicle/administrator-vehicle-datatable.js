@@ -1,26 +1,27 @@
-﻿$('#table-payment-adm').DataTable({
+﻿$('#table-vehicle-adm').DataTable({
     responsive: true,
     language: {
         url: 'https://raw.githubusercontent.com/DataTables/Plugins/master/i18n/pt-BR.json'
     },
     ajax: {
-        url: '/administrator/payments/getAll',
+        url: '/administrator/vehicle/getAll',
         dataSrc: ''
     },
     processing: true,
     columns: [
+        { data: 'name' },
         { data: 'licensePlate' },
         {
             data: null,
-            render: function (data, tipo, payment) {
+            render: function (data, tipo, vehicle) {
                 let cor = '';
                 let type = '';
 
-                if (payment.type === 0) {
+                if (vehicle.type === 0) {
                     type = "Carro";
                     cor = "success";
                 }
-                else if (payment.type === 1) {
+                else if (vehicle.type === 1) {
                     type = "Moto";
                     cor = "info";
                 }
@@ -28,13 +29,6 @@
                 return `<span class="badge bg-${cor}">${type}</span>`;
             }
         },
-        { data: 'model' },
-        {
-            data: null,
-            width: '20%',
-            render: function (data, type, payment) {
-                return `<button class="btn btn-outline-primary payment-details" data-id="${payment.id}">Detalhes</button>`;
-            }
-        }
+        { data: 'model' }
     ],
 });
