@@ -10,7 +10,6 @@
     processing: true,
     columns: [
         { data: 'licensePlate' },
-        { data: 'model' },
         {
             data: null,
             render: function (data, tipo, vehicle) {
@@ -29,6 +28,7 @@
                 return `<span class="badge bg-${cor}">${type}</span>`;
             }
         },
+        { data: 'model' },
         {
             data: null,
             width: '20%',
