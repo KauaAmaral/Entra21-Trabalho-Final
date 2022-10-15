@@ -3,10 +3,33 @@
         ? event.target.parentElement
         : event.target;
 
-    administratorUserUpdateFillModal(element);
+    administratorUserUpdateFillModalUserData(element);
+
+    administratorUserUpdateFillModalGuardData(element);
 });
 
-let administratorUserUpdateFillModal = (buttonUpdate) => {
+
+let administratorUserUpdateFillModalGuardData = (buttonUpdate) => {
+    let id = buttonUpdate.getAttribute('data-id');
+    let statusResponse = 0;
+    fetch(`/administrator/users/getByIdGuard?id=${id}`)
+        .then((response) => {
+            statusResponse = response.status;
+
+            return response.json();
+        })
+        .then((data) => {
+            if (statusResponse === 200) {
+                debugger;
+
+                document.getElementById('campo-identification').value = data.identificationNumber;
+            }
+        })
+        .catch((error) => console.log(error));
+};
+
+
+let administratorUserUpdateFillModalUserData = (buttonUpdate) => {
     let id = buttonUpdate.getAttribute('data-id');
     let statusResponse = 0;
 
