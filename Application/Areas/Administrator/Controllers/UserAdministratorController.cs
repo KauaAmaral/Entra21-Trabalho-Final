@@ -42,79 +42,22 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
             return Ok(users);
         }
 
-        //[HttpGet("register")]
-        //public IActionResult Register()
-        //{
-        //    ViewBag.UserHierarchy = GetUserHierarchy();
+        [HttpPost("register")]
+        public IActionResult Register([FromForm] UserRegisterViewModel userRegisterViewModel)
+        {
+            var validator = new UserRegisterViewModelValidator();
+            var result = validator.Validate(userRegisterViewModel);
 
-        //    var userRegisterViewModel = new UserRegisterViewModel();
+            if (!result.IsValid)
+                result.AddToModelState(ModelState);
 
-        //    return View("register", userRegisterViewModel);
-        //}
+            if (!ModelState.IsValid)
+                return UnprocessableEntity(ModelState);
 
-        //[HttpPost("register")]
-        //public IActionResult Register([FromForm] UserRegisterViewModel userRegisterViewModel)
-        //{
-        //    var validator = new UserRegisterViewModelValidator();
-        //    var result = validator.Validate(userRegisterViewModel);
+            var register = _userService.Insert(userRegisterViewModel);
 
-        //    if (!result.IsValid || !ModelState.IsValid)
-        //    {
-        //        ViewBag.UserHierarchy = GetUserHierarchy();
-
-        //        return View("User/register", userRegisterViewModel);
-        //    }
-
-        //    var user = _userService.Insert(userRegisterViewModel);
-
-        //    if (userRegisterViewModel.IdentificationId != null)
-        //    {
-        //        var guardRegisterViewModel = new GuardRegisterViewModel
-        //        {
-        //            Cpf = user.Cpf,
-        //            IdentificationNumber = userRegisterViewModel.IdentificationId,
-        //            UserId = user.Id
-        //        };
-
-        //        _guardService.Register(guardRegisterViewModel);
-        //    }
-
-        //    return RedirectToAction("Index");
-        //}
-
-        //[HttpGet("update")]
-        //public IActionResult Update([FromQuery] int id)
-        //{
-        //    var user = _userService.GetById(id);
-
-        //    var userUpdateAdministratorViewModel = new UserUpdateAdministratorViewModel
-        //    {
-        //        Id = user.Id,
-        //        Name = user.Name,
-        //        Phone = user.Phone,
-        //        Cpf = user.Cpf,
-        //        Email = user.Email,
-        //        Hierarchy = user.Hierarchy
-        //    };
-
-        //    if (user.Hierarchy == UserHierarchy.Guarda)
-        //    {
-        //        var guard = _guardService.GetByUserId(user.Id);
-
-        //        userUpdateAdministratorViewModel.IdentificationId = guard.IdentificationNumber;
-        //    }
-
-        //    ViewBag.UserHierarchy = GetUserHierarchy();
-
-        //    return View("User/update", userUpdateAdministratorViewModel);
-        //}
-
-        //[HttpPost("register")]
-        //public IActionResult Register([FromForm] UserRegisterViewModel userRegisterViewModel)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return UnprocessableEntity(ModelState);
-        //}
+            return Ok(new { status = register });
+        }
 
         [HttpPost("update")]
         public IActionResult Update([FromForm] UserUpdateAdministratorViewModel userUpdateAdministratorViewModel)

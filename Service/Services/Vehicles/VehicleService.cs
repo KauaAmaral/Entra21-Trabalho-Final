@@ -1,6 +1,7 @@
 ﻿using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.Repository.Repositories.Vehicles;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Vehicles;
+using Entra21.CSharp.Area21.Service.ViewModels.Payments;
 using Entra21.CSharp.Area21.Service.ViewModels.Vehicles;
 
 namespace Entra21.CSharp.Area21.Service.Services.Vehicles
@@ -55,6 +56,20 @@ namespace Entra21.CSharp.Area21.Service.Services.Vehicles
             var vehicle = _vehicleRepository.GetByVehiclePlate(vehiclePlate);
 
             return vehicle;
+        }
+
+        public IList<VehicleIndexViewModel> GetAll()
+        {
+            var vehicles = _vehicleRepository.GetAll();
+
+            return vehicles.Select(x => new VehicleIndexViewModel
+            {
+                Id = x.Id,
+                Name = x.User.Name,
+                Model = x.Model,
+                LicensePlate = x.LicensePlate,
+                Type = x.Type
+            }).ToList();
         }
     }
 }
