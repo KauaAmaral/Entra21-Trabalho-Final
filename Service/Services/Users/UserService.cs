@@ -37,8 +37,9 @@ namespace Entra21.CSharp.Area21.Service.Services.Users
             return user;
         }
 
-        public User? GetById(int id) => 
+        public User? GetById(int id) =>
             _userRepository.GetById(id);
+
 
         public User Insert(UserRegisterViewModel viewModel)
         {
