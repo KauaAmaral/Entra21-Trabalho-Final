@@ -37,7 +37,6 @@ let administratorUserUpdateFillModalGuardData = (buttonUpdate) => {
     }
 };
 
-
 let administratorUserUpdateFillModalUserData = (buttonUpdate) => {
     let id = buttonUpdate.getAttribute('data-id');
     let statusResponse = 0;
