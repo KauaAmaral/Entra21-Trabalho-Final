@@ -17,7 +17,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
         public VehicleController(
             IVehicleService vehicleService,
-            ISessionAuthentication sessionAuthentication            
+            ISessionAuthentication sessionAuthentication
             )
         {
             _vehicleService = vehicleService;
@@ -35,25 +35,25 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         }
 
         [HttpPost("register")] // TODO: Problema para salvar
-        public IActionResult Register([FromForm] VehicleRegisterViewModel vehicleRegisterViewModel)
+        public IActionResult Register(VehicleRegisterViewModel vehicleRegisterViewModel)
         {
-            var user = _session.FindUserSession();
+            //var user = _session.FindUserSession();
 
-            if (user != null)
-                vehicleRegisterViewModel.UserId = user.Id;
-            else
-                return RedirectToAction("Index", "Home");
+            //if (user != null)
+            //    vehicleRegisterViewModel.UserId = user.Id;
+            //else
+            //    return RedirectToAction("Index", "Home");
 
-            if (!ModelState.IsValid)
-            {
-                ViewBag.VehicleType = GetVehicleType();
+            //if (!ModelState.IsValid)
+            //{
+            //    ViewBag.VehicleType = GetVehicleType();
 
-                return View(vehicleRegisterViewModel);
-            }
+            //    return View(vehicleRegisterViewModel);
+            //}
 
-            _vehicleService.Register(vehicleRegisterViewModel);
+            var vehicle = _vehicleService.Register(vehicleRegisterViewModel);
 
-            return RedirectToAction("Index");
+            return Ok(vehicle);
         }
 
         [HttpGet("update")]
@@ -95,22 +95,31 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         [HttpGet("delete")]
         public IActionResult Delete([FromQuery] int id)
         {
-            _vehicleService.Delete(id);
+            var delete = _vehicleService.Delete(id);
 
-            return RedirectToAction("Index");
+            if (!delete)
+                return NotFound();
+
+            return Ok();
         }
 
-        [HttpGet("")]
-        public IActionResult GetAllById()
+        [HttpGet]
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet("getall")]
+        public IActionResult GetAll()
         {
             var user = _session.FindUserSession();
 
             if (user == null)
                 return RedirectToAction("Index", "Home");
 
-            var vehicles = _vehicleService.GetAllById(user.Id);
+            var vehicles = _vehicleService.GetByUserId(user.Id);
 
-            return View("Vehicle/Index", vehicles);//TUDO Problema de rota
+            return Ok(vehicles);
         }
 
         [HttpGet("getById")]
@@ -120,12 +129,29 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             return Ok(vehicle);
         }
 
-        private List<string> GetVehicleType()
+
+        //private List<string> GetVehicleType()
+        //{
+        //    return Enum
+        //        .GetNames<VehicleType>()
+        //        .OrderBy(x => x)
+        //        .ToList();
+        //}
+
+        [HttpGet("getVehicleType")]
+        public IActionResult GetVehicleType()
         {
-            return Enum
+            var type = Enum
                 .GetNames<VehicleType>()
                 .OrderBy(x => x)
+                .Select(x => new
+                {
+                    Id = (int)(VehicleType)Enum.Parse(typeof(VehicleType), x),
+                    Text = x
+                })
                 .ToList();
+
+            return Ok(type);
         }
     }
 }

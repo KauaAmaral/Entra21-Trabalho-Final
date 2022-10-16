@@ -3,11 +3,12 @@ using Entra21.CSharp.Area21.Repository.Enums;
 using Entra21.CSharp.Area21.Service.Authentication;
 using Entra21.CSharp.Area21.Service.Services.Guards;
 using Entra21.CSharp.Area21.Service.Services.Users;
+using Entra21.CSharp.Area21.Service.ViewModels.Guards;
 using Entra21.CSharp.Area21.Service.ViewModels.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Users.Validations;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
 {
@@ -42,116 +43,94 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
             return Ok(users);
         }
 
-        //[HttpGet("register")]
-        //public IActionResult Register()
-        //{
-        //    ViewBag.UserHierarchy = GetUserHierarchy();
+        [HttpPost("register")]
+        public IActionResult Register([FromForm] UserRegisterViewModel userRegisterViewModel)
+        {
+            var validator = new UserRegisterViewModelValidator();
+            var result = validator.Validate(userRegisterViewModel);
 
-        //    var userRegisterViewModel = new UserRegisterViewModel();
+            if (!result.IsValid)
+                result.AddToModelState(ModelState);
 
-        //    return View("register", userRegisterViewModel);
-        //}
+            if (!ModelState.IsValid)
+                return UnprocessableEntity(ModelState);
 
-        //[HttpPost("register")]
-        //public IActionResult Register([FromForm] UserRegisterViewModel userRegisterViewModel)
-        //{
-        //    var validator = new UserRegisterViewModelValidator();
-        //    var result = validator.Validate(userRegisterViewModel);
+            var register = _userService.Insert(userRegisterViewModel);
 
-        //    if (!result.IsValid || !ModelState.IsValid)
-        //    {
-        //        ViewBag.UserHierarchy = GetUserHierarchy();
+            if (userRegisterViewModel.IdentificationId != null)
+            {
+                var guardViewModel = new GuardRegisterViewModel()
+                {
+                    Cpf = userRegisterViewModel.Cpf,
+                    IdentificationNumber = userRegisterViewModel.IdentificationId,
+                    UserId = register.Id
+                };
 
-        //        return View("User/register", userRegisterViewModel);
-        //    }
+                _guardService.Register(guardViewModel);
+            }
 
-        //    var user = _userService.Insert(userRegisterViewModel);
-
-        //    if (userRegisterViewModel.IdentificationId != null)
-        //    {
-        //        var guardRegisterViewModel = new GuardRegisterViewModel
-        //        {
-        //            Cpf = user.Cpf,
-        //            IdentificationNumber = userRegisterViewModel.IdentificationId,
-        //            UserId = user.Id
-        //        };
-
-        //        _guardService.Register(guardRegisterViewModel);
-        //    }
-
-        //    return RedirectToAction("Index");
-        //}
-
-        //[HttpGet("update")]
-        //public IActionResult Update([FromQuery] int id)
-        //{
-        //    var user = _userService.GetById(id);
-
-        //    var userUpdateAdministratorViewModel = new UserUpdateAdministratorViewModel
-        //    {
-        //        Id = user.Id,
-        //        Name = user.Name,
-        //        Phone = user.Phone,
-        //        Cpf = user.Cpf,
-        //        Email = user.Email,
-        //        Hierarchy = user.Hierarchy
-        //    };
-
-        //    if (user.Hierarchy == UserHierarchy.Guarda)
-        //    {
-        //        var guard = _guardService.GetByUserId(user.Id);
-
-        //        userUpdateAdministratorViewModel.IdentificationId = guard.IdentificationNumber;
-        //    }
-
-        //    ViewBag.UserHierarchy = GetUserHierarchy();
-
-        //    return View("User/update", userUpdateAdministratorViewModel);
-        //}
+            return Ok(new { status = register });
+        }
 
         [HttpPost("update")]
-        public IActionResult Update([FromForm] UserUpdateAdministratorViewModel userUpdateAdministratorViewMode)
+        public IActionResult Update([FromForm] UserUpdateAdministratorViewModel userUpdateAdministratorViewModel)
         {
             var validator = new UserUpdateAdministratorViewModelValidator();
-            var result = validator.Validate(userUpdateAdministratorViewMode);
+            var result = validator.Validate(userUpdateAdministratorViewModel);
 
-            //if (!result.IsValid || !ModelState.IsValid)
-            //{
-            //    return UnprocessableEntity(ModelState);
-            //}
+            if (!result.IsValid)
+                result.AddToModelState(ModelState);
 
-            //var user = _userService.UpdateAdministrator(userUpdateAdministratorViewMode);
-
-            //if (userUpdateAdministratorViewMode.IdentificationId != null)
-            //{
-            //    var guardRegisterViewModel = new GuardRegisterViewModel
-            //    {
-            //        Cpf = user.Cpf,
-            //        IdentificationNumber = userUpdateAdministratorViewMode.IdentificationId,
-            //        UserId = user.Id
-            //    };
-
-            //    _guardService.Register(guardRegisterViewModel);
-            //}
-            //else
-            //{
-            //    var guard = _guardService.GetByUserId(user.Id);
-            //    _guardService.Delete(guard.Id);
-            //}
             if (!ModelState.IsValid)
-                return UnprocessableEntity(userUpdateAdministratorViewMode);
+                return UnprocessableEntity(ModelState);
 
-            var atualizou = _userService.Update(userUpdateAdministratorViewMode);
+            var updated = _userService.UpdateAdministrator(userUpdateAdministratorViewModel);
 
-            return Ok(new { status = atualizou });
+            var userUpdated = _userService.GetByCpf(userUpdateAdministratorViewModel.Cpf);
+
+            if (userUpdateAdministratorViewModel.IdentificationId != null)
+            {
+                var guardViewModel = new GuardRegisterViewModel()
+                {
+                    Cpf = userUpdateAdministratorViewModel.Cpf,
+                    IdentificationNumber = userUpdateAdministratorViewModel.IdentificationId,
+                    UserId = userUpdated.Id
+                };
+
+                var currentGuard = _guardService.GetByUserId(userUpdateAdministratorViewModel.Id);
+
+                if (currentGuard == null)
+                    _guardService.Register(guardViewModel);
+
+                else
+                {
+                    var guardUpdate = new GuardUpdateViewModel()
+                    {
+                        Id = currentGuard.Id,
+                        IdentificationNumber = userUpdateAdministratorViewModel.IdentificationId,
+                        UserId = userUpdated.Id
+                    };
+
+                    _guardService.Update(guardUpdate);
+                }
+            }
+            else
+            {
+                var currentGuard = _guardService.GetByUserId(userUpdateAdministratorViewModel.Id);
+
+                if (currentGuard != null)
+                    _guardService.Delete(currentGuard.Id);
+            }
+
+            return Ok(new { status = updated });
         }
 
         [HttpGet("delete")]
         public IActionResult Delete([FromQuery] int id)
         {
-           var delete = _userService.Delete(id);
+            var delete = _userService.Delete(id);
 
-            if(!delete)
+            if (!delete)
                 return NotFound();
 
             return Ok();
@@ -180,5 +159,21 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
 
             return Ok(user);
         }
+        
+        [HttpGet("getByIdGuard")]
+        public IActionResult GetByIdGuard([FromQuery] int id)
+        {
+            var guard = _guardService.GetByUserId(id);
+
+            return Ok(guard);
+        }
+
+        [HttpGet("getViewModelById")]
+        public IActionResult GetViewModelById([FromQuery] int id)
+        {
+            var viewModel = _userService.GetViewModelById(id);
+            return Ok(viewModel);
+        }
+
     }
 }

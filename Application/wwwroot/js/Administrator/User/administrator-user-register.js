@@ -1,7 +1,4 @@
-﻿document.getElementById('button-save-user')
-    .addEventListener('click', () => UserHandleRegisterButton());
-
-let UserHandleRegisterButton = () => {
+﻿let UserHandleRegisterButton = () => {
     let id = document.getElementById('campo-id').value;
     let formData = UserGetFormData();
 
@@ -15,6 +12,9 @@ let UserHandleRegisterButton = () => {
     userUpdate(formData);
 }
 
+document.getElementById('button-persist-user')
+    .addEventListener('click', () => UserHandleRegisterButton());
+
 let userCleanFields = () => {
     document.getElementById('campo-email').value = '';
     document.getElementById('campo-name').value = '';
@@ -22,7 +22,7 @@ let userCleanFields = () => {
     document.getElementById('campo-phone').value = '';
     document.getElementById('campo-identification').value = '';
     document.getElementById('campo-password').value = '';
-    document.getElementById('campo-confirm-password') = '';
+    document.getElementById('campo-confirm-password').value = '';
 
     $('#campo-hierarchy').val('').trigger('change');
 }
@@ -43,7 +43,7 @@ let UserGetFormData = () => {
     formData.append('cpf', cpf);
     formData.append('phone', phone);
     formData.append('hierarchyId', hierarchyId);
-    formData.append('identification', identification);
+    formData.append('identificationId', identification);
     formData.append('password', password);
     formData.append('confirmPassword', confirmPassword);
 
@@ -63,15 +63,14 @@ let userRegister = (formData) => {
         })
         .then((data) => {
             if (statusResponse === 200) {
-                let modal = new bootstrap.Modal(document.getElementById('userUpdateModal'), {});
+                debugger;
+                $("#userUpdateModal .close").click();
 
-                modal.hide();
-
-                userClearFields();
+                userCleanFields();
 
                 $('#table-user-adm').DataTable().ajax.reload();
 
-                toastr.success('PET cadastrado com sucesso');
+                toastr.success('Usuário cadastrado com sucesso');
 
                 return;
             }
@@ -81,6 +80,6 @@ let userRegister = (formData) => {
         .catch((error) => {
             console.error(error);
 
-            toastr.error('Não foi possível cadastrar o PET');
+            toastr.error('Não foi possível cadastrar o usuário');
         });
 }

@@ -5,5 +5,7 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Notifications
 {
     public interface INotificationRepository : IGenericRepository<Notification>
     {
+        Notification? GetByPlate(string plate);
+        IList<Notification> GetByVehicleId(int id);
     }
 }

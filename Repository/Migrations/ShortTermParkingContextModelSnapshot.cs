@@ -76,7 +76,6 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                         .HasColumnName("address");
 
                     b.Property<string>("Comments")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("VARCHAR(100)")
                         .HasColumnName("comments");
@@ -84,7 +83,7 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME2")
-                        .HasDefaultValue(new DateTime(2022, 9, 28, 20, 59, 23, 73, DateTimeKind.Local).AddTicks(6959))
+                        .HasDefaultValue(new DateTime(2022, 9, 29, 20, 58, 56, 484, DateTimeKind.Local).AddTicks(367))
                         .HasColumnName("created_at");
 
                     b.Property<int>("GuardId")
@@ -98,28 +97,25 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                         .HasColumnName("notification_amount");
 
                     b.Property<string>("PayerId")
-                        .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("VARCHAR(15)")
                         .HasColumnName("payer_id");
 
                     b.Property<bool>("RegisteredVehicle")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("BIT")
-                        .HasDefaultValue(false)
                         .HasColumnName("register_vehicle");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("BIT");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasDefaultValue(true);
 
                     b.Property<string>("Token")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("VARCHAR(20)")
                         .HasColumnName("token");
 
                     b.Property<string>("TransactionId")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("VARCHAR(20)")
                         .HasColumnName("transaction_id");
@@ -132,12 +128,12 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                         .HasColumnType("DATETIME2")
                         .HasColumnName("update_at");
 
-                    b.Property<decimal>("Value")
+                    b.Property<decimal?>("Value")
                         .HasPrecision(5, 2)
                         .HasColumnType("DECIMAL(5,2)")
                         .HasColumnName("value");
 
-                    b.Property<int>("VehicleId")
+                    b.Property<int?>("VehicleId")
                         .HasColumnType("INT")
                         .HasColumnName("vehicle_id");
 
@@ -167,7 +163,7 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME2")
-                        .HasDefaultValue(new DateTime(2022, 9, 28, 20, 59, 23, 73, DateTimeKind.Local).AddTicks(3791))
+                        .HasDefaultValue(new DateTime(2022, 9, 29, 20, 58, 56, 483, DateTimeKind.Local).AddTicks(3927))
                         .HasColumnName("create_at");
 
                     b.Property<string>("PayerId")
@@ -197,7 +193,7 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME2")
-                        .HasDefaultValue(new DateTime(2022, 9, 28, 20, 59, 23, 73, DateTimeKind.Local).AddTicks(4054))
+                        .HasDefaultValue(new DateTime(2022, 9, 29, 20, 58, 56, 483, DateTimeKind.Local).AddTicks(4501))
                         .HasColumnName("update_at");
 
                     b.Property<int>("UserId")
@@ -313,7 +309,7 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME2")
-                        .HasDefaultValue(new DateTime(2022, 9, 28, 20, 59, 23, 73, DateTimeKind.Local).AddTicks(2))
+                        .HasDefaultValue(new DateTime(2022, 9, 29, 20, 58, 56, 482, DateTimeKind.Local).AddTicks(8696))
                         .HasColumnName("created_at");
 
                     b.Property<string>("LicensePlate")
@@ -352,7 +348,7 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 9, 28, 20, 59, 23, 73, DateTimeKind.Local).AddTicks(1460),
+                            CreatedAt = new DateTime(2022, 9, 29, 20, 58, 56, 483, DateTimeKind.Local).AddTicks(517),
                             LicensePlate = "fhf-1234",
                             Model = "123121234",
                             Status = true,
@@ -383,8 +379,7 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                     b.HasOne("Entra21.CSharp.Area21.Repository.Entities.Vehicle", "Vehicle")
                         .WithMany("Notifications")
                         .HasForeignKey("VehicleId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Guard");
 

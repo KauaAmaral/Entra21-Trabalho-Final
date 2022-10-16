@@ -26,7 +26,8 @@ namespace Entra21.CSharp.Area21.Service.Services.Payments
             {
                 Id = x.Id,
                 Model = x.Vehicle.Model,
-                LicensePlate = x.Vehicle.LicensePlate
+                LicensePlate = x.Vehicle.LicensePlate,
+                Type = x.Vehicle.Type
             }).ToList();
         }
 

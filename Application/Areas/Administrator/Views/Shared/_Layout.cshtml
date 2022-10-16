@@ -77,7 +77,7 @@
                 <span class="sr-only">Toggle navigation</span>
                 <span class="hamburger-bar"></span>
             </button>
-            <a class="navbar-brand navbar-brand-center" href="index.html">
+            <a class="navbar-brand navbar-brand-center">
                 <img class="navbar-brand-logo navbar-brand-logo" src="~/Theme/global/portraits/Logo Maior.png">
             </a>
         </div>
@@ -96,7 +96,7 @@
                             </span>
                         </a>
                         <div class="dropdown-menu" role="menu">
-                            <a asp-action="Payments" asp-controller="Payments" class="dropdown-item">
+                            <a asp-action="Index" asp-controller="Payments" class="dropdown-item">
                                 <i class="icon wb-payment"></i> Pagamentos
                             </a>
                             <a class="dropdown-item" asp-area="Public" asp-controller="Login" asp-action="Logout" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Sair</a>
@@ -240,13 +240,13 @@
     <script src="~/js/toastr-configure.js" asp-append-version="true"></script>
     <script src="~/js/shared/notification-error.js" asp-append-version="true"></script>
 
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.js"></script>
-
     <!-- DataTable -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.js"></script>
 
     <!-- Select2 -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>

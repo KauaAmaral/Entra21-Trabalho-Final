@@ -25,5 +25,20 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Notifications
             .Include(x => x.Guard)
             .Include(x => x.Vehicle)
             .ToList();
+
+
+        public Notification? GetByPlate(string plate) =>
+            _context.Notifications
+            .Include(x => x.Guard)
+            .Include(x => x.Vehicle)
+            .OrderByDescending(x => x.Id)
+            .FirstOrDefault(x => x.VehicleLicensePlate == plate);
+
+        public IList<Notification> GetByVehicleId(int id) =>
+            _context.Notifications
+            .Include(x => x.Guard)
+            .Include(x => x.Vehicle)
+            .Where(x => x.VehicleId == id)
+            .ToList();
     }
 }

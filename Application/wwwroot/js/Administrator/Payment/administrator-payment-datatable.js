@@ -9,8 +9,26 @@
     },
     processing: true,
     columns: [
-        { data: 'model' },
         { data: 'licensePlate' },
+        {
+            data: null,
+            render: function (data, tipo, payment) {
+                let cor = '';
+                let type = '';
+
+                if (payment.type === 0) {
+                    type = "Carro";
+                    cor = "success";
+                }
+                else if (payment.type === 1) {
+                    type = "Moto";
+                    cor = "info";
+                }
+
+                return `<span class="badge bg-${cor}">${type}</span>`;
+            }
+        },
+        { data: 'model' },
         {
             data: null,
             width: '20%',

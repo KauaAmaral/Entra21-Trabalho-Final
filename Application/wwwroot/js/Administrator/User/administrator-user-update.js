@@ -3,17 +3,17 @@
         ? event.target.parentElement
         : event.target;
 
-    administratorUserUpdateFillModal(element);
+    administratorUserUpdateFillModalUserData(element);
+
+    administratorUserUpdateFillModalGuardData(element);
 });
 
-// Limpar os campos quando a modal for fechada
-document.getElementById('userUpdateModal').addEventListener('hide.bs.modal', () => userClearFields());
 
-let administratorUserUpdateFillModal = (buttonUpdate) => {
+let administratorUserUpdateFillModalGuardData = (buttonUpdate) => {
     let id = buttonUpdate.getAttribute('data-id');
     let statusResponse = 0;
-
-    fetch(`/administrator/users/getById?id=${id}`)
+    debugger;
+    fetch(`/administrator/users/getByIdGuard?id=${id}`)
         .then((response) => {
             statusResponse = response.status;
 
@@ -21,20 +21,49 @@ let administratorUserUpdateFillModal = (buttonUpdate) => {
         })
         .then((data) => {
             if (statusResponse === 200) {
-                let modal = new bootstrap.Modal(document.getElementById('userUpdateModal'), {});
+                debugger;
+                if (data.identificationNumber != "undefined") {
+                    document.getElementById('campo-identification').value = data.identificationNumber;
+                }
+            }
+            else {
+                return;
+            }
+        })
+        .catch((error) => console.log(error));
 
+    if (statusResponse === 0) {
+        document.getElementById('campo-identification').value = '';
+    }
+};
+
+let administratorUserUpdateFillModalUserData = (buttonUpdate) => {
+    let id = buttonUpdate.getAttribute('data-id');
+    let statusResponse = 0;
+
+    fetch(`/administrator/users/getViewModelById?id=${id}`)
+        .then((response) => {
+            statusResponse = response.status;
+
+            return response.json();
+        })
+        .then((data) => {
+            if (statusResponse === 200) {
+
+                let modal = new bootstrap.Modal(document.getElementById('userUpdateModal'), {});
                 document.getElementById('campo-id').value = data.id;
                 document.getElementById('campo-email').value = data.email;
                 document.getElementById('campo-name').value = data.name;
                 document.getElementById('campo-cpf').value = data.cpf;
                 document.getElementById('campo-phone').value = data.phone;
-                document.getElementById('campo-identification').value = data.identificationId;
                 document.getElementById('campo-password').value = "";
                 document.getElementById('campo-confirm-password').value = "";
 
+                debugger;
+
                 $('#campo-hierarchy')
-                    .append(new Option(data.hierarchy, false, false))
-                    .val(data.hierarchy)
+                    .append(new Option(data.typeName, data.hierarchyId, false, false))
+                    .val(data.hierarchyId)
                     .trigger('change');
 
                 modal.show();
@@ -56,27 +85,22 @@ let userUpdate = (formData) => {
         })
         .then((data) => {
             if (statusResponse === 200) {
-                let modal = new bootstrap.Modal(document.getElementById('userUpdateModal'), {});
-
-                modal.hide();
+                $("#userUpdateModal .close").click();
 
                 userCleanFields();
 
                 $('#table-user-adm').DataTable().ajax.reload();
 
-                toastr.success('Usuario alterado com sucesso');
+                toastr.success('Usuário alterado com sucesso');
 
                 return;
             }
 
-            //showNotificationErrorsOfValidation(data);
+            showNotificationErrorsOfValidation(data);
         })
-        //.catch((error) => {
-        //    console.error(error);
+        .catch((error) => {
+            console.error(error);
 
-        //    toastr.error('Não foi possível alterar o usuario');
-        //});
+            toastr.error('Não foi possível alterar o usuario');
+        });
 };
-
-document.getElementById("button-update-user")
-    .addEventListener("click", userUpdate);

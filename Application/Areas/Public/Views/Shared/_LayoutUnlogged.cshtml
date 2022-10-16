@@ -4,12 +4,29 @@
     <title>Area21</title>
     
     <link rel="shortcut icon" href="~/Theme/global/portraits/Logo Desenho Menor_Prancheta 1.png ">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="~/Theme/global/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/Theme/global/css/bootstrap-extend.min.css">
     <link rel="stylesheet" href="~/Theme/assets/css/site.min.css">
     <link rel="stylesheet" href="~/css/site.css">
+
+
+    <link rel="stylesheet" href="~/Theme/global/vendor/animsition/animsition.css">
+    <link rel="stylesheet" href="~/Theme/global/vendor/asscrollable/asScrollable.css">
+    <link rel="stylesheet" href="~/Theme/global/vendor/switchery/switchery.css">
+    <link rel="stylesheet" href="~/Theme/global/vendor/intro-js/introjs.css">
+    <link rel="stylesheet" href="~/Theme/global/vendor/slidepanel/slidePanel.css">
+    <link rel="stylesheet" href="~/Theme/global/vendor/flag-icon-css/flag-icon.css">
+    <link rel="stylesheet" href="~/Theme/global/vendor/chartist/chartist.css">
+    <link rel="stylesheet" href="~/Theme/global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css">
+    <link rel="stylesheet" href="~/Theme/global/vendor/aspieprogress/asPieProgress.css">
+    <link rel="stylesheet" href="~/Theme/global/vendor/jquery-selective/jquery-selective.css">
+    <link rel="stylesheet" href="~/Theme/global/vendor/bootstrap-datepicker/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="~/Theme/global/vendor/asscrollable/asScrollable.css">
+    <link rel="stylesheet" href="~/Theme/assets/examples/css/dashboard/team.css">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="~/Theme/global/fonts/web-icons/web-icons.min.css">
@@ -19,6 +36,40 @@
 <body class="body-login">
     <div class="background-image">
         @RenderBody()
+        @RenderSection("Scripts", required: false)
+    </div>
+
+<!-- End Edit Dialog -->
+<script src="~/Theme/global/vendor/babel-external-helpers/babel-external-helpers.js"></script>
+<script src="~/Theme/global/vendor/jquery/jquery.js"></script>
+<script src="~/Theme/global/vendor/popper-js/umd/popper.min.js"></script>
+<script src="~/Theme/global/vendor/animsition/animsition.js"></script>
+<script src="~/Theme/global/vendor/mousewheel/jquery.mousewheel.js"></script>
+<script src="~/Theme/global/vendor/asscrollbar/jquery-asScrollbar.js"></script>
+<script src="~/Theme/global/vendor/asscrollable/jquery-asScrollable.js"></script>
+
+<!-- Plugins -->
+<script src="~/Theme/global/vendor/switchery/switchery.js"></script>
+<script src="~/Theme/global/vendor/intro-js/intro.js"></script>
+<script src="~/Theme/global/vendor/screenfull/screenfull.js"></script>
+<script src="~/Theme/global/vendor/slidepanel/jquery-slidePanel.js"></script>
+<script src="~/Theme/global/vendor/chartist/chartist.js"></script>
+<script src="~/Theme/global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.js"></script>
+<script src="~/Theme/global/vendor/aspieprogress/jquery-asPieProgress.js"></script>
+<script src="~/Theme/global/vendor/matchheight/jquery.matchHeight-min.js"></script>
+<script src="~/Theme/global/vendor/jquery-selective/jquery-selective.min.js"></script>
+
+<!-- Scripts -->
+<script src="~/Theme/global/js/Component.js"></script>
+<script src="~/Theme/global/js/Plugin.js"></script>
+<script src="~/Theme/global/js/Base.js"></script>
+<script src="~/Theme/global/js/Config.js"></script>
+
+<script src="~/Theme/assets/js/Section/Menubar.js"></script>
+<script src="~/Theme/assets/js/Section/Sidebar.js"></script>
+<script src="~/Theme/assets/js/Section/PageAside.js"></script>
+<script src="~/Theme/assets/js/Plugin/menu.js"></script>
+
 </body>
 </html>
 

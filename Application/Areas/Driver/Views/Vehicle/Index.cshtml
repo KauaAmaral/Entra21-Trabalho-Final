@@ -1,38 +1,32 @@
-﻿@model List<Vehicle>
-
-    <div class="row mb-3">
-        <div class="text-end">
-            <a asp-action="Register" class="btn btn-primary">
-                <i class="fa-solid fa-plus"></i> Cadastrar
-            </a>
+﻿<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="text-end">
+                <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalRegisterVehicle">
+                    Cadastrar
+                </button>
+            </div>
+            <table class="table table-bordered table-striped display nowrap" cellspacing="0" width="100%" id="table-vehicle-driver">
+                <thead>
+                    <tr>
+                        <th><b>Placa</b></th>
+                        <th><b>Tipo do Veículo</b></th>
+                        <th><b>Modelo</b></th>
+                        <th><b>Ação</b></th>
+                    </tr>
+                </thead>
+            </table>
         </div>
     </div>
+</div>
 
-<table class="table caption-top table-hover" id="vehicles-id" style="width:85%" align="center">
-        <thead>
-            <tr>
-                <th style="width:15%"><font size="5"><b><font>Nome</font></b></th>
-                <th style="width:15%"><font size="5"><b><font>Descrição</font></b></th>
-                <th style="width:15%"><font size="5"><b><font>Tipo Veículo</font></b></th>
-                <th style="width:15%"><font size="5"><b><font>Ação</font></b></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var vehicles in Model)
-            {
-                <tr>
-                    <td>@vehicles.LicensePlate</td>
-                    <td>@vehicles.Model</td>
-                    <td>@vehicles.Type</td>
-                    <td>
-                        <a class="btn btn-primary" asp-action="update" asp-route-id="@vehicles.Id">
-                            <i class="fa-solid fa-pencil"></i> Editar
-                        </a>
-                        <a class="btn btn-outline-danger" asp-action="delete" asp-route-id="@vehicles.Id">
-                            <i class="fa-solid fa-trash"></i> Apagar
-                        </a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<partial name="Register" />
+<partial name="Update" />
+
+@section Scripts{
+    <script src="~/js/Driver/Vehicle/driver-vehicle-datatable.js"></script>
+    <script src="~/js/Driver/Vehicle/driver-vehicle-register.js"></script>
+    <script src="~/js/Driver/Vehicle/driver-vehicle-update.js"></script>
+    <script src="~/js/Driver/Vehicle/driver-vehicle-delete.js"></script>
+    <script src="~/js/Driver/Vehicle/vehicle-select2.js"></script>
+}

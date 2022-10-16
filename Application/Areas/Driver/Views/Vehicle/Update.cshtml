@@ -1,44 +1,31 @@
-﻿@model VehicleUpdateViewModel
-
-@{
-    var vehicle = ViewBag.VehicleType as List<string>;
-    vehicle.Add(string.Empty);
-
-    var selectVehicleType = new SelectList(vehicle, string.Empty);
-}
-
-<div class="page-content row justify-content-center">
-    <div class="col-6">
-
-        <h3 class="h3">Editar Veículo - @Model.LicensePlate</h3>
-        <form asp-action="update" method="POST">
-            <input type="hidden" asp-for="Id" />
-            <div>
-                <label asp-for="LicensePlate" class="form-label" span-required=""></label>
-                <input asp-for="LicensePlate" class="form-control" />
-                <span asp-validation-for="LicensePlate" class="text-danger"></span>
+﻿<div class="modal fade" id="vehicleUpdateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar Veiculo</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">x</button>
             </div>
+            <div class="modal-body">
 
-            <div>
-                <label asp-for="Model" class="form-label" span-required=""></label>
-                <input asp-for="Model" class="form-control" />
-                <span asp-validation-for="Model" class="text-danger"></span>
-            </div>
+                <div class="form-group">
+                    <label for="campo-licensePlate" class="form-label">Placa</label>
+                    <input type="text" id="campo-licensePlate" class="form-control" />
+                </div>
 
-            <div class="mb-3">
-                <label asp-for="Type" class="form-label" span-required=""></label>
-                <select asp-for="Type" asp-items="selectVehicleType" class="form-select">
-                </select>
-                <span asp-validation-for="Type" class="text-danger"></span>
+                <div class="form-group">
+                    <label for="campo-model" class="form-label">Modelo</label>
+                    <input type="text" id="campo-model" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label for="campo-type" class="form-label">Tipo</label>
+                    <select type="text" id="campo-type" class="form-select"></select>
+                </div>
             </div>
-            <div class="text-end">
-                <a asp-action="Index" class="btn btn-outline-danger">
-                    <i class="fa-solid fa-xmark"></i> Cancelar
-                </a>
-                <button type="submit" class="btn btn-success">
-                    <i class="fa-solid fa-floppy-disk"></i> Salvar
-                </button>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="button-update-vehicle">Editar</button>
             </div>
-        </form>
+        </div>
     </div>
 </div>
