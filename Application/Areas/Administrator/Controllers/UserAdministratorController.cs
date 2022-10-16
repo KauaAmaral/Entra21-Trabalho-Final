@@ -55,7 +55,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
             if (!ModelState.IsValid)
                 return UnprocessableEntity(ModelState);
 
-            var register = _userService.Insert(userRegisterViewModel);
+            var register = _userService.InsertAdministrator(userRegisterViewModel);
 
             if (userRegisterViewModel.IdentificationId != null)
             {
