@@ -36,6 +36,6 @@ namespace Entra21.CSharp.Area21.Service.ViewModels.Users
         public string? IdentificationId { get; set; }
         public Guid Token { get; set; }
         public DateTime TokenExpiredDate { get; set; }
-        public UserHierarchy Hierarchy { get; set; }
+        public UserHierarchy HierarchyId { get; set; }
     }
 }

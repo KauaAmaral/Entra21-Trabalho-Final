@@ -1,5 +1,4 @@
 ﻿let UserHandleRegisterButton = () => {
-    debugger;
     let id = document.getElementById('campo-id').value;
     let formData = UserGetFormData();
 

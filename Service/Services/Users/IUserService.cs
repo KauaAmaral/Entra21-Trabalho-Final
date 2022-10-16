@@ -18,5 +18,6 @@ namespace Entra21.CSharp.Area21.Service.Services.Users
         User UpdateVerifyEmail(int id);
         bool Disable(User userChange);
         bool VerifyEmails(string email);
+        UserUpdateAdministratorViewModel? GetViewModelById(int id);
     }
 }
