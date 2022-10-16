@@ -19,7 +19,7 @@ namespace Tests.Unit.Service.EntitiesMappings
         public void Test_RegisterWith()
         {
             // Arrange
-            var viewModel = RegisterUser();
+            var viewModel = RegisterGuard();
 
             // Act
             var guard = _guardEntityMapping.RegisterWith(viewModel);
@@ -44,7 +44,7 @@ namespace Tests.Unit.Service.EntitiesMappings
             guard.IdentificationNumber.Should().Be(viewModelEdit.IdentificationNumber);            
         }
 
-        private GuardRegisterViewModel RegisterUser()
+        private GuardRegisterViewModel RegisterGuard()
             => new Faker<GuardRegisterViewModel>()
             .RuleFor(x => x.IdentificationNumber, f => f.Random.Word())
             .RuleFor(x => x.UserId, f => f.Random.Number())

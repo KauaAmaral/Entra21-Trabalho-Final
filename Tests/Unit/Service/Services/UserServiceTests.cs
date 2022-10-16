@@ -43,12 +43,12 @@ namespace Tests.Unit.Service.Services
         {
             // Arrange
             var viewModel = new UserRegisterViewModel
-            {                
+            {
                 Name = "Luiz Roberto",
                 Cpf = "198.445.012-45",
                 Email = "luiz-roberto@gmail.com",
                 Token = Guid.NewGuid(),
-                Password = "154d612"
+                Password = "154d612",
             };
 
             var user = new User()
@@ -60,8 +60,12 @@ namespace Tests.Unit.Service.Services
                 Password = viewModel.Password
             };
 
-            _userEntityMapping.RegisterWith(Arg.Is<UserRegisterViewModel>(
-                x => x.Name == viewModel.Name))
+            _userEntityMapping.RegisterWith(Arg.Is<UserRegisterViewModel>
+                (x => x.Name == viewModel.Name &&
+                    x.Cpf == viewModel.Cpf &&
+                    x.Email == viewModel.Email &&
+                    x.Token == viewModel.Token &&
+                    x.Password == viewModel.Password))
                 .Returns(user);
 
             // Act
@@ -79,28 +83,36 @@ namespace Tests.Unit.Service.Services
             var viewModel = new UserUpdateViewModel
             {
                 Id = 3,
-                Name = "Foi Editado",
+                Name = "Miguel Pereira",
                 Cpf = "198.445.012-45",
-                Email = "luiz-roberto@gmail.com",
+                Email = "miguel_pereira@gmail.com",
                 Phone = "47988452610"
             };
 
             var userToEdit = new User
             {
                 Id = 3,
-                Name = "Para Editar",
+                Name = "Miguel Ferreira",
                 Cpf = "198.445.012-44",
-                Email = "luis_roberto@gmail.com",
+                Email = "miguel-ferreira@gmail.com",
                 Phone = "47991206630"
             };
 
             _userEntityMapping.UpdateWith(
-                Arg.Is<User>(x => x.Name == userToEdit.Name),
-                Arg.Is<UserUpdateViewModel>(x => x.Name == viewModel.Name))
+                Arg.Is<User>(x => x.Id == userToEdit.Id &&
+                    x.Name == userToEdit.Name && 
+                    x.Cpf == userToEdit.Cpf &&
+                    x.Email == userToEdit.Email &&
+                    x.Phone == userToEdit.Phone),
+                Arg.Is<UserUpdateViewModel>(x => x.Id == viewModel.Id &&
+                    x.Name == viewModel.Name &&
+                    x.Cpf == viewModel.Cpf &&
+                    x.Email == viewModel.Email &&
+                    x.Phone == viewModel.Phone))
                 .Returns(userToEdit);
-                              
+
             _userRepository.GetById(Arg.Is(viewModel.Id)).Returns(userToEdit);
-            
+
             // Act
             _userService.Update(viewModel);
 
@@ -115,10 +127,10 @@ namespace Tests.Unit.Service.Services
             // Arrange
             var viewModel = new UserUpdateViewModel
             {
-                Id = 3,
-                Name = "Miguel Coelho",
+                Id = 5,
+                Name = "Fernando Coelho",
                 Cpf = "101.477.012-03",
-                Email = "miguelcoelho@outlook.com",
+                Email = "fcoelho@outlook.com",
                 Phone = "47999856336"
             };
 
@@ -176,9 +188,42 @@ namespace Tests.Unit.Service.Services
             _userRepository.Received(1).GetById(Arg.Is(15));
         }
 
+        [Fact]
+        public void Test_UpdatePassword()
+        {
+            // Arrange
+            var passwordToEdit = new User
+
+            {
+                Password = "12345678"
+            };
+
+            var viewModel = new UserChangePasswordViewModel
+            {
+                CurrentPassword = passwordToEdit.Password,
+                NewPassword = "ABCDEFGH",
+                ConfirmNewPassword = "ABCDEFGH"
+            };
+
+
+            _userEntityMapping.UpdatePasswordWith(
+                Arg.Is<User>(x => x.Password == passwordToEdit.Password),
+                Arg.Is<UserChangePasswordViewModel>(x => x.CurrentPassword == passwordToEdit.Password))
+                .Returns(passwordToEdit);
+
+            _userRepository.GetById(Arg.Is(viewModel.Id)).Returns(passwordToEdit);
+
+            // Act
+            _userService.UpdatePassword(viewModel);
+
+            // Assert
+            _userRepository.Received(1).Update(Arg.Is<User>(user =>
+                ValidateUserWithUserChangePasswordViewModel(user, passwordToEdit)));
+        }
+
         private bool ValidateUser(User user, UserRegisterViewModel viewModel)
         {
-            user.Name.Should().Be(viewModel.Name);           
+            user.Name.Should().Be(viewModel.Name);
             user.Email.Should().Be(viewModel.Email);
 
             return true;
@@ -196,5 +241,12 @@ namespace Tests.Unit.Service.Services
             return true;
         }
 
+        private bool ValidateUserWithUserChangePasswordViewModel(
+            User user, User passwordExpected)
+        {
+            user.Password.Should().Be(passwordExpected.Password);
+
+            return true;
+        }
     }
 }

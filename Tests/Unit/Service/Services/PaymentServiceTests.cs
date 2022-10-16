@@ -48,7 +48,12 @@ namespace Tests.Unit.Service.Services
             };
 
             _paymentEntityMapping.RegisterWith(Arg.Is<PaymentRegisterViewModel>(
-                x => x.PayerId == viewModel.PayerId))
+                x => x.PayerId == viewModel.PayerId &&
+                    x.Token == viewModel.Token &&
+                    x.TransactionId == viewModel.TransactionId &&
+                    x.UserId == viewModel.UserId &&
+                    x.VehicleId == viewModel.VehicleId &&
+                    x.Value == viewModel.Value))
                 .Returns(payment);
 
             // Act

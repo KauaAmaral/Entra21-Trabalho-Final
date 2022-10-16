@@ -35,7 +35,7 @@ namespace Tests.Unit.Service.EntitiesMappings
             user.Password.Should().Be(viewModel.Password.GetHash());
             user.Cpf.Should().Be(viewModel.Cpf);
             user.Hierarchy.Should().Be(viewModel.Hierarchy);
-        }
+        }    
 
         [Fact]
         public void Test_UpdateWith()
@@ -71,7 +71,7 @@ namespace Tests.Unit.Service.EntitiesMappings
             user.Cpf.Should().Be(viewModelEdit.Cpf);
             user.Email.Should().Be(viewModelEdit.Email);
             user.Phone.Should().Be(viewModelEdit.Phone);
-            user.Hierarchy.Should().Be(viewModelEdit.Hierarchy);
+            user.Hierarchy.Should().Be(viewModelEdit.HierarchyId);
         }
 
         [Fact]
@@ -130,7 +130,7 @@ namespace Tests.Unit.Service.EntitiesMappings
             .RuleFor(x => x.Cpf, f => f.Random.Word())
             .RuleFor(x => x.Email, f => f.Internet.Email())
             .RuleFor(x => x.Phone, f => f.Random.Word())
-            .RuleFor(x => x.Hierarchy, f => userHierarchy)
+            .RuleFor(x => x.HierarchyId, f => userHierarchy)
             .Generate();
     }
 }

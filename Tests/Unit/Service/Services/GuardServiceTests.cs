@@ -55,7 +55,8 @@ namespace Tests.Unit.Service.Services
             };
 
             _guardEntityMapping.RegisterWith(Arg.Is<GuardRegisterViewModel>(
-                x => x.IdentificationNumber == viewModel.IdentificationNumber))
+                x => x.IdentificationNumber == viewModel.IdentificationNumber &&
+                    x.UserId == viewModel.UserId))
                 .Returns(guard);
 
             // Act            
@@ -73,7 +74,7 @@ namespace Tests.Unit.Service.Services
             var viewModel = new GuardUpdateViewModel
             {
                 Id = 3,
-                IdentificationNumber = "2145620179",
+                IdentificationNumber = "2145612179",
                 UserId = 9
             };
 
@@ -85,8 +86,12 @@ namespace Tests.Unit.Service.Services
             };
 
             _guardEntityMapping.UpdateWith(
-                Arg.Is<Guard>(x => x.IdentificationNumber == guardToEdit.IdentificationNumber),
-                Arg.Is<GuardUpdateViewModel>(x => x.IdentificationNumber == viewModel.IdentificationNumber))
+                Arg.Is<Guard>(x => x.Id == guardToEdit.Id &&
+                    x.IdentificationNumber == guardToEdit.IdentificationNumber &&
+                    x.UserId == guardToEdit.UserId),
+                Arg.Is<GuardUpdateViewModel>(x => x.Id == viewModel.Id &&
+                    x.IdentificationNumber == viewModel.IdentificationNumber &&
+                    x.UserId == viewModel.UserId))
                 .Returns(guardToEdit);
 
             _guardRepository.GetById(Arg.Is(viewModel.Id)).Returns(guardToEdit);
@@ -105,9 +110,9 @@ namespace Tests.Unit.Service.Services
             // Arrange
             var viewModel = new GuardUpdateViewModel
             {
-                Id = 1,
-                IdentificationNumber = "4578965412",
-                UserId = 3
+                Id = 7,
+                IdentificationNumber = "4571115412",
+                UserId = 14
             };
 
             _guardRepository.GetById(Arg.Is(viewModel.Id)).ReturnsNull();

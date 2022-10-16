@@ -3,6 +3,7 @@ using Entra21.CSharp.Area21.Repository.Enums;
 using Entra21.CSharp.Area21.Repository.Repositories.Notifications;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Notifications;
 using Entra21.CSharp.Area21.Service.Services.Notifications;
+using Entra21.CSharp.Area21.Service.Services.Vehicles;
 using Entra21.CSharp.Area21.Service.ViewModels.Notifications;
 using FluentAssertions;
 using NSubstitute;
@@ -16,12 +17,13 @@ namespace Tests.Unit.Service.Services
         private readonly INotificationService _notificationService;
         private readonly INotificationRepository _notificationRepository;
         private readonly INotificationEntityMapping _notificationEntityMapping;
+        private readonly IVehicleService _vehicleService;
 
         public NotificationServiceTests()
         {
             _notificationRepository = Substitute.For<INotificationRepository>();
             _notificationEntityMapping = Substitute.For<INotificationEntityMapping>();
-            _notificationService = new NotificationService(_notificationRepository, _notificationEntityMapping);
+            _notificationService = new NotificationService(_notificationRepository, _notificationEntityMapping, _vehicleService);
         }
 
         [Fact]
@@ -30,38 +32,36 @@ namespace Tests.Unit.Service.Services
             // Arrange           
             var viewModel = new NotificationRegisterViewModel
             {
+                GuardId = 7,                
+                VehicleId = 14,
+                VehiclePlate = "ONS0209",
+                Type = VehicleType.Carro,
                 Address = "Rua XV de Novembro",
                 Comments = "Horário Expirado",
-                GuardId = 7,
-                NotificationAmount = 2,
-                PayerId = "8",
-                Registered = true,
-                Token = "15",
-                TransactionId = "92",
-                Type = VehicleType.Carro,
-                Value = 1.50m,
-                VehicleId = 14,
-                VehiclePlate = "ONS0209"
+                Registered = true,                
+                //Value = 1.50m,
             };
 
             var notification = new Notification()
-            {
+            {                
+                GuardId = viewModel.GuardId,                
+                VehicleId = viewModel.VehicleId,
+                VehicleLicensePlate = viewModel.VehiclePlate,
+                Type = viewModel.Type,
                 Address = viewModel.Address,
                 Comments = viewModel.Comments,
-                GuardId = viewModel.GuardId,
-                NotificationAmount = viewModel.NotificationAmount,
-                PayerId = viewModel.PayerId,
-                RegisteredVehicle = viewModel.Registered,
-                Token = viewModel.Token,
-                TransactionId = viewModel.TransactionId,
-                Type = viewModel.Type,
-                Value = viewModel.Value,
-                VehicleId = viewModel.VehicleId,
-                VehicleLicensePlate = viewModel.VehiclePlate
+                RegisteredVehicle = viewModel.Registered,                
+                //Value = viewModel.Value,
             };
 
             _notificationEntityMapping.RegisterWith(Arg.Is<NotificationRegisterViewModel>(
-                x => x.Address == viewModel.Address))
+                x => x.GuardId == viewModel.GuardId &&
+                    x.VehicleId == viewModel.VehicleId &&
+                    x.VehiclePlate == viewModel.VehiclePlate &&
+                    x.Type == viewModel.Type &&
+                    x.Address == viewModel.Address &&
+                    x.Comments == viewModel.Comments &&
+                    x.Registered == viewModel.Registered))
                 .Returns(notification);
 
             // Act
@@ -78,37 +78,21 @@ namespace Tests.Unit.Service.Services
             // Arrange
             var viewModel = new NotificationUpdateViewModel
             {
-                Id = 3,
-                Address = "Rua XV de Novembro",
-                Comments = "Horário Expirado",
-                GuardId = 7,
-                NotificationAmount = 2,
-                PayerId = "8",
-                Token = "15",
-                TransactionId = "92",
-                Type = VehicleType.Carro,
-                Value = 1.50m,
-                VehicleId = 14,
+                Id = 3,                
+                NotificationAmount = 1,                
             };
 
             var notificationToEdit = new Notification
             {
-                Id = 8,
-                Address = "Rua 7 de Setembro",
-                Comments = "Horário Expirado",
-                GuardId = 7,
-                NotificationAmount = 2,
-                PayerId = "8",
-                Token = "15",
-                TransactionId = "92",
-                Type = VehicleType.Moto,
-                Value = 1.50m,
-                VehicleId = 26,
+                Id = 8,                
+                NotificationAmount = 2,                
             };
 
             _notificationEntityMapping.UpdateWith(
-                Arg.Is<Notification>(x => x.Address == notificationToEdit.Address),
-                Arg.Is<NotificationUpdateViewModel>(x => x.Address == viewModel.Address))
+                Arg.Is<Notification>(x => x.Id == notificationToEdit.Id &&
+                    x.NotificationAmount == notificationToEdit.NotificationAmount),
+                Arg.Is<NotificationUpdateViewModel>(x => x.Id == viewModel.Id &&
+                    x.NotificationAmount == viewModel.NotificationAmount))
                 .Returns(notificationToEdit);
 
             _notificationRepository.GetById(Arg.Is(viewModel.Id)).Returns(notificationToEdit);
@@ -163,12 +147,12 @@ namespace Tests.Unit.Service.Services
                 Comments = "Horário Expirado",
                 GuardId = 7,
                 NotificationAmount = 2,
-                PayerId = "8",                
+                PayerId = "8",
                 Token = "15",
                 TransactionId = "92",
                 Type = VehicleType.Carro,
                 Value = 1.50m,
-                VehicleId = 14,               
+                VehicleId = 14,
             };
 
             _notificationRepository.GetById(Arg.Is(id))
@@ -215,12 +199,7 @@ namespace Tests.Unit.Service.Services
             notification.VehicleLicensePlate.Should().Be(viewModel.VehiclePlate);
             notification.RegisteredVehicle.Should().Be(viewModel.Registered);
             notification.Comments.Should().Be(viewModel.Comments);
-            notification.Address.Should().Be(viewModel.Address);
-            notification.NotificationAmount.Should().Be(viewModel.NotificationAmount);
-            notification.Token.Should().Be(viewModel.Token);
-            notification.PayerId.Should().Be(viewModel.PayerId);
-            notification.TransactionId.Should().Be(viewModel.TransactionId);
-            notification.Value.Should().Be(viewModel.Value);
+            notification.Address.Should().Be(viewModel.Address);            
             notification.Type.Should().Be(viewModel.Type);
 
             return true;
@@ -228,17 +207,8 @@ namespace Tests.Unit.Service.Services
 
         private bool ValidateNotificationWithNotificationUpdateViewModel(Notification notification, Notification notificationExpected)
         {
-            notification.Id.Should().Be(notificationExpected.Id);
-            notification.GuardId.Should().Be(notificationExpected.GuardId);
-            notification.VehicleId.Should().Be(notificationExpected.VehicleId);
-            notification.Comments.Should().Be(notificationExpected.Comments);
-            notification.Address.Should().Be(notificationExpected.Address);
-            notification.NotificationAmount.Should().Be(notificationExpected.NotificationAmount);
-            notification.Token.Should().Be(notificationExpected.Token);
-            notification.PayerId.Should().Be(notificationExpected.PayerId);
-            notification.TransactionId.Should().Be(notificationExpected.TransactionId);
-            notification.Value.Should().Be(notificationExpected.Value);
-            notification.Type.Should().Be(notificationExpected.Type);
+            notification.Id.Should().Be(notificationExpected.Id);            
+            notification.NotificationAmount.Should().Be(notificationExpected.NotificationAmount);            
 
             return true;
         }

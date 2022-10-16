@@ -60,7 +60,10 @@ namespace Tests.Unit.Service.Services
             };
 
             _vehicleEntityMapping.RegisterWith(Arg.Is<VehicleRegisterViewModel>(
-                x => x.LicensePlate == viewModel.LicensePlate))
+                x => x.LicensePlate == viewModel.LicensePlate &&
+                    x.Model == viewModel.Model &&
+                    x.Type == viewModel.Type &&
+                    x.UserId == viewModel.UserId))
                 .Returns(vehicle);
 
             // Act
@@ -88,14 +91,22 @@ namespace Tests.Unit.Service.Services
             {
                 Id = 4,
                 LicensePlate = "MSA7J00",
-                Model = "Fiat Mobi",
-                Type = VehicleType.Carro,
+                Model = "Honda CG 125",
+                Type = VehicleType.Moto,
                 UserId = 7
             };
 
             _vehicleEntityMapping.UpdateWith(
-                Arg.Is<Vehicle>(x => x.LicensePlate == vehicleToEdit.LicensePlate),
-                Arg.Is<VehicleUpdateViewModel>(x => x.LicensePlate == viewModel.LicensePlate))
+                Arg.Is<Vehicle>(x => x.Id == viewModel.Id &&
+                    x.LicensePlate == vehicleToEdit.LicensePlate &&
+                    x.Model == vehicleToEdit.Model &&
+                    x.Type == vehicleToEdit.Type &&
+                    x.UserId == vehicleToEdit.UserId),
+                Arg.Is<VehicleUpdateViewModel>(x => x.Id == viewModel.Id &&
+                    x.LicensePlate == viewModel.LicensePlate &&
+                    x.Model == viewModel.Model &&
+                    x.Type == viewModel.Type &&
+                    x.UserId == viewModel.UserId))                   
                 .Returns(vehicleToEdit);
 
             _vehicleRepository.GetById(Arg.Is(viewModel.Id)).Returns(vehicleToEdit);
@@ -115,8 +126,8 @@ namespace Tests.Unit.Service.Services
             var viewModel = new VehicleUpdateViewModel
             {
                 Id = 4,
-                LicensePlate = "MRA7745",
-                Model = "Fiat Uno",
+                LicensePlate = "MRA7K45",
+                Model = "Fiat Mobi",
                 Type = VehicleType.Carro,
                 UserId = 5
             };

@@ -1,5 +1,6 @@
 ﻿using Bogus;
 using Entra21.CSharp.Area21.Repository.Entities;
+using Entra21.CSharp.Area21.Repository.Enums;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Notifications;
 using Entra21.CSharp.Area21.Service.ViewModels.Notifications;
 using FluentAssertions;
@@ -30,12 +31,10 @@ namespace Tests.Unit.Service.EntitiesMappings
             notification.VehicleLicensePlate.Should().Be(viewModel.VehiclePlate);
             notification.RegisteredVehicle.Should().Be(viewModel.Registered);
             notification.Comments.Should().Be(viewModel.Comments);
-            notification.Address.Should().Be(viewModel.Address);
-            notification.NotificationAmount.Should().Be(viewModel.NotificationAmount);
-            notification.Token.Should().Be(viewModel.Token);
-            notification.PayerId.Should().Be(viewModel.PayerId);
-            notification.TransactionId.Should().Be(viewModel.TransactionId);
+            notification.Address.Should().Be(viewModel.Address);            
             notification.Value.Should().Be(viewModel.Value);
+            notification.Type.Should().Be(viewModel.Type);
+
         }
 
         [Fact]
@@ -53,6 +52,24 @@ namespace Tests.Unit.Service.EntitiesMappings
             notification.Address.Should().Be(viewModelEdit.Address);
         }
 
+        [Fact]
+        public void Test_UpdateWithPayment()
+        {
+            // Arrange
+            var notificationPayment = NotificationCreated();
+
+            var viewModelEdit = UpdatePaymentNotification();
+
+            // Act
+            _notificationEntityMapping.UpdateWithPayment(notificationPayment, viewModelEdit);
+
+            // Assert
+            notificationPayment.PayerId.Should().Be(viewModelEdit.PayerId);
+            notificationPayment.TransactionId.Should().Be(viewModelEdit.TransactionId);
+            notificationPayment.Token.Should().Be(viewModelEdit.Token);
+        }
+
+
         private NotificationRegisterViewModel RegisterNotification()
             => new Faker<NotificationRegisterViewModel>()
             .RuleFor(x => x.GuardId, x => x.Random.Number())
@@ -60,38 +77,30 @@ namespace Tests.Unit.Service.EntitiesMappings
             .RuleFor(x => x.VehiclePlate, x => x.Random.Word())
             .RuleFor(x => x.Registered, x => true)
             .RuleFor(x => x.Comments, x => x.Random.Word())
-            .RuleFor(x => x.Address, x => x.Random.Word())
-            .RuleFor(x => x.NotificationAmount, x => x.Random.Number())
-            .RuleFor(x => x.Token, x => x.Random.Word())
-            .RuleFor(x => x.PayerId, x => x.Random.Word())
-            .RuleFor(x => x.TransactionId, x => x.Random.Word())
+            .RuleFor(x => x.Address, x => "Rua XV de Novembro")            
             .RuleFor(x => x.Value, x => x.Random.Number())
+            .RuleFor(x => x.Type, x => VehicleType.Carro)
             .Generate();
 
         private Notification NotificationCreated()
-            => new Faker<Notification>()
-            .RuleFor(x => x.GuardId, x => x.Random.Number())
-            .RuleFor(x => x.VehicleId, x => x.Random.Number())      
-            .RuleFor(x => x.Comments, x => x.Random.Word())
-            .RuleFor(x => x.Address, x => x.Random.Word())
-            .RuleFor(x => x.NotificationAmount, x => x.Random.Number())
-            .RuleFor(x => x.Token, x => x.Random.Word())
-            .RuleFor(x => x.PayerId, x => x.Random.Word())
-            .RuleFor(x => x.TransactionId, x => x.Random.Word())
-            .RuleFor(x => x.Value, x => x.Random.Number())
+            => new Faker<Notification>()         
+            .RuleFor(x => x.NotificationAmount, x => x.Random.Number())            
+            .RuleFor(x => x.PayerId, x => x.Random.Word())            
+            .RuleFor(x => x.TransactionId, x => x.Random.Word())            
+            .RuleFor(x => x.Token, x => x.Random.Word())    
             .Generate();
 
         private NotificationUpdateViewModel UpdateNotification()
-            => new Faker<NotificationUpdateViewModel>()
-            .RuleFor(x => x.GuardId, x => x.Random.Number())
-            .RuleFor(x => x.VehicleId, x => x.Random.Number())            
-            .RuleFor(x => x.Comments, x => x.Random.Word())
-            .RuleFor(x => x.Address, x => x.Random.Word())
-            .RuleFor(x => x.NotificationAmount, x => x.Random.Number())
-            .RuleFor(x => x.Token, x => x.Random.Word())
+            => new Faker<NotificationUpdateViewModel>()          
+            .RuleFor(x => x.NotificationAmount, x => x.Random.Number())            
+            .Generate();
+
+        private NotificationUpdateViewModel UpdatePaymentNotification()
+             => new Faker<NotificationUpdateViewModel>()
             .RuleFor(x => x.PayerId, x => x.Random.Word())
             .RuleFor(x => x.TransactionId, x => x.Random.Word())
-            .RuleFor(x => x.Value, x => x.Random.Number())
+            .RuleFor(x => x.Token, x => x.Random.Word())            
             .Generate();
+
     }
 }
