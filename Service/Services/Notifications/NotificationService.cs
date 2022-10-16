@@ -53,6 +53,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
             var fileName = $"..\\Application\\wwwroot\\Theme\\global\\notifications\\{notification.Vehicle.User}.{DateTime.Now.ToString("dd/MM/yyyy-HH:mm:ss")}";
             var file = new FileStream(fileName, FileMode.Create);
             var document = new Document(PageSize.A4);
+            var writer = PdfWriter.GetInstance(document, file);
 
             document.Open();
 
@@ -61,7 +62,8 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
             var fontParagraph = new Font(baseFont, 16, Font.NORMAL, BaseColor.BLACK);
             var fontTitle = new Font(baseFont, 32, Font.NORMAL, BaseColor.BLACK);
 
-            var title = new Paragraph($"Notificação - {notification.Vehicle.LicensePlate}");
+            var title = new Paragraph($"Notificação - {notification.Vehicle.LicensePlate}", fontTitle);
+            title.Alignment = Element.ALIGN_LEFT;
             document.Add(title);
 
             var paragraph = new Paragraph(@$"
@@ -69,8 +71,10 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
 Para pagar esta notificação, você deverá entrar no site por meio do QR code abaixo, ou pelo link {link}:
 
 Caso não seja pago no tempo de quinze dias, o valor será passado de R$ 7,50 para R$ 12,50.
-");
-            document.Add(paragraph)
+", fontParagraph);
+            document.Add(paragraph);
+
+            document.Close();
         }
     }
 }
