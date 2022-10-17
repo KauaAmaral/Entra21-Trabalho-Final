@@ -22,7 +22,8 @@ let driverUpdateVehicle = (buttonUpdate) => {
         .then((data) => {
             if (statusResponse === 200) {
                 let modal = new bootstrap.Modal(document.getElementById('vehicleUpdateModal'), {});
-
+                
+                document.getElementById('updateVehicleModalId').value = data.id;
                 document.getElementById('campo-licensePlate-update').value = data.licensePlate;
                 document.getElementById('campo-model-update').value = data.model;
                 $('#campo-type-update')
@@ -37,11 +38,13 @@ let driverUpdateVehicle = (buttonUpdate) => {
 }
 
 let vehicleDriverUpdate = () => {
+    let id = document.getElementById("updateVehicleModalId").value;
     let licensePlate = document.getElementById("campo-licensePlate-update").value;
     let model = document.getElementById("campo-model-update").value;
     let type = document.getElementById("campo-type-update").value;
 
     let dados = new FormData();
+    dados.append("id", id);
     dados.append("licensePlate", licensePlate);
     dados.append("model", model);
     dados.append("type", type);

@@ -80,7 +80,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
             ViewBag.VehicleType = GetVehicleType();
 
-            return View(vehicleUpdateViewModel);
+            //return View(vehicleUpdateViewModel);
 
 
             //_vehicleService.Update(vehicleUpdateViewModel);

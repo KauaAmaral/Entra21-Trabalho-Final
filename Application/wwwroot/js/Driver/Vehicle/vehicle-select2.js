@@ -1,5 +1,4 @@
-﻿debugger;
-$('#campo-type').select2({
+﻿$('#campo-type').select2({
     ajax: {
         url: '/driver/vehicle/getVehicleType',
         dataType: 'json',
