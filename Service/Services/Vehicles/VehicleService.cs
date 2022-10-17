@@ -6,7 +6,7 @@ using Entra21.CSharp.Area21.Service.ViewModels.Vehicles;
 
 namespace Entra21.CSharp.Area21.Service.Services.Vehicles
 {
-    internal class VehicleService : IVehicleService
+    public class VehicleService : IVehicleService
     {
         private readonly IVehicleRepository _vehicleRepository;
         private readonly IVehicleEntityMapping _vehicleEntityMapping;
