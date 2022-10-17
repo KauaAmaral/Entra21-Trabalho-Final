@@ -13,7 +13,7 @@ let driverUpdateVehicle = (buttonUpdate) => {
     let id = buttonUpdate.getAttribute('data-id');
     let statusResponse = 0;
 
-    fetch(`/driver/vehicle/getById?id=${id}`)
+    fetch(`/driver/vehicle/GetViewModelById?id=${id}`)
         .then((response) => {
             statusResponse = response.status;
 
@@ -22,11 +22,14 @@ let driverUpdateVehicle = (buttonUpdate) => {
         .then((data) => {
             if (statusResponse === 200) {
                 let modal = new bootstrap.Modal(document.getElementById('vehicleUpdateModal'), {});
-
-                //document.getElementById('cadastroPetModalLabel').innerText = `Editar PET: ${data.nome}`
-                document.getElementById('campo-licensePlate').value = data.licensePlate;
-                document.getElementById('campo-model').value = data.model;
-                document.getElementById('campo-type').value = data.type;
+                
+                document.getElementById('updateVehicleModalId').value = data.id;
+                document.getElementById('campo-licensePlate-update').value = data.licensePlate;
+                document.getElementById('campo-model-update').value = data.model;
+                $('#campo-type-update')
+                    .append(new Option(data.typeName, data.type, false, false))
+                    .val(data.type)
+                    .trigger('change');
 
                 modal.show();
             }
@@ -34,40 +37,66 @@ let driverUpdateVehicle = (buttonUpdate) => {
         .catch((error) => console.log(error));
 }
 
+let vehicleDriverUpdate = () => {
+    let id = document.getElementById("updateVehicleModalId").value;
+    let licensePlate = document.getElementById("campo-licensePlate-update").value;
+    let model = document.getElementById("campo-model-update").value;
+    let type = document.getElementById("campo-type-update").value;
+
+    let dados = new FormData();
+    dados.append("id", id);
+    dados.append("licensePlate", licensePlate);
+    dados.append("model", model);
+    dados.append("type", type);
+
+    console.log(dados);
+
+    return dados;
+}
+
+let saveUpdateVehicleDriver = () => {
+    let formData = vehicleDriverUpdate();
+
+    vehicleUpdate(formData);
+}
+
 let vehicleUpdate = (formData) => {
-
     let statusResponse = 0;
-
     fetch('/driver/vehicle/update', {
         method: 'POST',
         body: formData
     })
-        .then((response) => {
-            statusResponse = response.status;
+        //.then((response) => {
+        //    statusResponse = response.status;
 
-            return response.json();
-        })
+        //    return response.json();
+        //})
         .then((data) => {
-            if (statusResponse === 200) {
-                bootstrap.Modal.getInstance(document.getElementById('vehicleUpdateModal')).hide();
+            //if (statusResponse === 200) {
+            debugger;
 
-                userClearFields();
+            //let modal = bootstrap.Modal.getInstance(document.getElementById('vehicleUpdateModal'), {});
+            //modal.hide();
 
-                $('#vehicles-id').DataTable().ajax.reload();
+            $("#vehicleUpdateModal .btn-close-update").click();
 
-                toastr.success('Vehicle alterado com sucesso');
+            $('#table-vehicle-driver').DataTable().ajax.reload();
 
-                return;
-            }
+            toastr.success('Veículo alterado com sucesso');
 
-            //showNotificationErrorsOfValidation(data);
+            //vehicleClearFields();
+
+            return;
+            //}
+
+            showNotificationErrorsOfValidation(data);
         })
-    //.catch((error) => {
-    //    console.error(error);
+    .catch((error) => {
+        console.error(error);
 
-    //    toastr.error('Não foi possível alterar o usuario');
-    //});
+        toastr.error('Não foi possível alterar o veículo');
+    });
 };
 
 document.getElementById("button-update-vehicle")
-    .addEventListener("click", userUpdate);
+    .addEventListener("click", saveUpdateVehicleDriver);
