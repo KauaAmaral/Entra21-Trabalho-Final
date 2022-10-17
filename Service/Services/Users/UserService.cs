@@ -1,4 +1,5 @@
 ﻿using Entra21.CSharp.Area21.Repository.Entities;
+using Entra21.CSharp.Area21.Repository.Enums;
 using Entra21.CSharp.Area21.Repository.Repositories.Users;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Users;
@@ -37,8 +38,9 @@ namespace Entra21.CSharp.Area21.Service.Services.Users
             return user;
         }
 
-        public User? GetById(int id) => 
+        public User? GetById(int id) =>
             _userRepository.GetById(id);
+
 
         public User Insert(UserRegisterViewModel viewModel)
         {
@@ -132,6 +134,23 @@ namespace Entra21.CSharp.Area21.Service.Services.Users
             var user = _userRepository.GetByCpf(cpf);
 
             return user;
+        }
+
+        public UserUpdateAdministratorViewModel? GetViewModelById(int id)
+        {
+            var user = _userRepository.GetById(id);
+
+            var userUpdateAdministratorViewModel = new UserUpdateAdministratorViewModel
+            {
+                Id = user.Id,
+                Cpf = user.Cpf,
+                Email = user.Email,
+                Name = user.Name,
+                Phone = user.Phone,
+                HierarchyId = user.Hierarchy,
+                TypeName = Enum.GetName(typeof(UserHierarchy), user.Hierarchy)?.ToString() ?? string.Empty
+            };
+            return userUpdateAdministratorViewModel;
         }
     }
 }

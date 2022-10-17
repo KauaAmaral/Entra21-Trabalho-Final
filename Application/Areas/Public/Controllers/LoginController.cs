@@ -97,7 +97,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
             var token = Guid.NewGuid();
 
             userRegisterViewModel.Token = token;
-            userRegisterViewModel.Hierarchy = Repository.Enums.UserHierarchy.Motorista;
+            userRegisterViewModel.HierarchyId = Repository.Enums.UserHierarchy.Motorista;
 
             var user = _userService.Insert(userRegisterViewModel);
 

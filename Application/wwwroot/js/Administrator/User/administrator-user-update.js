@@ -3,14 +3,45 @@
         ? event.target.parentElement
         : event.target;
 
-    administratorUserUpdateFillModal(element);
+    administratorUserUpdateFillModalUserData(element);
+
+    administratorUserUpdateFillModalGuardData(element);
 });
 
-let administratorUserUpdateFillModal = (buttonUpdate) => {
+
+let administratorUserUpdateFillModalGuardData = (buttonUpdate) => {
+    let id = buttonUpdate.getAttribute('data-id');
+    let statusResponse = 0;
+    debugger;
+    fetch(`/administrator/users/getByIdGuard?id=${id}`)
+        .then((response) => {
+            statusResponse = response.status;
+
+            return response.json();
+        })
+        .then((data) => {
+            if (statusResponse === 200) {
+                debugger;
+                if (data.identificationNumber != "undefined") {
+                    document.getElementById('campo-identification').value = data.identificationNumber;
+                }
+            }
+            else {
+                return;
+            }
+        })
+        .catch((error) => console.log(error));
+
+    if (statusResponse === 0) {
+        document.getElementById('campo-identification').value = '';
+    }
+};
+
+let administratorUserUpdateFillModalUserData = (buttonUpdate) => {
     let id = buttonUpdate.getAttribute('data-id');
     let statusResponse = 0;
 
-    fetch(`/administrator/users/getById?id=${id}`)
+    fetch(`/administrator/users/getViewModelById?id=${id}`)
         .then((response) => {
             statusResponse = response.status;
 
@@ -25,14 +56,14 @@ let administratorUserUpdateFillModal = (buttonUpdate) => {
                 document.getElementById('campo-name').value = data.name;
                 document.getElementById('campo-cpf').value = data.cpf;
                 document.getElementById('campo-phone').value = data.phone;
-                document.getElementById('campo-identification').value = data.identificationId;
                 document.getElementById('campo-password').value = "";
                 document.getElementById('campo-confirm-password').value = "";
 
                 debugger;
 
-                $('campo-hierarchy')
-                    .val(data.hierarchy)
+                $('#campo-hierarchy')
+                    .append(new Option(data.typeName, data.hierarchyId, false, false))
+                    .val(data.hierarchyId)
                     .trigger('change');
 
                 modal.show();

@@ -4,7 +4,7 @@ using Entra21.CSharp.Area21.Service.ViewModels.Users;
 
 namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Users
 {
-    internal class UserEntityMapping : IUserEntityMapping
+    public class UserEntityMapping : IUserEntityMapping
     {
         public User RegisterWith(UserRegisterViewModel viewModel) =>
             new User
@@ -15,7 +15,7 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Users
                 Email = viewModel.Email,
                 Password = viewModel.Password.GetHash(),
                 Cpf = viewModel.Cpf,
-                Hierarchy = viewModel.Hierarchy,
+                Hierarchy = viewModel.HierarchyId,
                 CreatedAt = DateTime.Now
             };
 
@@ -28,7 +28,7 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Users
                 Email = viewModel.Email,
                 Password = viewModel.Password.GetHash(),
                 Cpf = viewModel.Cpf,
-                Hierarchy = viewModel.Hierarchy,
+                Hierarchy = viewModel.HierarchyId,
                 CreatedAt = DateTime.Now
             };
 
