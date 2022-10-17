@@ -41,7 +41,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         {
             var IdVehicle = Convert.ToInt32(id);
 
-            string price;
+            var price = "";
 
             var vehicle = _vehicleService.GetById(IdVehicle);
             var product = vehicle.LicensePlate;
@@ -53,10 +53,10 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             else
                 price = "0.75";
 
-            bool status = false;
-            string answer = string.Empty;
+            var status = false;
+            var answer = string.Empty;
 
-            string _urlReturn = $"https://localhost:7121/driver/Paypal/Approved?idVehicle={IdVehicle}&IdUser={idUser}";
+            var _urlReturn = $"https://localhost:7121/driver/Paypal/Approved?idVehicle={IdVehicle}&IdUser={idUser}";
 
             using (var client = new HttpClient())
             {

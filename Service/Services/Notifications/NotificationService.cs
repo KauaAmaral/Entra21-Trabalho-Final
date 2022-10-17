@@ -100,7 +100,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
 
         public void CreatePdfNotifications(Notification notification, string link)
         {
-            var fileName = $"..\\Application\\wwwroot\\Theme\\global\\notifications\\{notification.Vehicle.User}.{DateTime.Now.ToString("dd/MM/yyyy-HH:mm:ss")}";
+            var fileName = $"..\\Application\\wwwroot\\Theme\\global\\notifications\\{notification.VehicleLicensePlate}.{DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss")}.pdf";
             var file = new FileStream(fileName, FileMode.Create);
             var document = new Document(PageSize.A4);
             var writer = PdfWriter.GetInstance(document, file);
@@ -112,12 +112,12 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
             var fontParagraph = new Font(baseFont, 16, Font.NORMAL, BaseColor.BLACK);
             var fontTitle = new Font(baseFont, 32, Font.NORMAL, BaseColor.BLACK);
 
-            var title = new Paragraph($"Notificação - {notification.Vehicle.LicensePlate}", fontTitle);
+            var title = new Paragraph($"Notificação - {notification.VehicleLicensePlate}", fontTitle);
             title.Alignment = Element.ALIGN_LEFT;
             document.Add(title);
 
             var paragraph = new Paragraph(@$"
-{notification.Vehicle.User.Name}, você estacionou seu veículo de placa {notification.Vehicle.LicensePlate} sem apresentar um cartão área azul ou pagamento digital.
+Você estacionou seu veículo de placa {notification.VehicleLicensePlate} sem apresentar um cartão área azul ou pagamento digital.
 Para pagar esta notificação, você deverá entrar no site por meio do QR code abaixo, ou pelo link {link}:
 
 Caso não seja pago no tempo de quinze dias, o valor será passado de R$ 7,50 para R$ 12,50.
