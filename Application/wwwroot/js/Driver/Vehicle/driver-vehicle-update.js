@@ -28,18 +28,18 @@ let driverUpdateVehicle = (buttonUpdate) => {
                 $('#campo-type-update')
                     .append(new Option(data.typeName, data.type, false, false))
                     .val(data.type)
-                    .trigger('change'); 
-                
+                    .trigger('change');
+
                 modal.show();
             }
         })
-    //.catch((error) => console.log(error));
+        .catch((error) => console.log(error));
 }
 
 let vehicleDriverUpdate = () => {
-    let licensePlate = document.getElementById("campo-license-plate").value;
-    let model = document.getElementById("campo-model").value;
-    let type = document.getElementById("campo-type").value;
+    let licensePlate = document.getElementById("campo-licensePlate-update").value;
+    let model = document.getElementById("campo-model-update").value;
+    let type = document.getElementById("campo-type-update").value;
 
     let dados = new FormData();
     dados.append("licensePlate", licensePlate);
@@ -57,41 +57,42 @@ let saveUpdateVehicleDriver = () => {
     vehicleUpdate(formData);
 }
 
-let vehicleUpdate = (dados) => {
-
+let vehicleUpdate = (formData) => {
     let statusResponse = 0;
-
     fetch('/driver/vehicle/update', {
         method: 'POST',
-        body: dados
+        body: formData
     })
-        .then((response) => {
-            statusResponse = response.status;
+        //.then((response) => {
+        //    statusResponse = response.status;
 
-            return response.json();
-        })
+        //    return response.json();
+        //})
         .then((data) => {
-            if (statusResponse === 200) {
-                bootstrap.Modal.getInstance(document.getElementById('vehicleUpdateModal')).hide();
+            //if (statusResponse === 200) {
+            debugger;
 
-                vehicleClearFields();
+            //let modal = bootstrap.Modal.getInstance(document.getElementById('vehicleUpdateModal'), {});
+            //modal.hide();
 
-                $('#table-vehicle-driver').DataTable().ajax.reload();
+            $("#vehicleUpdateModal .btn-close-update").click();
 
-                toastr.success('Vehicle alterado com sucesso');
+            $('#table-vehicle-driver').DataTable().ajax.reload();
 
-                $("#vehicleUpdateModal .btn-close-update").click();
+            toastr.success('Veículo alterado com sucesso');
 
-                return;
-            }
+            //vehicleClearFields();
+
+            return;
+            //}
 
             showNotificationErrorsOfValidation(data);
         })
-        .catch((error) => {
-            console.error(error);
+    .catch((error) => {
+        console.error(error);
 
-            toastr.error('Não foi possível alterar o veículo');
-        });
+        toastr.error('Não foi possível alterar o veículo');
+    });
 };
 
 document.getElementById("button-update-vehicle")
