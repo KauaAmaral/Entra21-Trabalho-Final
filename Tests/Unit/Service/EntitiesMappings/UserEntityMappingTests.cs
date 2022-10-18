@@ -34,7 +34,7 @@ namespace Tests.Unit.Service.EntitiesMappings
             user.Email.Should().Be(viewModel.Email);
             user.Password.Should().Be(viewModel.Password.GetHash());
             user.Cpf.Should().Be(viewModel.Cpf);
-            user.Hierarchy.Should().Be(viewModel.Hierarchy);
+            user.Hierarchy.Should().Be(viewModel.HierarchyId);
         }    
 
         [Fact]
@@ -105,7 +105,7 @@ namespace Tests.Unit.Service.EntitiesMappings
             .RuleFor(x => x.Email, f => f.Internet.Email())
             .RuleFor(x => x.Password, f => f.Internet.Password())
             .RuleFor(x => x.Cpf, f => f.Random.Word())
-            .RuleFor(x => x.Hierarchy, f => userHierarchy)
+            .RuleFor(x => x.HierarchyId, f => userHierarchy)
             .Generate();
 
         private User UserCreated()
