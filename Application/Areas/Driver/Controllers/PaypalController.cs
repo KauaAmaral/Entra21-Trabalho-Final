@@ -37,7 +37,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> Paypal(string id, string longitude, string latitude)
+        public async Task<JsonResult> Paypal(string id)
         {
             var IdVehicle = Convert.ToInt32(id);
 
@@ -152,6 +152,12 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         public IActionResult Register()
         {
             return View();
+        }
+
+        [HttpPost("setLocation")]
+        public IActionResult SetLocation(string longitude, string latitude)
+        {
+            return View(nameof(Approved));
         }
     }
 }

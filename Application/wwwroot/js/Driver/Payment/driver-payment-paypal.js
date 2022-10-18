@@ -15,11 +15,11 @@ function getLocation() {
     }
 }
 
-function realizarPagamento(id, position) {
+function realizarPagamento(id) {
     $.ajax({
         url: '/driver/paypal',
         type: "POST",
-        data: { id: id, longitude: position.coords.longitude, latidude: position.coords.latitude },
+        data: { id: id },
         dataType: "json",
         success: function (data) {
             console.log(data);

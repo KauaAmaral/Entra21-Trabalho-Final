@@ -7,25 +7,25 @@
         @{
             if ((bool)ViewData["Status"])
             {
-                    <br />
-                    <h1 class="text-success">Obrigado!</h1>
+                <br />
+                <h1 class="text-success">Obrigado!</h1>
 
-                    <i class="far fa-check-circle fa-9x text-success"></i>
+                <i class="far fa-check-circle fa-9x text-success"></i>
 
-                    <h2 class="text-success">Seu pagamento foi realizado com êxito</h2>
-                    <h4> ID do pagamento: @ViewData["IdTransaccion"]</h4>
-                    <br />
-                    <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Voltar para Area21</a>
+                <h2 class="text-success">Seu pagamento foi realizado com êxito</h2>
+                <h4> ID do pagamento: @ViewData["IdTransaccion"]</h4>
+                <br />
+                <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Voltar para Area21</a>
 
             }
             else
             {
-                    <br />
-                    <h1 class="text-danger">Sentimos muito</h1>
-                    <i class="fas fa-exclamation-circle fa-9x text-danger"></i>
-                    <h2 class="text-danger">Seu pagamento não foi realizado com êxito</h2>
-                    <br />
-                    <a href="@Url.Action("Index","Home")" class="btn btn-primary">Voltar para Area21</a>
+                <br />
+                <h1 class="text-danger">Sentimos muito</h1>
+                <i class="fas fa-exclamation-circle fa-9x text-danger"></i>
+                <h2 class="text-danger">Seu pagamento não foi realizado com êxito</h2>
+                <br />
+                <a href="@Url.Action("Index","Home")" class="btn btn-primary">Voltar para Area21</a>
             }
 
         }
@@ -35,40 +35,24 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
-            function getLocation() {
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(sendPosition);
-                } 
+            getLocation();
+        });
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(sendPosition);
             }
-
-
-            let sendPosition(position) => {
-                $.ajax({
-                    url: '/driver/paypal',
-                    type: "POST",
-                    data: { id: id, longitude: position.coords.longitude, latidude: position.coords.latitude },
-                    dataType: "json",
-                    success: function (data) {
-                        console.log(data);
-                        if (data.status) {
-
-                            let jsonresult = JSON.parse(data.response);
-
-                            console.log(jsonresult);
-
-                            let links = jsonresult.links;
-
-                            let resultado = links.find(item => item.rel === "approve")
-
-                            window.location.href = resultado.href
-                        }
-                        else {
-                            alert("Volte mais tarde, o serviço de pagamento não está funcionado!")
-                        }
-                    }
-                });
-            }
-
         }
+
+        let sendPosition(position) => {
+            debugger;
+
+            $.ajax({
+                url: '/driver/paypal/setLocation',
+                type: "POST",
+                data: { longitude: position.coords.longitude, latidude: position.coords.latitude },
+                dataType: "json"
+            });
+        };
     </script>
 }
