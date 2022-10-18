@@ -2,31 +2,27 @@
 
 <div class="page-content row justify-content-center">
     <div class="col-6">
-        <form asp-controller="User" asp-action="Update" method="POST">
-            <input type="hidden" asp-for="Id" name="id" />
+        <form asp-action="Update" method="POST">
+            <input type="hidden" asp-for="Id"/>
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label class="form-control-label" for="name">Nome</label>
-                    <input asp-for="Name" type="text" class="form-control" id="name" name="name" placeholder="Nome">
-                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <label asp-for="Name" class="form-label">Nome</label>
+                    <input asp-for="Name" class="form-control" disabled="">
                 </div>
                 <div class="form-group col-md-6">
-                    <label class="form-control-label" for="email">Email</label>
-                    <input asp-for="Email" type="email" class="form-control" id="email" name="email" placeholder="Email">
-                    <span asp-validation-for="Email" class="text-danger"></span>
+                    <label asp-for="Email" class="form-label">Email</label>
+                    <input asp-for="Email" class="form-control" disabled="">
                 </div>
             </div>
 
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label class="form-control-label" for="cpf">CPF</label>
-                    <input asp-for="Cpf" type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF">
-                    <span asp-validation-for="Cpf" class="text-danger"></span>
+                    <label asp-for="Cpf" class="form-label">CPF</label>
+                    <input asp-for="Cpf" class="form-control" disabled="">
                 </div>
                 <div class="form-group col-md-6">
-                    <label class="form-control-label" for="phone">Telefone</label>
-                    <input asp-for="Phone" type="text" class="form-control" id="phone" name="phone" placeholder="Telefone">
-                    <span asp-validation-for="Phone" class="text-danger"></span>
+                    <label asp-for="Phone" class="form-label">Telefone</label>
+                    <input asp-for="Phone" class="form-control" disabled="">
                 </div>
             </div>
             <div class="form-group">
