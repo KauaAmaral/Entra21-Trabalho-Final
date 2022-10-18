@@ -1,26 +1,26 @@
 ﻿@{
-	Layout = "/Areas/Public/Views/Shared/_Layout.cshtml";
+    Layout = "/Areas/Public/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
 <html>
 <body>
 
-<h1>My First Google Map</h1>
+    <h1>My First Google Map</h1>
 
-<div id="googleMap" style="width:100%;height:400px;"></div>
+    <div id="googleMap" style="width:100%;height:400px;"></div>
 
-<script>
-function myMap() {
-var mapProp= {
-  center:new google.maps.LatLng(51.508742,-0.120850),
-  zoom:5,
-};
-var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-}
-</script>
+    <script>
+        function myMap() {
+            var mapProp = {
+                center: new google.maps.LatLng(51.508742, -0.120850),
+                zoom: 5,
+            };
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+        }
+    </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl5EjVV5roMTtLPWNS6wpEh4GaGVRnpJU&callback=myMap"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl5EjVV5roMTtLPWNS6wpEh4GaGVRnpJU&callback=myMap"></script>
 
 </body>
 </html>
@@ -38,14 +38,14 @@ var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
             new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
             map.getProjectionObject() // to Spherical Mercator Projection
           );
-          
+
     var zoom=16;
 
     var markers = new OpenLayers.Layer.Markers( "Markers" );
     map.addLayer(markers);
-    
+
     markers.addMarker(new OpenLayers.Marker(lonLat));
-    
+
     map.setCenter (lonLat, zoom);
   </script>
 </body>
