@@ -1,58 +1,73 @@
 ﻿@{
-    ViewBag.Title = "Approvado";
+	ViewBag.Title = "Approvado";
 }
 <div class="row">
-    <div class="col-sm-12 text-center">
+	<div class="col-sm-12 text-center">
 
-        @{
-            if ((bool)ViewData["Status"])
-            {
-                <br />
-                <h1 class="text-success">Obrigado!</h1>
+		@{
+			if ((bool)ViewData["Status"])
+			{
+				<br />
+				<h1 class="text-success">Obrigado!</h1>
 
-                <i class="far fa-check-circle fa-9x text-success"></i>
+				<i class="far fa-check-circle fa-9x text-success"></i>
 
-                <h2 class="text-success">Seu pagamento foi realizado com êxito</h2>
-                <h4> ID do pagamento: @ViewData["IdTransaccion"]</h4>
-                <br />
-                <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Voltar para Area21</a>
+				<h2 class="text-success">Seu pagamento foi realizado com êxito</h2>
+				<h4> ID do pagamento: @ViewData["IdTransaccion"]</h4>
+				<br />
+				<a href="@Url.Action("Index", "Home")" class="btn btn-primary">Voltar para Area21</a>
 
-            }
-            else
-            {
-                <br />
-                <h1 class="text-danger">Sentimos muito</h1>
-                <i class="fas fa-exclamation-circle fa-9x text-danger"></i>
-                <h2 class="text-danger">Seu pagamento não foi realizado com êxito</h2>
-                <br />
-                <a href="@Url.Action("Index","Home")" class="btn btn-primary">Voltar para Area21</a>
-            }
+			}
+			else
+			{
+				<br />
+				<h1 class="text-danger">Sentimos muito</h1>
+				<i class="fas fa-exclamation-circle fa-9x text-danger"></i>
+				<h2 class="text-danger">Seu pagamento não foi realizado com êxito</h2>
+				<br />
+				<a href="@Url.Action("Index","Home")" class="btn btn-primary">Voltar para Area21</a>
+			}
 
-        }
-    </div>
+		}
+	</div>
 </div>
 
 @section Scripts {
-    <script>
-        $(document).ready(function () {
-            getLocation();
-        });
+<script>
+	$(document).ready(function(){
+		debugger;
+		getLocation();
+	});
 
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(sendPosition);
-            }
-        }
+	function getLocation() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(sendPosition);
+		}
+	}
 
-        let sendPosition(position) => {
-            debugger;
+	let sendPosition = (position) => {
+		let latitude = position.coords.latitude;
+		let longitude = position.coords.longitude;
 
-            $.ajax({
-                url: '/driver/paypal/setLocation',
-                type: "POST",
-                data: { longitude: position.coords.longitude, latidude: position.coords.latitude },
-                dataType: "json"
-            });
-        };
-    </script>
+		let formData = new FormData();
+		formData.append('latitude', position.coords.latitude);
+		formData.append('longitude', position.coords.longitude);
+
+		debugger;
+
+		let statusResponse = 0;
+
+		fetch('/driver/paypal/setLocation', {
+			method: 'POST',
+			body: formData
+		})
+		.then((data) => {
+		if (statusResponse === 200) {
+			console.log(position.coords.latitude);
+			console.log(position.coords.longitude);
+		}
+	});
+	}
+
+</script>
 }

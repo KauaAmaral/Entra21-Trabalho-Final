@@ -155,9 +155,15 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         }
 
         [HttpPost("setLocation")]
-        public IActionResult SetLocation(string longitude, string latitude)
+        public void SetLocation(string longitude, string latitude)
         {
-            return View(nameof(Approved));
+            var viewModel = new PaymentUpdateViewModel
+            {
+                Latitude = latitude,
+                Longitude = longitude
+            };
+
+            _paymentService.UpdateLocation(viewModel);
         }
     }
 }

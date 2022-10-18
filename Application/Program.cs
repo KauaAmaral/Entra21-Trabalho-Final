@@ -88,7 +88,7 @@ app.UseEndpoints(endpoint =>
     endpoint.MapAreaControllerRoute(
         name: "AreaPublic",
         areaName: "Public",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
+        pattern: "Public/{controller=HomeDriver}/{action=Index}/{id?}");
 
     endpoint.MapControllerRoute(
         name: "default",

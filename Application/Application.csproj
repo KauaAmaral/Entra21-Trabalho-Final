@@ -42,7 +42,6 @@
 
 	<ItemGroup>
 	  <Folder Include="Areas\Logged\Controllers\" />
-	  <Folder Include="Areas\Public\Views\Map\" />
 	</ItemGroup>
 
 </Project>
