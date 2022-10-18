@@ -348,4 +348,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/Application/wwwroot/Theme/global/notifications
 /Application/Properties/ServiceDependencies/area21 - Zip Deploy/profile.arm.json
