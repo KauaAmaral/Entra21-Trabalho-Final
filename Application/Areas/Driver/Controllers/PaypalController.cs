@@ -37,7 +37,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> Paypal(string id)
+        public async Task<JsonResult> Paypal(string id, string longitude, string latitude)
         {
             var IdVehicle = Convert.ToInt32(id);
 
