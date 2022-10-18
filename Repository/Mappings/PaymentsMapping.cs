@@ -61,6 +61,14 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .HasPrecision(5, 2)
                 .IsRequired()
                 .HasColumnName("value");
+            
+            builder.Property(x => x.Latitude)
+                .HasColumnType("VARCHAR")
+                .HasColumnName("latitude");
+
+            builder.Property(x => x.Longitude)
+                .HasColumnType("VARCHAR")
+                .HasColumnName("longitude");
 
             builder.HasOne(x => x.Vehicle)
                 .WithMany(x => x.Payments)
