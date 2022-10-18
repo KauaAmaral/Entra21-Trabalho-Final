@@ -49,7 +49,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Payments
 
         public bool UpdateLocation(PaymentUpdateViewModel viewModel)
         {
-            var payment = _paymentRepository.GetById(viewModel.Id);
+            var payment = _paymentRepository.GetByTransactionId(viewModel.TransactionId);
 
             if (payment == null)
                 return false;
