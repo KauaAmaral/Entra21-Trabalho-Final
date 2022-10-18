@@ -3,17 +3,17 @@
         ? event.target.parentElement
         : event.target;
 
-    driverUpdateVehicle(element);
+    driverUpdateUser(element);
 });
 
 // Limpar os campos quando a modal for fechada
 document.getElementById('vehicleUpdateModal').addEventListener('hide.bs.modal', () => vehicleClearFields());
 
-let driverUpdateVehicle = (buttonUpdate) => {
+let driverUpdateUser = (buttonUpdate) => {
     let id = buttonUpdate.getAttribute('data-id');
     let statusResponse = 0;
 
-    fetch(`/driver/vehicle/GetViewModelById?id=${id}`)
+    fetch(`/driver/user/getById?id=${id}`)
         .then((response) => {
             statusResponse = response.status;
 
@@ -21,15 +21,14 @@ let driverUpdateVehicle = (buttonUpdate) => {
         })
         .then((data) => {
             if (statusResponse === 200) {
-                let modal = new bootstrap.Modal(document.getElementById('vehicleUpdateModal'), {});
+                let modal = new bootstrap.Modal(document.getElementById('userUpdateModal'), {});
                 
-                document.getElementById('updateVehicleModalId').value = data.id;
-                document.getElementById('campo-licensePlate-update').value = data.licensePlate;
-                document.getElementById('campo-model-update').value = data.model;
-                $('#campo-type-update')
-                    .append(new Option(data.typeName, data.type, false, false))
-                    .val(data.type)
-                    .trigger('change');
+                document.getElementById('updateUserModalId').value = data.id;
+                document.getElementById('campo-name-update').value = data.name;
+                document.getElementById('campo-email-update').value = data.email;
+                document.getElementById('campo-cpf-update').value = data.cpf;
+                document.getElementById('campo-phone-update').value = data.phone;
+            
 
                 modal.show();
             }
@@ -37,32 +36,34 @@ let driverUpdateVehicle = (buttonUpdate) => {
         .catch((error) => console.log(error));
 }
 
-let vehicleDriverUpdate = () => {
-    let id = document.getElementById("updateVehicleModalId").value;
-    let licensePlate = document.getElementById("campo-licensePlate-update").value;
-    let model = document.getElementById("campo-model-update").value;
-    let type = document.getElementById("campo-type-update").value;
+let userDriverUpdate = () => {
+    let id = document.getElementById("updateUserModalId").value;
+    let name = document.getElementById("campo-name-update").value;
+    let email = document.getElementById("campo-email-update").value;
+    let cpf = document.getElementById("campo-cpf-update").value;
+    let phone = document.getElementById("campo-phone-update").value;
 
     let dados = new FormData();
     dados.append("id", id);
-    dados.append("licensePlate", licensePlate);
-    dados.append("model", model);
-    dados.append("type", type);
+    dados.append("name", name);
+    dados.append("email", email);
+    dados.append("cpf", cpf);
+    dados.append("phone", phone);
 
     console.log(dados);
 
     return dados;
 }
 
-let saveUpdateVehicleDriver = () => {
-    let formData = vehicleDriverUpdate();
+let saveUpdateUserDriver = () => {
+    let formData = userDriverUpdate();
 
-    vehicleUpdate(formData);
+    userUpdate(formData);
 }
 
-let vehicleUpdate = (formData) => {
+let userUpdate = (formData) => {
     let statusResponse = 0;
-    fetch('/driver/vehicle/update', {
+    fetch('/driver/user/update', {
         method: 'POST',
         body: formData
     })
@@ -78,9 +79,9 @@ let vehicleUpdate = (formData) => {
             //let modal = bootstrap.Modal.getInstance(document.getElementById('vehicleUpdateModal'), {});
             //modal.hide();
 
-            $("#vehicleUpdateModal .btn-close-update").click();
+            $("#userUpdateModal .btn-close-update").click();
 
-            $('#table-vehicle-driver').DataTable().ajax.reload();
+            //$('#table-vehicle-driver').DataTable().ajax.reload();
 
             toastr.success('Veículo alterado com sucesso');
 
@@ -98,5 +99,5 @@ let vehicleUpdate = (formData) => {
     });
 };
 
-document.getElementById("button-update-vehicle")
-    .addEventListener("click", saveUpdateVehicleDriver);
+document.getElementById("button-update-driver-user")
+    .addEventListener("click", saveUpdateUserDriver);

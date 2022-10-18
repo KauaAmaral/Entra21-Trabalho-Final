@@ -95,5 +95,12 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
             return RedirectToAction("User/Index", "Login");
         }
+
+        [HttpGet("getById")]
+        public IActionResult GetById([FromQuery] int id)
+        {
+            var user = _userService.GetById(id);
+            return Ok(user);
+        }
     }
 }
