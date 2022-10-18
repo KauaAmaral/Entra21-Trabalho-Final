@@ -13,7 +13,7 @@
 				<i class="far fa-check-circle fa-9x text-success"></i>
 
 				<h2 class="text-success">Seu pagamento foi realizado com êxito</h2>
-				<h4> ID do pagamento: @ViewData["IdTransaccion"]</h4>
+				<h4> ID do pagamento: <span id="transactionId">@ViewData["IdTransaccion"]</span></h4>
 				<br />
 				<a href="@Url.Action("Index", "Home")" class="btn btn-primary">Voltar para Area21</a>
 
@@ -47,11 +47,13 @@
 
 	let sendPosition = (position) => {
 		let latitude = position.coords.latitude;
-		let longitude = position.coords.longitude;
+			let longitude = position.coords.longitude;
+			let idPagamento = document.getElementById('transactionId').innerHTML;
 
 		let formData = new FormData();
-		formData.append('latitude', position.coords.latitude);
-		formData.append('longitude', position.coords.longitude);
+			formData.append('longitude', position.coords.longitude);
+			formData.append('latitude', position.coords.latitude);
+			formData.append('transactionId', idPagamento);
 
 		debugger;
 
