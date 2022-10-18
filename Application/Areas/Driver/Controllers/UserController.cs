@@ -21,6 +21,10 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             _session = session;
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
         [HttpGet("Update")]
         public IActionResult Update()
         {
