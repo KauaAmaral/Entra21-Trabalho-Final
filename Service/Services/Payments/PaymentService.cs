@@ -47,6 +47,11 @@ namespace Entra21.CSharp.Area21.Service.Services.Payments
             return payment;
         }
 
+        public Payment UpdateLocation(PaymentUpdateViewModel viewModel) //TODO AAA CONTINUAR
+        {
+            return null;
+        }
+
         public bool ValidPayment(Vehicle vehicle)
         {
             var validPayment = true;

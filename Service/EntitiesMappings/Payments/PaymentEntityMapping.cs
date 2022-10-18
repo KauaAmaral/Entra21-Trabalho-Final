@@ -13,9 +13,15 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Payments
                 TransactionId = registerViewModel.TransactionId,
                 UserId = registerViewModel.UserId,
                 VehicleId = registerViewModel.VehicleId,
-                Value = registerViewModel.Value,
-                Latitude = registerViewModel.Latitude,
-                Longitude = registerViewModel.Longitude
+                Value = registerViewModel.Value
             };
+
+        public Payment UpdateWith(Payment payment, PaymentRegisterViewModel registerViewModel)
+        {
+            payment.Latitude = registerViewModel.Latitude;
+            payment.Longitude = registerViewModel.Longitude;
+
+            return payment;
+        }
     }
 }
