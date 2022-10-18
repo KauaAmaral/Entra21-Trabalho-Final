@@ -2,6 +2,7 @@
 
 <div align="center"> 
 <a href="https://area21.azurewebsites.net" target="_blank"><img src="https://img.shields.io/badge/-Link do site-%230077B5?style=for-the-badge" target="_blank"></a>
+</div>
 
 ![Área21](https://raw.githubusercontent.com/KauaAmaral/Entra21-Trabalho-Final/develop/Application/wwwroot/Theme/global/portraits/Sobre21.jpg)
 
