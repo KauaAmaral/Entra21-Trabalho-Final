@@ -10,14 +10,19 @@
 
 Foram utilizadas as seguintes tecnologias na construção deste projeto:
 
-* <b>C#</b>;
-* <b>Visual Studio 2022</b>;
-* <b>.NET  -  6.0</b>
-* <b>FluentAssertions - 6.7</b>
-* <b>Microsoft NET Test Sdk - 17.2</b>
-* <b>xUnit - 2.4.1</b>
-* <b>xUnit Runner VisualStudio - 2.4.5</b>
-* <b>GitHub</b>.
+* <b>ASP.NET Core</b>
+* <b>PayPal</b>
+* <b>Entity Framework</b>
+* <b>SQL Server</b>
+* <b>HTML</b>
+* <b>CSS</b>
+* <b>JavaScript</b>
+* <b>FluentAssertions</b>
+* <b>Microsoft NET Test Sdk</b>
+* <b>xUnit</b>
+* <b>xUnit Runner VisualStudio</b>
+* <b>NSubistitute</b>
+* <b>Bogus</b>
 
 ## Instalação :hammer_and_wrench:
 
