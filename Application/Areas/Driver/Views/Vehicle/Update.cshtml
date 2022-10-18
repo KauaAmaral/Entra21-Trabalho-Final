@@ -2,24 +2,28 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Editar Veiculo</h5>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">x</button>
+                <div col-3>
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Veiculo</h5>
+                </div>
+                <div col-12>
+                    <button type="button" class="btn-close-update" data-dismiss="modal" aria-label="Close">&times;</button>
+                </div>
             </div>
             <div class="modal-body">
-
+                <input id="updateVehicleModalId" class="form-control" type="hidden"/>
                 <div class="form-group">
-                    <label for="campo-licensePlate" class="form-label">Placa</label>
-                    <input type="text" id="campo-licensePlate" class="form-control" />
+                    <label for="campo-licensePlate-update" class="form-label">Placa</label>
+                    <input type="text" id="campo-licensePlate-update" class="form-control" />
                 </div>
 
                 <div class="form-group">
-                    <label for="campo-model" class="form-label">Modelo</label>
-                    <input type="text" id="campo-model" class="form-control" />
+                    <label for="campo-model-update" class="form-label">Modelo</label>
+                    <input type="text" id="campo-model-update" class="form-control" />
                 </div>
 
                 <div class="form-group">
-                    <label for="campo-type" class="form-label">Tipo</label>
-                    <select type="text" id="campo-type" class="form-select"></select>
+                    <label for="campo-type-update" class="form-label">Tipo de veículo</label>
+                    <select id="campo-type-update" class="form-select"></select>
                 </div>
             </div>
             <div class="modal-footer">

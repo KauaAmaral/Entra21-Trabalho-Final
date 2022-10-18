@@ -37,10 +37,10 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         [HttpPost("register")] // TODO: Problema para salvar
         public IActionResult Register(VehicleRegisterViewModel vehicleRegisterViewModel)
         {
-            //var user = _session.FindUserSession();
+            var user = _session.FindUserSession();
 
-            //if (user != null)
-            //    vehicleRegisterViewModel.UserId = user.Id;
+            if (user != null)
+                vehicleRegisterViewModel.UserId = user.Id;
             //else
             //    return RedirectToAction("Index", "Home");
 
@@ -56,39 +56,40 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             return Ok(vehicle);
         }
 
-        [HttpGet("update")]
-        public IActionResult Update([FromQuery] int id)
-        {
-            var vehicle = _vehicleService.GetById(id);
-            var vehicleType = GetVehicleType();
-            var user = _session.FindUserSession();
+        //[HttpGet("update")]
+        //public IActionResult Update([FromQuery] int id)
+        //{
+        //    var vehicle = _vehicleService.GetById(id);
 
-            var vehicleUpdateViewMode = new VehicleUpdateViewModel
-            {
-                Id = vehicle.Id,
-                LicensePlate = vehicle.LicensePlate,
-                Model = vehicle.Model,
-                Type = vehicle.Type
-            };
+        //    var vehicleUpdateViewMode = new VehicleUpdateViewModel
+        //    {
+        //        Id = vehicle.Id,
+        //        LicensePlate = vehicle.LicensePlate,
+        //        Model = vehicle.Model,
+        //        Type = vehicle.Type
+        //    };
 
-            ViewBag.VehicleType = vehicleType;
-
-            return View(vehicleUpdateViewMode);
-        }
+        //    return Ok(vehicleUpdateViewMode);
+        //}
 
         [HttpPost("update")]
         public IActionResult Update([FromForm] VehicleUpdateViewModel vehicleUpdateViewModel)
         {
             if (!ModelState.IsValid)
-            {
-                ViewBag.VehicleType = GetVehicleType();
+                return UnprocessableEntity(ModelState);
 
-                return View(vehicleUpdateViewModel);
-            }
+            ViewBag.VehicleType = GetVehicleType();
 
-            _vehicleService.Update(vehicleUpdateViewModel);
+            //return View(vehicleUpdateViewModel);
 
-            return RedirectToAction("Index");
+
+            //_vehicleService.Update(vehicleUpdateViewModel);
+
+            //return RedirectToAction("Index");
+
+            var atualizou = _vehicleService.Update(vehicleUpdateViewModel);
+
+            return Ok(new { status = atualizou });
         }
 
 
@@ -152,6 +153,14 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
                 .ToList();
 
             return Ok(type);
+        }
+
+
+        [HttpGet("GetViewModelById")]
+        public IActionResult GetViewModelById([FromQuery] int id)
+        {
+            var viewModel = _vehicleService.GetViewModelById(id);
+            return Ok(viewModel);
         }
     }
 }
