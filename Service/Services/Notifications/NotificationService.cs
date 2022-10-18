@@ -148,7 +148,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
 
             var baseFont = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, false);
 
-            var fontParagraph = new iTextSharp.text.Font(baseFont, 12s, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
+            var fontParagraph = new iTextSharp.text.Font(baseFont, 12, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
             var fontTitle = new iTextSharp.text.Font(baseFont, 26, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
 
             var title = new Paragraph($"Notificação - {notification.VehicleLicensePlate}", fontTitle);
