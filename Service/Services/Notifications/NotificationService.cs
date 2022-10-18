@@ -11,7 +11,7 @@ using System.Drawing;
 
 namespace Entra21.CSharp.Area21.Service.Services.Notifications
 {
-    internal class NotificationService : INotificationService
+    public class NotificationService : INotificationService
     {
         private readonly INotificationRepository _notificationRepository;
         private readonly INotificationEntityMapping _notificationEntityMapping;

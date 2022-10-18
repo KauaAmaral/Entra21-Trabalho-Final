@@ -1,4 +1,5 @@
 ﻿using Entra21.CSharp.Area21.Repository.Entities;
+using Entra21.CSharp.Area21.Repository.Enums;
 using Entra21.CSharp.Area21.Repository.Repositories.Vehicles;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Vehicles;
 using Entra21.CSharp.Area21.Service.ViewModels.Payments;
@@ -6,7 +7,7 @@ using Entra21.CSharp.Area21.Service.ViewModels.Vehicles;
 
 namespace Entra21.CSharp.Area21.Service.Services.Vehicles
 {
-    internal class VehicleService : IVehicleService
+    public class VehicleService : IVehicleService
     {
         private readonly IVehicleRepository _vehicleRepository;
         private readonly IVehicleEntityMapping _vehicleEntityMapping;
@@ -70,6 +71,21 @@ namespace Entra21.CSharp.Area21.Service.Services.Vehicles
                 LicensePlate = x.LicensePlate,
                 Type = x.Type
             }).ToList();
+        }
+
+        public VehicleUpdateViewModel? GetViewModelById(int id)
+        {
+            var vehicle = _vehicleRepository.GetById(id);
+
+            var vehicleUpdateViewMode = new VehicleUpdateViewModel
+            {
+                Id = vehicle.Id,
+                LicensePlate = vehicle.LicensePlate,
+                Model = vehicle.Model,
+                Type = vehicle.Type,
+                TypeName = Enum.GetName(typeof(VehicleType), vehicle.Type)?.ToString() ?? string.Empty
+            };
+            return vehicleUpdateViewMode;
         }
     }
 }

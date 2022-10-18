@@ -4,7 +4,7 @@ using Entra21.CSharp.Area21.Service.ViewModels.Users;
 
 namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Users
 {
-    internal class UserEntityMapping : IUserEntityMapping
+    public class UserEntityMapping : IUserEntityMapping
     {
         public User RegisterWith(UserRegisterViewModel viewModel) =>
             new User
