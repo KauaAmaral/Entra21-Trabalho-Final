@@ -63,7 +63,7 @@ let saveUpdateUserDriver = () => {
 
 let userUpdate = (formData) => {
     let statusResponse = 0;
-    fetch('/driver/user/update', {
+    fetch('/Driver/user/Update', {
         method: 'POST',
         body: formData
     })
