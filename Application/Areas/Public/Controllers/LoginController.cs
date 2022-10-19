@@ -3,7 +3,6 @@ using Entra21.CSharp.Area21.Service.Email;
 using Entra21.CSharp.Area21.Service.Services.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Users;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
 {
@@ -24,8 +23,13 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
             _email = email;
         }
 
-        [HttpGet]
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet("login")]
+        public IActionResult Login()
         {
             if (_session.FindUserSession() != null)
                 return RedirectToAction("Index", "Home", new { Area = "driver" });
@@ -36,10 +40,10 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
                 Password = "1234"
             };
 
-            return View("Login", userLoginViewModel);
+            return View("login", userLoginViewModel);
         }
 
-        [HttpPost]
+        [HttpPost("login")]
         public IActionResult Login([FromForm] UserLoginViewModel userLoginViewModel)
         {
             if (!ModelState.IsValid)
