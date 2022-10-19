@@ -30,3 +30,14 @@
 		</div>
 	</div>
 </div>
+
+
+@*@section Scripts{
+    @if (TempData["ShowMessageToastr"] != null)
+    {
+        <script>
+
+            toastr.error(@TempData["ShowMessageToastr"]);
+        </script>
+    }
+}*@
