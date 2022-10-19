@@ -44,8 +44,8 @@ namespace Entra21.CSharp.Area21.Service.Services.Payments
 
             return paymentsLocations.Select(x => new PaymentsLocationsViewModel
             {
-                Lat = x.Latitude,
-                Lng = x.Longitude
+                Lat = Convert.ToDouble(x.Latitude),
+                Lng = Convert.ToDouble(x.Longitude)
             }).ToList();
         }
 
