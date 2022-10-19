@@ -31,13 +31,11 @@
 	</div>
 </div>
 
-
-@*@section Scripts{
+@section Scripts{
     @if (TempData["ShowMessageToastr"] != null)
     {
         <script>
-
-            toastr.error(@TempData["ShowMessageToastr"]);
+            toastr.success("@TempData["ShowMessageToastr"]");
         </script>
     }
-}*@
+}
