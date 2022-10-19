@@ -9,6 +9,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
     public class MapController : Controller
     {
         private readonly IPaymentService _paymentService;
+        
         public MapController(IPaymentService paymentService)
         {
             _paymentService = paymentService;
@@ -20,12 +21,12 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
             return View();
         }
 
-        //[HttpPost("getLocations")]
-        ////public IActionResult GetLocations()
-        ////{
-        ////    //var locations = _paymentService.GetLocations();
+        [HttpGet("getLocations")]
+        public IActionResult GetLocations()
+        {
+            var locations = _paymentService.GetLocations();
 
-        ////    return Ok(locations);
-        ////}
+            return Ok(locations);
+        }
     }
 }
