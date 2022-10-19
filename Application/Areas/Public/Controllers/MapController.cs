@@ -20,12 +20,12 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
             return View();
         }
 
-        [HttpPost("getLocations")]
-        public IActionResult GetLocations()
-        {
-            //var locations = _paymentService.GetLocations();
+        //[HttpPost("getLocations")]
+        ////public IActionResult GetLocations()
+        ////{
+        ////    //var locations = _paymentService.GetLocations();
 
-            return Ok(locations);
-        }
+        ////    return Ok(locations);
+        ////}
     }
 }
