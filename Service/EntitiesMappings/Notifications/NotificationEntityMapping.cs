@@ -21,7 +21,9 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Notifications
 
         public Notification UpdateWith(Notification notification, NotificationUpdateViewModel viewModel)
         {
-            notification.NotificationAmount = (int)viewModel.NotificationAmount;
+            notification.Address = viewModel.Address;
+            notification.Comments = viewModel.Comments;
+            notification.VehicleLicensePlate = viewModel.VehiclePlate;
             notification.UpdatedAt = DateTime.Now; 
 
             return notification;
