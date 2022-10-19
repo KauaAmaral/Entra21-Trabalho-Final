@@ -38,6 +38,17 @@ namespace Entra21.CSharp.Area21.Service.Services.Payments
             return payment;
         }
 
+        public IList<PaymentsLocationsViewModel> GetLocations()
+        {
+            var paymentsLocations = _paymentRepository.GetLocations();
+
+            return paymentsLocations.Select(x => new PaymentsLocationsViewModel
+            {
+                Latitude = x.Latitude,
+                Longitude = x.Longitude
+            }).ToList();
+        }
+
         public Payment Register(PaymentRegisterViewModel registerViewModel)
         {
             var payment = _paymentEntityMapping.RegisterWith(registerViewModel);
