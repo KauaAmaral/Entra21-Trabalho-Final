@@ -6,5 +6,8 @@
         public string LicensePlate { get; set; }
         public string Model { get; set; }
         public Enum Type { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
+
     }
 }

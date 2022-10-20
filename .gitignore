@@ -350,3 +350,4 @@ MigrationBackup/
 .ionide/
 /Application/wwwroot/Theme/global/notifications
 /Application/Properties/ServiceDependencies/area21 - Zip Deploy/profile.arm.json
+/Application/wwwroot/Theme/global/notifications

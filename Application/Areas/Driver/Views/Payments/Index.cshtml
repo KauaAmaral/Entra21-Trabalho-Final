@@ -18,4 +18,13 @@
 @section scripts{
     <script src="~/js/Driver/Payment/driver-payment-datatable.js"></script>
     <script src="~/js/Driver/Payment/driver-payment-paypal.js"></script>
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+    </script>
     }

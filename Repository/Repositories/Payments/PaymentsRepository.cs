@@ -30,5 +30,17 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Payments
           .Include(x => x.Vehicle)
           .Include(x => x.User)
           .FirstOrDefault(x => x.Id == id);
+
+        public Payment? GetByTransactionId(string transactionId) =>
+            _context.Payments
+            .Include(x => x.Vehicle)
+            .Include(x => x.User)
+            .FirstOrDefault(x => x.TransactionId == transactionId);
+
+        public List<Payment>? GetLocations() =>
+            _context.Payments
+            .Where(x => x.CreatedAt > DateTime.Now.AddHours(-1) && x.Latitude != null)
+            .ToList();
+        
     }
 }

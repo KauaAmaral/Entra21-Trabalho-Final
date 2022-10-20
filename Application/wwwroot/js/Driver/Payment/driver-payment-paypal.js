@@ -7,6 +7,14 @@
     realizarPagamento(id)
 });
 
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(realizarPagamento);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
 function realizarPagamento(id) {
     $.ajax({
         url: '/driver/paypal',
