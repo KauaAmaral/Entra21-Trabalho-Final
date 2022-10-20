@@ -158,7 +158,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
                     _notificationService.Update(viewModel);
                 }
             }
-            return Ok();
+            return View();
         }
 
         [HttpPost("Approved")]

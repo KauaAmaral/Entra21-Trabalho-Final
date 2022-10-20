@@ -119,7 +119,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
         public bool Delete(int id) =>
             _notificationRepository.Delete(id);
 
-        public void CreatePdfNotifications(Notification notification, string link)
+        public string CreatePdfNotifications(Notification notification, string link)
         {
             var fileName = $"..\\Application\\wwwroot\\Theme\\global\\notifications\\{notification.VehicleLicensePlate}.{DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss")}.pdf";
             var file = new FileStream(fileName, FileMode.Create);
@@ -168,6 +168,8 @@ O valor a ser pago será de {notification.Value}, caso seja feito uma notificaç
             document.Add(paragraph2);
 
             document.Close();
+
+            return fileName;
         }
 
         public Bitmap CreateQrCode(string url)

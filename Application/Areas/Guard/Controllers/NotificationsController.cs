@@ -8,6 +8,7 @@ using Entra21.CSharp.Area21.Service.Email;
 using Entra21.CSharp.Area21.Service.Services.Guards;
 using Entra21.CSharp.Area21.Service.Services.Notifications;
 using Entra21.CSharp.Area21.Service.Services.Payments;
+using Entra21.CSharp.Area21.Service.Services.Users;
 using Entra21.CSharp.Area21.Service.Services.Vehicles;
 using Entra21.CSharp.Area21.Service.ViewModels.Notifications;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +30,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
         private readonly ISessionAuthentication _session;
         private readonly IGuardService _guardService;
         private readonly IEmailService _emailService;
+        private readonly IUserService _userService;
         private readonly string _userName = "AeHh1KwTDiCTJlkmPVoWT5qj9YMp0dwnhAStwYVE7VZiaPN2jfJjMm7UJ6B9TMXFkVqFNkmpzpfinpJR";
         private readonly string _passwd = "EHqhokF9mvWolaWgw04hay43lNAuCcLNHZ8XBpmm0cLSYUxdAYnbBI6dhiaCXtI54qJJ-EF3VS0IMGfx";
         private readonly string _url = "https://api-m.sandbox.paypal.com";
@@ -39,7 +41,8 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
             IGuardService guardService,
             IPaymentService paymentService,
             ISessionAuthentication sessionAuthentication,
-            IEmailService emailService
+            IEmailService emailService,
+            IUserService userService
             )
         {
             _notificationService = notificationService;
@@ -48,6 +51,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
             _session = sessionAuthentication;
             _guardService = guardService;
             _emailService = emailService;
+            _userService = userService;
         }
 
         [HttpGet]
@@ -130,19 +134,33 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
 
             var vehicle = _vehicleService.GetByVehiclePlate(notificationRegisterViewModel.VehiclePlate);
 
+            if (vehicle != null)
+                notificationRegisterViewModel.VehicleId = vehicle.Id;
+
             var notification = _notificationService.SetNotification(notificationRegisterViewModel);
 
             var link = Url.ActionLink("Check", "Notification", new { Area = "Public" });
 
             link += $"?id={notification.Id}";
 
-            _notificationService.CreatePdfNotifications(notification, link);
+            var fileName = _notificationService.CreatePdfNotifications(notification, link);
 
             if (vehicle != null)
             {
                 notificationRegisterViewModel.VehicleId = vehicle.Id;
-                
-                _emailService.SendEMail("")
+
+                var currentVehicle = _vehicleService.GetById(vehicle.Id);
+
+                var currentUser = _userService.GetById(currentVehicle.UserId);
+
+                _emailService.SendEMail(currentUser.Email, "Notificação gerada", $@"
+Caro {currentUser.Name}, uma nova notificação foi gerada, confira em anexo.
+<br>
+<br>
+<br>
+Atenciosamente,
+Efraim Calebe Mertens
+", fileName);
             }
 
             if (!ModelState.IsValid)
