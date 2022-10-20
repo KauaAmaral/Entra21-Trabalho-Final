@@ -1,4 +1,5 @@
-﻿let petEditarPreencherModal = (detailsPayments) => {
+﻿let detailsPaymentsAdminstrator
+    = (detailsPayments) => {
     let id = detailsPayments.getAttribute('data-id');
     let statusResponse = 0;
 
@@ -32,5 +33,6 @@ $('table').on('click', '.payment-details', (event) => {
         ? event.target.parentElement
         : event.target;
 
-    petEditarPreencherModal(element);
+    detailsPaymentsAdminstrator
+        (element);
 });
