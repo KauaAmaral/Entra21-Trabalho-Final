@@ -18,7 +18,7 @@
 
                 <form asp-action="updateNotification" method="POST">
           
-                       <input type="hidden" asp-for="Registered" />
+                       <input type="hidden" asp-for="Id" name="id"/>
                     <div class="form-group form-material floating" data-plugin="formMaterial">
                         <label asp-for="VehiclePlate" class="form-label" span-required="">Placa do Veículo</label>
                         <input asp-for="VehiclePlate" class="form-control" />
@@ -49,8 +49,9 @@
                         <p class="text-danger">@TempData["Message"]</p>
                     }
                     <button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Atualizando Notificação</button>
-                   
+
                 </form>
+
             </div>
         </div>
     </div>

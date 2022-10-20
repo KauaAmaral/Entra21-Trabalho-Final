@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="~/Theme/assets/css/site.min.css">
     <link rel="stylesheet" href="~/css/site.css">
 
+    <!-- Select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <!-- DataTable -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
@@ -39,13 +42,14 @@
     <link rel="stylesheet" href="~/Theme/assets/examples/css/dashboard/team.css">
 
     <link rel="stylesheet" href="~/css/Background.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
-
 
     <!-- Fonts -->
     <link rel="stylesheet" href="~/Theme/global/fonts/web-icons/web-icons.min.css">
     <link rel="stylesheet" href="~/Theme/global/fonts/brand-icons/brand-icons.min.css">
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
 
     <!--[if lt IE 9]>
     <script src="~/Theme/global/vendor/html5shiv/html5shiv.min.js"></script>
@@ -83,47 +87,8 @@
             <!-- Navbar Collapse -->
             <div class="collapse navbar-collapse navbar-collapse-toolbar" id="site-navbar-collapse">
                 <!-- Navbar Toolbar Right -->
-                <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false"
-                           data-animation="scale-up" role="button">
-                            <span class="avatar avatar-online">
-                                <img src="~/Theme/global/portraits/userMaior.png" alt="...">
-                                <i></i>
-                            </span>
-                        </a>
-                        <div class="dropdown-menu" role="menu">
-                            <a asp-area="Driver" asp-controller="User" asp-action="Update" class="dropdown-item" role="menuitem">
-                                <i class="icon wb-user" aria-hidden="true"></i> Perfil
-                            </a>
-                            <a asp-action="Payments" asp-controller="Payments" class="dropdown-item">
-                                <i class="icon wb-payment"></i> Pagamentos
-                            </a>
-                            <a class="dropdown-item" asp-area="Public" asp-controller="Login" asp-action="Logout" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Sair</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="/driver/notification" title="Notifications"
-                           aria-expanded="false" data-animation="scale-up" role="button">
-                            <i class="fa-solid fa-bell color-icons" aria-hidden="true"></i>
-                            <span class="badge badge-pill badge-danger up">0</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
-                            <div class="dropdown-menu-header">
-                                <h5>Notificações</h5>
-                                <span class="badge badge-round badge-danger"></span>
-                            </div>
-
-                            <div class="dropdown-menu-footer">
-                                <a class="dropdown-menu-footer-btn" href="javascript:void(0)" role="button">
-                                    <i class="icon wb-settings" aria-hidden="true"></i>
-                                </a>
-                                <a class="dropdown-item" href="Notification" role="menuitem">
-                                    Todas Notificações
-                                </a>
-                            </div>
-                        </div>
-                    </li>
+                <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right mr-20">
+                    <button type="button" class="btn btn-primary">Entre</button>
                 </ul>
                 <!-- End Navbar Toolbar Right -->
             </div>
@@ -148,10 +113,15 @@
                             </a>
                         </li>
                         <li class="dropdown site-menu-item has-sub">
-                            <a asp-area="Driver" asp-controller="Payments" asp-action="Payments" data-toggle="dropdown" data-dropdown-toggle="false">
+                            <a asp-area="Driver" asp-controller="User" asp-action="Update" data-toggle="dropdown" data-dropdown-toggle="false">
+                                <i class="fa-solid fa-users"></i>
+                                <span class="site-menu-title">Usuário</span>
+                            </a>
+                        </li>
+                        <li class="dropdown site-menu-item has-sub">
+                            <a asp-area="Driver" asp-controller="Payments" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
                                 <i class="fa-regular fa-credit-card"></i>
                                 <span class="site-menu-title">Pagamentos</span>
-                                <span class="site-menu-arrow"></span>
                             </a>
                         </li>
                         <div class="dropdown-menu">
@@ -175,7 +145,7 @@
                             </div>
                         </div>
                         <li class="dropdown site-menu-item has-sub">
-                            <a asp-area="Guard" asp-controller="Notification" asp-action="Checkout" data-toggle="dropdown" data-dropdown-toggle="false">
+                            <a asp-area="Driver" asp-controller="Notification" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
                                 <i class="site-menu-icon wb-layout" aria-hidden="true"></i>
                                 <span class="site-menu-title">Notificações</span>
                             </a>
@@ -249,16 +219,23 @@
     <script src="~/Theme/global/js/Plugin/asscrollable.js"></script>
 
     <script src="~/Theme/assets/examples/js/dashboard/team.js"></script>
+
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl5EjVV5roMTtLPWNS6wpEh4GaGVRnpJU&callback=myMap"></script>
+
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="~/js/toastr-configure.js" asp-append-version="true"></script>
     <script src="~/js/shared/notification-error.js" asp-append-version="true"></script>
-
 
     <!-- DataTable -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 

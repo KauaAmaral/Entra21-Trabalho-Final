@@ -148,6 +148,8 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
 
             _notificationService.CreatePdfNotifications(notification, link);
 
+            TempData["ShowMessageToastr"] = "Notificação cadastrada com sucesso";
+
             return RedirectToAction("Checkout");
         }
 
