@@ -9,7 +9,6 @@ using Entra21.CSharp.Area21.Service.Services.Notifications;
 using Entra21.CSharp.Area21.Service.Services.Payments;
 using Entra21.CSharp.Area21.Service.Services.Vehicles;
 using Entra21.CSharp.Area21.Service.ViewModels.Notifications;
-using Entra21.CSharp.Area21.Service.ViewModels.Payments;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
@@ -31,7 +30,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
         private readonly string _userName = "AeHh1KwTDiCTJlkmPVoWT5qj9YMp0dwnhAStwYVE7VZiaPN2jfJjMm7UJ6B9TMXFkVqFNkmpzpfinpJR";
         private readonly string _passwd = "EHqhokF9mvWolaWgw04hay43lNAuCcLNHZ8XBpmm0cLSYUxdAYnbBI6dhiaCXtI54qJJ-EF3VS0IMGfx";
         private readonly string _url = "https://api-m.sandbox.paypal.com";
-        private readonly string _urlCancel = "https://localhost:7121/driver/Home";
 
         public NotificationController(
             INotificationService notificationService,
@@ -165,11 +163,13 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
                 .ToList();
         }
 
-        [HttpGet("paypal")]
+        [HttpGet("paypal")] //TODO Verificar se esta utilizando
         public async Task<JsonResult> Paypal(string id)
         {
             var idNotification = Convert.ToInt32(id);
-
+            
+            var urlCancel = Request.Scheme + "://" + Request.Host + "driver /Home";
+            
             var price = "";
 
             var notification = _notificationService.GetById(idNotification);
@@ -185,7 +185,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
             var status = false;
             var answer = string.Empty;
 
-            var _urlReturn = $"https://localhost:7121/driver/Paypal/Approved?idNotification={idNotification}";
+            var urlReturn = Request.Scheme + "://" + Request.Host + $"driver /Paypal/Approved?idNotification={idNotification}";
 
             using (var client = new HttpClient())
             {
@@ -213,8 +213,8 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
                         brand_name = "Area21",
                         landing_page = "NO_PREFERENCE",
                         user_action = "PAY_NOW",
-                        return_url = _urlReturn,
-                        cancel_url = _urlCancel
+                        return_url = urlReturn,
+                        cancel_url = urlCancel
                     }
                 };
 
