@@ -40,7 +40,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         {
             var link = GetUrl();
 
-            var urlCancel = Request.Scheme + "://" + Request.Host + "driver/Home";
+            var urlCancel = Request.Scheme + "://" + Request.Host + "/driver/Home";
 
             var IdVehicle = Convert.ToInt32(id);
 

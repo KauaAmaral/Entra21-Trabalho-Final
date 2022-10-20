@@ -59,7 +59,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
         [HttpPost("Paypal")]
         public async Task<JsonResult> Paypal(string id)
         {
-            var urlCancel = Request.Scheme + "://" + Request.Host + "driver/Home";
+            var urlCancel = Request.Scheme + "://" + Request.Host + "/driver/Home";
             var idNotificaton = Convert.ToInt32(id);
 
             var notification = _notificationService.GetById(idNotificaton);
@@ -70,7 +70,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
             if (notification.Token != null || notification.CreatedAt.Date > notification.CreatedAt.Date.AddDays(15))
                 return Json(new { status = status, response = answer });
 
-            string urlReturn = Request.Scheme + "://" + Request.Host + $"Public/Notification/Approved?id={notification.Id}";
+            string urlReturn = Request.Scheme + "://" + Request.Host + $"/Public/Notification/Approved?id={notification.Id}";
 
             using (var client = new HttpClient())
             {

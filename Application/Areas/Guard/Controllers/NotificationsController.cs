@@ -168,7 +168,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
         {
             var idNotification = Convert.ToInt32(id);
             
-            var urlCancel = Request.Scheme + "://" + Request.Host + "driver /Home";
+            var urlCancel = Request.Scheme + "://" + Request.Host + "/driver /Home";
             
             var price = "";
 
@@ -185,7 +185,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
             var status = false;
             var answer = string.Empty;
 
-            var urlReturn = Request.Scheme + "://" + Request.Host + $"driver /Paypal/Approved?idNotification={idNotification}";
+            var urlReturn = Request.Scheme + "://" + Request.Host + $"/driver/Paypal/Approved?idNotification={idNotification}";
 
             using (var client = new HttpClient())
             {
