@@ -12,7 +12,8 @@
         <script>
             $(document).ready(function () {
                 debugger;
-                getLocation();
+                getLocations();
+                //getLocation();
             });
 
             function getLocation() {
@@ -21,9 +22,10 @@
                 }
             }
 
-            function myMap(position) {
-                let latitude = position.coords.latitude;
-                let longitude = position.coords.longitude;
+            function myMap(locations) {
+                //let latitude = position.coords.latitude;
+                //let longitude = position.coords.longitude;
+                debugger;
 
                 const uluru = { lat: -26.9139878, lng: -49.0716194 };
 
@@ -31,22 +33,6 @@
                     center: new google.maps.LatLng(uluru),
                     zoom: 15,
                 };
-
-                let getLocations = () => {
-                    let statusResponse = 0;
-
-                    fetch(`/public/map/getLocations`)
-                        .then((response) => {
-                            statusResponse = response.status;
-
-                            return response.json();
-                        })
-                        .then((data) => {
-                            debugger;
-                            return data;
-                        })
-                        .catch((error) => console.log(error));
-                }   
 
                 var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
@@ -60,8 +46,24 @@
 
             }
 
+                let getLocations = () => {
+                    let statusResponse = 0;
 
-            //const locations = [
+                    fetch(`/public/map/getLocations`)
+                        .then((response) => {
+                            statusResponse = response.status;
+
+                            return response.json();
+                        })
+                        .then((data) => {
+                            debugger;
+                            var locations = data;
+                            myMap(locations);
+                        })
+                        .catch((error) => console.log(error));
+                }
+
+                        //const locations = [
             //    { lat: -31.56391, lng: 147.154312 },
             //    { lat: -33.718234, lng: 150.363181 },
             //    { lat: -33.727111, lng: 150.371124 },
