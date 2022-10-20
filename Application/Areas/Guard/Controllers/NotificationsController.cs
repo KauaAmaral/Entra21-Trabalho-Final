@@ -10,7 +10,6 @@ using Entra21.CSharp.Area21.Service.Services.Notifications;
 using Entra21.CSharp.Area21.Service.Services.Payments;
 using Entra21.CSharp.Area21.Service.Services.Vehicles;
 using Entra21.CSharp.Area21.Service.ViewModels.Notifications;
-using Entra21.CSharp.Area21.Service.ViewModels.Payments;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
@@ -33,7 +32,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
         private readonly string _userName = "AeHh1KwTDiCTJlkmPVoWT5qj9YMp0dwnhAStwYVE7VZiaPN2jfJjMm7UJ6B9TMXFkVqFNkmpzpfinpJR";
         private readonly string _passwd = "EHqhokF9mvWolaWgw04hay43lNAuCcLNHZ8XBpmm0cLSYUxdAYnbBI6dhiaCXtI54qJJ-EF3VS0IMGfx";
         private readonly string _url = "https://api-m.sandbox.paypal.com";
-        private readonly string _urlCancel = "https://localhost:7121/driver/Home";
 
         public NotificationController(
             INotificationService notificationService,

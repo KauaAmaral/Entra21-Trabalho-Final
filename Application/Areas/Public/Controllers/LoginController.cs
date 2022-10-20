@@ -3,7 +3,6 @@ using Entra21.CSharp.Area21.Service.Email;
 using Entra21.CSharp.Area21.Service.Services.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Users;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
 {
