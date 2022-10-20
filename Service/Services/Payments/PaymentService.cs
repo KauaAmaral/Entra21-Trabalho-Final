@@ -38,6 +38,17 @@ namespace Entra21.CSharp.Area21.Service.Services.Payments
             return payment;
         }
 
+        public IList<PaymentsLocationsViewModel> GetLocations()
+        {
+            var paymentsLocations = _paymentRepository.GetLocations();
+
+            return paymentsLocations.Select(x => new PaymentsLocationsViewModel
+            {
+                Lat = Convert.ToDouble(x.Latitude.Replace(".", ",")),
+                Lng = Convert.ToDouble(x.Longitude.Replace(".", ","))
+            }).ToList();
+        }
+
         public Payment Register(PaymentRegisterViewModel registerViewModel)
         {
             var payment = _paymentEntityMapping.RegisterWith(registerViewModel);
@@ -45,6 +56,19 @@ namespace Entra21.CSharp.Area21.Service.Services.Payments
             _paymentRepository.Add(payment);
 
             return payment;
+        }
+
+        public bool UpdateLocation(PaymentUpdateViewModel viewModel)
+        {
+            var payment = _paymentRepository.GetByTransactionId(viewModel.TransactionId);
+
+            if (payment == null)
+                return false;
+
+            payment = _paymentEntityMapping.UpdateWith(payment, viewModel);
+            _paymentRepository.Update(payment);
+
+            return true;
         }
 
         public bool ValidPayment(Vehicle vehicle)

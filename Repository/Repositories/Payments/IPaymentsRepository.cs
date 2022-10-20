@@ -6,5 +6,8 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Payments
     public interface IPaymentsRepository : IGenericRepository<Payment>
     {
         Payment? ValidPayment(int id);
+        Payment? GetByTransactionId(string transactionId);
+        List<Payment>? GetLocations();
+
     }
 }

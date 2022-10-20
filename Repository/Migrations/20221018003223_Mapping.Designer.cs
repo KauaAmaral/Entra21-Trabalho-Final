@@ -4,6 +4,7 @@ using Entra21.CSharp.Area21.RepositoryDataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entra21.CSharp.Area21.Repository.Migrations
 {
     [DbContext(typeof(ShortTermParkingContext))]
-    partial class ShortTermParkingContextModelSnapshot : ModelSnapshot
+    [Migration("20221018003223_Mapping")]
+    partial class Mapping
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,7 +85,7 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME2")
-                        .HasDefaultValue(new DateTime(2022, 10, 18, 20, 45, 39, 741, DateTimeKind.Local).AddTicks(621))
+                        .HasDefaultValue(new DateTime(2022, 10, 17, 21, 32, 23, 648, DateTimeKind.Local).AddTicks(5052))
                         .HasColumnName("created_at");
 
                     b.Property<int>("GuardId")
@@ -163,17 +165,15 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME2")
-                        .HasDefaultValue(new DateTime(2022, 10, 18, 20, 45, 39, 740, DateTimeKind.Local).AddTicks(3397))
+                        .HasDefaultValue(new DateTime(2022, 10, 17, 21, 32, 23, 648, DateTimeKind.Local).AddTicks(1925))
                         .HasColumnName("create_at");
 
                     b.Property<string>("Latitude")
-                        .HasMaxLength(50)
-                        .HasColumnType("VARCHAR(50)")
+                        .HasColumnType("VARCHAR")
                         .HasColumnName("latitude");
 
                     b.Property<string>("Longitude")
-                        .HasMaxLength(50)
-                        .HasColumnType("VARCHAR(50)")
+                        .HasColumnType("VARCHAR")
                         .HasColumnName("longitude");
 
                     b.Property<string>("PayerId")
@@ -203,7 +203,7 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME2")
-                        .HasDefaultValue(new DateTime(2022, 10, 18, 20, 45, 39, 740, DateTimeKind.Local).AddTicks(3959))
+                        .HasDefaultValue(new DateTime(2022, 10, 17, 21, 32, 23, 648, DateTimeKind.Local).AddTicks(2134))
                         .HasColumnName("update_at");
 
                     b.Property<int>("UserId")
@@ -319,7 +319,7 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME2")
-                        .HasDefaultValue(new DateTime(2022, 10, 18, 20, 45, 39, 739, DateTimeKind.Local).AddTicks(6561))
+                        .HasDefaultValue(new DateTime(2022, 10, 17, 21, 32, 23, 647, DateTimeKind.Local).AddTicks(8564))
                         .HasColumnName("created_at");
 
                     b.Property<string>("LicensePlate")
@@ -358,7 +358,7 @@ namespace Entra21.CSharp.Area21.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 10, 18, 20, 45, 39, 739, DateTimeKind.Local).AddTicks(8651),
+                            CreatedAt = new DateTime(2022, 10, 17, 21, 32, 23, 647, DateTimeKind.Local).AddTicks(9591),
                             LicensePlate = "fhf-1234",
                             Model = "123121234",
                             Status = true,
