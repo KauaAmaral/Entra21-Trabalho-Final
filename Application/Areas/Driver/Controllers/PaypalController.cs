@@ -24,8 +24,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
         private readonly string _userName = "AeHh1KwTDiCTJlkmPVoWT5qj9YMp0dwnhAStwYVE7VZiaPN2jfJjMm7UJ6B9TMXFkVqFNkmpzpfinpJR";
         private readonly string _passwd = "EHqhokF9mvWolaWgw04hay43lNAuCcLNHZ8XBpmm0cLSYUxdAYnbBI6dhiaCXtI54qJJ-EF3VS0IMGfx";
-        private readonly string _url = "https://api-m.sandbox.paypal.com";
-        private readonly string _urlCancel = "https://localhost:7121/driver/Home";
+        private readonly string _url = "https://api-m.sandbox.paypal.com"; //https://area21.azurewebsites.net
 
         public PaypalController(
             IVehicleService vehicleService,
@@ -40,6 +39,10 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         [HttpPost]
         public async Task<JsonResult> Paypal(string id)
         {
+            var link = GetUrl();
+
+            var urlCancel = Request.Scheme + "://" + Request.Host + "/driver/Home";
+
             var IdVehicle = Convert.ToInt32(id);
 
             var price = "";
@@ -57,8 +60,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             var status = false;
             var answer = string.Empty;
 
-            var _urlReturn = $"https://localhost:7121/driver/Paypal/Approved?idVehicle={IdVehicle}&IdUser={idUser}";
-
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(_url);
@@ -66,6 +67,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
                 var authToken = Encoding.ASCII.GetBytes($"{_userName}:{_passwd}");
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authToken));
 
+                var urlReturn = link + $"/driver/Paypal/Approved?idVehicle={IdVehicle}&IdUser={idUser}";
                 var orden = new PaypalOrder()
                 {
                     intent = "CAPTURE",
@@ -85,8 +87,8 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
                         brand_name = "Area21",
                         landing_page = "NO_PREFERENCE",
                         user_action = "PAY_NOW",
-                        return_url = _urlReturn,
-                        cancel_url = _urlCancel
+                        return_url = urlReturn,
+                        cancel_url = urlCancel
                     }
                 };
 
@@ -109,6 +111,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         [HttpGet("approved")]
         public async Task<IActionResult> Approved([FromQuery] int idVehicle, int idUser, string token, string PayerID)
         {
+
             var status = false;
 
             using (var client = new HttpClient())
@@ -147,6 +150,18 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
                 }
             }
             return View();
+        }
+
+        private string GetUrl()
+        {
+            //string urlAnterior = Request.Headers["Referer"].ToString(); TODO Pega o link da pagina atual
+            //var deasdas = Url.ActionLink(); Retorna o link completo tambem
+            var https = Request.Scheme; // https
+            var caminho = Request.Host; //localHost:7121
+            //var caminhoss = Request.Method; //Post
+            //var caminhosss = Request.Path; // caminho ex driver/paypal
+
+            return (https + "://" + caminho);
         }
 
         [HttpPost("Approved")]
