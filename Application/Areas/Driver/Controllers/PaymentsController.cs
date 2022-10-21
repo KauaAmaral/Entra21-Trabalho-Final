@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 {
-    [Area("Driver")]
     [IsUserLogged]
+    [IsDriver]
+    [Area("Driver")]
     [Route("driver/payments")]
     public class PaymentsController : Controller
     {
