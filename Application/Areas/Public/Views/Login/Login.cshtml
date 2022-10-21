@@ -14,10 +14,12 @@
                     <div class="wrap-input100 validate-input m-b-23" data-plugin="formMaterial">
                         <span class="label-input100">E-Mail</span>
                         <input asp-for="Email" type="email" class="input100" name="email" placeholder="Escreva seu E-Mail">
+                        <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
-                    <div class="wrap-input100 validate-input" data-validate="Password is required">
+                    <div class="wrap-input100 validate-input m-b-23" data-plugin="formMaterial">
                         <span class="label-input100">Senha</span>
                         <input asp-for="Password" type="password" class="input100" name="password" placeholder="Escreva sua senha">
+                        <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     <div class="text-right p-t-8 p-b-31"></div>
                     @if (TempData["Message"] != null)
