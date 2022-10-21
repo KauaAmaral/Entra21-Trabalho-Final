@@ -225,7 +225,20 @@ iframe {
     font-size: 39px;
     color: #333;
     line-height: 1.2;
-    text-align: center
+    text-align: center;
+    position: relative;
+    top: 100px
+}
+
+.text100-form {
+    display: block;
+    font-family: Poppins-Bold;
+    font-size: 30px;
+    color: #333;
+    line-height: 1.2;
+    text-align: center;
+    position: relative;
+    top: 150px
 }
 
 .wrap-input100 {
@@ -324,7 +337,7 @@ iframe {
 }
 
 .wrap-login100-form-btn {
-    width: 100%;
+    width: 10%;
     display: block;
     position: relative;
     z-index: 1;
@@ -335,7 +348,24 @@ iframe {
     -moz-box-shadow: 0 5px 30px 0 rgba(3,216,222,.2);
     -webkit-box-shadow: 0 5px 30px 0 rgba(3,216,222,.2);
     -o-box-shadow: 0 5px 30px 0 rgba(3,216,222,.2);
-    -ms-box-shadow: 0 5px 30px 0 rgba(3,216,222,.2)
+    -ms-box-shadow: 0 5px 30px 0 rgba(3,216,222,.2);
+    top: 395px;
+}
+
+.wrap-register100-form-btn {
+    width: 15%;
+    display: block;
+    position: relative;
+    z-index: 1;
+    border-radius: 25px;
+    overflow: hidden;
+    margin: 0 auto;
+    box-shadow: 0 5px 30px 0 rgba(3,216,222,.2);
+    -moz-box-shadow: 0 5px 30px 0 rgba(3,216,222,.2);
+    -webkit-box-shadow: 0 5px 30px 0 rgba(3,216,222,.2);
+    -o-box-shadow: 0 5px 30px 0 rgba(3,216,222,.2);
+    -ms-box-shadow: 0 5px 30px 0 rgba(3,216,222,.2);
+    top: 400px;
 }
 
 .login100-form-bgbtn {
@@ -356,7 +386,43 @@ iframe {
     transition: all .4s
 }
 
+.register100-form-bgbtn {
+    position: absolute;
+    z-index: -1;
+    width: 300%;
+    height: 100%;
+    background: #a64bf4;
+    background: -webkit-linear-gradient(right,#fe0173,#d842ff,#fe0173,#d842ff);
+    background: -o-linear-gradient(right,#00dbde,#fc00ff,#00dbde,#fc00ff);
+    background: -moz-linear-gradient(right,#00dbde,#fc00ff,#00dbde,#fc00ff);
+    background: linear-gradient(right,#00dbde,#fc00ff,#00dbde,#fc00ff);
+    top: 0;
+    left: -100%;
+    -webkit-transition: all .4s;
+    -o-transition: all .4s;
+    -moz-transition: all .4s;
+    transition: all .4s
+}
+
 .login100-form-btn {
+    font-family: Poppins-Medium;
+    font-size: 21px;
+    color: #fff;
+    line-height: 1.2;
+    text-transform: uppercase;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    width: 100%;
+    height: 50px
+}
+
+.register100-form-btn {
     font-family: Poppins-Medium;
     font-size: 21px;
     color: #fff;
