@@ -10,29 +10,29 @@
         <div class="panel">
             <div class="panel-body">
                 <div class="brand">
-                    <h1 class="font-size-22">Atualizando Notificações</h1>
+                    <h1 class="font-size-18">Atualizando Notificações</h1>
                 </div>
 
                 <form asp-action="updateNotification" method="POST">
 
                     <input type="hidden" asp-for="Id" name="id" />
 
-                    <label asp-for="VehiclePlate" class="form-label" span-required="">Placa do Veículo</label>
+                    <label asp-for="VehiclePlate" class="form-label"></label>
                     <input asp-for="VehiclePlate" class="form-control" />
                     <span asp-validation-for="VehiclePlate" class="text-danger"></span>
 
                     <div class="mb-3">
-                        <label asp-for="Type" class="form-label mt-5" span-required=""></label>
+                        <label asp-for="Type" class="form-label mt-5"></label>
                         <select asp-for="Type" asp-items="selectVehicleType" class="form-select" id="select-vehicleType">
                         </select>
                         <span asp-validation-for="Type" class="text-danger"></span>
                     </div>
 
-                    <label asp-for="Address" class="form-label mt-5" span-required=""></label>
+                    <label asp-for="Address" class="form-label mt-5"></label>
                     <input asp-for="Address" class="form-control" />
                     <span asp-validation-for="Address" class="text-danger"></span>
 
-                    <label asp-for="Comments" class="form-label mt-5" span-required=""></label>
+                    <label asp-for="Comments" class="form-label mt-5"></label>
                     <input asp-for="Comments" class="form-control" />
                     <span asp-validation-for="Comments" class="text-danger"></span>
 
