@@ -9,8 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
 {
-    [Area("Administrator")]
+    [IsUserLogged]
     [IsAdministrator]
+    [Area("Administrator")]
     [Route("Administrator/Notification")]
     public class NotificationController : Controller
     {
@@ -36,9 +37,17 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
         {
             var notifications = _notificationService.GetAll();
 
-            return View("Index", notifications);
-            //return View();
+            return View(notifications);
         }
+
+        [HttpGet("getAll")]
+        public IActionResult GetAll()
+        {
+            var notifications = _notificationService.GetAll();
+
+            return Ok(notifications);
+        }
+
 
         [HttpGet("update")]
         public IActionResult Update([FromQuery] int id)
@@ -79,13 +88,13 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet("getall")]
-        public IActionResult GetAll()
-        {
-            var notifications = _notificationService.GetAll();
+        //[HttpGet("getall")]
+        //public IActionResult GetAll()
+        //{
+        //    var notifications = _notificationService.GetAll();
 
-            return View("Index", notifications);
-        }
+        //    return View("Index", notifications);
+        //}
 
         [HttpGet("delete")]
         public IActionResult Delete([FromQuery] int id)

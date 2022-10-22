@@ -5,18 +5,18 @@ namespace Entra21.CSharp.Area21.Service.ViewModels.Notifications
 {
     public class NotificationViewModel
     {
-        [Display(Name = "Endereço")]
-        [Required(ErrorMessage = "{0} deve ser preenchido")]
+        [Display(Name = "Endereço:")]
+        [Required(ErrorMessage = "Endereço deve ser preenchido")]
         [MinLength(5, ErrorMessage = "{0} deve conter no mínimo {1} caracteres")]
         [MaxLength(100, ErrorMessage = "{0} deve conter no máximo {1} caracteres")]
         public string Address { get; set; }
 
-        [Display(Name = "Placa do Veículo")]
-        [Required(ErrorMessage = "{0} deve ser preenchido")]
+        [Display(Name = "Placa do Veículo:")]
+        [Required(ErrorMessage = "Placa do Veículo deve ser preenchido")]
         [StringLength(7, MinimumLength = 7, ErrorMessage = "{0} deve conter {1} caracteres")]
         public string VehiclePlate { get; set; }
 
-        [Display(Name = "Observações")]
+        [Display(Name = "Observações:")]
         public string? Comments { get; set; }
 
         [Display(Name = "Tipo do veículo: ")]

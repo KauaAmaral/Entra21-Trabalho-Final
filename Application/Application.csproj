@@ -9,12 +9,16 @@
 
 	<ItemGroup>
 		<Compile Remove="Areas\Driver\Controllers\Login\**" />
+		<Compile Remove="Areas\Logged\**" />
 		<Compile Remove="Controllers\**" />
 		<Content Remove="Areas\Driver\Controllers\Login\**" />
+		<Content Remove="Areas\Logged\**" />
 		<Content Remove="Controllers\**" />
 		<EmbeddedResource Remove="Areas\Driver\Controllers\Login\**" />
+		<EmbeddedResource Remove="Areas\Logged\**" />
 		<EmbeddedResource Remove="Controllers\**" />
 		<None Remove="Areas\Driver\Controllers\Login\**" />
+		<None Remove="Areas\Logged\**" />
 		<None Remove="Controllers\**" />
 	</ItemGroup>
 
@@ -40,4 +44,10 @@
 		<ProjectReference Include="..\Service\Service.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="wwwroot\fonts\font-awesome-4.7.0\fonts\" />
+	  <Folder Include="wwwroot\fonts\iconic\fonts\" />
+	  <Folder Include="wwwroot\fonts\poppins\" />
+	</ItemGroup>
+  
 </Project>

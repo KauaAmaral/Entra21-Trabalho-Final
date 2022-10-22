@@ -23,11 +23,37 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
             _email = email;
         }
 
-        [HttpGet]
         public IActionResult Index()
         {
             if (_session.FindUserSession() != null)
-                return RedirectToAction("Index", "Home", new { Area = "driver" });
+            {
+                if (_session.FindUserSession().Hierarchy == Repository.Enums.UserHierarchy.Administrador)
+                    return RedirectToAction("Index", "Home", new { Area = "administrator" });
+
+                else if (_session.FindUserSession().Hierarchy == Repository.Enums.UserHierarchy.Guarda)
+                    return RedirectToAction("Index", "Home", new { Area = "guard" });
+
+                else
+                    return RedirectToAction("Index", "Home", new { Area = "driver" });
+            }
+
+            return View();
+        }
+
+        [HttpGet("login")]
+        public IActionResult Login()
+        {
+            if (_session.FindUserSession() != null)
+            {
+                if (_session.FindUserSession().Hierarchy == Repository.Enums.UserHierarchy.Administrador)
+                    return RedirectToAction("Index", "Home", new { Area = "administrator" });
+
+                else if (_session.FindUserSession().Hierarchy == Repository.Enums.UserHierarchy.Guarda)
+                    return RedirectToAction("Index", "Home", new { Area = "guard" });
+
+                else
+                    return RedirectToAction("Index", "Home", new { Area = "driver" });
+            }
 
             var userLoginViewModel = new UserLoginViewModel
             {
@@ -35,10 +61,10 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
                 Password = "1234"
             };
 
-            return View("Login", userLoginViewModel);
+            return View("login", userLoginViewModel);
         }
 
-        [HttpPost]
+        [HttpPost("login")]
         public IActionResult Login([FromForm] UserLoginViewModel userLoginViewModel)
         {
             if (!ModelState.IsValid)

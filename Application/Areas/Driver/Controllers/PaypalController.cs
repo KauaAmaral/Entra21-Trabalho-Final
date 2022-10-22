@@ -12,8 +12,9 @@ using System.Text;
 
 namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 {
-    [Area("Driver")]
     [IsUserLogged]
+    [IsDriver]
+    [Area("Driver")]
     [Route("driver/paypal")]
     public class PaypalController : Controller
     {

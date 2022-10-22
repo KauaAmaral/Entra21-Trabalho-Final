@@ -102,28 +102,6 @@
                             <a class="dropdown-item" asp-area="Public" asp-controller="Login" asp-action="Logout" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Sair</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" title="Notifications"
-                           aria-expanded="false" data-animation="scale-up" role="button">
-                            <i class="fa-solid fa-bell color-icons" aria-hidden="true"></i>
-                            <span class="badge badge-pill badge-danger up">0</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
-                            <div class="dropdown-menu-header">
-                                <h5>Notificações</h5>
-                                <span class="badge badge-round badge-danger"></span>
-                            </div>
-
-                            <div class="dropdown-menu-footer">
-                                <a class="dropdown-menu-footer-btn" href="javascript:void(0)" role="button">
-                                    <i class="icon wb-settings" aria-hidden="true"></i>
-                                </a>
-                                <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
-                                    Todas Notificações
-                                </a>
-                            </div>
-                        </div>
-                    </li>
                 </ul>
                 <!-- End Navbar Toolbar Right -->
             </div>
@@ -136,7 +114,7 @@
                 <div>
                     <ul class="site-menu" data-plugin="menu">
                         <li class="dropdown site-menu-item has-sub">
-                            <a asp-area="Logged" asp-controller="Home" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
+                            <a asp-area="Administrator" asp-controller="Home" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
                                 <i class="fa-sharp fa-solid fa-house"></i>
                                 <span class="site-menu-title">Home</span>
                             </a>
@@ -185,6 +163,12 @@
             <a target="_blank" href="https://www.linkedin.com/in/leonardopokreweckysalvador/">Leonardo Pokrewecky</a>
         </div>
     </footer>
+
+    <!-- Mask -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/jquery.mask.js"></script>
+    <script src="~/js/Mask/mask.js"></script>
+
     <!-- End Edit Dialog -->
     <script src="~/Theme/global/vendor/babel-external-helpers/babel-external-helpers.js"></script>
     <script src="~/Theme/global/vendor/jquery/jquery.js"></script>

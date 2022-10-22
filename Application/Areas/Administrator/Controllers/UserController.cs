@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
 {
     [IsUserLogged]
+    [IsAdministrator]
     [Area("Administrator")]
     [Route("Administrator")]
     public class UserController : Controller
