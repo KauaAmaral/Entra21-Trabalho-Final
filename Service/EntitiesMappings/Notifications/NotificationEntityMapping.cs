@@ -11,7 +11,7 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Notifications
             {
                 GuardId = viewModel.GuardId,
                 VehicleId = viewModel.VehicleId,
-                VehicleLicensePlate = viewModel.VehiclePlate,
+                VehicleLicensePlate = viewModel.VehiclePlate.Trim().ToUpper(),
                 RegisteredVehicle = viewModel.Registered,
                 Comments = viewModel.Comments,
                 Address = viewModel.Address,
@@ -23,7 +23,7 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Notifications
         {
             notification.Address = viewModel.Address;
             notification.Comments = viewModel.Comments;
-            notification.VehicleLicensePlate = viewModel.VehiclePlate;
+            notification.VehicleLicensePlate = viewModel.VehiclePlate.Trim().ToUpper();
             notification.UpdatedAt = DateTime.Now; 
 
             return notification;

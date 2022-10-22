@@ -9,7 +9,7 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Vehicles
         public Vehicle RegisterWith(VehicleRegisterViewModel viewModel) =>
             new Vehicle
             {
-                LicensePlate = viewModel.LicensePlate,
+                LicensePlate = viewModel.LicensePlate.Trim().ToUpper(),
                 Model = viewModel.Model,
                 Type  = (VehicleType)viewModel.Type,
                 UserId = viewModel.UserId,
@@ -18,7 +18,7 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Vehicles
 
         public Vehicle UpdateWith(Vehicle vehicle, VehicleUpdateViewModel viewModel)
         {
-            vehicle.LicensePlate = viewModel.LicensePlate;
+            vehicle.LicensePlate = viewModel.LicensePlate.Trim().ToUpper();
             vehicle.Model = viewModel.Model;
             vehicle.Type = (VehicleType)viewModel.Type;
             //vehicle.UserId = viewModel.UserId;
