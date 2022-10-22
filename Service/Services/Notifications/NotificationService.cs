@@ -119,7 +119,7 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
         public bool Delete(int id) =>
             _notificationRepository.Delete(id);
 
-        public void CreatePdfNotifications(Notification notification, string link)
+        public string CreatePdfNotifications(Notification notification, string link)
         {
             var fileName = $"..\\Application\\wwwroot\\Theme\\global\\notifications\\{notification.VehicleLicensePlate}.{DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss")}.pdf";
             var file = new FileStream(fileName, FileMode.Create);
@@ -156,16 +156,20 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
             document.Add(title);
 
             var paragraph1 = new Paragraph(@$"
-Você estacionou seu veículo de placa {notification.VehicleLicensePlate} sem apresentar um cartão área azul ou pagamento digital. Para pagar esta notificação, você deverá entrar no site por meio do QR code abaixo, ou pelo link {link}:", fontParagraph);
+Você estacionou seu veículo de placa {notification.VehicleLicensePlate} sem apresentar um cartão área azul ou pagamento digital. Para pagar esta notificação, você deverá entrar no site por meio do QR code abaixo, ou pelo link {link}", fontParagraph);
+            paragraph1.Alignment = Element.ALIGN_JUSTIFIED;
             document.Add(paragraph1);
             document.Add(image);
 
             var paragraph2 = new Paragraph(@$"
-Caso não seja pago no tempo de quinze dias, o valor será passado de R$ 7,50 para R$ 12,50.
+O valor a ser pago será de {notification.Value}, caso seja feito uma notificação nova após 1 hora o valor será reajustado, e se passar 2 horas o carro será removido do local para o pátio e gerada a multa.
 ", fontParagraph);
+            paragraph2.Alignment = Element.ALIGN_JUSTIFIED;
             document.Add(paragraph2);
 
             document.Close();
+
+            return fileName;
         }
 
         public Bitmap CreateQrCode(string url)
