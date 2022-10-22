@@ -46,5 +46,5 @@
 	  <Folder Include="wwwroot\fonts\iconic\fonts\" />
 	  <Folder Include="wwwroot\fonts\poppins\" />
 	</ItemGroup>
-
+  
 </Project>
