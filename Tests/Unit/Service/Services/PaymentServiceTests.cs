@@ -119,40 +119,32 @@ namespace Tests.Unit.Service.Services
             // Arrange
             var viewModel = new PaymentUpdateViewModel
             {
-               VehicleId = 5,
-               UserId = 16,
-               PayerId = "18",
-               TransactionId = "12",
+               //VehicleId = 5,
+               //UserId = 16,
+               //PayerId = "18",
+               //TransactionId = "12",
                Latitude = "-26.9187784",
                Longitude = "-49.0678917"
             };
 
             var paymentToEdit = new Payment
             {
-                VehicleId = 5,
-                UserId = 16,
-                PayerId = "18",
-                TransactionId = "12",
+                //VehicleId = 5,
+                //UserId = 16,
+                //PayerId = "18",
+                //TransactionId = "12",
                 Latitude = "-26.9202362",
                 Longitude = "-49.0648242"
             };
 
             _paymentEntityMapping.UpdateWith(
-                Arg.Is<Payment>(x => x.VehicleId == paymentToEdit.VehicleId &&
-                    x.UserId == paymentToEdit.UserId &&
-                    x.PayerId == paymentToEdit.PayerId &&
-                    x.TransactionId == paymentToEdit.TransactionId &&
-                    x.Latitude == paymentToEdit.Latitude &&
+                Arg.Is<Payment>(x => x.Latitude == paymentToEdit.Latitude &&
                     x.Longitude == paymentToEdit.Longitude),
-                Arg.Is<PaymentUpdateViewModel>(x => x.VehicleId == viewModel.VehicleId &&
-                    x.UserId == viewModel.UserId &&
-                    x.PayerId == viewModel.PayerId &&
-                    x.TransactionId == viewModel.TransactionId &&
-                    x.Latitude == viewModel.Latitude &&
+                Arg.Is<PaymentUpdateViewModel>(x => x.Latitude == viewModel.Latitude &&
                     x.Longitude == viewModel.Longitude))
                 .Returns(paymentToEdit);
 
-            _paymentRepository.GetById(Arg.Is(viewModel.VehicleId.Value)).Returns(paymentToEdit);
+            _paymentRepository.GetByTransactionId(Arg.Is(viewModel.PayerId)).Returns(paymentToEdit);
 
             // Act
             _paymentService.UpdateLocation(viewModel);
