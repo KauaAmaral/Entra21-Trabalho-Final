@@ -127,6 +127,30 @@ namespace Tests.Unit.Service.Services
         }
 
         [Fact]
+        public void Test_GetByUserId()
+        {
+            // Arrange
+            var id = 2;
+
+            var expectedGuardId = new Guard
+            {
+                Id = id,
+                UserId = 6,
+                IdentificationNumber = "0123456789"
+            };
+
+            _guardRepository.GetByUserId(Arg.Is(id))
+                .Returns(expectedGuardId);
+            
+            // Act
+            var guard = _guardService.GetByUserId(id);
+
+            // Assert
+            guard.UserId.Should().Be(expectedGuardId.UserId);
+            guard.IdentificationNumber.Should().Be(expectedGuardId.IdentificationNumber);
+        }
+
+        [Fact]
         public void Test_GetById_With_Guard_Found()
         {
             // Arrange
