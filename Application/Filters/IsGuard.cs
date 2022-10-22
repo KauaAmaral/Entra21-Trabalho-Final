@@ -14,7 +14,7 @@ namespace Entra21.CSharp.Area21.Application.Filters
             var user = JsonConvert.DeserializeObject<User>(session);
 
             if (user.Hierarchy != Repository.Enums.UserHierarchy.Guarda)
-                context.Result = new RedirectToRouteResult(new RouteValueDictionary { { "area", "Public" }, { "controller", "Alert" }, { "action", "Guard" } });
+                context.Result = new RedirectToRouteResult(new RouteValueDictionary { { "area", "Public" }, { "controller", "Login" }, { "action", "Login" } });
 
             base.OnActionExecuting(context);
         }

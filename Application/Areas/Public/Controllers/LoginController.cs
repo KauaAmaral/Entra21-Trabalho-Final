@@ -25,6 +25,18 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
 
         public IActionResult Index()
         {
+            if (_session.FindUserSession() != null)
+            {
+                if (_session.FindUserSession().Hierarchy == Repository.Enums.UserHierarchy.Administrador)
+                    return RedirectToAction("Index", "Home", new { Area = "administrator" });
+
+                else if (_session.FindUserSession().Hierarchy == Repository.Enums.UserHierarchy.Guarda)
+                    return RedirectToAction("Index", "Home", new { Area = "guard" });
+
+                else
+                    return RedirectToAction("Index", "Home", new { Area = "driver" });
+            }
+
             return View();
         }
 
