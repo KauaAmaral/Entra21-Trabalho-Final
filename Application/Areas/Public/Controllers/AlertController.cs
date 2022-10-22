@@ -37,5 +37,12 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
             TempData["Message"] = "Você deve ser um guarda para acessar essa página";
             return View(nameof(Index));
         }
+        
+        [HttpGet("Driver")]
+        public IActionResult Driver()
+        {
+            TempData["Message"] = "Você deve ser um motorista para acessar essa página";
+            return View(nameof(Index));
+        }
     }
 }
