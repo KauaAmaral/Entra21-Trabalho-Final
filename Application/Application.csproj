@@ -40,4 +40,11 @@
 		<ProjectReference Include="..\Service\Service.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Areas\Logged\Controllers\" />
+	  <Folder Include="wwwroot\fonts\font-awesome-4.7.0\fonts\" />
+	  <Folder Include="wwwroot\fonts\iconic\fonts\" />
+	  <Folder Include="wwwroot\fonts\poppins\" />
+	</ItemGroup>
+  
 </Project>
