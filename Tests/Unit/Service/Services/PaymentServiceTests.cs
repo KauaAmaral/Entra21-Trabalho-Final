@@ -93,7 +93,7 @@ namespace Tests.Unit.Service.Services
             payment.TransactionId.Should().Be(expectedPayment.TransactionId);
             payment.UserId.Should().Be(expectedPayment.UserId);
             payment.VehicleId.Should().Be(expectedPayment.VehicleId);
-            payment.Value.Should().Be(expectedPayment.Value);          
+            payment.Value.Should().Be(expectedPayment.Value);
         }
 
         [Fact]
@@ -119,20 +119,12 @@ namespace Tests.Unit.Service.Services
             // Arrange
             var viewModel = new PaymentUpdateViewModel
             {
-               //VehicleId = 5,
-               //UserId = 16,
-               //PayerId = "18",
-               //TransactionId = "12",
-               Latitude = "-26.9187784",
-               Longitude = "-49.0678917"
+                Latitude = "-26.9187784",
+                Longitude = "-49.0678917"
             };
 
             var paymentToEdit = new Payment
             {
-                //VehicleId = 5,
-                //UserId = 16,
-                //PayerId = "18",
-                //TransactionId = "12",
                 Latitude = "-26.9202362",
                 Longitude = "-49.0648242"
             };
