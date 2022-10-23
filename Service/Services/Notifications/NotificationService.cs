@@ -1,9 +1,8 @@
 ﻿using Entra21.CSharp.Area21.Repository.Entities;
-using Entra21.CSharp.Area21.Service.EntitiesMappings.Notifications;
 using Entra21.CSharp.Area21.Repository.Repositories.Notifications;
-using Entra21.CSharp.Area21.Service.ViewModels.Notifications;
-using Entra21.CSharp.Area21.Service.Authentication;
+using Entra21.CSharp.Area21.Service.EntitiesMappings.Notifications;
 using Entra21.CSharp.Area21.Service.Services.Vehicles;
+using Entra21.CSharp.Area21.Service.ViewModels.Notifications;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using QRCoder;
@@ -16,8 +15,6 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
         private readonly INotificationRepository _notificationRepository;
         private readonly INotificationEntityMapping _notificationEntityMapping;
         private readonly IVehicleService _vehicleService;
-
-
 
         public NotificationService(INotificationRepository notificationRepository,
             INotificationEntityMapping notificationEntityMapping,

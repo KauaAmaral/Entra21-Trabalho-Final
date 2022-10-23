@@ -1,5 +1,4 @@
 ﻿using Entra21.CSharp.Area21.Repository.Entities;
-using Entra21.CSharp.Area21.Repository.Enums;
 using Entra21.CSharp.Area21.Service.ViewModels.Notifications;
 
 namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Notifications

@@ -41,7 +41,6 @@ namespace Entra21.CSharp.Area21.Service.Services.Users
         public User? GetById(int id) =>
             _userRepository.GetById(id);
 
-
         public User Insert(UserRegisterViewModel viewModel)
         {
             var user = _userEntityMapping.RegisterWith(viewModel);
@@ -54,7 +53,6 @@ namespace Entra21.CSharp.Area21.Service.Services.Users
         public User InsertAdministrator(UserRegisterViewModel viewModel)
         {
             var user = _userEntityMapping.RegisterWith(viewModel);
-
 
             user.IsEmailConfirmed = true;
             user.Status = true;
@@ -116,7 +114,6 @@ namespace Entra21.CSharp.Area21.Service.Services.Users
             return true;
         }
 
-        //TODO: Criar EntityMapping para mudar propriedades
         public User UpdateVerifyEmail(int id)
         {
             var user = _userRepository.GetById(id);

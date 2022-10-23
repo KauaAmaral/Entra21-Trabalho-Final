@@ -7,7 +7,6 @@
         public List<PurchaseUnit> purchase_units { get; set; }
         public Payer payer { get; set; }
         public List<Link> links { get; set; }
-
     }
     public class Name
     {

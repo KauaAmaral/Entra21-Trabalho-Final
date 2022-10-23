@@ -48,7 +48,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
             return Ok(notifications);
         }
 
-
         [HttpGet("update")]
         public IActionResult Update([FromQuery] int id)
         {
@@ -87,14 +86,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
 
             return RedirectToAction("Index");
         }
-
-        //[HttpGet("getall")]
-        //public IActionResult GetAll()
-        //{
-        //    var notifications = _notificationService.GetAll();
-
-        //    return View("Index", notifications);
-        //}
 
         [HttpGet("delete")]
         public IActionResult Delete([FromQuery] int id)

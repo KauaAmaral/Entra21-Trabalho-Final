@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Entra21.CSharp.Area21.Application.Filters
 {
-    public class IsGuard : ActionFilterAttribute//TODO ADICIONEI O ADM NO GUARDA
+    public class IsGuard : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext context)
         {
