@@ -1,48 +1,43 @@
 ﻿@model NotificationCheckoutViewModel;
 @{
-	Layout = "~/Areas/Public/Views/Shared/_LayoutUnlogged.cshtml";
+    Layout = "~/Areas/Public/Views/Shared/_LayoutUnlogged.cshtml";
 }
 
 <div class="page background-image vertical-align text-center">
-	<div class="page-content vertical-align-middle">
-		<div class="panel">
-			<div class="panel-body">
-				<h3 class="h3">Checar</h3>
-                 
-				<input type="hidden" asp-for="Id"/>
-				<div class="text-left"> 
-					<h3 class="h3">Placa: @Model.VehiclePlate</h3>
-					<h3 class="h3">Rua: @Model.Address</h3>
-					<h3 class="h3">Verificação 1 Data/Hora: @Model.CreatedAt</h3>
-					<h3 class="h3">Verificação 2 Data/Hora: @Model.UpdatedAt</h3>
-					<h3 class="h3">Valor: @Model.Value</h3>
-				</div>
-			
-					<div class="text-end">
-
-						<button class="btn btn-success" onclick="payment(@Model.Id)">
-							<i class="fa-solid fa-floppy-disk" ></i> Pagar
-						</button>
-
-					</div>
-
-			</div>
-		</div>
-	</div>
+    <div class="page-content vertical-align-middle">
+        <div class="panel">
+            <div class="panel-body">
+                <h3 class="h3">Checar</h3>
+                <input type="hidden" asp-for="Id" />
+                <div class="text-left">
+                    <h3 class="h3">Placa: @Model.VehiclePlate</h3>
+                    <h3 class="h3">Rua: @Model.Address</h3>
+                    <h3 class="h3">Verificação 1 Data/Hora: @Model.CreatedAt</h3>
+                    <h3 class="h3">Verificação 2 Data/Hora: @Model.UpdatedAt</h3>
+                    <h3 class="h3">Valor: @Model.Value</h3>
+                </div>
+                <div class="text-end">
+                    <button class="btn btn-success" onclick="payment(@Model.Id)">
+                        <i class="fa-solid fa-floppy-disk"></i> Pagar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section scripts{
     <script>
         debugger;
-       function payment(id) {
-        debugger;
-        $.ajax({
-            url: '@Url.Action( "Paypal" , "Notification" )',
-            type: "POST",
-            data: {id: id},
-            dataType: "json",
-            success: function(data) {
-                   console.log(data);
+        function payment(id) {
+            debugger;
+            $.ajax({
+                url: '@Url.Action( "Paypal" , "Notification" )',
+                type: "POST",
+                data: { id: id },
+                dataType: "json",
+                success: function(data) {
+                    console.log(data);
                     if (data.status) {
 
                         var jsonresult = JSON.parse(data.response);
@@ -54,7 +49,7 @@
                         var resultado = links.find(item => item.rel === "approve")
 
                         window.location.href = resultado.href
-                    } 
+                    }
                     else {
                         alert("Já esta pago ou Fora da data limite")
                         window.location.href = "https://localhost:7121"

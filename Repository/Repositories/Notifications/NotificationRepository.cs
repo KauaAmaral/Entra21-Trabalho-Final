@@ -27,7 +27,6 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Notifications
             .Include(x => x.Guard.User)
             .ToList();
 
-
         public Notification? GetByPlate(string plate) =>
             _context.Notifications
             .Include(x => x.Guard)

@@ -55,8 +55,6 @@
 			formData.append('latitude', position.coords.latitude);
 			formData.append('transactionId', idPagamento);
 
-		debugger;
-
 		let statusResponse = 0;
 
 		fetch('/driver/paypal/setLocation', {

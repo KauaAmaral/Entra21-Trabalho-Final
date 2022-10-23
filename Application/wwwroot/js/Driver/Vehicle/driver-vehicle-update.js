@@ -6,7 +6,6 @@
     driverUpdateVehicle(element);
 });
 
-// Limpar os campos quando a modal for fechada
 document.getElementById('vehicleUpdateModal').addEventListener('hide.bs.modal', () => vehicleClearFields());
 
 let driverUpdateVehicle = (buttonUpdate) => {
@@ -66,17 +65,7 @@ let vehicleUpdate = (formData) => {
         method: 'POST',
         body: formData
     })
-        //.then((response) => {
-        //    statusResponse = response.status;
-
-        //    return response.json();
-        //})
         .then((data) => {
-            //if (statusResponse === 200) {
-            debugger;
-
-            //let modal = bootstrap.Modal.getInstance(document.getElementById('vehicleUpdateModal'), {});
-            //modal.hide();
 
             $("#vehicleUpdateModal .btn-close-update").click();
 
@@ -84,10 +73,7 @@ let vehicleUpdate = (formData) => {
 
             toastr.success('Veículo alterado com sucesso');
 
-            //vehicleClearFields();
-
             return;
-            //}
 
             showNotificationErrorsOfValidation(data);
         })

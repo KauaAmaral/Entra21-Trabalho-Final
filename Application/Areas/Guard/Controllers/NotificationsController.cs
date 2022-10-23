@@ -1,7 +1,4 @@
 ﻿using Entra21.CSharp.Area21.Application.Filters;
-using Entra21.CSharp.Area21.Application.Models.PaypalOrder;
-using Entra21.CSharp.Area21.Application.Models.PaypalTransaction;
-using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.Repository.Enums;
 using Entra21.CSharp.Area21.Service.Authentication;
 using Entra21.CSharp.Area21.Service.Email;
@@ -12,9 +9,6 @@ using Entra21.CSharp.Area21.Service.Services.Users;
 using Entra21.CSharp.Area21.Service.Services.Vehicles;
 using Entra21.CSharp.Area21.Service.ViewModels.Notifications;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System.Net.Http.Headers;
-using System.Text;
 
 namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
 {
@@ -168,7 +162,6 @@ Efraim Calebe Mertens
                 ViewBag.VehicleType = GetVehicleType();
                 return View(notificationRegisterViewModel);
             }
-
 
             TempData["ShowMessageToastr"] = "Notificação cadastrada com sucesso";
 

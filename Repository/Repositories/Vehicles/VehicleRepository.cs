@@ -2,7 +2,6 @@
 using Entra21.CSharp.Area21.Repository.Repositories.Generic;
 using Entra21.CSharp.Area21.RepositoryDataBase;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Entra21.CSharp.Area21.Repository.Repositories.Vehicles
 {
@@ -15,7 +14,6 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Vehicles
             _context = context;
         }
 
-        // INNER JOIN com a tabela de Usuario
         public override Vehicle? GetById(int id) =>
             _context.Vehicles
             .Include(x => x.User)

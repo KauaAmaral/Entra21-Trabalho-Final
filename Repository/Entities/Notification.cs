@@ -7,9 +7,9 @@ namespace Entra21.CSharp.Area21.Repository.Entities
         public string Address { get; set; }
         public string? Comments { get; set; }
         public string VehicleLicensePlate { get; set; }
-        public bool RegisteredVehicle { get; set; } // Se o vehicle contem no sistema
+        public bool RegisteredVehicle { get; set; }
         public VehicleType Type { get; set; } 
-        public int NotificationAmount { get; set;} // Informa se rescebeu 1 ou 2 notification 
+        public int NotificationAmount { get; set;} 
 
         public string? Token { get; set; }
         public string? PayerId { get; set; }
@@ -21,6 +21,5 @@ namespace Entra21.CSharp.Area21.Repository.Entities
 
         public int? VehicleId { get; set; }
         public Vehicle? Vehicle { get; set; }
-
     }
 }

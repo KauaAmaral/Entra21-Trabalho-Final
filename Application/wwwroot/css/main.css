@@ -31,14 +31,15 @@ body, html {
 
 a {
     font-family: Poppins-Regular;
-    font-size: 14px;
+    font-size: 17px;
     line-height: 1.7;
     color: #666;
     margin: 0;
     transition: all .4s;
     -webkit-transition: all .4s;
     -o-transition: all .4s;
-    -moz-transition: all .4s
+    -moz-transition: all .4s;
+    left: 220px
 }
 
     a:focus {
@@ -56,10 +57,11 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
     font-family: Poppins-Regular;
-    font-size: 14px;
+    font-size: 17px;
     line-height: 1.7;
     color: #666;
-    margin: 0
+    margin: 0;
+    left: 220px
 }
 
 ul, li {
@@ -206,6 +208,11 @@ iframe {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover
+}
+
+.back-home-index{
+    position: relative;
+    left: 220px
 }
 
 .wrap-login100 {

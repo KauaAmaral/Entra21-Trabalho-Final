@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    debugger;
+
     $('#table-notification-adm').DataTable({
         responsive: true,
         language: {

@@ -154,13 +154,9 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
 
         private string GetUrl()
         {
-            //string urlAnterior = Request.Headers["Referer"].ToString(); TODO Pega o link da pagina atual
-            //var deasdas = Url.ActionLink(); Retorna o link completo tambem
-            var https = Request.Scheme; // https
-            var caminho = Request.Host; //localHost:7121
-            //var caminhoss = Request.Method; //Post
-            //var caminhosss = Request.Path; // caminho ex driver/paypal
-
+            var https = Request.Scheme; 
+            var caminho = Request.Host; 
+          
             return (https + "://" + caminho);
         }
 
