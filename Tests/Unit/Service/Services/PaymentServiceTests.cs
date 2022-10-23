@@ -4,7 +4,6 @@ using Entra21.CSharp.Area21.Service.EntitiesMappings.Payments;
 using Entra21.CSharp.Area21.Service.Services.Payments;
 using Entra21.CSharp.Area21.Service.ViewModels.Payments;
 using FluentAssertions;
-using Microsoft.AspNet.Identity;
 using NSubstitute;
 using NSubstitute.ReturnsExtensions;
 using Xunit;
