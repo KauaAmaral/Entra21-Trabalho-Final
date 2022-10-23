@@ -25,7 +25,10 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
         [HttpGet("Update")]
         public IActionResult Update()
         {
-            var user = _session.FindUserSession();
+            var userId = _session.FindUserSession().Id;
+
+            var user = _userService.GetById(userId);
+
             ViewBag.User = user;
 
             var userUpdateViewModel = new UserUpdateViewModel
