@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Entra21.CSharp.Area21.Application.Filters;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
 {
-    [Area("Administrator")]
+    [IsUserLogged]
+    [IsAdministrator]
+	[Area("Administrator")]
     [Route("administrator/map")]
     public class MapController : Controller
     {

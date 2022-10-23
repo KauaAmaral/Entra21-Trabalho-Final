@@ -1,7 +1,14 @@
-﻿@{
-    Layout = "~/Areas/Guard/Views/Shared/_Layout.cshtml";
-}
+﻿<h1 class="text-center mb-30">Bem vindo guarda, @TempData["name"]!!!</h1>
 
-<h1 class="text-center">
-    Bem vindo guarda, @TempData["name"]!!!
-</h1>
+<div class="row">
+	<div class="col-md-12">
+			<div class="card card-block p-30 bg-blue-600">
+			<div class="card-watermark darker font-size-80 m-15"><i class="site-menu-icon wb-layout" aria-hidden="true"></i></div>
+				<div class="counter counter-md counter-inverse text-left">
+					<div class="counter-number-group">
+						<span class="counter-number-related text-capitalize">Quantidade de notificações: @TempData["notifications"]</span>
+					</div>
+				</div>
+			</div>
+	</div>
+</div>
