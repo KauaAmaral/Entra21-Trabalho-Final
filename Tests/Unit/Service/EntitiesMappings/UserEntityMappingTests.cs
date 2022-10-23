@@ -35,7 +35,7 @@ namespace Tests.Unit.Service.EntitiesMappings
             user.Password.Should().Be(viewModel.Password.GetHash());
             user.Cpf.Should().Be(viewModel.Cpf);
             user.Hierarchy.Should().Be(viewModel.HierarchyId);
-        }    
+        }
 
         [Fact]
         public void Test_UpdateWith()

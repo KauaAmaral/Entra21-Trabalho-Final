@@ -17,20 +17,7 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Users
                 Cpf = viewModel.Cpf,
                 Hierarchy = viewModel.HierarchyId,
                 CreatedAt = DateTime.Now
-            };
-
-        public User RegisterWithAdministrator(UserRegisterViewModel viewModel) =>
-            new User
-            {
-                Name = viewModel.Name,
-                Token = viewModel.Token,
-                TokenExpiredDate = DateTime.Now.AddHours(2),
-                Email = viewModel.Email,
-                Password = viewModel.Password.GetHash(),
-                Cpf = viewModel.Cpf,
-                Hierarchy = viewModel.HierarchyId,
-                CreatedAt = DateTime.Now
-            };
+            };       
 
         public User UpdateWith(User user, UserUpdateViewModel viewModel)
         {

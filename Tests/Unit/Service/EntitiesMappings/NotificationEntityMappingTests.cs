@@ -34,7 +34,6 @@ namespace Tests.Unit.Service.EntitiesMappings
             notification.Address.Should().Be(viewModel.Address);            
             notification.Value.Should().Be(viewModel.Value);
             notification.Type.Should().Be(viewModel.Type);
-
         }
 
         [Fact]
@@ -69,7 +68,6 @@ namespace Tests.Unit.Service.EntitiesMappings
             notificationPayment.Token.Should().Be(viewModelEdit.Token);
         }
 
-
         private NotificationRegisterViewModel RegisterNotification()
             => new Faker<NotificationRegisterViewModel>()
             .RuleFor(x => x.GuardId, x => x.Random.Number())
@@ -102,6 +100,5 @@ namespace Tests.Unit.Service.EntitiesMappings
             .RuleFor(x => x.TransactionId, x => x.Random.Word())
             .RuleFor(x => x.Token, x => x.Random.Word())            
             .Generate();
-
     }
 }

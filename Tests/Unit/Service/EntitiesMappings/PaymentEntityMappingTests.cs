@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using Entra21.CSharp.Area21.Repository.Entities;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Payments;
 using Entra21.CSharp.Area21.Service.ViewModels.Payments;
 using FluentAssertions;
@@ -32,6 +33,22 @@ namespace Tests.Unit.Service.EntitiesMappings
             payment.Value.Should().Be(viewModel.Value);
         }
 
+        [Fact]
+        public void Test_UpdateWith()
+        {
+            // Arrange
+            var payment = PaymentCreated();
+
+            var viewModelEdit = UpdatePayment();
+
+            // Act
+            _paymentEntityMapping.UpdateWith(payment, viewModelEdit);
+
+            // Assert
+            payment.Latitude.Should().Be(viewModelEdit.Latitude);
+            payment.Longitude.Should().Be(viewModelEdit.Longitude);
+        }
+
         private PaymentRegisterViewModel RegisterPayment()
             => new Faker<PaymentRegisterViewModel>()
             .RuleFor(x => x.Token, p => p.Random.Word())
@@ -40,6 +57,18 @@ namespace Tests.Unit.Service.EntitiesMappings
             .RuleFor(x => x.UserId, p => p.Random.Number())
             .RuleFor(x => x.VehicleId, p => p.Random.Number())
             .RuleFor(x => x.Value, p => p.Random.Number())
+            .Generate();
+
+        private Payment PaymentCreated()
+            => new Faker<Payment>()
+            .RuleFor(x => x.Latitude, f => f.Random.Word())
+            .RuleFor(x => x.Latitude, f => f.Random.Word())
+            .Generate();
+
+        private PaymentUpdateViewModel UpdatePayment()
+            => new Faker<PaymentUpdateViewModel>()
+            .RuleFor(x => x.Latitude, f => f.Random.Word())
+            .RuleFor(x => x.Longitude, f => f.Random.Word())
             .Generate();
     }
 }
