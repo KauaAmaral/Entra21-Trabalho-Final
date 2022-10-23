@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Entra21.CSharp.Area21.Service.ViewModels.Vehicles
 {
-    public class VehicleViewModel // TODO Fazer as Validacao do VehicleViewModel
+    public class VehicleViewModel
     {
         [Display(Name = "Placa")]
         [Required(ErrorMessage = "{0} deve ser preenchido")]

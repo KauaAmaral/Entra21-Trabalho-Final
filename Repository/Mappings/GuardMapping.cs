@@ -12,7 +12,6 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
 
             builder.HasKey(x => x.Id);
 
-
             builder.Property(x => x.Status)
                 .HasColumnType("BIT")
                 .IsRequired()
@@ -42,15 +41,6 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
             builder.HasOne(x => x.User)
                 .WithMany(x => x.Guards)
                 .HasForeignKey(x => x.UserId);
-
-            //builder.HasData(
-            //   new Guard
-            //   {
-            //       Id = 1,
-            //       IdentificationNumber = "0123456789",
-            //       Status = true,
-            //       UserId = 1
-            //   });
         }
     }
 }

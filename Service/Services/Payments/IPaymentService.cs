@@ -11,6 +11,5 @@ namespace Entra21.CSharp.Area21.Service.Services.Payments
         IList<PaymentsLocationsViewModel> GetLocations();
         Payment GetById(int id);
         bool ValidPayment(Vehicle vehicle);
- 
     }
 }   

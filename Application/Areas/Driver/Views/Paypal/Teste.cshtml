@@ -29,17 +29,9 @@
 
 </div>
 
-
-
 @section scripts{
     <script>
         function pagar(vehicle) {
-
-
-            //var body = {
-            //    precio: $("#precio").val(),
-            //    producto: "Microfono Hyperx Quadcast"
-            //}
 
             jQuery.ajax({
                 url: '@Url.Action("Paypal", "Paypal")',
@@ -62,19 +54,14 @@
 
                         window.location.href = resultado.href
 
-                        /*console.log(links)*/
-                        /*console.log(resultado)*/
                     } else {
                         alert("Vuelva a intentarlo más tarde")
                     }
-
 
                 },
                 beforeSend: function () {
                 }
             });
-
-
         }
 
     </script>

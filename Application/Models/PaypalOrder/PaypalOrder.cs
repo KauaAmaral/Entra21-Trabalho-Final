@@ -5,7 +5,6 @@
         public string intent { get; set; }
         public List<PurchaseUnit> purchase_units { get; set; }
         public ApplicationContext application_context { get; set; }
-
     }
     public class Amount
     {

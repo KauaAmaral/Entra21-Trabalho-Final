@@ -2,7 +2,7 @@
 
 namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
 {
-	[Area("Administrator")]
+    [Area("Administrator")]
     [Route("administrator/map")]
     public class MapController : Controller
     {

@@ -41,6 +41,5 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Payments
             _context.Payments
             .Where(x => x.CreatedAt > DateTime.Now.AddHours(-1) && x.Latitude != null)
             .ToList();
-        
     }
 }

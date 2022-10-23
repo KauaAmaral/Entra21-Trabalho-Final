@@ -2,7 +2,6 @@
 using Entra21.CSharp.Area21.Repository.Enums;
 using Entra21.CSharp.Area21.Repository.Repositories.Vehicles;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Vehicles;
-using Entra21.CSharp.Area21.Service.ViewModels.Payments;
 using Entra21.CSharp.Area21.Service.ViewModels.Vehicles;
 
 namespace Entra21.CSharp.Area21.Service.Services.Vehicles
