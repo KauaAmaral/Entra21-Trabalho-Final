@@ -74,7 +74,7 @@ namespace Tests.Unit.Service.EntitiesMappings
             => new Faker<NotificationRegisterViewModel>()
             .RuleFor(x => x.GuardId, x => x.Random.Number())
             .RuleFor(x => x.VehicleId, x => x.Random.Number())
-            .RuleFor(x => x.VehiclePlate, x => x.Random.Word())
+            .RuleFor(x => x.VehiclePlate, x => x.Random.Word().ToUpper())
             .RuleFor(x => x.Registered, x => true)
             .RuleFor(x => x.Comments, x => x.Random.Word())
             .RuleFor(x => x.Address, x => "Rua XV de Novembro")            
@@ -84,15 +84,16 @@ namespace Tests.Unit.Service.EntitiesMappings
 
         private Notification NotificationCreated()
             => new Faker<Notification>()         
-            .RuleFor(x => x.NotificationAmount, x => x.Random.Number())            
-            .RuleFor(x => x.PayerId, x => x.Random.Word())            
-            .RuleFor(x => x.TransactionId, x => x.Random.Word())            
-            .RuleFor(x => x.Token, x => x.Random.Word())    
+            .RuleFor(x => x.Comments, x => x.Random.Word())
+            .RuleFor(x => x.Address, x => x.Random.Word())
+            .RuleFor(x => x.VehicleLicensePlate, x => x.Random.Word().ToUpper())
             .Generate();
 
         private NotificationUpdateViewModel UpdateNotification()
             => new Faker<NotificationUpdateViewModel>()          
-            .RuleFor(x => x.NotificationAmount, x => x.Random.Number())            
+            .RuleFor(x => x.Comments, x => x.Random.Word())            
+            .RuleFor(x => x.Address, x => x.Random.Word())            
+            .RuleFor(x => x.VehiclePlate, x => x.Random.Word().ToUpper())
             .Generate();
 
         private NotificationUpdateViewModel UpdatePaymentNotification()
