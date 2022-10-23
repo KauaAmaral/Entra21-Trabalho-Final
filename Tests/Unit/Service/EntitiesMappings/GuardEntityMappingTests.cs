@@ -49,11 +49,13 @@ namespace Tests.Unit.Service.EntitiesMappings
             .RuleFor(x => x.IdentificationNumber, f => f.Random.Word())
             .RuleFor(x => x.UserId, f => f.Random.Number())
             .Generate();
+
         private Guard GuardCreated()
             => new Faker<Guard>()
             .RuleFor(x => x.IdentificationNumber, f => f.Random.Word())
             .RuleFor(x => x.UserId, f => f.Random.Number())
             .Generate();
+
         private GuardUpdateViewModel UpdateGuard()
             => new Faker<GuardUpdateViewModel>()
             .RuleFor(x => x.IdentificationNumber, f => f.Random.Word())

@@ -93,6 +93,7 @@ namespace Tests.Unit.Service.EntitiesMappings
             .RuleFor(x => x.Address, x => x.Random.Word())            
             .RuleFor(x => x.VehiclePlate, x => x.Random.Word().ToUpper())
             .Generate();
+
         private NotificationUpdateViewModel UpdatePaymentNotification()
              => new Faker<NotificationUpdateViewModel>()
             .RuleFor(x => x.PayerId, x => x.Random.Word())
