@@ -1,6 +1,4 @@
-﻿using Entra21.CSharp.Area21.Repository.Entities;
-
-namespace Entra21.CSharp.Area21.Repository.Repositories.Generic
+﻿namespace Entra21.CSharp.Area21.Repository.Repositories.Generic
 {
     public interface IGenericRepository<TEntity> where TEntity : class
     {

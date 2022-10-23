@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.RegularExpressions;
-using System.Xml.Linq;
 
 namespace Entra21.CSharp.Area21.Service.ViewModels.Users
 {

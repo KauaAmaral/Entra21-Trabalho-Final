@@ -1,5 +1,4 @@
 ﻿using Entra21.CSharp.Area21.Service.Services.Payments;
-using Entra21.CSharp.Area21.Service.Services.Vehicles;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
@@ -9,7 +8,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
     public class MapController : Controller
     {
         private readonly IPaymentService _paymentService;
-        
         public MapController(IPaymentService paymentService)
         {
             _paymentService = paymentService;

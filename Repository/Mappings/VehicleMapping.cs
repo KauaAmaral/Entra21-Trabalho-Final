@@ -47,7 +47,6 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .HasColumnName("update_at")
                 .HasColumnType("DATETIME2");
 
-
             builder.HasOne(x => x.User)
                 .WithMany(x => x.Vehicles)
                 .HasForeignKey(x => x.UserId);
@@ -63,9 +62,6 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                    Status = true,
                    CreatedAt = DateTime.Now
                }) ;
-//INSERT INTO vehicles(license_plate, Model, vehicle_type, user_id, Status, created_at) VALUES('324123h', '12hj1', 0, 1, 'true', '1334-12-12')
-
-//SELECT* From vehicles
         }
     }
 }

@@ -3,7 +3,6 @@
 });
 
 function myMap(locations, position) {
-    //const uluru = { lat: -31.56391, lng: 147.154312 };
 
     var mapProp = {
         center: new google.maps.LatLng({ lat: -26.9179821, lng: -49.0672724 }),

@@ -1,5 +1,4 @@
-﻿debugger;
-$(".vehiclePlate").mask("SSS0A99");
+﻿$(".vehiclePlate").mask("SSS0A99");
 $(".vehiclePlate").on("input", function () {
     $(this).val($(this).val().toUpperCase());
 });

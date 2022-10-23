@@ -18,7 +18,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
         private readonly string _userName = "AeHh1KwTDiCTJlkmPVoWT5qj9YMp0dwnhAStwYVE7VZiaPN2jfJjMm7UJ6B9TMXFkVqFNkmpzpfinpJR";
         private readonly string _passwd = "EHqhokF9mvWolaWgw04hay43lNAuCcLNHZ8XBpmm0cLSYUxdAYnbBI6dhiaCXtI54qJJ-EF3VS0IMGfx";
         private readonly string _url = "https://api-m.sandbox.paypal.com";
-        
 
         public NotificationController(
             INotificationService notificationService
@@ -63,13 +62,13 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
 
             var notification = _notificationService.GetById(idNotificaton);
 
-            bool status = false;
-            string answer = string.Empty;
+            var status = false;
+            var answer = string.Empty;
 
             if (notification.Token != null || notification.CreatedAt.Date > notification.CreatedAt.Date.AddDays(15))
                 return Json(new { status = status, response = answer });
 
-            string urlReturn = Request.Scheme + "://" + Request.Host + $"/Public/Notification/Approved?id={notification.Id}";
+            var urlReturn = Request.Scheme + "://" + Request.Host + $"/Public/Notification/Approved?id={notification.Id}";
 
             using (var client = new HttpClient())
             {

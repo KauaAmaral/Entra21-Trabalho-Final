@@ -1,56 +1,55 @@
 ﻿@model NotificationRegisterViewModel
 @{
-    var vehicleType = ViewBag.VehicleType as List<string>;
-    vehicleType.Add(string.Empty);
+	var vehicleType = ViewBag.VehicleType as List<string>;
 
-    var selectVehicleType = new SelectList(vehicleType, string.Empty);
+	var selectVehicleType = new SelectList(vehicleType, string.Empty);
 }
 
 <div class="page vertical-align text-center">
-    <div class="page-content vertical-align-middle">
-        <div class="panel">
-            <div class="panel-body">
-                <div class="brand">
+	<div class="page-content vertical-align-middle">
+		<div class="panel">
+			<div class="panel-body">
+				<div class="brand">
+					<h3 class="h3">Registrar</h3>
+				</div>
 
-                    <h1 class="brand-text font-size-18">Cadastro de Notificações</h1>
+				<form asp-action="registerNotification" method="POST">
 
-                </div>
+					<input type="hidden" asp-for="Registered" />
 
-                <form asp-action="registerNotification" method="POST">
-                    <input type="hidden" asp-for="Registered" />
-                    <div class="form-group form-material floating" data-plugin="formMaterial">
-                        <label asp-for="VehiclePlate" class="form-label" span-required="">Placa do Veículo</label>
-                        <input asp-for="VehiclePlate" id="vehiclelate" class="form-control" disabled=""/>
-                        <span asp-validation-for="VehiclePlate" class="text-danger"></span>
-                    </div>
+					<label asp-for="VehiclePlate" class="form-label"></label>
+					<input asp-for="VehiclePlate" class="form-control vehiclelate"/>
+					<span asp-validation-for="VehiclePlate" class="text-danger"></span>
 
-                    <div class="mb-3">
-                        <label asp-for="Type" class="form-label" span-required=""></label>
-                        <select asp-for="Type" asp-items="selectVehicleType" class="form-select">
-                        </select>
-                        <span asp-validation-for="Type" class="text-danger"></span>
-                    </div>
+					<div class="mb-3">
+						<label asp-for="Type" class="form-label mt-5"></label>
+						<select asp-for="Type" asp-items="selectVehicleType" class="form-select" id="vehicleType">
+						</select>
+						<span asp-validation-for="Type" class="text-danger"></span>
+					</div>
 
-                    <div class="form-group form-material floating" data-plugin="formMaterial">
-                        <label asp-for="Address" class="sr-only" span-required="">Endereço</label>
-                        <input asp-for="Address" class="form-control" />
-                        <span asp-validation-for="Address" class="text-danger"></span>
-                    </div>
+					<label asp-for="Address" class="form-label mt-5"></label>
+					<input asp-for="Address" class="form-control" />
+					<span asp-validation-for="Address" class="text-danger"></span>
 
-                    <div class="form-group form-material floating" data-plugin="formMaterial">
-                        <label asp-for="Comments" class="sr-only" span-required="">Comentários</label>
-                        <input asp-for="Comments" class="form-control" />
-                        <span asp-validation-for="Comments" class="text-danger"></span>
-                    </div>
+					<div>
+						<label asp-for="Comments" class="form-label mt-5"></label>
+						<input asp-for="Comments" class="form-control" />
+						<span asp-validation-for="Comments" class="text-danger"></span>
+					</div>
 
-                    @if (TempData["Message"] != null)
-                    {
-                        <p class="text-danger">@TempData["Message"]</p>
-                    }
-                    <button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Criar Notificação</button>
+					@if (TempData["Message"] != null)
+					{
+						<p class="text-danger">@TempData["Message"]</p>
+					}
+					<button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Criar Notificação</button>
 
-                </form>
-            </div>
-        </div>
-    </div>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>
+
+@section Scripts{
+	<script src="~/js/Guard/Notification/guard-notification-select2.js"></script>
+}

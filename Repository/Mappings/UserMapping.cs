@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Entra21.CSharp.Area21.Repository.Authentication;
 using Entra21.CSharp.Area21.Repository.Entities;
-using Entra21.CSharp.Area21.Repository.Authentication;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Entra21.CSharp.Area21.Repository.Mappings
 {

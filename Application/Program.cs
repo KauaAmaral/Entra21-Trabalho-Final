@@ -21,7 +21,6 @@ builder.Services.Configure<RazorViewEngineOptions>(options =>
     options.AreaViewLocationFormats.Add("/Views/{0}.cshtml");
 });
 
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -94,6 +93,5 @@ app.UseEndpoints(endpoint =>
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
 });
-
 
 app.Run();

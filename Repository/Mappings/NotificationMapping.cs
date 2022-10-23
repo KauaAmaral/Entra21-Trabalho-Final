@@ -26,7 +26,6 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .HasColumnName("update_at")
                 .HasColumnType("DATETIME2");
 
-            //INNE JOIN 
             builder.Property(x => x.GuardId)
                 .HasColumnType("INT")
                 .HasColumnName("guard_id");
@@ -43,7 +42,7 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .WithMany(x => x.Notifications)
                 .HasForeignKey(x => x.VehicleId)
                 .OnDelete(DeleteBehavior.NoAction);
-            //Endereço e comentario
+
             builder.Property(x => x.Address)
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(100)
@@ -54,7 +53,7 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(100)
                 .HasColumnName("comments");
-            //Vehicle
+
             builder.Property(x => x.VehicleLicensePlate)
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(8)
@@ -75,7 +74,7 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .IsRequired()
                 .HasColumnType("TINYINT")
                 .HasDefaultValue(1);
-            //Pagamento
+
             builder.Property(x => x.Token)
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(20)

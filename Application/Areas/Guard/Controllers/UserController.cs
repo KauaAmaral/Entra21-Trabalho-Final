@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
 {
     [IsUserLogged]
+    [IsGuard]
     [Area("Guard")]
     [Route("Guard")]
     public class UserController : Controller
