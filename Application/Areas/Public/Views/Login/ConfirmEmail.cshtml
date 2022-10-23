@@ -1,12 +1,16 @@
-﻿<div class="page background-image vertical-align text-center">
-    <div class="page-content vertical-align-middle">
+﻿<div class="limiter">
+    <div class="container-login100" style="background-image: url('images/homeScreen.jpg');">
         <div class="panel">
             <div class="panel-body">
                 <div class="brand">
-                    <img class="navbar-brand-logo" src="~/Theme/global/portraits/Logo Black.png">
+                    <img class="navbar-brand-logo" src="~/images/logoArea21.png">
                 </div>
-                <p>@TempData["Confirm"]</p>
-                <P><a asp-controller="Login" asp-action="Index">Voltar para área de login</a><p>
+                <div class="user-confirm col-12">
+                    <p>@TempData["Confirm"]</p>
+                </div>
+                <div class="container-back-home100">
+                    <P><a asp-controller="Login" asp-action="Index" class="back-home-index">Voltar para área de login</a><p>
+                </div>
             </div>
         </div>
     </div>
