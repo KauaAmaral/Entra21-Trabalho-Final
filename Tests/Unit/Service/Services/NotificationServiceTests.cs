@@ -27,6 +27,21 @@ namespace Tests.Unit.Service.Services
         }
 
         [Fact]
+        public void Test_Delete()
+        {
+            // Arrange
+            var id = 5;
+
+            // Act
+            _notificationService.Delete(id);
+
+            // Assert
+            _notificationRepository
+                .Received()
+                .Delete(Arg.Is(5));
+        }
+
+        [Fact]
         public void Test_Register()
         {
             // Arrange           
@@ -38,8 +53,7 @@ namespace Tests.Unit.Service.Services
                 Type = VehicleType.Carro,
                 Address = "Rua XV de Novembro",
                 Comments = "Horário Expirado",
-                Registered = true,                
-                //Value = 1.50m,
+                Registered = true,     
             };
 
             var notification = new Notification()
@@ -50,8 +64,7 @@ namespace Tests.Unit.Service.Services
                 Type = viewModel.Type,
                 Address = viewModel.Address,
                 Comments = viewModel.Comments,
-                RegisteredVehicle = viewModel.Registered,                
-                //Value = viewModel.Value,
+                RegisteredVehicle = viewModel.Registered,               
             };
 
             _notificationEntityMapping.RegisterWith(Arg.Is<NotificationRegisterViewModel>(
@@ -133,7 +146,7 @@ namespace Tests.Unit.Service.Services
             _notificationRepository
                 .DidNotReceive()
                 .Update(Arg.Any<Notification>());
-        }
+        }        
 
         [Fact]
         public void Test_GetById_With_Notification_Found()

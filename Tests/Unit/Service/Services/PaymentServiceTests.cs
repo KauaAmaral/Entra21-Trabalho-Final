@@ -93,7 +93,7 @@ namespace Tests.Unit.Service.Services
             payment.TransactionId.Should().Be(expectedPayment.TransactionId);
             payment.UserId.Should().Be(expectedPayment.UserId);
             payment.VehicleId.Should().Be(expectedPayment.VehicleId);
-            payment.Value.Should().Be(expectedPayment.Value);          
+            payment.Value.Should().Be(expectedPayment.Value);
         }
 
         [Fact]
@@ -113,6 +113,65 @@ namespace Tests.Unit.Service.Services
             _paymentRepository.Received(1).GetById(Arg.Is(10));
         }
 
+        [Fact]
+        public void Test_UpdateLocation()
+        {
+            // Arrange
+            var viewModel = new PaymentUpdateViewModel
+            {
+                Latitude = "-26.9187784",
+                Longitude = "-49.0678917"
+            };
+
+            var paymentToEdit = new Payment
+            {
+                Latitude = "-26.9202362",
+                Longitude = "-49.0648242"
+            };
+
+            _paymentEntityMapping.UpdateWith(
+                Arg.Is<Payment>(x => x.Latitude == paymentToEdit.Latitude &&
+                    x.Longitude == paymentToEdit.Longitude),
+                Arg.Is<PaymentUpdateViewModel>(x => x.Latitude == viewModel.Latitude &&
+                    x.Longitude == viewModel.Longitude))
+                .Returns(paymentToEdit);
+
+            _paymentRepository.GetByTransactionId(Arg.Is(viewModel.PayerId)).Returns(paymentToEdit);
+
+            // Act
+            _paymentService.UpdateLocation(viewModel);
+
+            // Assert
+            _paymentRepository.Received(1).Update(Arg.Is<Payment>(payment =>
+                ValidatePaymentWithPaymentUpdateViewModel(payment, paymentToEdit)));
+        }
+
+        [Fact]
+        public void Test_ValidPayment()
+        {
+            // Arrange
+            var vehiclePayment = new Vehicle
+            {
+                Id = 7,
+                CreatedAt = DateTime.Now
+            };
+
+            var paymentToValidate = new Payment
+            {
+                Id = vehiclePayment.Id,
+                CreatedAt = vehiclePayment.CreatedAt,
+            };
+
+            _paymentRepository.ValidPayment(vehiclePayment.Id).Returns(paymentToValidate);
+
+            // Act
+            _paymentService.ValidPayment(vehiclePayment);
+
+            // Assert
+            vehiclePayment.Id.Should().Be(paymentToValidate.Id);
+            vehiclePayment.CreatedAt.Should().Be(paymentToValidate.CreatedAt);            
+        }
+
         private bool ValidatePayment(Payment payment, PaymentRegisterViewModel viewModel)
         {
             payment.PayerId.Should().Be(viewModel.PayerId);
@@ -121,6 +180,18 @@ namespace Tests.Unit.Service.Services
             payment.UserId.Should().Be(viewModel.UserId);
             payment.VehicleId.Should().Be(viewModel.VehicleId);
             payment.Value.Should().Be(viewModel.Value);
+
+            return true;
+        }
+
+        private bool ValidatePaymentWithPaymentUpdateViewModel(Payment payment, Payment paymentExpected)
+        {
+            payment.VehicleId.Should().Be(paymentExpected.VehicleId);
+            payment.UserId.Should().Be(paymentExpected.UserId);
+            payment.PayerId.Should().Be(paymentExpected.PayerId);
+            payment.TransactionId.Should().Be(paymentExpected.TransactionId);
+            payment.Latitude.Should().Be(paymentExpected.Latitude);
+            payment.Longitude.Should().Be(paymentExpected.Longitude);
 
             return true;
         }

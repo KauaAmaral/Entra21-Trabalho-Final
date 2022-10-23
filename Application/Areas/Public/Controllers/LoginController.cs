@@ -53,15 +53,9 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
 
                 else
                     return RedirectToAction("Index", "Home", new { Area = "driver" });
-            }
+            }           
 
-            var userLoginViewModel = new UserLoginViewModel
-            {
-                Email = "admin@admin.com",
-                Password = "1234"
-            };
-
-            return View("login", userLoginViewModel);
+            return View("login");
         }
 
         [HttpPost("login")]

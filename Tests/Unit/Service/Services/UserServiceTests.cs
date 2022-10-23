@@ -1,4 +1,6 @@
-﻿using Entra21.CSharp.Area21.Repository.Entities;
+﻿using Entra21.CSharp.Area21.Repository.Authentication;
+using Entra21.CSharp.Area21.Repository.Entities;
+using Entra21.CSharp.Area21.Repository.Enums;
 using Entra21.CSharp.Area21.Repository.Repositories.Users;
 using Entra21.CSharp.Area21.Service.EntitiesMappings.Users;
 using Entra21.CSharp.Area21.Service.Services.Users;
@@ -39,6 +41,25 @@ namespace Tests.Unit.Service.Services
         }
 
         [Fact]
+        public void Test_Disable()
+        {
+            // Arrange
+            var userChange = new User
+            {
+                Id = 5,
+                Name = "Leonardo Salvador",
+                Cpf = "101.147.854.33",
+                Status = true
+            };        
+
+            // Act
+            _userService.Disable(userChange);
+
+            // Assert
+            _userRepository.Update(userChange);
+        }
+
+        [Fact]
         public void Test_Register()
         {
             // Arrange
@@ -70,6 +91,44 @@ namespace Tests.Unit.Service.Services
 
             // Act
             _userService.Insert(viewModel);
+
+            // Assert
+            _userRepository.Received(1).Add(Arg.Is<User>(
+                user => ValidateUser(user, viewModel)));
+        }
+
+        [Fact]
+        public void Test_RegisterAdministrator()
+        {
+            // Arrange
+            var viewModel = new UserRegisterViewModel
+            {
+                Name = "Luiz Roberto",
+                Cpf = "198.445.012-45",
+                Email = "luiz-roberto@gmail.com",
+                Token = Guid.NewGuid(),
+                Password = "154d612"
+            };
+
+            var user = new User()
+            {
+                Name = viewModel.Name,
+                Cpf = viewModel.Cpf,
+                Email = viewModel.Email,
+                Token = viewModel.Token,
+                Password = viewModel.Password
+            };
+
+            _userEntityMapping.RegisterWith(Arg.Is<UserRegisterViewModel>
+                (x => x.Name == viewModel.Name &&
+                    x.Cpf == viewModel.Cpf &&
+                    x.Email == viewModel.Email &&
+                    x.Token == viewModel.Token &&
+                    x.Password == viewModel.Password))
+                .Returns(user);
+
+            // Act
+            _userService.InsertAdministrator(viewModel);
 
             // Assert
             _userRepository.Received(1).Add(Arg.Is<User>(
@@ -143,6 +202,80 @@ namespace Tests.Unit.Service.Services
             _userRepository
                 .DidNotReceive()
                 .Update(Arg.Any<User>());
+        }
+
+        [Fact]
+        public void Test_UpdateAdministrator()
+        {
+            // Arrange
+            var viewModel = new UserUpdateAdministratorViewModel
+            {
+                Id = 11,
+                Name = "Claudio Raimundo",
+                Cpf = "023.115.003-45",
+                Email = "claudioraimundo@gmail.com",
+                Phone = "47991206630",
+                Password = "1a2b3c4d".GetHash(),
+                HierarchyId = UserHierarchy.Motorista
+            };
+
+            var userToEdit = new User
+            {
+                Id = 11,
+                Name = "Claudio Raimundo",
+                Cpf = "023.115.003-45",
+                Email = "claudioraimundo@gmail.com",
+                Phone = "47991206630",
+                Password = "1234ABCD".GetHash(),
+                Hierarchy = UserHierarchy.Guarda
+            };
+
+            _userEntityMapping.UpdateWithAdministrator(
+                Arg.Is<User>(x => x.Id == userToEdit.Id &&
+                    x.Name == userToEdit.Name &&
+                    x.Cpf == userToEdit.Cpf &&
+                    x.Email == userToEdit.Email &&
+                    x.Phone == userToEdit.Phone &&
+                    x.Password == userToEdit.Password &&
+                    x.Hierarchy == userToEdit.Hierarchy),
+                Arg.Is<UserUpdateAdministratorViewModel>(x => x.Id == viewModel.Id &&
+                    x.Name == viewModel.Name &&
+                    x.Cpf == viewModel.Cpf &&
+                    x.Email == viewModel.Email &&
+                    x.Phone == viewModel.Phone &&
+                    x.Password == viewModel.Password &&
+                    x.HierarchyId == viewModel.HierarchyId))
+                .Returns(userToEdit);
+
+            _userRepository.GetById(Arg.Is(viewModel.Id)).Returns(userToEdit);
+
+            // Act
+            _userService.UpdateAdministrator(viewModel);
+
+            // Assert
+            _userRepository.Received(1).Update(Arg.Is<User>(user =>
+                ValidateUserWithUserAdministratorUpdateViewModel(user, userToEdit)));
+        }
+
+        [Fact]
+        public void Test_GetByCpf()
+        {
+            // Arrange
+            var cpf = "123.456.789-10";
+
+            var user = new User
+            {
+                Cpf = cpf
+            };
+
+            _userRepository.GetByCpf(cpf)
+                .Returns(user);
+
+            // Act
+            var userCpf = _userService.GetByCpf(cpf);
+
+            // Assert
+            userCpf.Cpf.Should().Be(user.Cpf);
         }
 
         [Fact]
@@ -237,6 +370,20 @@ namespace Tests.Unit.Service.Services
             user.Cpf.Should().Be(userExpected.Cpf);
             user.Email.Should().Be(userExpected.Email);
             user.Phone.Should().Be(userExpected.Phone);
+
+            return true;
+        }
+
+        private bool ValidateUserWithUserAdministratorUpdateViewModel(
+           User user, User userExpected)
+        {
+            user.Id.Should().Be(userExpected.Id);
+            user.Name.Should().Be(userExpected.Name);
+            user.Cpf.Should().Be(userExpected.Cpf);
+            user.Email.Should().Be(userExpected.Email);
+            user.Phone.Should().Be(userExpected.Phone);
+            user.Password.Should().Be(userExpected.Password);
+            user.Hierarchy.Should().Be(userExpected.Hierarchy);
 
             return true;
         }

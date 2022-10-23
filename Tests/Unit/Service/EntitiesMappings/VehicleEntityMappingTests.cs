@@ -51,7 +51,7 @@ namespace Tests.Unit.Service.EntitiesMappings
 
         private VehicleRegisterViewModel RegisterVehicle(VehicleType vehicleType)
             => new Faker<VehicleRegisterViewModel>()
-            .RuleFor(x => x.LicensePlate, x => x.Random.Word())
+            .RuleFor(x => x.LicensePlate, x => x.Random.Word().ToUpper())
             .RuleFor(x => x.Model, x => x.Random.Word())
             .RuleFor(x => x.Type, x => vehicleType)
             .RuleFor(x => x.UserId, x => x.Random.Number())
@@ -59,14 +59,14 @@ namespace Tests.Unit.Service.EntitiesMappings
 
         private Vehicle VehicleCreated(VehicleType vehicleType)
             => new Faker<Vehicle>()
-            .RuleFor(x => x.LicensePlate, x => x.Random.Word())
+            .RuleFor(x => x.LicensePlate, x => x.Random.Word().ToUpper())
             .RuleFor(x => x.Model, x => x.Random.Word())
             .RuleFor(x => x.Type, x => vehicleType)
             .Generate();
 
         private VehicleUpdateViewModel UpdateVehicle(VehicleType vehicleType)
             => new Faker<VehicleUpdateViewModel>()
-            .RuleFor(x => x.LicensePlate, x => x.Random.Word())
+            .RuleFor(x => x.LicensePlate, x => x.Random.Word().ToUpper())
             .RuleFor(x => x.Model, x => x.Random.Word())
             .RuleFor(x => x.Type, x => vehicleType)
             .Generate();
