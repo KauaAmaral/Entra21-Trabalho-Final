@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System.ComponentModel.DataAnnotations;
-
-namespace Entra21.CSharp.Area21.Service.ViewModels.Payments
+﻿namespace Entra21.CSharp.Area21.Service.ViewModels.Payments
 {
     public class PaymentViewModel
     {

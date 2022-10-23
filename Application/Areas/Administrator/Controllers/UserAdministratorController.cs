@@ -6,7 +6,6 @@ using Entra21.CSharp.Area21.Service.Services.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Guards;
 using Entra21.CSharp.Area21.Service.ViewModels.Users;
 using Entra21.CSharp.Area21.Service.ViewModels.Users.Validations;
-using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 
@@ -174,6 +173,5 @@ namespace Entra21.CSharp.Area21.Application.Areas.Administrator.Controllers
             var viewModel = _userService.GetViewModelById(id);
             return Ok(viewModel);
         }
-
     }
 }

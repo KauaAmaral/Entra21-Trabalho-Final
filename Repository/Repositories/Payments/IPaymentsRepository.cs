@@ -8,6 +8,5 @@ namespace Entra21.CSharp.Area21.Repository.Repositories.Payments
         Payment? ValidPayment(int id);
         Payment? GetByTransactionId(string transactionId);
         List<Payment>? GetLocations();
-
     }
 }

@@ -7,6 +7,5 @@ namespace Entra21.CSharp.Area21.Service.Authentication
         void CreateUserSession(User user);
         void RemoveUserSession();
         User FindUserSession();
-
     }
 }

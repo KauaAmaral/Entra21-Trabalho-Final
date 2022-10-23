@@ -21,7 +21,6 @@ builder.Services.Configure<RazorViewEngineOptions>(options =>
     options.AreaViewLocationFormats.Add("/Views/{0}.cshtml");
 });
 
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

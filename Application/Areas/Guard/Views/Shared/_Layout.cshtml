@@ -126,7 +126,7 @@
 							</a>
 						</li>
 						<li class="dropdown site-menu-item has-sub">
-							<a asp-area="Public" asp-controller="Map" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
+							<a asp-area="Guard" asp-controller="Map" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
 								<i class="fa fa-map"></i>
 								<span class="site-menu-title">Mapa</span>
 							</a>
@@ -219,6 +219,8 @@
 	<!-- Select2 -->
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl5EjVV5roMTtLPWNS6wpEh4GaGVRnpJU&callback=myMap"></script>
 
 	@await RenderSectionAsync("Scripts", required: false)
 

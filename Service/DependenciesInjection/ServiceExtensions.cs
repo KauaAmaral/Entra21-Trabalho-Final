@@ -31,9 +31,7 @@ namespace Entra21.CSharp.Area21.Service.DependenciesInjection
             {
                 o.Cookie.HttpOnly = true;
                 o.Cookie.IsEssential = true;
-
             });
-
 
             return services;
         }

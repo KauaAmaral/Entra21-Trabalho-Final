@@ -62,7 +62,6 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
             return View(viewModel);
         }
 
-
         [HttpPost("changePassword")]
         public IActionResult ChangePassword([FromForm] UserChangePasswordViewModel userChangePasswordViewModel)
         {

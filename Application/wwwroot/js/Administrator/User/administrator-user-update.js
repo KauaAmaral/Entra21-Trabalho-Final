@@ -8,11 +8,10 @@
     administratorUserUpdateFillModalGuardData(element);
 });
 
-
 let administratorUserUpdateFillModalGuardData = (buttonUpdate) => {
     let id = buttonUpdate.getAttribute('data-id');
     let statusResponse = 0;
-    debugger;
+
     fetch(`/administrator/users/getByIdGuard?id=${id}`)
         .then((response) => {
             statusResponse = response.status;
@@ -58,8 +57,6 @@ let administratorUserUpdateFillModalUserData = (buttonUpdate) => {
                 document.getElementById('campo-phone').value = data.phone;
                 document.getElementById('campo-password').value = "";
                 document.getElementById('campo-confirm-password').value = "";
-
-                debugger;
 
                 $('#campo-hierarchy')
                     .append(new Option(data.typeName, data.hierarchyId, false, false))
