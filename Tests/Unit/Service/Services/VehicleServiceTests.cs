@@ -144,6 +144,27 @@ namespace Tests.Unit.Service.Services
         }
 
         [Fact]
+        public void Test_GetByVehiclePlate()
+        {
+            // Arrange
+            var vehiclePlate = "DBW1A22";
+
+            var vehicle = new Vehicle
+            {
+                LicensePlate = vehiclePlate,
+            };
+
+            _vehicleRepository.GetByVehiclePlate(vehiclePlate)
+                .Returns(vehicle);
+
+            // Act
+            var vehicleLicensePlate = _vehicleService.GetByVehiclePlate(vehiclePlate);
+
+            // Assert
+            vehicleLicensePlate.LicensePlate.Should().Be(vehicle.LicensePlate);
+        }
+
+        [Fact]
         public void Test_GetById_With_Vehicle_Found()
         {
             // Arrange

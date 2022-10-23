@@ -4,6 +4,7 @@ using Entra21.CSharp.Area21.Service.EntitiesMappings.Payments;
 using Entra21.CSharp.Area21.Service.Services.Payments;
 using Entra21.CSharp.Area21.Service.ViewModels.Payments;
 using FluentAssertions;
+using Microsoft.AspNet.Identity;
 using NSubstitute;
 using NSubstitute.ReturnsExtensions;
 using Xunit;
@@ -144,6 +145,32 @@ namespace Tests.Unit.Service.Services
             // Assert
             _paymentRepository.Received(1).Update(Arg.Is<Payment>(payment =>
                 ValidatePaymentWithPaymentUpdateViewModel(payment, paymentToEdit)));
+        }
+
+        [Fact]
+        public void Test_ValidPayment()
+        {
+            // Arrange
+            var vehiclePayment = new Vehicle
+            {
+                Id = 7,
+                CreatedAt = DateTime.Now
+            };
+
+            var paymentToValidate = new Payment
+            {
+                Id = vehiclePayment.Id,
+                CreatedAt = vehiclePayment.CreatedAt,
+            };
+
+            _paymentRepository.ValidPayment(vehiclePayment.Id).Returns(paymentToValidate);
+
+            // Act
+            _paymentService.ValidPayment(vehiclePayment);
+
+            // Assert
+            vehiclePayment.Id.Should().Be(paymentToValidate.Id);
+            vehiclePayment.CreatedAt.Should().Be(paymentToValidate.CreatedAt);            
         }
 
         private bool ValidatePayment(Payment payment, PaymentRegisterViewModel viewModel)

@@ -263,19 +263,19 @@ namespace Tests.Unit.Service.Services
             // Arrange
             var cpf = "123.456.789-10";
 
-            var cpfUser = new User
+            var user = new User
             {
                 Cpf = cpf
             };
 
             _userRepository.GetByCpf(cpf)
-                .Returns(cpfUser);
+                .Returns(user);
 
             // Act
-            var user = _userService.GetByCpf(cpf);
+            var userCpf = _userService.GetByCpf(cpf);
 
             // Assert
-            user.Cpf.Should().Be(cpfUser.Cpf);
+            userCpf.Cpf.Should().Be(user.Cpf);
         }
 
         [Fact]
