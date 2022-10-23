@@ -123,7 +123,6 @@ namespace Tests.Unit.Service.EntitiesMappings
             .RuleFor(x => x.Email, f => f.Internet.Email())
             .RuleFor(x => x.Phone, f => f.Random.Word())
             .Generate();
-
         private UserUpdateAdministratorViewModel UpdateUserAdministrator(UserHierarchy userHierarchy)
             => new Faker<UserUpdateAdministratorViewModel>()          
             .RuleFor(x => x.Name, f => f.Random.Word())

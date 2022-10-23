@@ -64,7 +64,6 @@ namespace Tests.Unit.Service.EntitiesMappings
             .RuleFor(x => x.Latitude, f => f.Random.Word())
             .RuleFor(x => x.Latitude, f => f.Random.Word())
             .Generate();
-
         private PaymentUpdateViewModel UpdatePayment()
             => new Faker<PaymentUpdateViewModel>()
             .RuleFor(x => x.Latitude, f => f.Random.Word())

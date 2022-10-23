@@ -63,7 +63,6 @@ namespace Tests.Unit.Service.EntitiesMappings
             .RuleFor(x => x.Model, x => x.Random.Word())
             .RuleFor(x => x.Type, x => vehicleType)
             .Generate();
-
         private VehicleUpdateViewModel UpdateVehicle(VehicleType vehicleType)
             => new Faker<VehicleUpdateViewModel>()
             .RuleFor(x => x.LicensePlate, x => x.Random.Word().ToUpper())
