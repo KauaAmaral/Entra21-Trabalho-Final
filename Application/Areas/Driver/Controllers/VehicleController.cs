@@ -95,6 +95,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Driver.Controllers
         public IActionResult GetById([FromQuery] int id)
         {
             var vehicle = _vehicleService.GetById(id);
+
             return Ok(vehicle);
         }
 

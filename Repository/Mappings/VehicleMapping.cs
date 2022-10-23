@@ -47,7 +47,6 @@ namespace Entra21.CSharp.Area21.Repository.Mappings
                 .HasColumnName("update_at")
                 .HasColumnType("DATETIME2");
 
-
             builder.HasOne(x => x.User)
                 .WithMany(x => x.Vehicles)
                 .HasForeignKey(x => x.UserId);

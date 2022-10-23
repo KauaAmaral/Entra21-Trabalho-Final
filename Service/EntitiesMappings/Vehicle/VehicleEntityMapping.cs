@@ -4,7 +4,7 @@ using Entra21.CSharp.Area21.Service.ViewModels.Vehicles;
 
 namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Vehicles
 {
-    public class VehicleEntityMapping : IVehicleEntityMapping //TODO VehicleEntityMapping completar
+    public class VehicleEntityMapping : IVehicleEntityMapping
     {
         public Vehicle RegisterWith(VehicleRegisterViewModel viewModel) =>
             new Vehicle
@@ -21,7 +21,6 @@ namespace Entra21.CSharp.Area21.Service.EntitiesMappings.Vehicles
             vehicle.LicensePlate = viewModel.LicensePlate.Trim().ToUpper();
             vehicle.Model = viewModel.Model;
             vehicle.Type = (VehicleType)viewModel.Type;
-            //vehicle.UserId = viewModel.UserId;
             vehicle.UpdatedAt = DateTime.Now;
 
             return vehicle;

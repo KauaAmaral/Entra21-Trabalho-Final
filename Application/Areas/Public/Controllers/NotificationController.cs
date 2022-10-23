@@ -62,13 +62,13 @@ namespace Entra21.CSharp.Area21.Application.Areas.Public.Controllers
 
             var notification = _notificationService.GetById(idNotificaton);
 
-            bool status = false;
-            string answer = string.Empty;
+            var status = false;
+            var answer = string.Empty;
 
             if (notification.Token != null || notification.CreatedAt.Date > notification.CreatedAt.Date.AddDays(15))
                 return Json(new { status = status, response = answer });
 
-            string urlReturn = Request.Scheme + "://" + Request.Host + $"/Public/Notification/Approved?id={notification.Id}";
+            var urlReturn = Request.Scheme + "://" + Request.Host + $"/Public/Notification/Approved?id={notification.Id}";
 
             using (var client = new HttpClient())
             {

@@ -37,7 +37,6 @@ namespace Entra21.CSharp.Area21.Repository.DependeciesInjection
                     options.UseSqlServer(configurationManager.GetConnectionString("SqlServer")));
             }
             
-
             return services;
         }
     }
