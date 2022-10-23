@@ -102,29 +102,6 @@
                         </a>
                         <a class="dropdown-item" asp-area="Public" asp-controller="Login" asp-action="Logout" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Sair</a>
                     </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="/driver/notification" title="Notifications"
-                           aria-expanded="false" data-animation="scale-up" role="button">
-                            <i class="fa-solid fa-bell color-icons" aria-hidden="true"></i>
-                            <span class="badge badge-pill badge-danger up">0</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
-                            <div class="dropdown-menu-header">
-                                <h5>Notificações</h5>
-                                <span class="badge badge-round badge-danger"></span>
-                            </div>
-
-                            <div class="dropdown-menu-footer">
-                                <a class="dropdown-menu-footer-btn" href="javascript:void(0)" role="button">
-                                    <i class="icon wb-settings" aria-hidden="true"></i>
-                                </a>
-                                <a class="dropdown-item" href="Notification" role="menuitem">
-                                    Todas Notificações
-                                </a>
-                            </div>
-                        </div>
-                    </li>
                 </ul>
                 <!-- End Navbar Toolbar Right -->
             </div>
@@ -137,7 +114,7 @@
                 <div>
                     <ul class="site-menu" data-plugin="menu">
                         <li class="dropdown site-menu-item has-sub">
-                            <a asp-area="Administrator" asp-controller="Home" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
+                            <a asp-area="Driver" asp-controller="Home" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
                                 <i class="fa-sharp fa-solid fa-house"></i>
                                 <span class="site-menu-title">Home</span>
                             </a>
@@ -159,27 +136,7 @@
                                 <i class="fa-regular fa-credit-card"></i>
                                 <span class="site-menu-title">Pagamentos</span>
                             </a>
-                        </li>
-                        <div class="dropdown-menu">
-                            <div class="site-menu-scroll-wrap is-list">
-                                <div>
-                                    <div>
-                                        <ul class="site-menu-sub site-menu-normal-list">
-                                            <li class="site-menu-item">
-                                                <a href="layouts/grids.html">
-                                                    <span class="site-menu-title">Pagar</span>
-                                                </a>
-                                            </li>
-                                            <li class="site-menu-item">
-                                                <a href="layouts/grids.html">
-                                                    <span class="site-menu-title">Pagamentos efetuados</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </li>                      
                         <li class="dropdown site-menu-item has-sub">
                             <a asp-area="Driver" asp-controller="Notification" asp-action="Index" data-toggle="dropdown" data-dropdown-toggle="false">
                                 <i class="site-menu-icon wb-layout" aria-hidden="true"></i>
@@ -274,6 +231,10 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl5EjVV5roMTtLPWNS6wpEh4GaGVRnpJU&callback=myMap"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 

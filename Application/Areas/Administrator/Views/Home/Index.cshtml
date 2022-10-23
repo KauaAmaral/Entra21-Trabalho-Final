@@ -1,7 +1,34 @@
-﻿@{
-    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
-}
+﻿<h1 class="text-center mb-30">Bem vindo administrador, @TempData["name"]!!!</h1>
 
-<h1 class="text-center">
-    Bem vindo administrador, @TempData["name"]!!!
-</h1>
+<div class="row">
+	<div class="col-md-4">
+		<div class="card card-block p-30 bg-red-600">
+			<div class="counter counter-md counter-inverse text-left">
+				<div class="card-watermark darker font-size-80 m-15"><i class="fa fa-car" aria-hidden="true"></i></div>
+				<div class="counter-number-group">
+					<span class="counter-number-related text-capitalize">Quantidade de carros: @TempData["vehicles"]</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="card card-block p-30 bg-green-600">
+			<div class="card-watermark darker font-size-80 m-15"><i class="fa fa-users" aria-hidden="true"></i></div>
+			<div class="counter counter-md counter-inverse text-left">
+				<div class="counter-number-group">
+					<span class="counter-number-related text-capitalize">Quantidade de usuários: @TempData["users"]</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="card card-block p-30 bg-blue-600">
+			<div class="card-watermark darker font-size-80 m-15"><i class="site-menu-icon wb-layout" aria-hidden="true"></i></div>
+			<div class="counter counter-md counter-inverse text-left">
+				<div class="counter-number-group">
+					<span class="counter-number-related text-capitalize">Quantidade de notificações: @TempData["notification"]</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
