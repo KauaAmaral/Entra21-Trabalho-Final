@@ -36,7 +36,7 @@ let vehicleDelete = (botaoApagar) => {
                     toastr.error('Não foi possível encontrar o veículo');
                     break;
                 default:
-                    toastr.error('Não foi possível apagar o veículo');
+                    toastr.error('Não foi possível apagar esse veículo, pois já foi gerado uma notificação/pagamento com o mesmo!');
             }
 
             swal.stopLoading();
