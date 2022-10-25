@@ -670,3 +670,16 @@ iframe {
         padding-right: 15px
     }
 }
+
+.confirm-email {
+    font-family: Poppins-Regular;
+    font-size: 17px;
+    line-height: 1.7;
+    color: #fff;
+    margin: 0;
+    transition: all .4s;
+    -webkit-transition: all .4s;
+    -o-transition: all .4s;
+    -moz-transition: all .4s;
+    left: 220px;
+}

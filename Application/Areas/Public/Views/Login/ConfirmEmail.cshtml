@@ -1,17 +1,15 @@
 ﻿<div class="limiter">
     <div class="container-login100" style="background-image: url('images/homeScreen.jpg');">
-        <div class="panel">
-            <div class="panel-body">
-                <div class="brand">
-                    <img class="navbar-brand-logo" src="~/images/logoArea21.png">
-                </div>
-                <div class="user-confirm col-12">
-                    <p>@TempData["Confirm"]</p>
-                </div>
-                <div class="container-back-home100">
-                    <P><a asp-controller="Login" asp-action="Index" class="back-home-index">Voltar para área de login</a><p>
-                </div>
-            </div>
+        <div class="wrap-index100">
+            <img src="images/logoArea21.png" class="wrap-img-area100">
         </div>
+
+        <span class="index100-form-title p-l-250 p-r-250">
+            @TempData["Confirm"]
+        </span>
+
+        <span class="index100-form-title p-l-250 p-r-250">
+            <a class="confirm-email" href="/">Voltar para área de login</a>
+        </span>
     </div>
 </div>
