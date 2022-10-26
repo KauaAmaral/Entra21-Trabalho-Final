@@ -116,15 +116,16 @@ namespace Entra21.CSharp.Area21.Service.Services.Notifications
         public bool Delete(int id) =>
             _notificationRepository.Delete(id);
 
-        public string CreatePdfNotifications(Notification notification, string link)
+        public string CreatePdfNotifications(Notification notification, string link, string wwwRoot)
         {
-            var fileName = $"..\\Application\\wwwroot\\Theme\\global\\notifications\\{notification.VehicleLicensePlate}.{DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss")}.pdf";
+
+            var fileName = Path.Join(wwwRoot, "Theme", "global", "notifications", $"{notification.VehicleLicensePlate}.{DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss")}.pdf");
             var file = new FileStream(fileName, FileMode.Create);
             var pxByMm = 72 / 25.2F;
             var document = new Document(PageSize.A4, 15 * pxByMm, 15 * pxByMm, 15 * pxByMm, 20 * pxByMm);
             var writer = PdfWriter.GetInstance(document, file);
 
-            var logoPath = "..\\Application\\wwwroot\\Theme\\global\\portraits\\Logo Black.png";
+            var logoPath = Path.Join(wwwRoot, "Theme", "global", "portraits", "Logo Black.png");
             
             document.Open();
 

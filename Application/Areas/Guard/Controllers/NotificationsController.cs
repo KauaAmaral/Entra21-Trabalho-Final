@@ -25,6 +25,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
         private readonly IGuardService _guardService;
         private readonly IEmailService _emailService;
         private readonly IUserService _userService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly string _userName = "AeHh1KwTDiCTJlkmPVoWT5qj9YMp0dwnhAStwYVE7VZiaPN2jfJjMm7UJ6B9TMXFkVqFNkmpzpfinpJR";
         private readonly string _passwd = "EHqhokF9mvWolaWgw04hay43lNAuCcLNHZ8XBpmm0cLSYUxdAYnbBI6dhiaCXtI54qJJ-EF3VS0IMGfx";
         private readonly string _url = "https://api-m.sandbox.paypal.com";
@@ -36,7 +37,8 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
             IPaymentService paymentService,
             ISessionAuthentication sessionAuthentication,
             IEmailService emailService,
-            IUserService userService
+            IUserService userService,
+            IWebHostEnvironment webHostEnvironment 
             )
         {
             _notificationService = notificationService;
@@ -46,6 +48,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
             _guardService = guardService;
             _emailService = emailService;
             _userService = userService;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet]
@@ -137,7 +140,7 @@ namespace Entra21.CSharp.Area21.Application.Areas.Guard.Controllers
 
             link += $"?id={notification.Id}";
 
-            var fileName = _notificationService.CreatePdfNotifications(notification, link);
+            var fileName = _notificationService.CreatePdfNotifications(notification, link, _webHostEnvironment.WebRootPath);
 
             if (vehicle != null)
             {
