@@ -17,7 +17,7 @@
                     <h3 class="h3">Valor: @Model.Value</h3>
                 </div>
                 <div class="text-end">
-                    <button class="btn btn-success" onclick="payment(@Model.Id)">
+                    <button class="btn btn-primary notification-pay" data-id="${@Model.Id}">
                         <i class="fa-solid fa-floppy-disk"></i> Pagar
                     </button>
                 </div>
@@ -27,7 +27,8 @@
 </div>
 
 @section scripts{
-    <script>
+    <script src="~/js/Public/Payment/public-payment-paypal.js"></script>
+    @*<script>
         debugger;
         function payment(id) {
             debugger;
@@ -57,5 +58,5 @@
                 }
             });
         }
-    </script>
+    </script>*@
     }
